@@ -94,5 +94,4 @@ public class Registro_Fragment_2 extends Fragment {
         }
         return true;
     }
-
 }
