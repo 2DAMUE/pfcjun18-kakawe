@@ -37,6 +37,7 @@ public class Asistido_Perfil_Fragment extends Fragment {
                     vistaPerfil();
                 }else{
                     vistaDatosMedicos();
+                    
                 }
             }
             @Override
