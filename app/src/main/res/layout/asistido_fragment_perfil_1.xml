@@ -36,30 +36,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="156dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Contraseña"
-            android:textAlignment="center" />
-
-        <EditText
-            android:id="@+id/et_perfil_contrasena"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Contraseña"
-            android:inputType="textPassword" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
             android:id="@+id/textView8"
             android:layout_width="156dp"
             android:layout_height="wrap_content"
@@ -130,4 +106,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Actualizar datos" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/grisClarito"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_perfil_modContrasena"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/blanco"
+            android:drawableLeft="@drawable/ic_contrasena"
+            android:drawableRight="@drawable/ic_flecha_mayor"
+            android:gravity="center_vertical"
+            android:text="Modificar contraseña" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@color/grisClarito">
+
+        <TextView
+            android:id="@+id/tv_perfil_datosMedicos"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="Datos médicos"
+            android:gravity="center_vertical"
+            android:background="@color/blanco"
+            android:drawableRight="@drawable/ic_flecha_mayor"
+            android:drawableLeft="@drawable/ic_medico"/>
+    </LinearLayout>
+
+
 </LinearLayout>

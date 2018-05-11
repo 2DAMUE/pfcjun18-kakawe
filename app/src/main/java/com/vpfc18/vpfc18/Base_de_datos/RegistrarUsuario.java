@@ -19,7 +19,7 @@ public class RegistrarUsuario extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... urls) {
         Log.v("Datos1",urls.toString());
-        
+
     // params comes from the execute() call: params[0] is the url.
     try {
         return downloadUrl(urls[0]);
