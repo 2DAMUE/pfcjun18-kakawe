@@ -13,12 +13,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vpfc18.vpfc18.Principal.Asistido.Principal.Asistido_Principal_Activity;
 import com.vpfc18.vpfc18.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Asistido_Perfil_Fragment_1 extends Fragment {
+public class Asistido_Perfil_Fragment_1 extends Fragment{
 
     EditText et_perfil_email,et_perfil_telefono,et_perfil_nombre,et_perfil_apellido;
     Button btn_perfil_guardar;

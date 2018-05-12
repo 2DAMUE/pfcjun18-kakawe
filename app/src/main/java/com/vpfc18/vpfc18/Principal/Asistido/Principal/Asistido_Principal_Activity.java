@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.vpfc18.vpfc18.Principal.Asistido.Perfil.Asistido_Perfil_Fragment;
@@ -60,4 +61,5 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
         t.replace(R.id.asistido_contenedor_principal, fragmentoSeleccionado);
         t.commit();
     }
+
 }
