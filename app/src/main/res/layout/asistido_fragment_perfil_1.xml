@@ -143,6 +143,4 @@
             android:drawableRight="@drawable/ic_flecha_mayor"
             android:drawableLeft="@drawable/ic_medico"/>
     </LinearLayout>
-
-
 </LinearLayout>
