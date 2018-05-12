@@ -36,5 +36,4 @@ public class Asistido_Perfil_Fragment extends Fragment {
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.commit();
     }
-
 }
