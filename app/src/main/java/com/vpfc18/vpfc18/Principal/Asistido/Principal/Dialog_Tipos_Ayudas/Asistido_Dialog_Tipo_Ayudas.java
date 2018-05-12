@@ -20,9 +20,7 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View vista = inflater.inflate(R.layout.asistido_dialog_tipos_ayudas, null);
-
-
-
+        
         builder.setView(vista);
         return builder.create();
 
