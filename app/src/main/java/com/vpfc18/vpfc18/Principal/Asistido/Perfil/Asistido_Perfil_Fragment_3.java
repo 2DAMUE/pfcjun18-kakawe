@@ -12,34 +12,30 @@ import android.widget.EditText;
 
 import com.vpfc18.vpfc18.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Asistido_Perfil_Fragment_2 extends Fragment {
+public class Asistido_Perfil_Fragment_3 extends Fragment {
 
-    EditText et_perfil_peso,et_perfil_alergias,et_perfil_altura,et_perfil_medicacion,et_perfil_enfermedades,et_perfil_GrupoSanguineo,et_perfil_notasMedicas;
-    Button btn_perfil_guardar,btn_perfil_atras;
+    EditText et_perfil_contrasenaVieja,et_perfil_contrasenaNueva,et_perfil_repetirContrasena;
+    Button btn_perfil_actualizar,btn_perfil_atras;
 
-    public Asistido_Perfil_Fragment_2() {
+    public Asistido_Perfil_Fragment_3() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.asistido_fragment_perfil_2, container, false);
-        et_perfil_peso = (EditText)vista.findViewById(R.id.et_perfil_peso);
-        et_perfil_alergias = (EditText)vista.findViewById(R.id.et_perfil_alergias);
-        et_perfil_altura = (EditText)vista.findViewById(R.id.et_perfil_altura);
-        et_perfil_medicacion = (EditText)vista.findViewById(R.id.et_perfil_medicacion);
-        et_perfil_enfermedades = (EditText)vista.findViewById(R.id.et_perfil_enfermedades);
-        et_perfil_GrupoSanguineo = (EditText)vista.findViewById(R.id.et_perfil_GrupoSanguineo);
-        et_perfil_notasMedicas = (EditText)vista.findViewById(R.id.et_perfil_notasMedicas);
-        btn_perfil_guardar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
+        View vista = inflater.inflate(R.layout.asistido_fragment_perfil_3, container, false);
+        et_perfil_contrasenaVieja = (EditText)vista.findViewById(R.id.et_perfil_contrasenaVieja);
+        et_perfil_contrasenaNueva = (EditText)vista.findViewById(R.id.et_perfil_contrasenaNueva);
+        et_perfil_repetirContrasena = (EditText)vista.findViewById(R.id.et_perfil_repetirContrasena);
+        btn_perfil_actualizar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
         btn_perfil_atras = (Button) vista.findViewById(R.id.btn_perfil_atras);
 
-        btn_perfil_guardar.setOnClickListener(new View.OnClickListener() {
+        btn_perfil_actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 actualizarDatos();

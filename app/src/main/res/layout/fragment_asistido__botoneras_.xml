@@ -11,5 +11,12 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ESTAS EN LAS BOTONERAS" />
+        android:text="ESTAS EN LAS BOTONERAS"
+        />
+
+    <Button
+        android:id="@+id/btn_botoneras_tiposAyudas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@android:string/dialog_alert_title" />
 </LinearLayout>

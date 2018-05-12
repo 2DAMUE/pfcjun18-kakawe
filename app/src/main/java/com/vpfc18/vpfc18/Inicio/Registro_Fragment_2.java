@@ -44,7 +44,6 @@ public class Registro_Fragment_2 extends Fragment {
                 if (comprobarCampos()){
                     RegistrarUsuario registrar = new RegistrarUsuario();
                     registrar.execute("http://37.187.198.145/llamas/registro.php?nombres="+et_registro_nombre.getText().toString()+"&tel="+et_registro_telefono.getText().toString());
-
                 }
             }
         });
