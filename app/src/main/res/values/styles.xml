@@ -12,5 +12,56 @@
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:background">@color/grisOscuro</item>
+    </style>
+
+    <style name="low_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">@drawable/shape_divider</item>
+    </style>
+
+    <style name="medium_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@drawable/shape_divider</item>
+    </style>
+
+
+    <style name="high_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:background">@drawable/shape_divider</item>
+    </style>
+
+    <style name="et_perfil">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:gravity">end</item>
+        <item name="android:paddingHorizontal">30dp</item>
+    </style>
+
+    <style name="tv_perfil">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingHorizontal">40dp</item>
+    </style>
+
+    <style name="submenu_perfil">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:drawableRight">@drawable/ic_flecha_mayor</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">40dp</item>
+        <item name="android:paddingRight">15dp</item>
+    </style>
+
 
 </resources>

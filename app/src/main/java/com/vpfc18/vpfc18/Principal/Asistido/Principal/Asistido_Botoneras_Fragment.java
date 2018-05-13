@@ -19,7 +19,8 @@ import com.vpfc18.vpfc18.R;
 public class Asistido_Botoneras_Fragment extends Fragment {
 
 
-    Button btn_botoneras_tiposAyudas;
+    Button btn_ayuda;
+
     public Asistido_Botoneras_Fragment() {
         // Required empty public constructor
     }
@@ -29,9 +30,9 @@ public class Asistido_Botoneras_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_asistido__botoneras_, container, false);
-        btn_botoneras_tiposAyudas = (Button)vista.findViewById(R.id.btn_botoneras_tiposAyudas);
+        btn_ayuda = (Button) vista.findViewById(R.id.btn_ayuda);
 
-        btn_botoneras_tiposAyudas.setOnClickListener(new View.OnClickListener() {
+        btn_ayuda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tiposDeAyudas();
@@ -42,7 +43,7 @@ public class Asistido_Botoneras_Fragment extends Fragment {
 
     private void tiposDeAyudas() {
         Asistido_Dialog_Tipo_Ayudas pu = new Asistido_Dialog_Tipo_Ayudas();
-        pu.show(getActivity().getFragmentManager(),"¿Que tipo de ayuda necesitas");
+        pu.show(getActivity().getFragmentManager(), "¿Que tipo de ayuda necesitas");
     }
 
 }

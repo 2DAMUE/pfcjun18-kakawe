@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.vpfc18.vpfc18.R;
 
@@ -19,6 +20,7 @@ public class Asistido_Perfil_Fragment_2 extends Fragment {
 
     EditText et_perfil_peso,et_perfil_alergias,et_perfil_altura,et_perfil_medicacion,et_perfil_enfermedades,et_perfil_GrupoSanguineo,et_perfil_notasMedicas;
     Button btn_perfil_guardar,btn_perfil_atras;
+    Spinner spn_perfil_grSanguineo;
 
     public Asistido_Perfil_Fragment_2() {
         // Required empty public constructor
@@ -34,7 +36,7 @@ public class Asistido_Perfil_Fragment_2 extends Fragment {
         et_perfil_altura = (EditText)vista.findViewById(R.id.et_perfil_altura);
         et_perfil_medicacion = (EditText)vista.findViewById(R.id.et_perfil_medicacion);
         et_perfil_enfermedades = (EditText)vista.findViewById(R.id.et_perfil_enfermedades);
-        et_perfil_GrupoSanguineo = (EditText)vista.findViewById(R.id.et_perfil_GrupoSanguineo);
+        spn_perfil_grSanguineo = (Spinner) vista.findViewById(R.id.spn_perfil_grSanguineo);
         et_perfil_notasMedicas = (EditText)vista.findViewById(R.id.et_perfil_notasMedicas);
         btn_perfil_guardar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
         btn_perfil_atras = (Button) vista.findViewById(R.id.btn_perfil_atras);

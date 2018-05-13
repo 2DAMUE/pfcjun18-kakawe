@@ -5,91 +5,82 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_3">
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="156dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Contraseña vieja"
-                android:textAlignment="center" />
-
-            <EditText
-                android:id="@+id/et_perfil_contrasenaVieja"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Contraseña vieja"
-                android:inputType="textPassword" />
-        </LinearLayout>
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="156dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nueva contraseña"
-            android:textAlignment="center" />
+            android:id="@+id/tv_perfil_contrasenaVieja"
+            style="@style/tv_perfil"
+            android:text="Contraseña actual" />
 
-            <EditText
-                android:id="@+id/et_perfil_contrasenaNueva"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Nueva contraseña"
-                android:inputType="textPassword" />
-
+        <EditText
+            android:id="@+id/et_perfil_contrasenaVieja"
+            style="@style/et_perfil"
+            android:inputType="textPassword"
+            android:text="123456" />
     </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
+
+    <View style="@style/low_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_perfil_contrasenaNueva"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:gravity="center_vertical"
+            android:paddingHorizontal="40dp"
+            android:text="Nueva contraseña" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="156dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Repetir contraseña"
-                android:textAlignment="center" />
-
-            <EditText
-                android:id="@+id/et_perfil_repetirContrasena"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Repetir contraseña"
-                android:inputType="textPassword" />
-
-        </LinearLayout>
+        <EditText
+            android:id="@+id/et_perfil_contrasenaNueva"
+            style="@style/et_perfil"
+            android:inputType="textPassword"
+            android:text="123456" />
     </LinearLayout>
+
+    <View style="@style/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_perfil_repetirContrasena"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="40dp"
+            android:text="Repetir contraseña" />
+
+        <EditText
+            android:id="@+id/et_perfil_repetirContrasena"
+            style="@style/et_perfil"
+            android:inputType="textPassword"
+            android:text="123456" />
+    </LinearLayout>
+
+    <View style="@style/medium_divider" />
+
+
     <Button
         android:id="@+id/btn_perfil_guardar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="Actualizar datos" />
 
     <Button
         android:id="@+id/btn_perfil_atras"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="Atras" />
 
 </LinearLayout>

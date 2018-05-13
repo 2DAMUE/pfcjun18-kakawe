@@ -5,5 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorNaranja">#FF9800</color>
     <color name="grisClarito">#E5E4E2</color>
+    <color name="grisOscuro">#aaa</color>
     <color name="blanco">#FFFFFF</color>
 </resources>
