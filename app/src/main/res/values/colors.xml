@@ -7,4 +7,12 @@
     <color name="grisClarito">#E5E4E2</color>
     <color name="grisOscuro">#aaa</color>
     <color name="blanco">#FFFFFF</color>
+    <color name="green">#B8DE70</color>
+    <color name="purple">#CCB0D5</color>
+    <color name="blue">#73DCFC</color>
+    <color name="yellow">#FEB54F</color>
+    <color name="marine">#2A343D</color>
+    <color name="red">#ff4435</color>
+    <color name="rojo">#ff0000</color>
+    <color name="black">#000000</color>
 </resources>

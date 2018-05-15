@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Inicio.Inicio_Activity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +27,8 @@
             android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".Principal.Asistido.Principal.Asistido_Principal_Activity"
+        <activity
+            android:name=".Principal.Asistido.Principal.Asistido_Principal_Activity"
             android:screenOrientation="portrait">
 
         </activity>
