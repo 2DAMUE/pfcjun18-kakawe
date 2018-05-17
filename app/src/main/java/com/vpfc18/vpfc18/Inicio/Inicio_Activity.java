@@ -10,7 +10,7 @@ import android.os.Bundle;
 import com.vpfc18.vpfc18.R;
 
 public class Inicio_Activity extends AppCompatActivity {
-//Creamdo rama nueva
+//Gracias Adri
     TabLayout tab_selector;
 
     @Override
