@@ -2,19 +2,34 @@ package com.vpfc18.vpfc18.Principal.Voluntario.Principal;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.vpfc18.vpfc18.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Mapa_Fragment extends Fragment {
+public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCallback {
 
+    private GoogleMap mGoogleMaps;
+    private MapView mMapView;
+    private View mView;
+    private static final LatLng PERTH = new LatLng(-31.952854, 115.857342);
+    private Marker mPerth;
 
     public Voluntario_Mapa_Fragment() {
         // Required empty public constructor
@@ -25,7 +40,36 @@ public class Voluntario_Mapa_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.voluntario_fragment_mapa_, container, false);
+        mView = inflater.inflate(R.layout.voluntario_fragment_mapa_, container, false);
+        return mView;
     }
 
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mMapView = (MapView) mView.findViewById(R.id.map);
+        if (mMapView != null) {
+            mMapView.onCreate(null);
+            mMapView.onResume();
+            mMapView.getMapAsync(this);
+
+        }
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        MapsInitializer.initialize(getContext());
+
+        mGoogleMaps = googleMap;
+        mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mGoogleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(PERTH, 10));
+
+        mPerth = mGoogleMaps.addMarker(new MarkerOptions()
+                .position(PERTH)
+                .snippet("Dale cañaaaaaaaaaa")
+                .title("Perth"));
+    }
 }

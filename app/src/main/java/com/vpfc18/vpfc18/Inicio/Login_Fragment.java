@@ -84,7 +84,7 @@ public class Login_Fragment extends Fragment {
     }
 
     private void cargaPrincipal(){
-        Intent intent = new Intent(getContext(), Asistido_Principal_Activity.class);
+        Intent intent = new Intent(getContext(), Voluntario_Principal_Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
