@@ -133,34 +133,34 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         }
         mGoogleMaps.setMyLocationEnabled(true);
         mGoogleMaps.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-            @Override
-            public void onMyLocationChange(Location location) {
-                //TODO:
-                longitud = location.getLongitude();
-                latitud = location.getLatitude();
-                Log.v("lat", String.valueOf(latitud));
-                //setLatLng(location.getLatitude(),location.getLongitude());
-                final LatLng actual = new LatLng(latitud, longitud);
-                mGoogleMaps.clear();
-                //mMap.addMarker(new MarkerOptions().position(actual).title("Ubicación actual").snippet("Esta es la posición actual del usuario"));
-                mGoogleMaps.addMarker(new MarkerOptions().position(actual));
-                mGoogleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 15));
-                // mMap.setInfoWindowAdapter();
-                mGoogleMaps.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
-                    public boolean onMarkerClick(Marker marker) {
+                    public void onMyLocationChange(Location location) {
+                        //TODO:
+                        longitud = location.getLongitude();
+                        latitud = location.getLatitude();
+                        Log.v("lat", String.valueOf(latitud));
+                        //setLatLng(location.getLatitude(),location.getLongitude());
+                        final LatLng actual = new LatLng(latitud, longitud);
+                        mGoogleMaps.clear();
+                        //mMap.addMarker(new MarkerOptions().position(actual).title("Ubicación actual").snippet("Esta es la posición actual del usuario"));
+                        mGoogleMaps.addMarker(new MarkerOptions().position(actual));
+                        mGoogleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 15));
+                        // mMap.setInfoWindowAdapter();
+                        mGoogleMaps.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(Marker marker) {
 
-                        Toast.makeText(getActivity().getApplicationContext(), "has pulsado en el marcador y su posición " + actual, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "has pulsado en el marcador y su posición " + actual, Toast.LENGTH_LONG).show();
 /*
                         DialogDetalleMarket ddm = new DialogDetalleMarket();
                         ddm.show(getFragmentManager(), "ddm");
 
 */
 
-                        return false;
-                    }
-                });
-                Log.v("actual", String.valueOf(actual));
+                                return false;
+                            }
+                        });
+                        Log.v("actual", String.valueOf(actual));
             }
         });
     }

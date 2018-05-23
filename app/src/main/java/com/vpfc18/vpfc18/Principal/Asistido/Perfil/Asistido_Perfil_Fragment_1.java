@@ -27,6 +27,8 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
 
     String email,contrasena,nuevaContrasena,nombre,apellido,telefono;
 
+    Asistido_Principal_Activity barraSup = new Asistido_Principal_Activity();
+
     public Asistido_Perfil_Fragment_1() {
         // Required empty public constructor
     }
@@ -56,6 +58,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
             @Override
             public void onClick(View v) {
                 modificarContrasena();
+
             }
         });
         tv_perfil_datosMedicos.setOnClickListener(new View.OnClickListener() {

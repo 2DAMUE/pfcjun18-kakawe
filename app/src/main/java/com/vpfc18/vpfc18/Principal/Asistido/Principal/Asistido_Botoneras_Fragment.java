@@ -40,8 +40,8 @@ public class Asistido_Botoneras_Fragment extends Fragment {
         btn_contacto1 = (Button) vista.findViewById(R.id.btn_contacto1);
         btn_contacto2 = (Button) vista.findViewById(R.id.btn_contacto2);
 
-        final String contacto1 = "636796584";
-        final String contacto2 = "636796584";
+        final String contacto1 = "";
+        final String contacto2 = "";
 
 
         btn_ayuda.setOnClickListener(new View.OnClickListener() {

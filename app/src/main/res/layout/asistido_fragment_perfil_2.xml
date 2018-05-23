@@ -23,7 +23,8 @@
                 <TextView
                     android:id="@+id/tv_perfil_altura"
                     style="@style/tv_perfil"
-                    android:text="Altura" />
+                    android:text="Altura"
+                    android:paddingHorizontal="40dp"/>
 
                 <EditText
                     android:id="@+id/et_perfil_altura"
