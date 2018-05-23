@@ -31,7 +31,7 @@ import com.vpfc18.vpfc18.R;
  * A simple {@link Fragment} subclass.
  */
 public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCallback {
-
+//Toma Adri cabron
     private GoogleMap mGoogleMaps;
     private MapView mMapView;
     private static final int REQUEST_FINE_LOCATION = 11;
@@ -154,6 +154,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 /*
                         DialogDetalleMarket ddm = new DialogDetalleMarket();
                         ddm.show(getFragmentManager(), "ddm");
+
 */
 
                         return false;
