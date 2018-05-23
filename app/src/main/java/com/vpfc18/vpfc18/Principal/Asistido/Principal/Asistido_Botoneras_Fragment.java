@@ -26,6 +26,7 @@ public class Asistido_Botoneras_Fragment extends Fragment {
     Button btn_contacto1;
     Button btn_contacto2;
 
+    String correoUser;
     public Asistido_Botoneras_Fragment() {
         // Required empty public constructor
     }
@@ -35,10 +36,13 @@ public class Asistido_Botoneras_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_asistido__botoneras_, container, false);
+
         btn_ayuda = (Button) vista.findViewById(R.id.btn_ayuda);
         btn_compania = (Button) vista.findViewById(R.id.btn_compania);
         btn_contacto1 = (Button) vista.findViewById(R.id.btn_contacto1);
         btn_contacto2 = (Button) vista.findViewById(R.id.btn_contacto2);
+
+        correoUser = getArguments().getString("correoUser");
 
         final String contacto1 = "";
         final String contacto2 = "";
@@ -65,7 +69,6 @@ public class Asistido_Botoneras_Fragment extends Fragment {
                 llamadaTelefonica(contacto2);
             }
         });
-
 
         return vista;
 

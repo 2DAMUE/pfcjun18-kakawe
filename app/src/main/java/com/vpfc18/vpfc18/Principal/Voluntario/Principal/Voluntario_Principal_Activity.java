@@ -21,12 +21,15 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
     android.support.v7.widget.Toolbar voluntario_principal_toolbar;
     int contador=0;
     int perfil = 0;
+
+    String correoUser;
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.voluntario_activity_principal);
 
+        correoUser = getIntent().getStringExtra("correoUser");
         voluntario_principal_toolbar =(android.support.v7.widget.Toolbar) findViewById(R.id.voluntario_principal_toolbar);
         setSupportActionBar(voluntario_principal_toolbar);
         voluntario_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);

@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.vpfc18.vpfc18.Base_de_datos.RegistrarUsuario;
 import com.vpfc18.vpfc18.Principal.Asistido.Principal.Asistido_Principal_Activity;
 import com.vpfc18.vpfc18.Principal.Voluntario.Principal.Voluntario_Principal_Activity;
 import com.vpfc18.vpfc18.R;
@@ -85,14 +84,12 @@ public class Registro_Fragment_2 extends Fragment {
         protected void onPostExecute(String resultado) {
             try {
                 JSONArray respuesta= new JSONArray(resultado);
+                String correoUser = respuesta.getString(0);
                 String res = respuesta.getString(1);
-                Log.d("DatoRegistro1",String.valueOf(respuesta));
                 if (res.equals("asistentes")){
-                    Log.d("DatoRegistro2","asistentes");
-                    cargaPrincipal("asistentes");
+                    cargaPrincipal("asistentes",correoUser);
                 }else{
-                    Log.v("DatoRegistro3","dependientes");
-                    cargaPrincipal("dependientes");
+                    cargaPrincipal("dependientes",correoUser);
                 }
             } catch (JSONException e) {
                 Toast.makeText(getContext(), "El usuario ya existe", Toast.LENGTH_LONG).show();
@@ -101,17 +98,19 @@ public class Registro_Fragment_2 extends Fragment {
 
         }
     }
-    private void cargaPrincipal(String tipo){
+    private void cargaPrincipal(String tipo,String correoUser){
 
         if (tipo.equals("asistentes")){
             Intent intent = new Intent(getContext(), Voluntario_Principal_Activity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("correoUser",correoUser);
             startActivity(intent);
         }else{
             Intent intent = new Intent(getContext(), Asistido_Principal_Activity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.putExtra("correoUser",correoUser);
             startActivity(intent);
         }
     }

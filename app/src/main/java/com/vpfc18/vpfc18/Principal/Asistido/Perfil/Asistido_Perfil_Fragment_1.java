@@ -23,9 +23,9 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
 
     EditText et_perfil_email,et_perfil_telefono,et_perfil_nombre,et_perfil_apellido;
     Button btn_perfil_guardar;
-    TextView tv_perfil_modContrasena,tv_perfil_datosMedicos;
+    TextView tv_perfil_modContrasena,tv_perfil_datosMedicos,tv_perfil_contactos;
 
-    String email,contrasena,nuevaContrasena,nombre,apellido,telefono;
+    String email,contrasena,nuevaContrasena,nombre,apellido,telefono,correoUser;
 
     Asistido_Principal_Activity barraSup = new Asistido_Principal_Activity();
 
@@ -45,12 +45,15 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         btn_perfil_guardar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         tv_perfil_datosMedicos = (TextView) vista.findViewById(R.id.tv_perfil_datosMedicos);
+        tv_perfil_contactos = (TextView) vista.findViewById(R.id.tv_perfil_contactos);
+
+        correoUser = getArguments().getString("correoUser");
 
         btn_perfil_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (comprobarCampos()){
-                    actualizarDatos();
+
                 }
             }
         });
@@ -67,13 +70,16 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
                 vistaDatosMedicos();
             }
         });
+        tv_perfil_contactos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vistaModificarContactos();
+            }
+        });
         return vista;
     }
 
 
-    private void actualizarDatos(){
-
-    }
     private boolean comprobarCampos(){
         email = et_perfil_email.getText().toString().trim();
         telefono = et_perfil_telefono.getText().toString();
@@ -97,17 +103,32 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
     }
 
     private void vistaDatosMedicos() {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_2();
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_2_DatosMedicos();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
 
 
     private void modificarContrasena() {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_3();
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_3_contrasena();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
+    }
+    private void vistaModificarContactos() {
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_4_Contactos();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
 }
