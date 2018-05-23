@@ -80,6 +80,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             public void onClick(View v) {
                 ll_mapa_detalle.setVisibility(View.INVISIBLE);
             }
+            //
         });
 
     }
