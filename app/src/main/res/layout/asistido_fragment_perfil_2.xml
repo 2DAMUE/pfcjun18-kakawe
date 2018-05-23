@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_2">
+    tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_2_DatosMedicos">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +23,8 @@
                 <TextView
                     android:id="@+id/tv_perfil_altura"
                     style="@style/tv_perfil"
-                    android:text="Altura" />
+                    android:text="Altura"
+                    android:paddingHorizontal="40dp"/>
 
                 <EditText
                     android:id="@+id/et_perfil_altura"

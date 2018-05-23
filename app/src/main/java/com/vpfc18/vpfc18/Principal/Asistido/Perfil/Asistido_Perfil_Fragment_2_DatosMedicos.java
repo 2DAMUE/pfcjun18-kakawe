@@ -16,13 +16,14 @@ import com.vpfc18.vpfc18.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Asistido_Perfil_Fragment_2 extends Fragment {
+public class Asistido_Perfil_Fragment_2_DatosMedicos extends Fragment {
 
     EditText et_perfil_peso,et_perfil_alergias,et_perfil_altura,et_perfil_medicacion,et_perfil_enfermedades,et_perfil_GrupoSanguineo,et_perfil_notasMedicas;
     Button btn_perfil_guardar,btn_perfil_atras;
     Spinner spn_perfil_grSanguineo;
+    String correoUser;
 
-    public Asistido_Perfil_Fragment_2() {
+    public Asistido_Perfil_Fragment_2_DatosMedicos() {
         // Required empty public constructor
     }
 
@@ -41,6 +42,7 @@ public class Asistido_Perfil_Fragment_2 extends Fragment {
         btn_perfil_guardar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
         btn_perfil_atras = (Button) vista.findViewById(R.id.btn_perfil_atras);
 
+        correoUser = getArguments().getString("correoUser");
         btn_perfil_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +55,7 @@ public class Asistido_Perfil_Fragment_2 extends Fragment {
                 volverAPerfil();
             }
         });
+
         return vista;
     }
     private void actualizarDatos(){
@@ -64,6 +67,9 @@ public class Asistido_Perfil_Fragment_2 extends Fragment {
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
 
 }
