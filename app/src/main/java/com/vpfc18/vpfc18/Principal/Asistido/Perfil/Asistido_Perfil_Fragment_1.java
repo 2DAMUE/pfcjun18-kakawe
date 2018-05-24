@@ -120,24 +120,21 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         protected void onPostExecute(String resultado) {
             try {
                 JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1",respuesta.toString());
+                Log.v("Datos1actu",respuesta.toString());
                 //correo que viene viajando por la app(el que seria el viejo correo si se cambia)
                 //correoUser;
                 String apellido = respuesta.getString(3);
                 if (apellido.equals("null")){
-                    Log.d("Datos3","null");
                     et_perfil_apellido.setText("");
                 }else{
                     et_perfil_apellido.setText(respuesta.getString(3));
                 }
-                Log.d("Datos4","ninguno");
                 emailViejo = respuesta.getString(0);
                 et_perfil_email.setText(respuesta.getString(0));
                 et_perfil_telefono.setText(respuesta.getString(1));
                 et_perfil_nombre.setText(respuesta.getString(2));
-
             } catch (JSONException e) {
-                Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
 
@@ -156,27 +153,24 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         protected void onPostExecute(String resultado) {
             try {
                 JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1",respuesta.toString());
+                Log.v("Datos1carga",respuesta.toString());
                 //correo que viene viajando por la app(el que seria el viejo correo si se cambia)
                 //correoUser;
                 String apellido = respuesta.getString(3);
                 if (apellido.equals("null")){
-                    Log.d("Datos3","null");
                     et_perfil_apellido.setText("");
                 }else{
                     et_perfil_apellido.setText(respuesta.getString(3));
                 }
-                Log.d("Datos4","ninguno");
                 emailViejo = respuesta.getString(0);
                 et_perfil_email.setText(respuesta.getString(0));
                 et_perfil_telefono.setText(respuesta.getString(1));
                 et_perfil_nombre.setText(respuesta.getString(2));
 
             } catch (JSONException e) {
-                Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -206,8 +200,20 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
             et_perfil_nombre.requestFocus();
             return false;
         }
+        if (apellido.isEmpty()){
+            apellido = "null";
+        }
+
 
         return true;
+    }
+    private String devolverCorreo(){
+        if (emailViejo.equals(email)){
+            correoUser = email;
+        }else{
+            correoUser = emailViejo;
+        }
+        return correoUser;
     }
 
     private void vistaDatosMedicos() {
@@ -215,6 +221,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.commit();
+        correoUser = devolverCorreo();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
@@ -224,6 +231,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.commit();
+        correoUser = devolverCorreo();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
@@ -233,6 +241,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.commit();
+        correoUser = devolverCorreo();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);

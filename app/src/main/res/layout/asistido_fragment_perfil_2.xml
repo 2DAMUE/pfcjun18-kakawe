@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+            <View style="@style/low_divider" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -22,18 +22,25 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_altura"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Altura"
-                    android:paddingHorizontal="40dp"/>
+                    />
 
                 <EditText
                     android:id="@+id/et_perfil_altura"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="numberDecimal"
-                    android:text="00.0" />
+                    android:hint="00.0" />
 
             </LinearLayout>
-
+            <View style="@style/divider" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -41,16 +48,23 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_peso"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Peso" />
 
                 <EditText
                     android:id="@+id/et_perfil_peso"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="numberDecimal"
-                    android:text="00.0" />
+                    android:hint="00.0" />
             </LinearLayout>
-
+            <View style="@style/divider" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -58,7 +72,10 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_grSanguineo"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Grupo sanguíneo" />
 
                 <Spinner
@@ -68,10 +85,10 @@
                     android:drawSelectorOnTop="true"
                     android:entries="@array/gr_sanguineo"
                     android:gravity="right"
-                    android:textAlignment="gravity" />
+                    android:textAlignment="textEnd" />
 
             </LinearLayout>
-
+            <View style="@style/divider" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -79,18 +96,24 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_alergias"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Alérgias" />
 
                 <EditText
                     android:id="@+id/et_perfil_alergias"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="text"
-                    android:text="Alergias" />
+                    android:hint="Alergias" />
 
             </LinearLayout>
-
-
+            <View style="@style/divider" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -98,16 +121,23 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_medicacion"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Medicación" />
 
                 <EditText
                     android:id="@+id/et_perfil_medicacion"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="text"
-                    android:text="Medicación" />
+                    android:hint="Medicación" />
             </LinearLayout>
-
+            <View style="@style/divider" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -115,17 +145,24 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_enfermedades"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Enfermedades" />
 
                 <EditText
                     android:id="@+id/et_perfil_enfermedades"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="text"
-                    android:text="Enfermedades" />
+                    android:hint="Enfermedades" />
 
             </LinearLayout>
-
+            <View style="@style/divider" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -133,29 +170,25 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_notasMedicas"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Notas médicas" />
 
                 <EditText
                     android:id="@+id/et_perfil_notasMedicas"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="text"
-                    android:text="Notas medicas" />
+                    android:hint="Notas medicas" />
 
             </LinearLayout>
 
-
-            <Button
-                android:id="@+id/btn_perfil_guardar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Actualizar datos" />
-
-            <Button
-                android:id="@+id/btn_perfil_atras"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Atras" />
+            <View style="@style/low_divider" />
 
 
             <LinearLayout
@@ -167,7 +200,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/boton_cancelar"
+                    android:id="@+id/btn_perfil_atras"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -175,7 +208,7 @@
                     android:text="Cancelar" />
 
                 <Button
-                    android:id="@+id/boton_aceptar"
+                    android:id="@+id/btn_perfil_guardar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
