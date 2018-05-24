@@ -80,7 +80,7 @@ public class Asistido_Perfil_Fragment_2_DatosMedicos extends Fragment {
                 if (comprobarCampos()){
                     new actualizarDatosMedicos().execute("http://37.187.198.145/llamas/App/ActualizarDatosMedicosApp.php?correo="
                             +correoUser+"&peso="+peso+"&altura="+altura+"&grSanguineo="
-                            +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion+"&notasMedicas="+nMedicas);
+                            +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion+"&notasMedicas="+nMedicas+"&enfermedades="+enfermedades);
                 }
             }
         });
