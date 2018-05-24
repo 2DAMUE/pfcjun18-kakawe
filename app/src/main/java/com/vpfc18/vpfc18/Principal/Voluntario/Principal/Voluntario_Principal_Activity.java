@@ -73,7 +73,6 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
                     contador=0;
                     item.setIcon(R.drawable.ic_notificacion);
                     cargaMapa();
-
                 }
                 return true;
             default:
@@ -129,7 +128,6 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         }
         return;
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == STORAGE_PERMISSION_CODE)  {
@@ -140,7 +138,6 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
             }
         }
     }
-
     public void gohome(){
         Thread t = new Thread(){
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -156,7 +153,5 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
             }
         };
         t.start();
-
-
     }
 }
