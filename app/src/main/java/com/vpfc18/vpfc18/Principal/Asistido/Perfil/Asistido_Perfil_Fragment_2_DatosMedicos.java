@@ -66,7 +66,7 @@ public class Asistido_Perfil_Fragment_2_DatosMedicos extends Fragment {
         spn_perfil_grSanguineo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                gpSanguineo = String.valueOf(parent.getSelectedItemPosition()+1);
+                gpSanguineo = parent.getItemAtPosition(position).toString();
                 Log.v("Datos",gpSanguineo);
             }
             @Override
@@ -78,7 +78,9 @@ public class Asistido_Perfil_Fragment_2_DatosMedicos extends Fragment {
             @Override
             public void onClick(View v) {
                 if (comprobarCampos()){
-
+                    new actualizarDatosMedicos().execute("http://37.187.198.145/llamas/App/ActualizarDatosMedicosApp.php?correo="
+                            +correoUser+"&peso="+peso+"&altura="+altura+"&grSanguineo="
+                            +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion+"&notasMedicas="+nMedicas);
                 }
             }
         });
@@ -94,6 +96,28 @@ public class Asistido_Perfil_Fragment_2_DatosMedicos extends Fragment {
 
         return vista;
     }
+    public class actualizarDatosMedicos extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                return downloadUrl(strings[0]);
+            }catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        @Override
+        protected void onPostExecute(String resultado) {
+            try {
+                JSONArray respuesta= new JSONArray(resultado);
+                Log.v("Datos1carga",respuesta.toString());
+
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        }
+    }
+
     public class cargarDatosMedicos extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... strings) {
