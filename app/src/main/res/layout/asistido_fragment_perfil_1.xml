@@ -30,6 +30,14 @@
 
             <View style="@style/low_divider" />
 
+            <Button
+                android:id="@+id/btn_perfil_modificar_datos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modificar datos" />
+
+            <View style="@style/low_divider" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -37,14 +45,22 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_nombre"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Nombre" />
 
                 <EditText
                     android:id="@+id/et_perfil_nombre"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="textEmailAddress"
-                    android:text="Nombre" />
+                    android:enabled="false"
+                    android:hint="Nombre" />
 
             </LinearLayout>
 
@@ -57,14 +73,22 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_apellido"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Apellidos" />
 
                 <EditText
                     android:id="@+id/et_perfil_apellido"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="textPersonName"
-                    android:text="Apellidos" />
+                    android:enabled="false"
+                    android:hint="apellidos" />
             </LinearLayout>
 
             <View style="@style/divider" />
@@ -76,17 +100,27 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_fnacimiento"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Fecha de nacimiento" />
 
                 <EditText
                     android:id="@+id/et_perfil_fnacimiento"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="date"
-                    android:text="01/01/2001" />
+                    android:enabled="false"
+                    android:hint="01/01/2001" />
             </LinearLayout>
 
             <View style="@style/divider" />
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,18 +129,25 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_sexo"
-                    style="@style/tv_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Sexo" />
 
                 <EditText
                     android:id="@+id/et_perfil_sexo"
                     style="@style/et_perfil"
-                    android:inputType="date"
-                    android:text="Hombre" />
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
+                    android:inputType="text"
+                    android:enabled="false"
+                    android:hint="sexo"/>
             </LinearLayout>
-
             <View style="@style/divider" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -114,14 +155,22 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_telefono"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Telefono" />
 
                 <EditText
                     android:id="@+id/et_perfil_telefono"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="phone"
-                    android:text="000 000 000" />
+                    android:enabled="false"
+                    android:hint="000 000 000" />
 
             </LinearLayout>
 
@@ -142,14 +191,22 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_email"
-                    style="@style/tv_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Email" />
 
                 <EditText
                     android:id="@+id/et_perfil_email"
-                    style="@style/et_perfil"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:paddingHorizontal="30dp"
                     android:inputType="textEmailAddress"
-                    android:text="nombre@correo.com" />
+                    android:enabled="false"
+                    android:hint="nombre@correo.com" />
             </LinearLayout>
 
             <View style="@style/divider" />
