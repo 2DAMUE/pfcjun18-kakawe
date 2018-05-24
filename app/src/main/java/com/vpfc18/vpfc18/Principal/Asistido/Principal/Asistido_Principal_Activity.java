@@ -16,12 +16,13 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
     android.support.v7.widget.Toolbar asistido_principal_toolbar;
 
     int perfil = 0;
-
+    String correoUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.asistido_activity_principal);
 
+        correoUser = getIntent().getStringExtra("correoUser");
         asistido_principal_toolbar =(android.support.v7.widget.Toolbar) findViewById(R.id.asistido_principal_toolbar);
         setSupportActionBar(asistido_principal_toolbar);
         asistido_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
@@ -50,6 +51,9 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
         FragmentTransaction t = fm.beginTransaction();
         t.replace(R.id.asistido_contenedor_principal, fragmentoSeleccionado);
         t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
     private void cargaBotones() {
         perfil=0;
@@ -60,6 +64,9 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
         FragmentTransaction t = fm.beginTransaction();
         t.replace(R.id.asistido_contenedor_principal, fragmentoSeleccionado);
         t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
 
 }

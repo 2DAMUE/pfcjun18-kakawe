@@ -36,13 +36,13 @@ public class Registro_Fragment_1 extends Fragment {
         ibtn_registro_ayudar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registro2("ayudar");
+                registro2("asistentes");
             }
         });
         ibtn_registro_serAyudado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registro2("serAyudado");
+                registro2("dependientes");
             }
         });
         return vista;
@@ -53,7 +53,9 @@ public class Registro_Fragment_1 extends Fragment {
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_Inicio, fragmentoSeleccionado);
         t.commit();
-        Log.v("Datos",tipo);
+        Bundle datos = new Bundle();
+        datos.putString("tipoUsuario", tipo);
+        fragmentoSeleccionado.setArguments(datos);
     }
 
 }
