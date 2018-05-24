@@ -1,9 +1,11 @@
 package com.vpfc18.vpfc18.Principal.Asistido.Perfil;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +18,27 @@ import android.widget.Toast;
 import com.vpfc18.vpfc18.Principal.Asistido.Principal.Asistido_Principal_Activity;
 import com.vpfc18.vpfc18.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Asistido_Perfil_Fragment_1 extends Fragment{
 
-    EditText et_perfil_email,et_perfil_telefono,et_perfil_nombre,et_perfil_apellido;
-    Button btn_perfil_guardar;
+    EditText et_perfil_email,et_perfil_telefono,et_perfil_nombre,et_perfil_apellido,et_perfil_fnacimiento,et_perfil_sexo;
+    Button btn_perfil_guardar,btn_perfil_modificar_datos,btn_perfil_cerrarSesion;
     TextView tv_perfil_modContrasena,tv_perfil_datosMedicos,tv_perfil_contactos;
 
-    String email,contrasena,nuevaContrasena,nombre,apellido,telefono,correoUser;
-
-    Asistido_Principal_Activity barraSup = new Asistido_Principal_Activity();
+    String email,emailViejo,contrasena,nuevaContrasena,nombre,apellido,telefono,correoUser,sexo,fNacimiento;
 
     public Asistido_Perfil_Fragment_1() {
         // Required empty public constructor
@@ -42,18 +53,34 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         et_perfil_telefono = (EditText)vista.findViewById(R.id.et_perfil_telefono);
         et_perfil_nombre = (EditText)vista.findViewById(R.id.et_perfil_nombre);
         et_perfil_apellido = (EditText)vista.findViewById(R.id.et_perfil_apellido);
-        btn_perfil_guardar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
+        et_perfil_sexo = (EditText)vista.findViewById(R.id.et_perfil_sexo);
+        et_perfil_fnacimiento = (EditText)vista.findViewById(R.id.et_perfil_fnacimiento);
+
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         tv_perfil_datosMedicos = (TextView) vista.findViewById(R.id.tv_perfil_datosMedicos);
         tv_perfil_contactos = (TextView) vista.findViewById(R.id.tv_perfil_contactos);
 
+        btn_perfil_guardar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
+        btn_perfil_modificar_datos = (Button) vista.findViewById(R.id.btn_perfil_modificar_datos);
+        btn_perfil_cerrarSesion = (Button) vista.findViewById(R.id.btn_perfil_cerrarSesion);
         correoUser = getArguments().getString("correoUser");
-
+        btn_perfil_modificar_datos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_perfil_email.setEnabled(true);
+                et_perfil_telefono.setEnabled(true);
+                et_perfil_nombre.setEnabled(true);
+                et_perfil_apellido.setEnabled(true);
+                et_perfil_sexo.setEnabled(true);
+                et_perfil_fnacimiento.setEnabled(true);
+            }
+        });
         btn_perfil_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (comprobarCampos()){
-
+                    new actualizarPerfil().execute("http://37.187.198.145/llamas/App/ActualizarPerfilApp.php?correoV="
+                            +emailViejo+"&nombre="+nombre+"&telefono="+telefono+"&correoN="+email+"&apellido="+apellido);
                 }
             }
         });
@@ -61,7 +88,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
             @Override
             public void onClick(View v) {
                 modificarContrasena();
-
             }
         });
         tv_perfil_datosMedicos.setOnClickListener(new View.OnClickListener() {
@@ -76,15 +102,91 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
                 vistaModificarContactos();
             }
         });
+        //Carga el perfil de la base de datos
+        new cargarPerfil().execute("http://37.187.198.145/llamas/App/DatosPerfilApp.php?correo="
+                +correoUser);
         return vista;
     }
+    public class actualizarPerfil extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                return downloadUrl(strings[0]);
+            }catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        @Override
+        protected void onPostExecute(String resultado) {
+            try {
+                JSONArray respuesta= new JSONArray(resultado);
+                Log.v("Datos1",respuesta.toString());
+                //correo que viene viajando por la app(el que seria el viejo correo si se cambia)
+                //correoUser;
+                String apellido = respuesta.getString(3);
+                if (apellido.equals("null")){
+                    Log.d("Datos3","null");
+                    et_perfil_apellido.setText("");
+                }else{
+                    et_perfil_apellido.setText(respuesta.getString(3));
+                }
+                Log.d("Datos4","ninguno");
+                emailViejo = respuesta.getString(0);
+                et_perfil_email.setText(respuesta.getString(0));
+                et_perfil_telefono.setText(respuesta.getString(1));
+                et_perfil_nombre.setText(respuesta.getString(2));
 
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public class cargarPerfil extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                return downloadUrl(strings[0]);
+            }catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        @Override
+        protected void onPostExecute(String resultado) {
+            try {
+                JSONArray respuesta= new JSONArray(resultado);
+                Log.v("Datos1",respuesta.toString());
+                //correo que viene viajando por la app(el que seria el viejo correo si se cambia)
+                //correoUser;
+                String apellido = respuesta.getString(3);
+                if (apellido.equals("null")){
+                    Log.d("Datos3","null");
+                    et_perfil_apellido.setText("");
+                }else{
+                    et_perfil_apellido.setText(respuesta.getString(3));
+                }
+                Log.d("Datos4","ninguno");
+                emailViejo = respuesta.getString(0);
+                et_perfil_email.setText(respuesta.getString(0));
+                et_perfil_telefono.setText(respuesta.getString(1));
+                et_perfil_nombre.setText(respuesta.getString(2));
+
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+
+        }
+    }
 
     private boolean comprobarCampos(){
         email = et_perfil_email.getText().toString().trim();
         telefono = et_perfil_telefono.getText().toString();
         nombre = et_perfil_nombre.getText().toString();
         apellido = et_perfil_apellido.getText().toString();
+        sexo = et_perfil_sexo.getText().toString();
+        fNacimiento = et_perfil_fnacimiento.getText().toString();
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             String a= "Escribe un correo válido";
@@ -96,6 +198,12 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
             String a= "No puedes dejar el campo teléfono vacio";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_telefono.requestFocus();
+            return false;
+        }
+        if (nombre.isEmpty()){
+            String a= "No puedes dejar el campo nombre vacio";
+            Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+            et_perfil_nombre.requestFocus();
             return false;
         }
 
@@ -111,8 +219,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }
-
-
     private void modificarContrasena() {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_3_contrasena();
         FragmentTransaction t = getFragmentManager().beginTransaction();
@@ -131,4 +237,39 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }
+
+    private String downloadUrl(String myurl) throws IOException {
+        myurl = myurl.replace(" ","%20");
+        InputStream is = null;
+        int len = 500;
+
+        try {
+            URL url = new URL(myurl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000 /* milliseconds */);
+            conn.setConnectTimeout(15000 /* milliseconds */);
+            conn.setRequestMethod("GET");
+            conn.setDoInput(true);
+            conn.connect();
+            int response = conn.getResponseCode();
+            is = conn.getInputStream();
+
+            // Convert the InputStream into a string
+            String contentAsString = readIt(is, len);
+            return contentAsString;
+        } finally {
+            if (is != null) {
+                is.close();
+            }
+        }
+    }
+
+    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
+        Reader reader = null;
+        reader = new InputStreamReader(stream, "UTF-8");
+        char[] buffer = new char[len];
+        reader.read(buffer);
+        return new String(buffer);
+    }
 }
+

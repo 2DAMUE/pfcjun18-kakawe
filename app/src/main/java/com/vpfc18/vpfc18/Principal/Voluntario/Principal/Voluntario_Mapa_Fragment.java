@@ -69,6 +69,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         super.onViewCreated(view, savedInstanceState);
 
         mMapView = (MapView) mView.findViewById(R.id.map);
+        mMapView.setVisibility(View.INVISIBLE);
         if (mMapView != null) {
             mMapView.onCreate(null);
             mMapView.onResume();
@@ -91,10 +92,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
         mGoogleMaps = googleMap;
         mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
-        if (checkPermissions()) {
-            setMyLocationEnabled();
-        }
+        setMyLocationEnabled();
         /*
         mGoogleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(PERTH, 10));
         mPerth = mGoogleMaps.addMarker(new MarkerOptions()
@@ -105,48 +103,13 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
          */
     }
 
-    private boolean checkPermissions() {
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            requestPermissions();
-            return false;
-        }
-    }
-
-    private void requestPermissions() {
-        ActivityCompat.requestPermissions(getActivity(),
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                REQUEST_FINE_LOCATION);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_FINE_LOCATION: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    setMyLocationEnabled();
-                } else {
-                }
-            }
-        }
-    }
-
     private void setMyLocationEnabled() {
         mGoogleMaps.getUiSettings().setMyLocationButtonEnabled(true);
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            //entra cuando no tienes permisos
             return;
         }
+        mMapView.setVisibility(View.VISIBLE);
         mGoogleMaps.setMyLocationEnabled(true);
         mGoogleMaps.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
@@ -156,10 +119,9 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 longitud = location.getLongitude();
                 latitud = location.getLatitude();
                 Log.v("lat", String.valueOf(latitud));
-                //setLatLng(location.getLatitude(),location.getLongitude());
                 final LatLng actual = new LatLng(latitud, longitud);
                 mGoogleMaps.clear();
-                //mMap.addMarker(new MarkerOptions().position(actual).title("Ubicación actual").snippet("Esta es la posición actual del usuario"));
+
                 mGoogleMaps.addMarker(new MarkerOptions().position(actual).title("YO"));
                 if(salir == false){
                     salir = true;
@@ -173,13 +135,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     public boolean onMarkerClick(Marker marker) {
                         Toast.makeText(getActivity().getApplicationContext(), "has pulsado en el marcador y su posición " + actual, Toast.LENGTH_LONG).show();
                         ll_mapa_detalle.setVisibility(View.VISIBLE);
-
-/*
-
-                        DialogDetalleMarket ddm = new DialogDetalleMarket();
-                        ddm.show(getFragmentManager(), "ddm");
-
-*/
 
                         return false;
                     }

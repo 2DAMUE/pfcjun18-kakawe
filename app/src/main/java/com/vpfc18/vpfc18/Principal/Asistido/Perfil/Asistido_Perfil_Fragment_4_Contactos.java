@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class Asistido_Perfil_Fragment_4_Contactos extends Fragment {
     Button btn_contactos_modificar1,btn_contactos_modificar2,btn_contactos_guardar1,btn_contactos_guardar2,btn_contactos_atras;
     EditText et_contactos_nombre1,et_contactos_nombre2,et_contactos_telefono1,et_contactos_telefono2;
 
-    String correoUser;
+    String correoUser,nombre1,nombre2,telefono1,telefono2;
     public Asistido_Perfil_Fragment_4_Contactos() {
         // Required empty public constructor
     }
@@ -56,22 +57,83 @@ public class Asistido_Perfil_Fragment_4_Contactos extends Fragment {
 
         correoUser = getArguments().getString("correoUser");
 
+        btn_contactos_guardar1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (comprobarCampos("1")){
+                    guardarContactos("1");
+                }
+            }
+        });
+        btn_contactos_guardar2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (comprobarCampos("2")){
+                    guardarContactos("2");
+                }
+            }
+        });
         btn_contactos_atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                volverAPerfil();
             }
         });
         cargarContactos();
         return view;
     }
-
+    private void guardarContactos(String numero){
+        if (numero.equals("1")){
+            new guardarContacto1().execute("http://37.187.198.145/llamas/App/ActualizarContacto1App.php?correo="
+                    +correoUser+"&nombre="+nombre1+"&telefono="+telefono1);
+            //http://37.187.198.145/llamas/App/ActualizarContacto1App.php?correo=borja1@mail.com&nombre=ramoncete&telefono=4545
+        }else{
+            new guardarContacto1().execute("http://37.187.198.145/llamas/App/ActualizarContacto2App.php?correo="
+                    +correoUser+"&nombre="+nombre2+"&telefono="+telefono2);
+        }
+    }
+    private boolean comprobarCampos(String numero){
+        if (numero.equals("1")){
+            nombre1 = et_contactos_nombre1.getText().toString().trim();
+            telefono1 = et_contactos_telefono1.getText().toString().trim();
+            if (nombre1.isEmpty()){
+                String a= "Escribe un nombre de tu contacto 1";
+                Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+                et_contactos_nombre1.requestFocus();
+                return false;
+            }if (telefono1.isEmpty()){
+                String a= "Escribe un telefono de tu contacto 1";
+                Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+                et_contactos_telefono1.requestFocus();
+                return false;
+            }
+            guardarContactos(numero);
+        }else{
+            nombre2 = et_contactos_nombre2.getText().toString().trim();
+            telefono2 = et_contactos_telefono2.getText().toString().trim();
+            if (nombre2.isEmpty()){
+                String a= "Escribe un nombre de tu contacto 2";
+                Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+                et_contactos_nombre2.requestFocus();
+                return false;
+            }if (telefono2.isEmpty()){
+                String a= "Escribe un telefono de tu contacto 2";
+                Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+                et_contactos_telefono2.requestFocus();
+                return false;
+            }
+            guardarContactos(numero);
+        }
+        return true;
+    }
     private void cargarContactos() {
-        new cargarContactos().execute("http://37.187.198.145/llamas/App/CargarContactosApp.php?correo="
+        new cargarContacto1().execute("http://37.187.198.145/llamas/App/CargarContacto1App.php?correo="
+                +correoUser);
+        new cargarContacto2().execute("http://37.187.198.145/llamas/App/CargarContacto2App.php?correo="
                 +correoUser);
     }
 
-    public class cargarContactos extends AsyncTask<String,Void,String> {
+    public class cargarContacto1 extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... strings) {
             try{
@@ -88,18 +150,90 @@ public class Asistido_Perfil_Fragment_4_Contactos extends Fragment {
                 JSONArray respuesta= new JSONArray(resultado);
                 Log.v("Datos1",respuesta.toString());
                 String contactonombre1 = respuesta.getString(0);
-                String contactonombre2 = respuesta.getString(1);
-                Log.v("Datos2","1");
-                String contactotelefono1 = respuesta.getString(2);
-                String contactotelefono2 = respuesta.getString(3);
+                String contactotelefono1 = respuesta.getString(1);
                 Log.v("Datos2","2");
                 et_contactos_nombre1.setText(contactonombre1);
                 et_contactos_telefono1.setText(contactotelefono1);
+
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public class cargarContacto2 extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                return downloadUrl(strings[0]);
+            }catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+            Log.v("Datos",resultado);
+            try {
+                JSONArray respuesta= new JSONArray(resultado);
+                Log.v("Datos1",respuesta.toString());
+                String contactonombre2 = respuesta.getString(0);
+                String contactotelefono2 = respuesta.getString(1);
+                Log.v("Datos2","2");
                 et_contactos_nombre2.setText(contactonombre2);
                 et_contactos_telefono2.setText(contactotelefono2);
 
             } catch (JSONException e) {
-                Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "No tienes un contacto 2", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public class guardarContacto1 extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                return downloadUrl(strings[0]);
+            }catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+            Log.v("Datos",resultado);
+            try {
+                JSONArray respuesta= new JSONArray(resultado);
+                Log.v("Datos1",respuesta.toString());
+                String contactonombre1 = respuesta.getString(1);
+                Toast.makeText(getContext(), "Contacto "+contactonombre1+ " guardado con exito", Toast.LENGTH_LONG).show();
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "Fallo al guardar", Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public class guardarContacto2 extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                return downloadUrl(strings[0]);
+            }catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+            Log.v("Datos",resultado);
+            try {
+                JSONArray respuesta= new JSONArray(resultado);
+
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "Fallo al guardar", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
 

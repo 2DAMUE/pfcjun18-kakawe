@@ -15,7 +15,8 @@
     <style name="divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0.5dp</item>
-        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">15dp</item>
         <item name="android:background">@color/grisOscuro</item>
     </style>
 
