@@ -15,6 +15,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
+            <ToggleButton
+                android:id="@+id/btn_perfil_guardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textOff="EDITAR"
+                android:textOn="GUARDAR" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -62,11 +71,11 @@
 
                 <Spinner
                     android:id="@+id/spn_perfil_grSanguineo"
-                    android:layout_width="match_parent"
+                    android:layout_width="80dp"
                     android:layout_height="match_parent"
                     android:drawSelectorOnTop="true"
                     android:entries="@array/gr_sanguineo"
-                    android:gravity="right"
+                    
                     android:textAlignment="gravity" />
 
             </LinearLayout>
@@ -143,12 +152,6 @@
 
             </LinearLayout>
 
-
-            <Button
-                android:id="@+id/btn_perfil_guardar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Actualizar datos" />
 
             <Button
                 android:id="@+id/btn_perfil_atras"
