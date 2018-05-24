@@ -16,8 +16,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <ToggleButton
+                android:id="@+id/btn_perfil_guardar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textOff="EDITAR"
+                android:textOn="GUARDAR" />
 
-        <com.mikhaellopez.circularimageview.CircularImageView
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/iv_perfilUs_fotoUs"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
@@ -177,6 +183,20 @@
             <View style="@style/low_divider" />
 
             <TextView
+                android:id="@+id/tv_perfil_datosUsuario"
+                style="@style/submenu_perfil"
+                android:text="Datos usuario" />
+
+            <View style="@style/low_divider" />
+
+            <TextView
+                android:id="@+id/tv_perfil_datosPersonales"
+                style="@style/submenu_perfil"
+                android:text="Datos personales" />
+
+            <View style="@style/low_divider" />
+
+            <TextView
                 android:id="@+id/tv_perfil_datosMedicos"
                 style="@style/submenu_perfil"
                 android:text="Datos médicos" />
@@ -223,11 +243,6 @@
 
             <View style="@style/medium_divider" />
 
-            <Button
-                android:id="@+id/btn_perfil_guardar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Guardar" />
 
             <Button
                 android:id="@+id/btn_perfil_cerrarSesion"
