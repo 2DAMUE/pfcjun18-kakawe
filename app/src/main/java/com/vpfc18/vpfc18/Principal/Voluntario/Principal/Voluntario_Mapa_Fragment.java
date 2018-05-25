@@ -63,6 +63,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private LinearLayout ll_mapa_detalle;
     private Button btn_voluntarioMapa_x;
     ArrayList<Datos_Alertas> datos_alertas;
+    String correoUser;
     //private static final LatLng PERTH = new LatLng(-31.952854, 115.857342);
     //private Marker mPerth;
 
@@ -76,6 +77,9 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.voluntario_fragment_mapa, container, false);
+
+        correoUser = getArguments().getString("correoUser");
+
         ll_mapa_detalle = (LinearLayout) mView.findViewById(R.id.ll_mapa_detalle);
         btn_voluntarioMapa_x = (Button) mView.findViewById(R.id.btn_voluntarioMapa_x);
         return mView;

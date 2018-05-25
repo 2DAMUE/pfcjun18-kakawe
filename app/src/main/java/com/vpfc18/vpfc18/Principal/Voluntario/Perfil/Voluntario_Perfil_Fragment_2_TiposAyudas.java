@@ -15,13 +15,14 @@ import com.vpfc18.vpfc18.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Perfil_Fragment_2 extends Fragment {
+public class Voluntario_Perfil_Fragment_2_TiposAyudas extends Fragment {
 
     CheckBox cbx_tipoayuda_ayuda1,cbx_tipoayuda_ayuda2,cbx_tipoayuda_ayuda3,cbx_tipoayuda_ayuda4,cbx_tipoayuda_ayuda5;
     Button btn_tipoayuda_guardar;
 
+    String correoUser;
     String ayuda1,ayuda2,ayuda3,ayuda4,ayuda5;
-    public Voluntario_Perfil_Fragment_2() {
+    public Voluntario_Perfil_Fragment_2_TiposAyudas() {
         // Required empty public constructor
     }
 
@@ -30,6 +31,8 @@ public class Voluntario_Perfil_Fragment_2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.voluntario_fragment_perfil_2, container, false);
+        correoUser = getArguments().getString("correoUser");
+
         cbx_tipoayuda_ayuda1 = (CheckBox)vista.findViewById(R.id.cbx_tipoayuda_ayuda1);
         cbx_tipoayuda_ayuda2 = (CheckBox)vista.findViewById(R.id.cbx_tipoayuda_ayuda2);
         cbx_tipoayuda_ayuda3 = (CheckBox)vista.findViewById(R.id.cbx_tipoayuda_ayuda3);

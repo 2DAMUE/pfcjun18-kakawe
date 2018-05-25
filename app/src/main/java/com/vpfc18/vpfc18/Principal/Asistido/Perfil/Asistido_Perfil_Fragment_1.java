@@ -38,7 +38,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
     Button btn_perfil_guardar,btn_perfil_modificar_datos,btn_perfil_cerrarSesion;
     TextView tv_perfil_modContrasena,tv_perfil_datosMedicos,tv_perfil_contactos;
 
-    String email,emailViejo,contrasena,nuevaContrasena,nombre,apellido,telefono,correoUser,sexo,fNacimiento;
+    String email,emailViejo,nombre,apellido,telefono,correoUser,sexo,fNacimiento;
 
     public Asistido_Perfil_Fragment_1() {
         // Required empty public constructor
