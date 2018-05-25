@@ -61,12 +61,13 @@ public class Login_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //apaño para no estar comprobando campos todo el rato
-                correo= "jose1@mail.com";
-                contrasena = "1111";
+                correo = "eloy1@mail.com";
+                contrasena = "2222";
                 new Loguin_Usuario().execute("http://37.187.198.145/llamas/App/LoginApp.php?correo="
                         +correo+"&password="+contrasena);
-
                 if (comprobarCampos()){
+                    correo = "jose1@mail.com";
+                    contrasena = "1111";
                     new Loguin_Usuario().execute("http://37.187.198.145/llamas/App/LoginApp.php?correo="
                             +correo+"&password="+contrasena);
                 }
