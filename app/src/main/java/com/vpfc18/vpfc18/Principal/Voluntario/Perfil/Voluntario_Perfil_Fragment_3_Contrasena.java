@@ -4,8 +4,6 @@ package com.vpfc18.vpfc18.Principal.Voluntario.Perfil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +33,7 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
     Button btn_perfil_actualizarDatos,btn_perfil_atras;
     String correoUser,passwordViejo,passwordNuevo,repetirPassword;
 
+
     public Voluntario_Perfil_Fragment_3_Contrasena() {
         // Required empty public constructor
     }
@@ -43,7 +42,7 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.fragment_voluntario__perfil__fragment_3__contrasena, container, false);
+        View vista = inflater.inflate(R.layout.voluntario_perfil_fragment_3_contrasena, container, false);
         correoUser = getArguments().getString("correoUser");
 
         et_perfil_contrasenaVieja = (EditText)vista.findViewById(R.id.et_perfil_contrasenaVieja);
@@ -52,7 +51,15 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
 
         btn_perfil_atras = (Button) vista.findViewById(R.id.btn_perfil_atras);
         btn_perfil_actualizarDatos = (Button) vista.findViewById(R.id.btn_perfil_actualizarDatos);
-
+        btn_perfil_actualizarDatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (comprobarCampos()){
+                    new modificarContrasena().execute("http://37.187.198.145/llamas/App/ModificarContrasenaApp.php?correo="
+                            +correoUser+"&password="+passwordNuevo);
+                }
+            }
+        });
 
         //cargamos los datos de la contrasena primero
         new cargarContrasena().execute("http://37.187.198.145/llamas/App/CargarContrasenaApp.php?correo="
@@ -73,13 +80,40 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
         protected void onPostExecute(String resultado) {
             try {
                 JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1actu",respuesta.toString());
-
+                et_perfil_contrasenaVieja.setText(respuesta.getString(0));
             } catch (JSONException e) {
                 Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
 
+        }
+    }
+    //Cargo el perfil de la base de datos
+    public class modificarContrasena extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                return downloadUrl(strings[0]);
+            }catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
+        @Override
+        protected void onPostExecute(String resultado) {
+            try {
+                JSONArray respuesta= new JSONArray(resultado);
+                String contra = respuesta.getString(0);
+                if (contra.equals(passwordNuevo)){
+                    et_perfil_contrasenaVieja.setText(respuesta.getString(0));
+                    Toast.makeText(getContext(), "Contrasena actualizada con exito", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "Fallo al actualizar la contrasena", Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (JSONException e) {
+                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
         }
     }
     private boolean comprobarCampos(){
@@ -102,8 +136,12 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_repetirContrasena.requestFocus();
             return false;
+        }if (!passwordNuevo.equals(repetirPassword)){
+            String a= "No puedes dejar el campo contraseña actual vacio";
+            Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+            et_perfil_repetirContrasena.requestFocus();
+            return false;
         }
-
         return true;
     }
     private String downloadUrl(String myurl) throws IOException {
@@ -140,4 +178,3 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
         return new String(buffer);
     }
 }
-

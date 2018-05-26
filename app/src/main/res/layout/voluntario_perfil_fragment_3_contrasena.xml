@@ -25,7 +25,7 @@
             android:gravity="end"
             android:backgroundTint="@android:color/transparent"
             android:paddingHorizontal="30dp"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:text="123456" />
     </LinearLayout>
 

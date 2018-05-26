@@ -61,6 +61,12 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
 
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         tv_perfil_modificarAlertas = (TextView) vista.findViewById(R.id.tv_perfil_modificarAlertas);
+        tv_perfil_modContrasena.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modificarContrasena();
+            }
+        });
 
         btn_perfil_actualizarDatos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +98,6 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         protected void onPostExecute(String resultado) {
             try {
                 JSONArray respuesta= new JSONArray(resultado);
-                //correo que viene viajando por la app(el que seria el viejo correo si se cambia)
-                //correoUser;
                 String apellido = respuesta.getString(3);
                 if (apellido.equals("null")){
                     et_perfil_apellido.setText("");
@@ -104,6 +108,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
                 et_perfil_email.setText(respuesta.getString(0));
                 et_perfil_telefono.setText(respuesta.getString(1));
                 et_perfil_nombre.setText(respuesta.getString(2));
+                Toast.makeText(getContext(), "Perfil actualizado con exito", Toast.LENGTH_LONG).show();
             } catch (JSONException e) {
                 Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
@@ -184,7 +189,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
     private void modificarContrasena() {
         Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_3_Contrasena();
         FragmentTransaction t = getFragmentManager().beginTransaction();
-        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
@@ -194,7 +199,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
     private void modificarTiposAyudas() {
         Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_2_TiposAyudas();
         FragmentTransaction t = getFragmentManager().beginTransaction();
-        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
