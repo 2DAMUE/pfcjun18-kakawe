@@ -1,4 +1,4 @@
-package com.vpfc18.vpfc18.Principal.Voluntario.Principal;
+package com.vpfc18.vpfc18.Principal.Voluntario.Perfil;
 
 
 import android.os.Bundle;
@@ -12,10 +12,11 @@ import com.vpfc18.vpfc18.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Listado_Fragment extends Fragment {
+public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
 
     String correoUser;
-    public Voluntario_Listado_Fragment() {
+
+    public Voluntario_Perfil_Fragment_3_Contrasena() {
         // Required empty public constructor
     }
 
@@ -23,7 +24,7 @@ public class Voluntario_Listado_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.voluntario_fragment_listado_, container, false);
+        View vista = inflater.inflate(R.layout.fragment_voluntario__perfil__fragment_3__contrasena, container, false);
         correoUser = getArguments().getString("correoUser");
         return vista;
     }

@@ -85,6 +85,7 @@
                     android:drawSelectorOnTop="true"
                     android:entries="@array/gr_sanguineo"
                     android:gravity="right"
+
                     android:textAlignment="textEnd" />
 
             </LinearLayout>

@@ -65,7 +65,6 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menu_derecho:
                 if (contador==0){
-                    Log.v("clic11",String.valueOf(item.getGroupId()));
                     contador=1;
                     item.setIcon(R.drawable.ic_map);
                     cargaLista();
@@ -88,6 +87,9 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         FragmentTransaction t = fm.beginTransaction();
         t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
         t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
     private void cargaLista(){
         perfil=0;
@@ -98,6 +100,9 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         FragmentTransaction t = fm.beginTransaction();
         t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
         t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
     private void cargaPerfil(){
         perfil=1;
@@ -108,6 +113,9 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         FragmentTransaction t = fm.beginTransaction();
         t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
         t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
     public void requestStoragePermission() {
         runOnUiThread(new Runnable() {
