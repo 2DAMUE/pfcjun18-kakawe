@@ -66,8 +66,6 @@ public class Login_Fragment extends Fragment {
                 new Loguin_Usuario().execute("http://37.187.198.145/llamas/App/LoginApp.php?correo="
                         +correo+"&password="+contrasena);
                 if (comprobarCampos()){
-                    correo = "jose1@mail.com";
-                    contrasena = "1111";
                     new Loguin_Usuario().execute("http://37.187.198.145/llamas/App/LoginApp.php?correo="
                             +correo+"&password="+contrasena);
                 }

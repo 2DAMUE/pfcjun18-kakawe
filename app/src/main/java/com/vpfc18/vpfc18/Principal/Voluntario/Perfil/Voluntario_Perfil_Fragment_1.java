@@ -37,9 +37,9 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
 
     EditText et_perfil_email,et_perfil_contrasena,et_perfil_telefono,et_perfil_nombre,et_perfil_apellido,et_perfil_sexo,et_perfil_fnacimiento;
     TextView tv_perfil_modContrasena,tv_perfil_modificarAlertas;
-    Button btn_perfil_guardar;
+    Button btn_perfil_actualizarDatos,btn_perfil_cerrarSesion;
 
-    String correoUser,email,emailViejo,contrasena,nombre,apellido,telefono,sexo,fNacimiento;
+    String correoUser,email,emailViejo,nombre,apellido,telefono,sexo,fNacimiento;
     public Voluntario_Perfil_Fragment_1() {
         // Required empty public constructor
     }
@@ -57,15 +57,16 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         et_perfil_sexo = (EditText)vista.findViewById(R.id.et_perfil_sexo);
         et_perfil_fnacimiento = (EditText)vista.findViewById(R.id.et_perfil_fnacimiento);
 
-        btn_perfil_guardar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
+        btn_perfil_actualizarDatos = (Button) vista.findViewById(R.id.btn_perfil_actualizarDatos);
 
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         tv_perfil_modificarAlertas = (TextView) vista.findViewById(R.id.tv_perfil_modificarAlertas);
 
-        btn_perfil_guardar.setOnClickListener(new View.OnClickListener() {
+        btn_perfil_actualizarDatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (comprobarCampos()){
+                    //para actualizar el perfil de la bae de datos
                     new actualizarPerfil().execute("http://37.187.198.145/llamas/App/ActualizarPerfilApp.php?correoV="
                             +emailViejo+"&nombre="+nombre+"&telefono="+telefono+"&correoN="+email+"&apellido="+apellido);
                 }
@@ -91,7 +92,6 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         protected void onPostExecute(String resultado) {
             try {
                 JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1actu",respuesta.toString());
                 //correo que viene viajando por la app(el que seria el viejo correo si se cambia)
                 //correoUser;
                 String apellido = respuesta.getString(3);
@@ -125,8 +125,6 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         protected void onPostExecute(String resultado) {
             try {
                 JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1carga",respuesta.toString());
-
                 String apellido = respuesta.getString(3);
                 if (apellido.equals("null")){
                     et_perfil_apellido.setText("");
@@ -158,12 +156,6 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
             et_perfil_email.requestFocus();
             return false;
         }
-        if (contrasena.isEmpty()){
-            String a= "No puedes dejar el campo contraseña vacio";
-            Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
-            et_perfil_contrasena.requestFocus();
-            return false;
-        }
         if (telefono.isEmpty()){
             String a= "No puedes dejar el campo teléfono vacio";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
@@ -179,6 +171,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         }
         return true;
     }
+
     private String devolverCorreo(){
         if (emailViejo.equals(email)){
             correoUser = email;

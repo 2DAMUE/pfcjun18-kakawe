@@ -79,6 +79,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
             @Override
             public void onClick(View v) {
                 if (comprobarCampos()){
+
                     new actualizarPerfil().execute("http://37.187.198.145/llamas/App/ActualizarPerfilApp.php?correoV="
                             +emailViejo+"&nombre="+nombre+"&telefono="+telefono+"&correoN="+email+"&apellido="+apellido);
                 }
@@ -203,8 +204,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
         if (apellido.isEmpty()){
             apellido = "null";
         }
-
-
         return true;
     }
     private String devolverCorreo(){
@@ -272,7 +271,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment{
             }
         }
     }
-
     public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
         Reader reader = null;
         reader = new InputStreamReader(stream, "UTF-8");
