@@ -24,7 +24,7 @@
         android:visibility="invisible">
 
         <Button
-            android:id="@+id/btn_voluntarioMapa_x"
+            android:id="@+id/btn_voluntarioMapa_cerrar"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="right"
@@ -41,7 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="5dp"
-                android:text="Jose M"
                 android:textAlignment="center"
                 android:textSize="20dp" />
 
@@ -80,11 +79,11 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_voluntarioMapa_info"
+                android:id="@+id/btn_voluntarioMapa_navegar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="INFO" />
+                android:text="NAVEGAR" />
 
             <Button
                 android:id="@+id/btn_voluntarioMapa_Llamar"
