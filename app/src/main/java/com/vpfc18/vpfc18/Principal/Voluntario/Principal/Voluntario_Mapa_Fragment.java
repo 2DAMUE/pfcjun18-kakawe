@@ -54,7 +54,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCallback {
-    //Toma Adri cabron
+
     private GoogleMap mGoogleMaps;
     private MapView mMapView;
     private static final int REQUEST_FINE_LOCATION = 11;
@@ -65,7 +65,8 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private LinearLayout ll_mapa_detalle;
     private Button btn_voluntarioMapa_x;
     ArrayList<Datos_Alertas> datos_alertas;
-
+    String correoUser;
+    final Cargar_Alertas Carga_Alertas = new Cargar_Alertas();
     public Voluntario_Mapa_Fragment() {
         // Required empty public constructor
     }
@@ -76,14 +77,33 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                              Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.voluntario_fragment_mapa, container, false);
+        correoUser = getArguments().getString("correoUser");
         ll_mapa_detalle = (LinearLayout) mView.findViewById(R.id.ll_mapa_detalle);
         btn_voluntarioMapa_x = (Button) mView.findViewById(R.id.btn_voluntarioMapa_x);
-        cargarAlertas();
+        gohome();
+        //cargarAlertas();
         return mView;
     }
 
     private void cargarAlertas() {
-        new Cargar_Alertas().execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
+        Log.v("CargandoAlertas3","asdfsadfsadf");
+        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
+    }
+    public void gohome(){
+        Thread t = new Thread(){
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void run() {
+                try {
+                    sleep(700);
+                }catch (Exception e){
+
+                } finally {
+                    cargarAlertas();
+                }
+            }
+        };
+        t.start();
     }
 
 
@@ -91,13 +111,13 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //cargarAlertas();
         mMapView = (MapView) mView.findViewById(R.id.map);
         mMapView.setVisibility(View.INVISIBLE);
         if (mMapView != null) {
             mMapView.onCreate(null);
             mMapView.onResume();
             mMapView.getMapAsync(this);
-
         }
         btn_voluntarioMapa_x.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,15 +136,11 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGoogleMaps.clear();
         mMapView.setVisibility(View.VISIBLE);
-
-        posicionAsistidos();
         setMyLocationEnabled();
 
     }
 
     private void posicionAsistidos() {
-        espera();
-
         Datos_Alertas eAlertas;
         for (int i = 0; i < datos_alertas.size(); i++){
             eAlertas = datos_alertas.get(i);
@@ -132,8 +148,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             double longitudAsistido = eAlertas.getLogitud();
             LatLng posicionAsistido = new LatLng(latitudAsistido, longitudAsistido);
             mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido));
-
-            //Log.v("posicionAsistido", String.valueOf(posicionAsistido));
         }
     }
 
@@ -179,7 +193,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     public class Cargar_Alertas extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            Log.v("posicionAsis","Enreo dentro");
+            Log.v("CargandoAlertas1","cargandooooooooooooooooo");
             try {
                 return downloadUrl(strings[0]);
             } catch (IOException e) {
@@ -188,9 +202,13 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         }
 
         @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
         protected void onPostExecute(String resultado) {
-
-
+            Log.v("CargandoAlertas2","cargandooooooooooooooooo");
             datos_alertas = new ArrayList<>();
             try {
                 JSONArray listadoAlertas = new JSONArray(resultado);
@@ -204,14 +222,16 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
                     Datos_Alertas eAlertas = new Datos_Alertas(id_dependiente, latitud, longitud);
                     datos_alertas.add(eAlertas);
-
                 }
-
+                posicionAsistidos();
             } catch (JSONException e) {
                 Toast.makeText(getContext(), "No hay datos de alertas", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
+
         }
+
+
     }
 
     public void espera(){

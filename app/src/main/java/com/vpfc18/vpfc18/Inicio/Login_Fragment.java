@@ -61,6 +61,8 @@ public class Login_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //apaño para no estar comprobando campos todo el rato
+
+                //misterciclos21
                 correo = "eloy1@mail.com";
                 contrasena = "2222";
                 new Loguin_Usuario().execute("http://37.187.198.145/llamas/App/LoginApp.php?correo="

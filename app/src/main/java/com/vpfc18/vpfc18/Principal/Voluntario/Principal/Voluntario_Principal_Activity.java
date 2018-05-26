@@ -4,7 +4,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -17,9 +20,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.vpfc18.vpfc18.Entidades.Datos_Alertas;
 import com.vpfc18.vpfc18.Principal.Voluntario.Perfil.Voluntario_Perfil_Fragment;
 import com.vpfc18.vpfc18.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 
@@ -30,6 +48,7 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
     int perfil = 0;
     int STORAGE_PERMISSION_CODE=2;
     String correoUser;
+    ArrayList<Datos_Alertas> datos_alertas;
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +136,7 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }
+
     public void requestStoragePermission() {
         runOnUiThread(new Runnable() {
             @Override
@@ -163,3 +183,4 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         t.start();
     }
 }
+
