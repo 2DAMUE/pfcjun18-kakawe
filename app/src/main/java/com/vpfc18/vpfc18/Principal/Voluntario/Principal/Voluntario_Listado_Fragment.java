@@ -2,7 +2,9 @@ package com.vpfc18.vpfc18.Principal.Voluntario.Principal;
 
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,13 +53,35 @@ public class Voluntario_Listado_Fragment extends Fragment {
 
         lv_lista_voluntario_listado = (ListView)vista.findViewById(R.id.lv_lista_voluntario_listado);
 
+        cargar();
         return vista;
+    }
+
+
+    public void cargar() {
+        Thread t = new Thread() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void run() {
+                try {
+                    sleep(700);
+                } catch (Exception e) {
+
+                } finally {
+                    cargarAlertas();
+                }
+            }
+        };
+        t.start();
+    }
+
+    private void cargarAlertas() {
+        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarTodasLasAlertasApp.php");
     }
 
     public class Cargar_Alertas extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            Log.v("CargandoAlertas1", "cargandooooooooooooooooo");
             try {
                 return downloadUrl(strings[0]);
             } catch (IOException e) {
@@ -72,7 +96,6 @@ public class Voluntario_Listado_Fragment extends Fragment {
 
         @Override
         protected void onPostExecute(String resultado) {
-            Log.v("CargandoAlertas2", "cargandooooooooooooooooo");
             lista_alertas = new ArrayList<>();
             try {
                 JSONArray listadoAlertas = new JSONArray(resultado);
