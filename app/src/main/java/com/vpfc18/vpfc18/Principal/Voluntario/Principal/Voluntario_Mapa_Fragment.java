@@ -70,10 +70,12 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     ArrayList<Datos_Alertas> datos_alertas;
     String correoUser;
     final Cargar_Alertas Carga_Alertas = new Cargar_Alertas();
+    private LatLng actual;
     //-----------------------------------------//
     //----------Elementos del Vista--------------//
     private TextView tv_voluntarioMapa_nombreAsistido, tv_voluntarioMapa_tipoAlerta, tv_voluntarioMapa_distancia;
     private Button btn_voluntarioMapa_cerrar, btn_voluntarioMapa_navegar,btn_voluntarioMapa_Llamar;
+
 
 
     public Voluntario_Mapa_Fragment() {
@@ -194,7 +196,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 //------------posicion de mi marcador--------------//
                 longitud = location.getLongitude();
                 latitud = location.getLatitude();
-                final LatLng actual = new LatLng(latitud, longitud);
+                actual = new LatLng(latitud, longitud);
                 mGoogleMaps.addMarker(new MarkerOptions().position(actual).title("YO"));
 
                 //-------------------------------------------------//
@@ -261,6 +263,8 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     //String id_tipoAlerta = object.getString("id_tipoAlerta");
                     double latitud = object.getDouble("latitud");
                     double longitud = object.getDouble("longitud");
+
+
 
                     Datos_Alertas eAlertas = new Datos_Alertas(id_dependiente, latitud, longitud);
                     datos_alertas.add(eAlertas);
