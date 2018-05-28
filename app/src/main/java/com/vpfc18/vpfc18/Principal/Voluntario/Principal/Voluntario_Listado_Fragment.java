@@ -56,8 +56,6 @@ public class Voluntario_Listado_Fragment extends Fragment {
         cargar();
         return vista;
     }
-
-
     public void cargar() {
         Thread t = new Thread() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -103,16 +101,17 @@ public class Voluntario_Listado_Fragment extends Fragment {
                 for (int i = 0; i < listadoAlertas.length(); i++) {
                     JSONObject object = listadoAlertas.getJSONObject(i);
 
-                    String id_dependiente = object.getString("id_dependiente");
-                    //String id_tipoAlerta = object.getString("id_tipoAlerta");
+                    String nombreDependiente = object.getString("nombre");
+                    String tipoAlerta = object.getString("nombreAlerta");
                     double latitud = object.getDouble("latitud");
                     double longitud = object.getDouble("longitud");
+                    String telefono = object.getString("telefono");
 
-                    Datos_Alertas eAlertas = new Datos_Alertas(id_dependiente, latitud, longitud);
+                    //metodo para calcular la distancia entre posicion actual y la ubicacion de la alerta
+                    double distancia = calcularDistancia();
+                    Datos_Alertas eAlertas = new Datos_Alertas(nombreDependiente, latitud, longitud,tipoAlerta,telefono,distancia);
                     lista_alertas.add(eAlertas);
                 }
-
-
 
             } catch (JSONException e) {
                 Toast.makeText(getContext(), "No hay datos de alertas", Toast.LENGTH_LONG).show();
