@@ -155,9 +155,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 ll_mapa_detalle.setVisibility(View.INVISIBLE);
             }
         });
-
     }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
