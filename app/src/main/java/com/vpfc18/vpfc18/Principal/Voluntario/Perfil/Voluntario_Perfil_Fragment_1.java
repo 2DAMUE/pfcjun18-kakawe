@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vpfc18.vpfc18.Principal.Asistido.Perfil.Asistido_Perfil_Fragment_3_contrasena;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
@@ -35,7 +34,7 @@ import java.net.URL;
  */
 public class Voluntario_Perfil_Fragment_1 extends Fragment {
 
-    EditText et_perfil_email,et_perfil_contrasena,et_perfil_telefono,et_perfil_nombre,et_perfil_apellido,et_perfil_sexo,et_perfil_fnacimiento;
+    EditText et_perfil_email,et_perfil_telefono,et_perfil_nombre,et_perfil_apellido,et_perfil_sexo,et_perfil_fnacimiento;
     TextView tv_perfil_modContrasena,tv_perfil_modificarAlertas;
     Button btn_perfil_actualizarDatos,btn_perfil_cerrarSesion;
 
@@ -89,6 +88,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try{
+                Log.d("CargandoAlertasPERFIL",strings+"");
                 return downloadUrl(strings[0]);
             }catch (IOException e) {
                 return "Unable to retrieve web page. URL may be invalid.";
@@ -121,6 +121,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
             try{
+                Log.d("CargandoAlertasPERFIL2",strings+"");
                 return downloadUrl(strings[0]);
             }catch (IOException e) {
                 return "Unable to retrieve web page. URL may be invalid.";
@@ -164,7 +165,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         if (telefono.isEmpty()){
             String a= "No puedes dejar el campo teléfono vacio";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
-            et_perfil_contrasena.requestFocus();
+            et_perfil_telefono.requestFocus();
             return false;
         }
         if (apellido.isEmpty()){

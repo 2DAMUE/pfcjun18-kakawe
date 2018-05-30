@@ -108,7 +108,8 @@ public class Voluntario_Listado_Fragment extends Fragment {
                     String telefono = object.getString("telefono");
 
                     //metodo para calcular la distancia entre posicion actual y la ubicacion de la alerta
-                    double distancia = calcularDistancia();
+                    //double distancia = calcularDistancia();
+                    double distancia = 0;
                     Datos_Alertas eAlertas = new Datos_Alertas(nombreDependiente, latitud, longitud,tipoAlerta,telefono,distancia);
                     lista_alertas.add(eAlertas);
                 }

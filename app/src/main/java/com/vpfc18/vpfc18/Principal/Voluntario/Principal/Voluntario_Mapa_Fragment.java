@@ -121,8 +121,8 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
 
     private void cargarAlertas() {
-        Log.v("CargandoAlertas3", "asdfsadfsadf");
-        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
+        //new Cargar_Alertas().execute("http://37.187.198.145/llamas/App/CargarTodasLasAlertasApp.php");
+        new Cargar_Alertas().execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
     }
 
     public void gohome() {
@@ -197,7 +197,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 longitud = location.getLongitude();
                 latitud = location.getLatitude();
                 actual = new LatLng(latitud, longitud);
-                mGoogleMaps.addMarker(new MarkerOptions().position(actual).title("YO"));
+                //mGoogleMaps.addMarker(new MarkerOptions().position(actual).title("YO"));
 
                 //-------------------------------------------------//
 
@@ -214,14 +214,11 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         String idMarkerString = marker.getId().substring(1,2);
                         int idMarker = Integer.parseInt(idMarkerString);
                         Datos_Alertas eAlertas = datos_alertas.get(idMarker);
-                        String nombreDetalle = eAlertas.getId_dependiente();
+                        String nombreDetalle = eAlertas.getNombreAlerta();
                         String tipoAlertaDetalle;
                         tv_voluntarioMapa_nombreAsistido.setText(nombreDetalle);
 
-
-
                         Toast.makeText(getActivity().getApplicationContext(), "has pulsado en el marcador y su posición " + idMarker, Toast.LENGTH_LONG).show();
-
                         ll_mapa_detalle.setVisibility(View.VISIBLE);
 
                         return false;
@@ -236,10 +233,11 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     public class Cargar_Alertas extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            Log.v("CargandoAlertas1", "cargandooooooooooooooooo");
             try {
+                Log.v("CargandoAlertasMAPA", strings+"");
                 return downloadUrl(strings[0]);
             } catch (IOException e) {
+                Log.v("CargandoAlertasMAPA1",e.getCause()+"");
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
@@ -251,22 +249,25 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
         @Override
         protected void onPostExecute(String resultado) {
-            Log.v("CargandoAlertas2", "cargandooooooooooooooooo");
+            Log.v("CargandoAlertasMAPA3", resultado.toString());
             datos_alertas = new ArrayList<>();
             try {
                 JSONArray listadoAlertas = new JSONArray(resultado);
-                Log.v("JSONARRAY", resultado);
+                Log.v("CargandoAlertasMAPA4", resultado);
                 for (int i = 0; i < listadoAlertas.length(); i++) {
                     JSONObject object = listadoAlertas.getJSONObject(i);
-
-                    String id_dependiente = object.getString("id_dependiente");
-                    //String id_tipoAlerta = object.getString("id_tipoAlerta");
+                    Log.v("CargandoAlertasMAPA5", object.toString());
+                    String nombreDependiente = object.getString("nombre");
+                    String tipoAlerta = object.getString("nombreAlerta");
                     double latitud = object.getDouble("latitud");
                     double longitud = object.getDouble("longitud");
+                    String telefono = object.getString("telefono");
 
+                    //metodo para calcular la distancia entre posicion actual y la ubicacion de la alerta
+                    //double distancia = calcularDistancia();
+                    double distancia = 0;
 
-
-                    Datos_Alertas eAlertas = new Datos_Alertas(id_dependiente, latitud, longitud);
+                    Datos_Alertas eAlertas = new Datos_Alertas(nombreDependiente, latitud, longitud,tipoAlerta,telefono,distancia);
                     datos_alertas.add(eAlertas);
                 }
 
@@ -289,14 +290,14 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             double latitudAsistido = eAlertas.getLatitud();
             double longitudAsistido = eAlertas.getLogitud();
             LatLng posicionAsistido = new LatLng(latitudAsistido, longitudAsistido);
-            mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).title(eAlertas.getId_dependiente())).setTag(i);
+            mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido)).setTag(i);
         }
 
     }
 
 
     private String downloadUrl(String myurl) throws IOException {
-        myurl = myurl.replace(" ", "%20");
+        //myurl = myurl.replace(" ", "%20");
         InputStream is = null;
         int len = 100000;
 
