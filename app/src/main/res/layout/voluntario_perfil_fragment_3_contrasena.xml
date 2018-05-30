@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Principal.Voluntario.Perfil.Voluntario_Perfil_Fragment_3_Contrasena">
+
+    <View style="@style/low_divider" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -81,7 +83,7 @@
             android:text="123456" />
     </LinearLayout>
 
-    <View style="@style/medium_divider" />
+    <View style="@style/low_divider" />
 
 
     <Button

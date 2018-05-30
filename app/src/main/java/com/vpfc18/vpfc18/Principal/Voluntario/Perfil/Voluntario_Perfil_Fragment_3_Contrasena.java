@@ -4,6 +4,7 @@ package com.vpfc18.vpfc18.Principal.Voluntario.Perfil;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,12 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
                 }
             }
         });
-
+        btn_perfil_atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                volverAPerfil();
+            }
+        });
         //cargamos los datos de la contrasena primero
         new cargarContrasena().execute("http://37.187.198.145/llamas/App/CargarContrasenaApp.php?correo="
                 +correoUser);
@@ -144,6 +150,17 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
         }
         return true;
     }
+
+    private void volverAPerfil() {
+        Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_1();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
+        t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
+    }
+
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ","%20");
         InputStream is = null;
