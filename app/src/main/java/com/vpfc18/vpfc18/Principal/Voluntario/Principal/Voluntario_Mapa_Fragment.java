@@ -75,6 +75,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     String correoUser;
     final Cargar_Alertas Carga_Alertas = new Cargar_Alertas();
     private LatLng actual;
+    private int contador = 0;
 
 
     //-----------------------------------------//
@@ -87,6 +88,13 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         // Required empty public constructor
     }
 
+    public double getLongitudAsistente() {
+        return longitudAsistente;
+    }
+
+    public double getLatitudAsistente() {
+        return latitudAsistente;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,7 +118,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         btn_voluntarioMapa_navegar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=101+main+street=tf");
+                Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=101+main+street");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
@@ -119,15 +127,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         });
 
 
-        gohome();
-
         return mView;
-    }
-
-
-    private void cargarAlertas() {
-        Log.v("CargandoAlertas3", "asdfsadfsadf");
-        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
     }
 
     public void gohome() {
@@ -136,7 +136,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             @Override
             public void run() {
                 try {
-                    sleep(700);
+                    sleep(1000);
                 } catch (Exception e) {
 
                 } finally {
@@ -145,6 +145,12 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             }
         };
         t.start();
+    }
+
+
+    private void cargarAlertas() {
+        Log.v("CargandoAlertas3", "asdfsadfsadf");
+        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
     }
 
 
@@ -180,9 +186,11 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         mGoogleMaps.getUiSettings().setMapToolbarEnabled(false);
         mGoogleMaps.getUiSettings().setZoomControlsEnabled(true);
 
+        setMyLocationEnabled();
+        gohome();
+
         mMapView.setVisibility(View.VISIBLE);
 
-        setMyLocationEnabled();
 
     }
 
@@ -260,8 +268,9 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             datos_alertas = new ArrayList<>();
             try {
                 JSONArray listadoAlertas = new JSONArray(resultado);
-                Log.v("JSONARRAY", listadoAlertas +"");
+                Log.v("JSONARRAY", listadoAlertas + "");
                 for (int i = 0; i < listadoAlertas.length(); i++) {
+
                     JSONObject object = listadoAlertas.getJSONObject(i);
                     Log.v("JSONARRAY2", resultado);
                     String nombreAsistidoDetalle = object.getString("nombre");
@@ -283,30 +292,28 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 e.printStackTrace();
             }
 
-            Log.v("distancia1",distancia + "");
         }
 
 
     }
 
-    private double calcularDistancia(double latitudAsistido, double longitudAsistido) {
+    private double calcularDistancia(final double latitudAsistido, final double longitudAsistido) {
+
         distancia = 0;
 
         Location asistente = new Location("puntoA");
         Location asistido = new Location("puntoB");
 
-        asistente.setLatitude(latitudAsistente);
-        asistente.setLongitude(longitudAsistente);
-        asistido.setLatitude(latitudAsistido);
-        asistido.setLongitude(longitudAsistido);
-
-        distancia = asistente.distanceTo(asistido);
-        Log.v("distancia",distancia + "");
-        distancia = asistido.distanceTo(asistente);
-
+            asistente.setLatitude(getLatitudAsistente());
+            asistente.setLongitude(getLongitudAsistente());
+            asistido.setLatitude(latitudAsistido);
+            asistido.setLongitude(longitudAsistido);
+            distancia = asistente.distanceTo(asistido);
+        Log.v("distancia", distancia + "");
 
         return distancia;
     }
+
 
     private void posicionAsistidos() {
         Datos_Alertas eAlertas;
