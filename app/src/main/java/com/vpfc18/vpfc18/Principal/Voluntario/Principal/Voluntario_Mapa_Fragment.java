@@ -117,8 +117,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
             }
         });
-
-
         gohome();
 
         return mView;
@@ -219,10 +217,16 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         String idMarkerString = marker.getId().substring(1, 2);
                         int idMarker = Integer.parseInt(idMarkerString);
                         Datos_Alertas eAlertas = datos_alertas.get(idMarker);
-                        String nombreAsistidoDetalle = eAlertas.getNombreAsistido();
-                        String tipoAlertaDetalle;
+                        final String nombreAsistidoDetalle = eAlertas.getNombreAsistido();
+                        String tipoAlertaDetalle = eAlertas.getNombreAlerta();
+                        final String telefono = eAlertas.getTelefono();
                         tv_voluntarioMapa_nombreAsistido.setText(nombreAsistidoDetalle);
-
+                        btn_voluntarioMapa_Llamar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                cargarDialogLlamada(nombreAsistidoDetalle,telefono);
+                            }
+                        });
                         Toast.makeText(getActivity().getApplicationContext(), "has pulsado en el marcador y su posición " + idMarker, Toast.LENGTH_LONG).show();
 
                         ll_mapa_detalle.setVisibility(View.VISIBLE);
@@ -234,7 +238,16 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             }
         });
     }
-
+    public void cargarDialogLlamada(String nombre1,String telefono1){
+        Log.v("enviodialog",nombre1);
+        Log.v("enviodialog",telefono1);
+        Voluntario_llamada_dialog vld = new Voluntario_llamada_dialog();
+        Bundle datos = new Bundle();
+        datos.putString("nombre",nombre1);
+        datos.putString("telefono",telefono1);
+        vld.setArguments(datos);
+        vld.show(getActivity().getFragmentManager(),"dialog");
+    }
 
     public class Cargar_Alertas extends AsyncTask<String, Void, String> {
         @Override

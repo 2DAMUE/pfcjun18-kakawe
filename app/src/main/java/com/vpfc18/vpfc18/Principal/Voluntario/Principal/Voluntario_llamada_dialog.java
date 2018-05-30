@@ -23,8 +23,8 @@ public class Voluntario_llamada_dialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         Bundle datos=this.getArguments();
-        nombre = datos.getString("");
-        telefono = datos.getString("telenombrefono");
+        nombre = datos.getString("nombre");
+        telefono = datos.getString("telefono");
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
