@@ -114,6 +114,11 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         perfil=0;
         voluntario_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
         getSupportActionBar().setTitle("Listado eventos");
+
+        //Voluntario_Mapa_Fragment vmf = new Voluntario_Mapa_Fragment();
+        //double latitudAsistente = vmf.getLatitudAsistente();
+       // double longitudAsistente = vmf.getLongitudAsistente();
+
         Fragment fragmentoSeleccionado = new Voluntario_Listado_Fragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction t = fm.beginTransaction();
@@ -121,6 +126,8 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         t.commit();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
+        //datos.putDouble("latitudAsistente",latitudAsistente);
+        //datos.putDouble("longitudAsistente",longitudAsistente);
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargaPerfil(){
