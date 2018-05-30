@@ -193,7 +193,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         }
         mMapView.setVisibility(View.VISIBLE);
         mGoogleMaps.setMyLocationEnabled(true);
-
         mGoogleMaps.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
@@ -221,7 +220,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         int idMarker = Integer.parseInt(idMarkerString);
                         Datos_Alertas eAlertas = datos_alertas.get(idMarker);
                         String nombreAsistidoDetalle = eAlertas.getNombreAsistido();
-
                         String tipoAlertaDetalle;
                         tv_voluntarioMapa_nombreAsistido.setText(nombreAsistidoDetalle);
 
@@ -265,10 +263,10 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     JSONObject object = listadoAlertas.getJSONObject(i);
                     Log.v("JSONARRAY2", resultado);
                     String nombreAsistidoDetalle = object.getString("nombre");
-                    String tipoAlerta = object.getString("nombreAlerta");
                     latitudAsistido = object.getDouble("latitud");
                     longitudAsistido = object.getDouble("longitud");
                     String telefono = object.getString("telefono");
+                    String tipoAlerta = object.getString("nombreAlerta");
 
                     double distancia = calcularDistancia(latitudAsistido, longitudAsistido);
 

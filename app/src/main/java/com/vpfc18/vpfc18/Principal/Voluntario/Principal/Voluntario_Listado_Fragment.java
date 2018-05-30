@@ -53,7 +53,6 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
     private String correoUser;
     private ArrayList<Datos_Alertas> lista_alertas = new ArrayList<>();
     ListView lv_lista_voluntario_listado;
-    LVAdapterAlertas lvAdapterAlertas;
     Cargar_Alertas Carga_Alertas = new Cargar_Alertas();
     double latitudAsistente;
     double longitudAsistente;
@@ -68,10 +67,9 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
         View vista = inflater.inflate(R.layout.voluntario_fragment_listado_, container, false);
 
         correoUser = getArguments().getString("correoUser");
-       // latitudAsistente = getArguments().getDouble("latitudAsistente");
-       // longitudAsistente = getArguments().getDouble("longitudAsistente");
-
         lv_lista_voluntario_listado = (ListView)vista.findViewById(R.id.lv_lista_voluntario_listado);
+
+
 
         cargar();
         return vista;
@@ -147,7 +145,6 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
             lista_alertas = new ArrayList<>();
             try {
                 JSONArray listadoAlertas = new JSONArray(resultado);
-                Log.v("JSONARRAY", resultado);
                 for (int i = 0; i < listadoAlertas.length(); i++) {
                     JSONObject object = listadoAlertas.getJSONObject(i);
 
@@ -159,18 +156,16 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
 
                     //metodo para calcular la distancia entre posicion actual y la ubicacion de la alerta
                     double distancia = calcularDistancia(latitudAsistido,longitudAsistido);
-                    Datos_Alertas eAlertas = new Datos_Alertas(nombreDependiente, latitudAsistido, longitudAsistido,tipoAlerta,telefono,distancia);
+                    Datos_Alertas eAlertas = new Datos_Alertas(nombreDependiente, latitudAsistido, longitudAsistido,telefono,tipoAlerta,distancia);
                     lista_alertas.add(eAlertas);
                 }
-
+                LVAdapterAlertas adaptador = new LVAdapterAlertas(lista_alertas,getContext(),getActivity().getFragmentManager());
+                lv_lista_voluntario_listado.setAdapter(adaptador);
             } catch (JSONException e) {
                 Toast.makeText(getContext(), "No hay datos de alertas", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
-
         }
-
-
     }
 
     private double calcularDistancia(double latitudAsistido, double longitudAsistido) {
