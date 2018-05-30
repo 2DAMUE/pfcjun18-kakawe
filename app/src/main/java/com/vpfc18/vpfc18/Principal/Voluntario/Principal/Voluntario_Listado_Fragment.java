@@ -74,7 +74,7 @@ public class Voluntario_Listado_Fragment extends Fragment {
     }
 
     private void cargarAlertas() {
-        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarTodasLasAlertasApp.php");
+        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
     }
 
     public class Cargar_Alertas extends AsyncTask<String, Void, String> {
@@ -83,7 +83,7 @@ public class Voluntario_Listado_Fragment extends Fragment {
             try {
                 return downloadUrl(strings[0]);
             } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
+                return e.toString();
             }
         }
 
@@ -108,7 +108,7 @@ public class Voluntario_Listado_Fragment extends Fragment {
                     String telefono = object.getString("telefono");
 
                     //metodo para calcular la distancia entre posicion actual y la ubicacion de la alerta
-                    double distancia = calcularDistancia();
+                    double distancia = 0;
                     Datos_Alertas eAlertas = new Datos_Alertas(nombreDependiente, latitud, longitud,tipoAlerta,telefono,distancia);
                     lista_alertas.add(eAlertas);
                 }

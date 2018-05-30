@@ -69,7 +69,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private Button btn_voluntarioMapa_x;
     ArrayList<Datos_Alertas> datos_alertas;
     String correoUser;
-    final Cargar_Alertas Carga_Alertas = new Cargar_Alertas();
     private LatLng actual;
     //-----------------------------------------//
     //----------Elementos del Vista--------------//
@@ -112,17 +111,12 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
             }
         });
-
-
         gohome();
-
         return mView;
     }
-
-
     private void cargarAlertas() {
-        Log.v("CargandoAlertas3", "asdfsadfsadf");
-        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
+        new Cargar_Alertas().execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
+        //new Cargar_Alertas().execute("http://37.187.198.145/llamas/App/CargarTodasLasAlertasApp.php");
     }
 
     public void gohome() {
@@ -197,13 +191,14 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 longitud = location.getLongitude();
                 latitud = location.getLatitude();
                 actual = new LatLng(latitud, longitud);
-                mGoogleMaps.addMarker(new MarkerOptions().position(actual).title("YO"));
+
 
                 //-------------------------------------------------//
 
                 if (salir == false) {
                     salir = true;
                     mGoogleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 15));
+                   // mGoogleMaps.addMarker(new MarkerOptions().position(actual).title("YO"));
                 }
 
                 mGoogleMaps.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -214,12 +209,9 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         String idMarkerString = marker.getId().substring(1,2);
                         int idMarker = Integer.parseInt(idMarkerString);
                         Datos_Alertas eAlertas = datos_alertas.get(idMarker);
-                        String nombreDetalle = eAlertas.getId_dependiente();
+                        String nombreDetalle = eAlertas.getNombreAsistido();
                         String tipoAlertaDetalle;
-                        tv_voluntarioMapa_nombreAsistido.setText(nombreDetalle);
-
-
-
+                        //tv_voluntarioMapa_nombreAsistido.setText(nombreDetalle);
                         Toast.makeText(getActivity().getApplicationContext(), "has pulsado en el marcador y su posición " + idMarker, Toast.LENGTH_LONG).show();
 
                         ll_mapa_detalle.setVisibility(View.VISIBLE);
@@ -227,7 +219,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         return false;
                     }
                 });
-
             }
         });
     }
@@ -236,7 +227,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     public class Cargar_Alertas extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            Log.v("CargandoAlertas1", "cargandooooooooooooooooo");
             try {
                 return downloadUrl(strings[0]);
             } catch (IOException e) {
@@ -251,35 +241,32 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
         @Override
         protected void onPostExecute(String resultado) {
-            Log.v("CargandoAlertas2", "cargandooooooooooooooooo");
             datos_alertas = new ArrayList<>();
+                Log.v("CargaDatosMapa",resultado);
             try {
                 JSONArray listadoAlertas = new JSONArray(resultado);
-                Log.v("JSONARRAY", resultado);
+                Log.v("CargaDatosMapa1", resultado);
                 for (int i = 0; i < listadoAlertas.length(); i++) {
                     JSONObject object = listadoAlertas.getJSONObject(i);
-
-                    String id_dependiente = object.getString("id_dependiente");
-                    //String id_tipoAlerta = object.getString("id_tipoAlerta");
+                    Log.v("CargaDatosMapa2", object.toString());
+                    String nombreAsistido = object.getString("nombre");
+                    String nombreAlerta = object.getString("nombreAlerta");
                     double latitud = object.getDouble("latitud");
                     double longitud = object.getDouble("longitud");
+                    String telefono= object.getString("telefono");
+                    double distancia= 0;
 
-
-
-                    Datos_Alertas eAlertas = new Datos_Alertas(id_dependiente, latitud, longitud);
+                    Datos_Alertas eAlertas = new Datos_Alertas(nombreAsistido, latitud, longitud,telefono,nombreAlerta,distancia);
                     datos_alertas.add(eAlertas);
                 }
-
                 posicionAsistidos();
 
             } catch (JSONException e) {
                 Toast.makeText(getContext(), "No hay datos de alertas", Toast.LENGTH_LONG).show();
+                Log.e("CargaDatosMapa3",e.toString());
                 e.printStackTrace();
             }
-
         }
-
-
     }
 
     private void posicionAsistidos() {
@@ -289,12 +276,10 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             double latitudAsistido = eAlertas.getLatitud();
             double longitudAsistido = eAlertas.getLogitud();
             LatLng posicionAsistido = new LatLng(latitudAsistido, longitudAsistido);
-            mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).title(eAlertas.getId_dependiente())).setTag(i);
+            mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido)).setTag(i);
         }
 
     }
-
-
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ", "%20");
         InputStream is = null;

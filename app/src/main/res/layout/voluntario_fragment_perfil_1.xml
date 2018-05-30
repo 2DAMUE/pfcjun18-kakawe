@@ -182,12 +182,12 @@
                 style="@style/submenu_perfil"
                 android:text="Contraseña" />
             <View style="@style/low_divider" />
-            <TextView
+            <!--<TextView
                 android:id="@+id/tv_perfil_modificarAlertas"
                 style="@style/submenu_perfil"
                 android:text="Modificar alertas" />
 
-            <View style="@style/low_divider" />
+            <View style="@style/low_divider" />-->
             <Button
                 android:id="@+id/btn_perfil_actualizarDatos"
                 android:layout_width="match_parent"

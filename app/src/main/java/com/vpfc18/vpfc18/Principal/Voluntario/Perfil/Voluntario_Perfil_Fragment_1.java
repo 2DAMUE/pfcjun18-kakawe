@@ -60,7 +60,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         btn_perfil_actualizarDatos = (Button) vista.findViewById(R.id.btn_perfil_actualizarDatos);
 
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
-        tv_perfil_modificarAlertas = (TextView) vista.findViewById(R.id.tv_perfil_modificarAlertas);
+        //tv_perfil_modificarAlertas = (TextView) vista.findViewById(R.id.tv_perfil_modificarAlertas);
         tv_perfil_modContrasena.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
