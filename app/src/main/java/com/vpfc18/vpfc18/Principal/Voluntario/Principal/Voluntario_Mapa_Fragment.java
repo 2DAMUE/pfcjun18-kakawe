@@ -228,8 +228,12 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         int idMarker = Integer.parseInt(idMarkerString);
                         Datos_Alertas eAlertas = datos_alertas.get(idMarker);
                         String nombreAsistidoDetalle = eAlertas.getNombreAsistido();
-                        String tipoAlertaDetalle;
+                        String tipoAlertaDetalle = eAlertas.getNombreAlerta();
+                        double distanciaEntreAsistidoAsistente = eAlertas.getDistancia();
+
                         tv_voluntarioMapa_nombreAsistido.setText(nombreAsistidoDetalle);
+                        tv_voluntarioMapa_tipoAlerta.setText(tipoAlertaDetalle);
+                        tv_voluntarioMapa_distancia.setText(String.valueOf(distanciaEntreAsistidoAsistente));
 
                         Toast.makeText(getActivity().getApplicationContext(), "has pulsado en el marcador y su posición " + idMarker, Toast.LENGTH_LONG).show();
 
@@ -277,7 +281,9 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     String telefono = object.getString("telefono");
                     String tipoAlerta = object.getString("nombreAlerta");
 
-                    double distancia = calcularDistancia(latitudAsistido, longitudAsistido);
+                    int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
+
+                    
 
                     Datos_Alertas eAlertas = new Datos_Alertas(nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
                     datos_alertas.add(eAlertas);
@@ -295,21 +301,23 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
     }
 
-    private double calcularDistancia(final double latitudAsistido, final double longitudAsistido) {
+    private int calcularDistancia(final double latitudAsistido, final double longitudAsistido) {
 
         distancia = 0;
 
         Location asistente = new Location("puntoA");
         Location asistido = new Location("puntoB");
 
-            asistente.setLatitude(getLatitudAsistente());
-            asistente.setLongitude(getLongitudAsistente());
-            asistido.setLatitude(latitudAsistido);
-            asistido.setLongitude(longitudAsistido);
-            distancia = asistente.distanceTo(asistido);
-        Log.v("distancia", distancia + "");
+        asistente.setLatitude(getLatitudAsistente());
+        asistente.setLongitude(getLongitudAsistente());
+        asistido.setLatitude(latitudAsistido);
+        asistido.setLongitude(longitudAsistido);
+        distancia = asistente.distanceTo(asistido);
 
-        return distancia;
+        int castDistancia = (int)distancia;
+        Log.v("castDistancia", castDistancia + "" );
+
+        return castDistancia;
     }
 
 
