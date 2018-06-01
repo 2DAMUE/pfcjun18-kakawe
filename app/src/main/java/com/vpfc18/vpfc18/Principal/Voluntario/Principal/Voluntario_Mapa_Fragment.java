@@ -171,14 +171,12 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
-
         mGoogleMaps = googleMap;
         mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mGoogleMaps.clear();
         mGoogleMaps.getUiSettings().setMyLocationButtonEnabled(true);
         mGoogleMaps.getUiSettings().setMapToolbarEnabled(false);
         mGoogleMaps.getUiSettings().setZoomControlsEnabled(true);
-
         mMapView.setVisibility(View.VISIBLE);
 
         setMyLocationEnabled();
@@ -322,11 +320,13 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private void posicionAsistidos() {
         Datos_Alertas eAlertas;
         for (int i = 0; i < datos_alertas.size(); i++) {
+
             eAlertas = datos_alertas.get(i);
             double latitudAsistido = eAlertas.getLatitud();
             double longitudAsistido = eAlertas.getLongitud();
             LatLng posicionAsistido = new LatLng(latitudAsistido, longitudAsistido);
             mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido)).setTag(i);
+
         }
 
     }
