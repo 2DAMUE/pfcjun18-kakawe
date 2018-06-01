@@ -32,6 +32,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -110,11 +111,29 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         btn_voluntarioMapa_navegar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=101+main+street=tf");
+
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=40.36205286273625,-3.791138733494563");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
 
+
+                /*
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=Taronga+Zoo,+Sydney+Australia");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+
+                 Uri gmmIntentUri = Uri.parse("geo=40.36205286273625,-3.791138733494563" );
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+
+                Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=101+main+street");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+*/
             }
         });
 
@@ -229,7 +248,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         btn_voluntarioMapa_Llamar.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cargarDialogLlamada(nombreAsistidoDetalle,telefono,id_alerta);
+                                cargarDialogLlamada(nombreAsistidoDetalle, telefono, id_alerta);
                             }
                         });
                         tv_voluntarioMapa_tipoAlerta.setText(tipoAlertaDetalle);
@@ -246,15 +265,16 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             }
         });
     }
-    public void cargarDialogLlamada(String nombre1,String telefono1,int id_alerta1){
+
+    public void cargarDialogLlamada(String nombre1, String telefono1, int id_alerta1) {
         Voluntario_llamada_dialog vld = new Voluntario_llamada_dialog();
         Bundle datos = new Bundle();
-        datos.putString("nombre",nombre1);
-        datos.putString("telefono",telefono1);
-        datos.putInt("id_alerta",id_alerta1);
-        datos.putString("correoUser",correoUser);
+        datos.putString("nombre", nombre1);
+        datos.putString("telefono", telefono1);
+        datos.putInt("id_alerta", id_alerta1);
+        datos.putString("correoUser", correoUser);
         vld.setArguments(datos);
-        vld.show(getActivity().getFragmentManager(),"dialog");
+        vld.show(getActivity().getFragmentManager(), "dialog");
     }
 
     public class Cargar_Alertas extends AsyncTask<String, Void, String> {
@@ -287,7 +307,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     String tipoAlerta = object.getString("nombreAlerta");
 
                     int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
-                    Datos_Alertas eAlertas = new Datos_Alertas(id_alerta,nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
+                    Datos_Alertas eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
                     datos_alertas.add(eAlertas);
                 }
 
@@ -304,6 +324,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     }
 
     private double calcularDistancia(double latitudAsistido, double longitudAsistido) {
+
         distancia = 0;
 
         Location asistente = new Location("puntoA");
@@ -315,7 +336,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         asistido.setLongitude(longitudAsistido);
         distancia = asistente.distanceTo(asistido);
 
-        int castDistancia = (int)distancia;
+        int castDistancia = (int) distancia;
 
         return distancia;
     }
@@ -326,8 +347,42 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             eAlertas = datos_alertas.get(i);
             double latitudAsistido = eAlertas.getLatitud();
             double longitudAsistido = eAlertas.getLongitud();
+            String tipoAlerta = eAlertas.getNombreAlerta();
             LatLng posicionAsistido = new LatLng(latitudAsistido, longitudAsistido);
-            mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido)).setTag(i);
+
+            //mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_phone))).setTag(i);
+
+            //mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido)).setTag(i);
+
+
+            if (tipoAlerta.equals("Aseo")) {
+
+                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.botiquin_de_primeros_auxilios))).setTag(i);
+            }
+
+            if (tipoAlerta.equals("Ayuda en la compra")) {
+
+                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.sirena))).setTag(i);
+
+            }
+
+            if (tipoAlerta.equals("Compañia")) {
+
+                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulancia))).setTag(i);
+            }
+
+            if (tipoAlerta.equals("Desplazamiento")) {
+
+                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.hidrante))).setTag(i);
+
+            }
+
+            if (tipoAlerta.equals("Labores del hogar")) {
+
+                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_phone))).setTag(i);
+            }
+
+
         }
 
     }
