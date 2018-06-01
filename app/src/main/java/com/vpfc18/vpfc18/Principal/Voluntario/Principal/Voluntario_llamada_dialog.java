@@ -5,15 +5,21 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vpfc18.vpfc18.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -92,10 +98,29 @@ public class Voluntario_llamada_dialog extends DialogFragment {
     }
 
     private void quitarLaAlerta() {
-
+        new modificarAlerta().execute("http://37.187.198.145/llamas/App/ModificarAlertasApp.php?correo="
+                +correoUser+"&idAlerta="+id_alerta);
     }
+    public class modificarAlerta extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                return downloadUrl(strings[0]);
+            }catch (IOException e) {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+        }
 
+        @Override
+        protected void onPostExecute(String resultado) {
+            try {
+                JSONArray respuesta= new JSONArray(resultado);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
+        }
+    }
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ", "%20");
         InputStream is = null;

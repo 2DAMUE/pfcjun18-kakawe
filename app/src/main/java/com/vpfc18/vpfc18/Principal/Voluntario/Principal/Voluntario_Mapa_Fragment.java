@@ -126,7 +126,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
 
     private void cargarAlertas() {
-        Log.v("CargandoAlertas3", "asdfsadfsadf");
         Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
     }
 
