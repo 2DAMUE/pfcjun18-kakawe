@@ -252,6 +252,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         datos.putString("nombre",nombre1);
         datos.putString("telefono",telefono1);
         datos.putInt("id_alerta",id_alerta1);
+        datos.putString("correoUser",correoUser);
         vld.setArguments(datos);
         vld.show(getActivity().getFragmentManager(),"dialog");
     }
@@ -286,9 +287,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     String tipoAlerta = object.getString("nombreAlerta");
 
                     int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
-
-
-
                     Datos_Alertas eAlertas = new Datos_Alertas(id_alerta,nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
                     datos_alertas.add(eAlertas);
                 }

@@ -158,7 +158,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
                     Datos_Alertas eAlertas = new Datos_Alertas(id_alerta,nombreDependiente, latitudAsistido, longitudAsistido,telefono,tipoAlerta,distancia);
                     lista_alertas.add(eAlertas);
                 }
-                LVAdapterAlertas adaptador = new LVAdapterAlertas(lista_alertas,getContext(),getActivity().getFragmentManager());
+                LVAdapterAlertas adaptador = new LVAdapterAlertas(lista_alertas,getContext(),getActivity().getFragmentManager(),correoUser);
                 lv_lista_voluntario_listado.setAdapter(adaptador);
             } catch (JSONException e) {
                 Toast.makeText(getContext(), "No hay datos de alertas", Toast.LENGTH_LONG).show();

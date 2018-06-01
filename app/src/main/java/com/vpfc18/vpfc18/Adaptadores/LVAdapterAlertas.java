@@ -25,11 +25,13 @@ public class LVAdapterAlertas implements ListAdapter {
     ArrayList<Datos_Alertas> listaAlertas;
     Context context;
     FragmentManager fm;
+    String correoUser;
 
-    public LVAdapterAlertas(ArrayList<Datos_Alertas> listaAlertas, Context context, FragmentManager fm) {
+    public LVAdapterAlertas(ArrayList<Datos_Alertas> listaAlertas, Context context, FragmentManager fm,String correoUser) {
         this.listaAlertas = listaAlertas;
         this.context = context;
         this.fm = fm;
+        this.correoUser = correoUser;
     }
 
     @Override
@@ -104,6 +106,8 @@ public class LVAdapterAlertas implements ListAdapter {
         datos.putString("nombre",nombre);
         datos.putString("telefono",telefono);
         datos.putInt("id_alerta",id_alerta);
+        datos.putString("correoUser",correoUser);
+
         vld.setArguments(datos);
         vld.show(fm,"dialog");
     }

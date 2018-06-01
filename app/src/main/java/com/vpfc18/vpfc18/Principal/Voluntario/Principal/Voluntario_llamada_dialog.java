@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +28,7 @@ public class Voluntario_llamada_dialog extends DialogFragment {
     TextView tv_nombre_dialogLlamada;
     Button btn_llamar_dialogLlamada,btn_cancelar_dialogLlamada;
     View vista;
-    String nombre,telefono;
+    String nombre,telefono,correoUser;
     int id_alerta;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class Voluntario_llamada_dialog extends DialogFragment {
         nombre = datos.getString("nombre");
         telefono = datos.getString("telefono");
         id_alerta = datos.getInt("id_alerta");
+        correoUser = datos.getString("correoUser");
+
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -70,7 +74,24 @@ public class Voluntario_llamada_dialog extends DialogFragment {
         }
     }
 
-    private void agregarAsistente() {
+    public void agregarAsistente() {
+        Thread t = new Thread() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void run() {
+                try {
+                    sleep(700);
+                } catch (Exception e) {
+
+                } finally {
+                    quitarLaAlerta();
+                }
+            }
+        };
+        t.start();
+    }
+
+    private void quitarLaAlerta() {
 
     }
 
