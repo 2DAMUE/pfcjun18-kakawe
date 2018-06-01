@@ -219,6 +219,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         String idMarkerString = marker.getId().substring(1, 2);
                         int idMarker = Integer.parseInt(idMarkerString);
                         Datos_Alertas eAlertas = datos_alertas.get(idMarker);
+                        final int id_alerta = eAlertas.getId_alerta();
                         final String nombreAsistidoDetalle = eAlertas.getNombreAsistido();
                         String tipoAlertaDetalle = eAlertas.getNombreAlerta();
                         final String telefono = eAlertas.getTelefono();
@@ -228,7 +229,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         btn_voluntarioMapa_Llamar.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                cargarDialogLlamada(nombreAsistidoDetalle,telefono);
+                                cargarDialogLlamada(nombreAsistidoDetalle,telefono,id_alerta);
                             }
                         });
                         tv_voluntarioMapa_tipoAlerta.setText(tipoAlertaDetalle);
@@ -245,11 +246,12 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             }
         });
     }
-    public void cargarDialogLlamada(String nombre1,String telefono1){
+    public void cargarDialogLlamada(String nombre1,String telefono1,int id_alerta1){
         Voluntario_llamada_dialog vld = new Voluntario_llamada_dialog();
         Bundle datos = new Bundle();
         datos.putString("nombre",nombre1);
         datos.putString("telefono",telefono1);
+        datos.putInt("id_alerta",id_alerta1);
         vld.setArguments(datos);
         vld.show(getActivity().getFragmentManager(),"dialog");
     }
@@ -276,6 +278,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 JSONArray listadoAlertas = new JSONArray(resultado);
                 for (int i = 0; i < listadoAlertas.length(); i++) {
                     JSONObject object = listadoAlertas.getJSONObject(i);
+                    int id_alerta = object.getInt("id_alerta");
                     String nombreAsistidoDetalle = object.getString("nombre");
                     latitudAsistido = object.getDouble("latitud");
                     longitudAsistido = object.getDouble("longitud");
@@ -286,7 +289,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
 
 
-                    Datos_Alertas eAlertas = new Datos_Alertas(nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
+                    Datos_Alertas eAlertas = new Datos_Alertas(id_alerta,nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
                     datos_alertas.add(eAlertas);
                 }
 
@@ -324,7 +327,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         for (int i = 0; i < datos_alertas.size(); i++) {
             eAlertas = datos_alertas.get(i);
             double latitudAsistido = eAlertas.getLatitud();
-            double longitudAsistido = eAlertas.getLogitud();
+            double longitudAsistido = eAlertas.getLongitud();
             LatLng posicionAsistido = new LatLng(latitudAsistido, longitudAsistido);
             mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido)).setTag(i);
         }

@@ -93,16 +93,17 @@ public class LVAdapterAlertas implements ListAdapter {
         btn_vista_alertas_llamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarDialogLlamada(listaAlertas.get(position).getNombreAsistido(),listaAlertas.get(position).getTelefono());
+                cargarDialogLlamada(listaAlertas.get(position).getNombreAsistido(),listaAlertas.get(position).getTelefono(),listaAlertas.get(position).getId_alerta());
             }
         });
         return view;
     }
-    public void cargarDialogLlamada(String nombre,String telefono){
+    public void cargarDialogLlamada(String nombre,String telefono,int id_alerta){
         Voluntario_llamada_dialog vld = new Voluntario_llamada_dialog();
         Bundle datos = new Bundle();
         datos.putString("nombre",nombre);
         datos.putString("telefono",telefono);
+        datos.putInt("id_alerta",id_alerta);
         vld.setArguments(datos);
         vld.show(fm,"dialog");
     }

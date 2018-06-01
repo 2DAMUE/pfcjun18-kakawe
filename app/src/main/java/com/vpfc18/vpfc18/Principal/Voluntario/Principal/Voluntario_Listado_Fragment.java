@@ -146,7 +146,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
                 JSONArray listadoAlertas = new JSONArray(resultado);
                 for (int i = 0; i < listadoAlertas.length(); i++) {
                     JSONObject object = listadoAlertas.getJSONObject(i);
-
+                    int id_alerta = object.getInt("id_alerta");
                     String nombreDependiente = object.getString("nombre");
                     String tipoAlerta = object.getString("nombreAlerta");
                     double latitudAsistido = object.getDouble("latitud");
@@ -155,7 +155,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
 
                     //metodo para calcular la distancia entre posicion actual y la ubicacion de la alerta
                     double distancia = calcularDistancia(latitudAsistido,longitudAsistido);
-                    Datos_Alertas eAlertas = new Datos_Alertas(nombreDependiente, latitudAsistido, longitudAsistido,telefono,tipoAlerta,distancia);
+                    Datos_Alertas eAlertas = new Datos_Alertas(id_alerta,nombreDependiente, latitudAsistido, longitudAsistido,telefono,tipoAlerta,distancia);
                     lista_alertas.add(eAlertas);
                 }
                 LVAdapterAlertas adaptador = new LVAdapterAlertas(lista_alertas,getContext(),getActivity().getFragmentManager());

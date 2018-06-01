@@ -2,9 +2,10 @@ package com.vpfc18.vpfc18.Entidades;
 
 public class Datos_Alertas {
 
+    private int id_alerta;
     private String nombreAsistido;
     private double latitud;
-    private double logitud;
+    private double longitud;
     private String telefono;
     private String nombreAlerta;
     private double distancia;
@@ -12,13 +13,22 @@ public class Datos_Alertas {
     public Datos_Alertas() {
     }
 
-    public Datos_Alertas(String nombreAsistido, double latitud, double logitud, String telefono, String nombreAlerta, double distancia) {
+    public Datos_Alertas(int id_alerta, String nombreAsistido, double latitud, double longitud, String telefono, String nombreAlerta, double distancia) {
+        this.id_alerta = id_alerta;
         this.nombreAsistido = nombreAsistido;
         this.latitud = latitud;
-        this.logitud = logitud;
+        this.longitud = longitud;
         this.telefono = telefono;
         this.nombreAlerta = nombreAlerta;
         this.distancia = distancia;
+    }
+
+    public int getId_alerta() {
+        return id_alerta;
+    }
+
+    public void setId_alerta(int id_alerta) {
+        this.id_alerta = id_alerta;
     }
 
     public String getNombreAsistido() {
@@ -37,12 +47,12 @@ public class Datos_Alertas {
         this.latitud = latitud;
     }
 
-    public double getLogitud() {
-        return logitud;
+    public double getLongitud() {
+        return longitud;
     }
 
-    public void setLogitud(double logitud) {
-        this.logitud = logitud;
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 
     public String getTelefono() {
@@ -72,9 +82,10 @@ public class Datos_Alertas {
     @Override
     public String toString() {
         return "Datos_Alertas{" +
-                "nombreAsistido='" + nombreAsistido + '\'' +
+                "id_alerta=" + id_alerta +
+                ", nombreAsistido='" + nombreAsistido + '\'' +
                 ", latitud=" + latitud +
-                ", logitud=" + logitud +
+                ", logitud=" + longitud +
                 ", telefono='" + telefono + '\'' +
                 ", nombreAlerta='" + nombreAlerta + '\'' +
                 ", distancia=" + distancia +
