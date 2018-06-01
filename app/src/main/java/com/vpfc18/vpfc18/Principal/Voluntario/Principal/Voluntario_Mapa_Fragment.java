@@ -124,7 +124,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
 
     private void cargarAlertas() {
-        Log.v("CargandoAlertas3", "asdfsadfsadf");
         Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
     }
 
@@ -252,7 +251,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     public class Cargar_Alertas extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... strings) {
-            Log.v("CargandoAlertas1", "cargandooooooooooooooooo");
             try {
                 return downloadUrl(strings[0]);
             } catch (IOException e) {
@@ -267,14 +265,11 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
         @Override
         protected void onPostExecute(String resultado) {
-            Log.v("CargandoAlertas2", resultado);
             datos_alertas = new ArrayList<>();
             try {
                 JSONArray listadoAlertas = new JSONArray(resultado);
-                Log.v("JSONARRAY", listadoAlertas +"");
                 for (int i = 0; i < listadoAlertas.length(); i++) {
                     JSONObject object = listadoAlertas.getJSONObject(i);
-                    Log.v("JSONARRAY2", resultado);
                     String nombreAsistidoDetalle = object.getString("nombre");
                     latitudAsistido = object.getDouble("latitud");
                     longitudAsistido = object.getDouble("longitud");
@@ -293,8 +288,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 Toast.makeText(getContext(), "No hay datos de alertas", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
-
-            Log.v("distancia1",distancia + "");
         }
 
 
@@ -312,7 +305,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         asistido.setLongitude(longitudAsistido);
 
         distancia = asistente.distanceTo(asistido);
-        Log.v("distancia",distancia + "");
         distancia = asistido.distanceTo(asistente);
 
 
