@@ -117,6 +117,8 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
             }
         });
+
+
         gohome();
 
         return mView;
@@ -124,6 +126,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
 
     private void cargarAlertas() {
+        Log.v("CargandoAlertas3", "asdfsadfsadf");
         Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
     }
 
@@ -219,6 +222,8 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         final String nombreAsistidoDetalle = eAlertas.getNombreAsistido();
                         String tipoAlertaDetalle = eAlertas.getNombreAlerta();
                         final String telefono = eAlertas.getTelefono();
+                        double distanciaEntreAsistidoAsistente = eAlertas.getDistancia();
+
                         tv_voluntarioMapa_nombreAsistido.setText(nombreAsistidoDetalle);
                         btn_voluntarioMapa_Llamar.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -226,6 +231,9 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                                 cargarDialogLlamada(nombreAsistidoDetalle,telefono);
                             }
                         });
+                        tv_voluntarioMapa_tipoAlerta.setText(tipoAlertaDetalle);
+                        tv_voluntarioMapa_distancia.setText(String.valueOf(distanciaEntreAsistidoAsistente));
+
                         Toast.makeText(getActivity().getApplicationContext(), "has pulsado en el marcador y su posición " + idMarker, Toast.LENGTH_LONG).show();
 
                         ll_mapa_detalle.setVisibility(View.VISIBLE);
@@ -238,8 +246,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         });
     }
     public void cargarDialogLlamada(String nombre1,String telefono1){
-        Log.v("enviodialog",nombre1);
-        Log.v("enviodialog",telefono1);
         Voluntario_llamada_dialog vld = new Voluntario_llamada_dialog();
         Bundle datos = new Bundle();
         datos.putString("nombre",nombre1);
@@ -276,7 +282,9 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     String telefono = object.getString("telefono");
                     String tipoAlerta = object.getString("nombreAlerta");
 
-                    double distancia = calcularDistancia(latitudAsistido, longitudAsistido);
+                    int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
+
+
 
                     Datos_Alertas eAlertas = new Datos_Alertas(nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
                     datos_alertas.add(eAlertas);
@@ -288,6 +296,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 Toast.makeText(getContext(), "No hay datos de alertas", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
+
         }
 
 
@@ -303,10 +312,9 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         asistente.setLongitude(longitudAsistente);
         asistido.setLatitude(latitudAsistido);
         asistido.setLongitude(longitudAsistido);
-
         distancia = asistente.distanceTo(asistido);
-        distancia = asistido.distanceTo(asistente);
 
+        int castDistancia = (int)distancia;
 
         return distancia;
     }

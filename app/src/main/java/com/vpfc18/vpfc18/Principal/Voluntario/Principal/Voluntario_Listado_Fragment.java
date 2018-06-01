@@ -68,10 +68,8 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
 
         correoUser = getArguments().getString("correoUser");
         lv_lista_voluntario_listado = (ListView)vista.findViewById(R.id.lv_lista_voluntario_listado);
-
-
-
         cargar();
+
         return vista;
     }
     public void cargar() {
@@ -101,6 +99,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
         MapsInitializer.initialize(getContext());
 
         mGoogleMaps = googleMap;
+
         setMyLocationEnabled();
     }
 
