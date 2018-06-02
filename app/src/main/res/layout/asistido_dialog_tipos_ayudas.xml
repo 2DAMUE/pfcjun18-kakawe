@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_ayuda1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Aseo" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_ayuda2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Compra" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_ayuda3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Desplazamiento" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_ayuda4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Hogar" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btn_ayuda5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Compañia" />
 </LinearLayout>

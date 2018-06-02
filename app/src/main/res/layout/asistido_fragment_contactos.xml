@@ -3,101 +3,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_4_Contactos">
+    tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_4_contactos">
 
 
-    <LinearLayout
+    <ToggleButton
+        android:id="@+id/btn_contactos_modificar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
+        android:backgroundTint="@color/green"
+        android:textOff="EDITAR"
+        android:textOn="GUARDAR" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Contacto 1"
-            android:textAlignment="center"
-            />
 
-        <Button
-            android:id="@+id/btn_contactos_modificar1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Modificar" />
-
-        <EditText
-            android:id="@+id/et_contactos_nombre1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="nombre"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/et_contactos_telefono1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="telefono"
-            android:inputType="textPersonName" />
-
-        <Button
-            android:id="@+id/btn_contactos_guardar1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView10"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Contacto 2"
-            android:textAlignment="center"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_contactos_modificar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Modificar" />
+            <TextView
+                android:id="@+id/tv_contactos_contacto1"
+                style="@style/subheader"
+                android:text="Contacto 1" />
 
-        <EditText
-            android:id="@+id/et_contactos_nombre2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="nombre"
-            android:inputType="textPersonName" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/et_contactos_telefono2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="telefono"
-            android:inputType="textPersonName" />
 
-        <Button
-            android:id="@+id/btn_contactos_guardar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guardar" />
+                <TextView
+                    android:id="@+id/tv_contactos_nombre1"
+                    style="@style/tv_perfil"
+                    android:text="Nombre" />
 
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/et_contactos_nombre1"
+                    style="@style/et_perfil"
+                    android:hint="Nombre"
+                    android:inputType="text" />
 
-    <Button
-        android:id="@+id/btn_contactos_atras"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Atras" />
+            </LinearLayout>
+
+            <View style="@style/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_contactos_telefono1"
+                    style="@style/tv_perfil"
+                    android:text="Telefono" />
+
+                <EditText
+                    android:id="@+id/et_contactos_telefono1"
+                    style="@style/et_perfil"
+                    android:hint="000 000 000"
+                    android:inputType="phone" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_contactos_contacto2"
+                style="@style/subheader"
+                android:text="Contacto 2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tv_contactos_nombre2"
+                    style="@style/tv_perfil"
+                    android:text="Nombre" />
+
+                <EditText
+                    android:id="@+id/et_contactos_nombre2"
+                    style="@style/et_perfil"
+                    android:hint="Nombre"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <View style="@style/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_contactos_telefono2"
+                    style="@style/tv_perfil"
+                    android:text="Telefono" />
+
+                <EditText
+                    android:id="@+id/et_contactos_telefono2"
+                    style="@style/et_perfil"
+                    android:hint="000 000 000"
+                    android:inputType="phone" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_contactos_atras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Atras" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
