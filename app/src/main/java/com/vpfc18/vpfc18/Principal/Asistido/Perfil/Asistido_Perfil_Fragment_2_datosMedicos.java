@@ -36,14 +36,14 @@ import java.net.URL;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Asistido_Perfil_Fragment_2_DatosMedicos extends Fragment {
+public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
 
     EditText et_perfil_peso,et_perfil_alergias,et_perfil_altura,et_perfil_medicacion,et_perfil_enfermedades,et_perfil_notasMedicas;
     Button btn_perfil_guardar,btn_perfil_atras;
     Spinner spn_perfil_grSanguineo;
     String correoUser,altura,peso,gpSanguineo,alergias,medicacion,enfermedades,nMedicas;
 
-    public Asistido_Perfil_Fragment_2_DatosMedicos() {
+    public Asistido_Perfil_Fragment_2_datosMedicos() {
         // Required empty public constructor
     }
 

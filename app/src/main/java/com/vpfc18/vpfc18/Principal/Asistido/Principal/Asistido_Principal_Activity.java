@@ -17,13 +17,14 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
 
     int perfil = 0;
     String correoUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.asistido_activity_principal);
 
         correoUser = getIntent().getStringExtra("correoUser");
-        asistido_principal_toolbar =(android.support.v7.widget.Toolbar) findViewById(R.id.asistido_principal_toolbar);
+        asistido_principal_toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.asistido_principal_toolbar);
         setSupportActionBar(asistido_principal_toolbar);
         asistido_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
 
@@ -31,19 +32,17 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
         asistido_principal_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (perfil == 0){
+                if (perfil == 0) {
                     cargaPerfil();
-                }else{
+                } else {
                     cargaBotones();
                 }
-
-
             }
         });
     }
 
-    private void cargaPerfil(){
-        perfil=1;
+    private void cargaPerfil() {
+        perfil = 1;
         asistido_principal_toolbar.setNavigationIcon(R.drawable.ic_vacio);
         getSupportActionBar().setTitle("Perfil Usuario");
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment();
@@ -55,8 +54,13 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }
+
+
+
+
+
     private void cargaBotones() {
-        perfil=0;
+        perfil = 0;
         asistido_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
         getSupportActionBar().setTitle("Selector emergencias");
         Fragment fragmentoSeleccionado = new Asistido_Botoneras_Fragment();
