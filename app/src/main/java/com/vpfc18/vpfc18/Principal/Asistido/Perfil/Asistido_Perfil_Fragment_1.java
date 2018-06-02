@@ -87,7 +87,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
             }
         });
 
-
         tv_perfil_modContrasena.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
