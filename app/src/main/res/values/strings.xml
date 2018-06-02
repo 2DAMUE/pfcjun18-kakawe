@@ -6,7 +6,6 @@
 
 
     <string-array name="gr_sanguineo">
-        <item>Grupo</item>
         <item>0-</item>
         <item>0+</item>
         <item>A-</item>
@@ -16,4 +15,12 @@
         <item>AB-</item>
         <item>AB+</item>
     </string-array>
+
+    <string-array name="sexo">
+        <item>Masculino</item>
+        <item>Femenino</item>
+
+    </string-array>
+
+
 </resources>

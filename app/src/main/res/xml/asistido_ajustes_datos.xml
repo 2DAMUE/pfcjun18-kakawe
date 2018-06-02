@@ -1,0 +1,181 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Datos de acceso">
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="Nombre"
+            android:dialogTitle="Email"
+            android:inputType="textEmailAddress"
+            android:key="example_text"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Email" />
+
+        <PreferenceScreen android:title="Contraseña">
+
+            <EditTextPreference
+                android:hint="Introduce"
+                android:inputType="textPassword"
+                android:title="Contraseña actual" />
+
+            <EditTextPreference
+                android:hint="Introduce"
+                android:inputType="textPassword"
+                android:title="Nueva contraseña" />
+
+            <EditTextPreference
+                android:hint="Introduce"
+                android:inputType="textPassword"
+                android:title="Repetir contraseña" />
+
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Datos personales">
+
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="Nombre"
+            android:dialogTitle="Nombre"
+            android:inputType="textCapWords"
+            android:key="example_text"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Nombre" />
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="Nombre"
+            android:dialogTitle="Nombre"
+            android:inputType="textCapWords"
+            android:key="example_text"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Apellido" />
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="Nombre"
+            android:dialogTitle="Nombre"
+            android:inputType="textCapWords"
+            android:key="example_text"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Fecha de nacimiento" />
+
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/sexo"
+            android:entryValues="@array/sexo"
+            android:key="example_list"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:title="Sexo" />
+
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="Nombre"
+            android:dialogTitle="Nombre"
+            android:inputType="phone"
+            android:key="example_text"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Teléfono" />
+
+
+    </PreferenceCategory>
+
+
+    <PreferenceScreen android:title="Datos médicos">
+
+        <PreferenceCategory android:title="Datos médicos">
+            <EditTextPreference
+                android:capitalize="words"
+                android:defaultValue="Nombre"
+                android:dialogTitle="Nombre"
+                android:inputType="phone"
+                android:key="example_text"
+                android:maxLines="1"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Altura" />
+
+            <EditTextPreference
+                android:capitalize="words"
+                android:defaultValue="Nombre"
+                android:dialogTitle="Nombre"
+                android:inputType="phone"
+                android:key="example_text"
+                android:maxLines="1"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Peso" />
+
+            <ListPreference
+                android:defaultValue="-1"
+                android:entries="@array/gr_sanguineo"
+                android:entryValues="@array/gr_sanguineo"
+                android:key="example_list"
+                android:negativeButtonText="@null"
+                android:positiveButtonText="@null"
+                android:title="Grupo sanguíneo" />
+
+            <EditTextPreference
+                android:capitalize="words"
+                android:defaultValue="Nombre"
+                android:dialogTitle="Nombre"
+                android:inputType="phone"
+                android:key="example_text"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Alergias" />
+
+            <EditTextPreference
+                android:capitalize="words"
+                android:defaultValue="Nombre"
+                android:dialogTitle="Nombre"
+                android:inputType="phone"
+                android:key="example_text"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Medicación" />
+
+            <EditTextPreference
+                android:capitalize="words"
+                android:defaultValue="Nombre"
+                android:dialogTitle="Nombre"
+                android:inputType="phone"
+                android:key="example_text"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Enfermedades" />
+
+            <EditTextPreference
+                android:capitalize="words"
+                android:defaultValue="Nombre"
+                android:dialogTitle="Nombre"
+                android:inputType="phone"
+                android:key="example_text"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Notas médicas" />
+
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="example_switch"
+                android:summary="Selecciona si tiene silla de ruedas"
+                android:title="Silla de ruedas" />
+        </PreferenceCategory>
+
+
+    </PreferenceScreen>
+
+
+</PreferenceScreen>

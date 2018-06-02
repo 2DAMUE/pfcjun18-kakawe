@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.vpfc18.vpfc18.R;
 
@@ -30,13 +32,15 @@ import java.net.URL;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Asistido_Perfil_Fragment_4_Contactos extends Fragment {
+public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
 
-    Button btn_contactos_modificar1,btn_contactos_modificar2,btn_contactos_guardar1,btn_contactos_guardar2,btn_contactos_atras;
+    Button btn_contactos_atras;
+    ToggleButton btn_contactos_modificar;
     EditText et_contactos_nombre1,et_contactos_nombre2,et_contactos_telefono1,et_contactos_telefono2;
 
+
     String correoUser,nombre1,nombre2,telefono1,telefono2;
-    public Asistido_Perfil_Fragment_4_Contactos() {
+    public Asistido_Perfil_Fragment_4_contactos() {
         // Required empty public constructor
     }
 
@@ -49,39 +53,40 @@ public class Asistido_Perfil_Fragment_4_Contactos extends Fragment {
         et_contactos_telefono1 = (EditText)view.findViewById(R.id.et_contactos_telefono1);
         et_contactos_nombre2 = (EditText)view.findViewById(R.id.et_contactos_nombre2);
         et_contactos_telefono2 = (EditText)view.findViewById(R.id.et_contactos_telefono2);
-        btn_contactos_modificar1 = (Button)view.findViewById(R.id.btn_contactos_modificar1);
-        btn_contactos_modificar2 = (Button)view.findViewById(R.id.btn_contactos_modificar2);
-        btn_contactos_guardar1 = (Button)view.findViewById(R.id.btn_contactos_guardar1);
-        btn_contactos_guardar2 = (Button)view.findViewById(R.id.btn_contactos_guardar2);
+        btn_contactos_modificar = (ToggleButton)view.findViewById(R.id.btn_contactos_modificar);
+
         btn_contactos_atras = (Button)view.findViewById(R.id.btn_contactos_atras);
 
         correoUser = getArguments().getString("correoUser");
 
-        btn_contactos_guardar1.setOnClickListener(new View.OnClickListener() {
+        btn_contactos_modificar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (comprobarCampos("1")){
-                    guardarContactos("1");
-                }
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //if (isChecked) {
+                    //habilitarCampos(true);
+                //} else if (comprobarCampos()) {
+                    //habilitarCampos(false);
+                    //actualizarDatos();
+                    //actualizarDatosPerfil();
+                //}
             }
         });
-        btn_contactos_guardar2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (comprobarCampos("2")){
-                    guardarContactos("2");
-                }
-            }
-        });
+
         btn_contactos_atras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 volverAPerfil();
             }
         });
+
+
         cargarContactos();
         return view;
     }
+
+
+
+
     private void guardarContactos(String numero){
         if (numero.equals("1")){
             new guardarContacto1().execute("http://37.187.198.145/llamas/App/ActualizarContacto1App.php?correo="
@@ -216,7 +221,7 @@ public class Asistido_Perfil_Fragment_4_Contactos extends Fragment {
 
         }
     }
-    public class guardarContacto2 extends AsyncTask<String,Void,String> {
+    public class guardarContactos extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... strings) {
             try{
