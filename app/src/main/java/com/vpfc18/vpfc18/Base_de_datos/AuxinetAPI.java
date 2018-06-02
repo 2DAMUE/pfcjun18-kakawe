@@ -109,6 +109,7 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         String metodo = "DatosPerfilApp.php?";
         String parametros = "correo=" + usuario;
         this.execute(APIUrl + metodo + parametros);
+
         return respuesta;
     }
 
