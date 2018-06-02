@@ -363,10 +363,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
 
-
-
-
-
+    
 
 
     public void actualizarDatosPerfil() {
