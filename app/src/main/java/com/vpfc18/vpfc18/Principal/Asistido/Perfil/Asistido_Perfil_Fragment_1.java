@@ -67,12 +67,11 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         tv_perfil_datosMedicos = (TextView) vista.findViewById(R.id.tv_perfil_datosMedicos);
         tv_perfil_contactos = (TextView) vista.findViewById(R.id.tv_perfil_contactos);
 
-        btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_guardar);
+        btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_modificar_datos);
 
         btn_perfil_cerrarSesion = (Button) vista.findViewById(R.id.btn_perfil_cerrarSesion);
 
         correoUser = getArguments().getString("correoUser");
-
 
         btn_perfil_modificar_datos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -86,6 +85,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 }
             }
         });
+
 
         tv_perfil_modContrasena.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -329,15 +329,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
 
-
-
-
-
-
-
-
-
-
     public void cargarDatosPerfil() {
         try {
             JSONArray datosPerfil = auxinetAPI.cargarPerfil(correoUser);
@@ -362,12 +353,10 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
 
-    
-
-
     public void actualizarDatosPerfil() {
         try {
             JSONArray datosPerfil = auxinetAPI.actualizarPerfil(emailViejo, nombre, telefono, email, apellido);
+
             Log.v("Datos1actu", datosPerfil.toString());
             //correo que viene viajando por la app(el que seria el viejo correo si se cambia)
             //correoUser;

@@ -26,7 +26,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
     private JSONArray respuesta = null;
 
 
-
     @Override
     protected String doInBackground(String... strings) {
         try {
@@ -50,6 +49,7 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         }
 
     }
+
 
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ", "%20");
@@ -87,14 +87,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
 
 
 
-
-
-
-
-
-
-
-
     public JSONArray nuevaAlerta(String usuario, String tipoAlerta, String latitud, String longitud) {
         String metodo = "GenerarAlertasApp.php?";
         String parametros = "correo=" + usuario + "&nombreAlerta=" + tipoAlerta + "&latitud=" + latitud + "&longitud=" + longitud;
@@ -103,16 +95,12 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
     }
 
 
-
-
     public JSONArray cargarPerfil(String usuario) {
         String metodo = "DatosPerfilApp.php?";
         String parametros = "correo=" + usuario;
         this.execute(APIUrl + metodo + parametros);
-
         return respuesta;
     }
-
 
 
     public JSONArray actualizarPerfil(String emailViejo, String nombre, String telefono, String email, String apellido) {
@@ -121,4 +109,5 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         this.execute(APIUrl + metodo + parametros);
         return respuesta;
     }
+    
 }

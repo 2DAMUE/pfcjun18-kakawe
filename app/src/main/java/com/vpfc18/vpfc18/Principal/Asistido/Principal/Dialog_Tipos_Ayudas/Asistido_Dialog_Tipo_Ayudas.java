@@ -43,7 +43,7 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
         btn_ayuda4 = (Button) vista.findViewById(R.id.btn_ayuda4);
         btn_ayuda5 = (Button) vista.findViewById(R.id.btn_ayuda5);
 
-        usuario = getArguments().getString("correoUser");
+        //usuario = getArguments().getString("correoUser");
 
         btn_ayuda1.setOnClickListener(new View.OnClickListener() {
             @Override
