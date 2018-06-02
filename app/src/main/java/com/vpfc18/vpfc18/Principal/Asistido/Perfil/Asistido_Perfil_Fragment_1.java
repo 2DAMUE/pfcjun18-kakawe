@@ -34,7 +34,7 @@ import java.net.URL;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Asistido_Perfil_Fragment_1 extends Fragment {
+public class Asistido_Perfil_Fragment_1 extends Fragment implements AuxinetAPI.Llamadas{
 
     AuxinetAPI auxinetAPI = new AuxinetAPI();
 
@@ -49,11 +49,9 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View vista = inflater.inflate(R.layout.asistido_fragment_perfil_1, container, false);
 
         et_perfil_email = (EditText) vista.findViewById(R.id.et_perfil_email);
@@ -321,9 +319,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         reader.read(buffer);
         return new String(buffer);
     }
-
-
-    public void cargarDatosPerfil(JSONArray datosPerfil) {
+    /*public void cargarDatosPerfil(JSONArray datosPerfil) {
         try {
             Log.v("DATOSPERFIL",datosPerfil.toString());
             Log.v("Datos1carga", datosPerfil.toString());
@@ -344,7 +340,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
             Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-    }
+    }*/
 
 
     public void actualizarDatosPerfil() {
@@ -370,5 +366,30 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         }
     }
 
+    @Override
+    public void cargarDatosDelPerfil() {
+        Log.v("DATOSPERFIL","aqiiiiii");
+        JSONArray array = auxinetAPI.getRespuesta();
+        /*try {
+            Log.v("DATOSPERFIL",datosPerfil.toString());
+            Log.v("Datos1carga", datosPerfil.toString());
+            //correo que viene viajando por la app(el que seria el viejo correo si se cambia)
+            //correoUser;
+            String apellido = datosPerfil.getString(3);
+            if (apellido.equals("null")) {
+                et_perfil_apellido.setText("");
+            } else {
+                et_perfil_apellido.setText(datosPerfil.getString(3));
+            }
+            emailViejo = datosPerfil.getString(0);
+            et_perfil_email.setText(datosPerfil.getString(0));
+            et_perfil_telefono.setText(datosPerfil.getString(1));
+            et_perfil_nombre.setText(datosPerfil.getString(2));
+
+        } catch (JSONException e) {
+            Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }*/
+    }
 }
 

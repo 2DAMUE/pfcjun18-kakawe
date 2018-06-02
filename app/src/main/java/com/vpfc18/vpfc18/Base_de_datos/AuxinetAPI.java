@@ -21,13 +21,22 @@ import java.net.URL;
  */
 
 
-public class AuxinetAPI extends AsyncTask<String, Void, String> {
+public class AuxinetAPI extends AsyncTask<String, Void, String>{
 
     String ubicacion;
     private String APIUrl = "http://37.187.198.145/llamas/App/";
     private JSONArray respuesta = null;
 
+    public interface Llamadas{
+        // Método de la interfaz
+        public void cargarDatosDelPerfil();
+    }
 
+    public JSONArray getRespuesta() {
+        return respuesta;
+    }
+
+    Llamadas llamar;
     @Override
     protected String doInBackground(String... strings) {
         try {
@@ -44,9 +53,9 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
             Log.v("Datos1actu1", resultado);
             respuesta = new JSONArray(resultado);
             Log.v("Datos1actu2", respuesta.toString());
+
             if (ubicacion.equals("asistidoPerfilFragment1")){
-                Asistido_Perfil_Fragment_1 aspf = new Asistido_Perfil_Fragment_1();
-                aspf.cargarDatosPerfil(respuesta);
+                llamar.cargarDatosDelPerfil();
             }
 
         } catch (JSONException e) {
@@ -116,5 +125,4 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         this.execute(APIUrl + metodo + parametros);
         return respuesta;
     }
-    
 }
