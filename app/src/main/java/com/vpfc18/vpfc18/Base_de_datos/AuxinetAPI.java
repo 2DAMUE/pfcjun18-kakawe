@@ -3,6 +3,8 @@ package com.vpfc18.vpfc18.Base_de_datos;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.vpfc18.vpfc18.Principal.Asistido.Perfil.Asistido_Perfil_Fragment_1;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -21,7 +23,7 @@ import java.net.URL;
 
 public class AuxinetAPI extends AsyncTask<String, Void, String> {
 
-
+    String ubicacion;
     private String APIUrl = "http://37.187.198.145/llamas/App/";
     private JSONArray respuesta = null;
 
@@ -39,9 +41,13 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String resultado) {
         try {
+            Log.v("Datos1actu1", resultado);
             respuesta = new JSONArray(resultado);
-            Log.v("Datos1actu", respuesta.toString());
-
+            Log.v("Datos1actu2", respuesta.toString());
+            if (ubicacion.equals("asistidoPerfilFragment1")){
+                Asistido_Perfil_Fragment_1 aspf = new Asistido_Perfil_Fragment_1();
+                aspf.cargarDatosPerfil(respuesta);
+            }
 
         } catch (JSONException e) {
             //Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
@@ -95,7 +101,8 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
     }
 
 
-    public JSONArray cargarPerfil(String usuario) {
+    public JSONArray cargarPerfil(String usuario,String destino) {
+        ubicacion = destino;
         String metodo = "DatosPerfilApp.php?";
         String parametros = "correo=" + usuario;
         this.execute(APIUrl + metodo + parametros);

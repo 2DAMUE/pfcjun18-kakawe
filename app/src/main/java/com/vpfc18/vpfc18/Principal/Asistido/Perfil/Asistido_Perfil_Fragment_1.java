@@ -105,13 +105,10 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 vistaModificarContactos();
             }
         });
-
-
         //Carga el perfil de la base de datos
         //new cargarPerfil().execute("http://37.187.198.145/llamas/App/DatosPerfilApp.php?correo=" + correoUser);
-
-
-        cargarDatosPerfil();
+        //cargarDatosPerfil();
+        auxinetAPI.cargarPerfil(correoUser,"asistidoPerfilFragment1");
         return vista;
 
     }
@@ -167,8 +164,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
 */
-
-
     private void habilitarCampos(Boolean habilitado) {
         et_perfil_nombre.setEnabled(habilitado);
         et_perfil_apellido.setEnabled(habilitado);
@@ -246,7 +241,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         if (apellido.isEmpty()) {
             apellido = "null";
         }
-
         return true;
     }
 
@@ -329,9 +323,9 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
 
-    public void cargarDatosPerfil() {
+    public void cargarDatosPerfil(JSONArray datosPerfil) {
         try {
-            JSONArray datosPerfil = auxinetAPI.cargarPerfil(correoUser);
+            Log.v("DATOSPERFIL",datosPerfil.toString());
             Log.v("Datos1carga", datosPerfil.toString());
             //correo que viene viajando por la app(el que seria el viejo correo si se cambia)
             //correoUser;
