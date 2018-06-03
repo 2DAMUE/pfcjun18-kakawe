@@ -1,9 +1,6 @@
 package com.vpfc18.vpfc18.Base_de_datos;
 
 import android.os.AsyncTask;
-import android.util.Log;
-
-import com.vpfc18.vpfc18.Principal.Asistido.Perfil.Asistido_Perfil_Fragment_1;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,48 +18,43 @@ import java.net.URL;
  */
 
 
-public class AuxinetAPI extends AsyncTask<String, Void, String>{
+public class AuxinetAPI extends AsyncTask<String, Void, String> {
 
-    String ubicacion;
-    private String APIUrl = "http://37.187.198.145/llamas/App/";
-    private JSONArray respuesta = null;
+    String APIUrl = "http://37.187.198.145/llamas/App/";
 
-    public interface Llamadas{
-        // Método de la interfaz
-        public void cargarDatosDelPerfil();
+    private OnResponseListener callBack;
+    public Exception exception;
+
+
+    public AuxinetAPI(OnResponseListener<JSONArray> callBack) {
+        this.callBack = callBack;
     }
 
-    public JSONArray getRespuesta() {
-        return respuesta;
-    }
-
-    Llamadas llamar;
     @Override
     protected String doInBackground(String... strings) {
         try {
             return downloadUrl(strings[0]);
         } catch (IOException e) {
-            return "Unable to retrieve web page. URL may be invalid.";
+            exception = e;
         }
+        return null;
     }
 
 
     @Override
-    protected void onPostExecute(String resultado) {
-        try {
-            Log.v("Datos1actu1", resultado);
-            respuesta = new JSONArray(resultado);
-            Log.v("Datos1actu2", respuesta.toString());
-
-            if (ubicacion.equals("asistidoPerfilFragment1")){
-                llamar.cargarDatosDelPerfil();
+    protected void onPostExecute(String result) {
+        if (callBack != null) {
+            if (exception == null) {
+                try {
+                    JSONArray response = new JSONArray(result);
+                    callBack.onSuccess(response);
+                } catch (JSONException e) {
+                    callBack.onFailure(e);
+                }
+            } else {
+                callBack.onFailure(exception);
             }
-
-        } catch (JSONException e) {
-            //Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
         }
-
     }
 
 
@@ -92,6 +84,7 @@ public class AuxinetAPI extends AsyncTask<String, Void, String>{
         }
     }
 
+
     public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
         Reader reader = null;
         reader = new InputStreamReader(stream, "UTF-8");
@@ -101,28 +94,27 @@ public class AuxinetAPI extends AsyncTask<String, Void, String>{
     }
 
 
-
-    public JSONArray nuevaAlerta(String usuario, String tipoAlerta, String latitud, String longitud) {
+    public void nuevaAlerta(String usuario, String tipoAlerta, String latitud, String longitud) {
         String metodo = "GenerarAlertasApp.php?";
         String parametros = "correo=" + usuario + "&nombreAlerta=" + tipoAlerta + "&latitud=" + latitud + "&longitud=" + longitud;
         this.execute(APIUrl + metodo + parametros);
-        return respuesta;
     }
 
 
-    public JSONArray cargarPerfil(String usuario,String destino) {
-        ubicacion = destino;
+    public void cargarPerfil(String usuario) {
         String metodo = "DatosPerfilApp.php?";
         String parametros = "correo=" + usuario;
         this.execute(APIUrl + metodo + parametros);
-        return respuesta;
     }
 
 
-    public JSONArray actualizarPerfil(String emailViejo, String nombre, String telefono, String email, String apellido) {
+    public void actualizarPerfil(String emailViejo, String nombre, String telefono, String email, String apellido) {
         String metodo = "ActualizarPerfilApp.php?";
         String parametros = "correoV=" + emailViejo + "&nombre=" + nombre + "&telefono=" + telefono + "&correoN=" + email + "&apellido=" + apellido;
         this.execute(APIUrl + metodo + parametros);
-        return respuesta;
     }
+
+
 }
+
+
