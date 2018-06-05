@@ -117,7 +117,6 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
 
                 latitudAsistente = location.getLatitude();
                 longitudAsistente = location.getLongitude();
-
             }
         });
     }
@@ -202,6 +201,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
             // Convert the InputStream into a string
             String contentAsString = readIt(is, len);
             return contentAsString;
+            //Poner un Catch porfa by Miguel
         } finally {
             if (is != null) {
                 is.close();

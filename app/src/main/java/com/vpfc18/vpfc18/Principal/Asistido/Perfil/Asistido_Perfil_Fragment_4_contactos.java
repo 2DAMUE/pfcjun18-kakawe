@@ -164,7 +164,6 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                 Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
-
         }
     }
     public class cargarContacto2 extends AsyncTask<String,Void,String> {

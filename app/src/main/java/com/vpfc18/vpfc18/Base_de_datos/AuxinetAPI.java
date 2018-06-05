@@ -1,7 +1,6 @@
 package com.vpfc18.vpfc18.Base_de_datos;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,35 +20,43 @@ import java.net.URL;
 
 public class AuxinetAPI extends AsyncTask<String, Void, String> {
 
+    String APIUrl = "http://37.187.198.145/llamas/App/";
 
-    private String APIUrl = "http://37.187.198.145/llamas/App/";
-    private JSONArray respuesta = null;
+    private OnResponseListener callBack;
+    public Exception exception;
 
 
+    public AuxinetAPI(OnResponseListener<JSONArray> callBack) {
+        this.callBack = callBack;
+    }
 
     @Override
     protected String doInBackground(String... strings) {
         try {
             return downloadUrl(strings[0]);
         } catch (IOException e) {
-            return "Unable to retrieve web page. URL may be invalid.";
+            exception = e;
         }
+        return null;
     }
 
 
     @Override
-    protected void onPostExecute(String resultado) {
-        try {
-            respuesta = new JSONArray(resultado);
-            Log.v("Datos1actu", respuesta.toString());
-
-
-        } catch (JSONException e) {
-            //Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+    protected void onPostExecute(String result) {
+        if (callBack != null) {
+            if (exception == null) {
+                try {
+                    JSONArray response = new JSONArray(result);
+                    callBack.onSuccess(response);
+                } catch (JSONException e) {
+                    callBack.onFailure(e);
+                }
+            } else {
+                callBack.onFailure(exception);
+            }
         }
-
     }
+
 
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ", "%20");
@@ -85,40 +92,36 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         return new String(buffer);
     }
 
-
-
-
-
-
-
-
-
-
-
-    public JSONArray nuevaAlerta(String usuario, String tipoAlerta, String latitud, String longitud) {
+    public void nuevaAlerta(String usuario, String tipoAlerta, String latitud, String longitud) {
         String metodo = "GenerarAlertasApp.php?";
         String parametros = "correo=" + usuario + "&nombreAlerta=" + tipoAlerta + "&latitud=" + latitud + "&longitud=" + longitud;
         this.execute(APIUrl + metodo + parametros);
-        return respuesta;
     }
 
-
-
-
-    public JSONArray cargarPerfil(String usuario) {
+    public void cargarPerfil(String usuario) {
         String metodo = "DatosPerfilApp.php?";
         String parametros = "correo=" + usuario;
         this.execute(APIUrl + metodo + parametros);
-
-        return respuesta;
     }
 
-
-
-    public JSONArray actualizarPerfil(String emailViejo, String nombre, String telefono, String email, String apellido) {
+    public void actualizarPerfil(String emailViejo, String nombre, String telefono, String email, String apellido) {
         String metodo = "ActualizarPerfilApp.php?";
         String parametros = "correoV=" + emailViejo + "&nombre=" + nombre + "&telefono=" + telefono + "&correoN=" + email + "&apellido=" + apellido;
         this.execute(APIUrl + metodo + parametros);
-        return respuesta;
     }
+
+    public void cargarContactos(String usuario,String contacto){
+        String parametros = "correo=" + usuario;
+        if (contacto.equals("contacto1")){
+            String metodo = "CargarContacto1App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }else{
+            String metodo = "CargarContacto2App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }
+    }
+
+
 }
+
+

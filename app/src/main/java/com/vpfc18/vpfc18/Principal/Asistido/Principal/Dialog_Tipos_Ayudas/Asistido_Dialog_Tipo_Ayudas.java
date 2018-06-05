@@ -3,25 +3,20 @@ package com.vpfc18.vpfc18.Principal.Asistido.Principal.Dialog_Tipos_Ayudas;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
+import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
-
-    AuxinetAPI auxinetAPI = new AuxinetAPI();
 
     Button btn_ayuda1, btn_ayuda2, btn_ayuda3, btn_ayuda4, btn_ayuda5;
 
@@ -43,7 +38,7 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
         btn_ayuda4 = (Button) vista.findViewById(R.id.btn_ayuda4);
         btn_ayuda5 = (Button) vista.findViewById(R.id.btn_ayuda5);
 
-        usuario = getArguments().getString("correoUser");
+        //usuario = getArguments().getString("correoUser");
 
         btn_ayuda1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +60,20 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
         String latitud = null;
         String longitud = null;
 
-        JSONArray datosPerfil = auxinetAPI.nuevaAlerta(usuario, tipoAlerta, latitud, longitud);
-        Log.v("Datos1actu", datosPerfil.toString());
+
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray response) {
+                Log.v("AlertaCreada", response.toString());
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.v("ErrorAlerta", e.getMessage());
+            }
+        });
+
+        auxinetAPI.nuevaAlerta(usuario, tipoAlerta, latitud, longitud);
 
 
     }

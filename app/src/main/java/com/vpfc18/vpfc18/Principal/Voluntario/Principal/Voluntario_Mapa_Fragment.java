@@ -51,6 +51,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 
 /**
@@ -136,16 +137,11 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 */
             }
         });
-
-
-        gohome();
-
         return mView;
     }
 
 
     private void cargarAlertas() {
-        Log.v("CargandoAlertas3", "asdfsadfsadf");
         Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
     }
 
@@ -170,8 +166,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //cargarAlertas();
         mMapView = (MapView) mView.findViewById(R.id.map);
         mMapView.setVisibility(View.INVISIBLE);
         if (mMapView != null) {
@@ -191,18 +185,55 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
+        if (checkPermissions()) {
+            mGoogleMaps = googleMap;
+            mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            mGoogleMaps.clear();
+            mGoogleMaps.getUiSettings().setMyLocationButtonEnabled(true);
+            mGoogleMaps.getUiSettings().setMapToolbarEnabled(false);
+            mGoogleMaps.getUiSettings().setZoomControlsEnabled(true);
+            mMapView.setVisibility(View.VISIBLE);
+            Log.v("CARGANDOO1","ASDF");
+            cargaVista();
+            Log.v("CARGANDOO2","ASDF");
+            gohome();
+            setMyLocationEnabled();
+        }
+        //setMyLocationEnabled();
+    }
 
-        mGoogleMaps = googleMap;
-        mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mGoogleMaps.clear();
-        mGoogleMaps.getUiSettings().setMyLocationButtonEnabled(true);
-        mGoogleMaps.getUiSettings().setMapToolbarEnabled(false);
-        mGoogleMaps.getUiSettings().setZoomControlsEnabled(true);
+    private View cargaVista() {
 
-        mMapView.setVisibility(View.VISIBLE);
+        Log.v("CARGANDOO3","ASDF");
+        return mView;
+    }
 
-        setMyLocationEnabled();
-
+    private boolean checkPermissions() {
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            requestPermissions();
+            return false;
+        }
+    }
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(getActivity(),
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                REQUEST_FINE_LOCATION);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_FINE_LOCATION: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    setMyLocationEnabled();
+                } else {
+                }
+            }
+        }
     }
 
     private void setMyLocationEnabled() {
@@ -305,7 +336,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     longitudAsistido = object.getDouble("longitud");
                     String telefono = object.getString("telefono");
                     String tipoAlerta = object.getString("nombreAlerta");
-
                     int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
                     Datos_Alertas eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
                     datos_alertas.add(eAlertas);
