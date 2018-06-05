@@ -32,6 +32,7 @@ public class Asistido_Perfil_Fragment extends Fragment {
         vistaPerfil();
         return vista;
     }
+
     private void vistaPerfil() {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_1();
         FragmentTransaction t = getFragmentManager().beginTransaction();

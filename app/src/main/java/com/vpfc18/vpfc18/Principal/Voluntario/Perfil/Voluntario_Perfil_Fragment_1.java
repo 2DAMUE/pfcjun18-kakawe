@@ -1,6 +1,7 @@
 package com.vpfc18.vpfc18.Principal.Voluntario.Perfil;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vpfc18.vpfc18.Inicio.Inicio_Activity;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
@@ -57,7 +59,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         et_perfil_fnacimiento = (EditText)vista.findViewById(R.id.et_perfil_fnacimiento);
 
         btn_perfil_actualizarDatos = (Button) vista.findViewById(R.id.btn_perfil_actualizarDatos);
-
+        btn_perfil_cerrarSesion = (Button) vista.findViewById(R.id.btn_perfil_cerrarSesion);
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         //tv_perfil_modificarAlertas = (TextView) vista.findViewById(R.id.tv_perfil_modificarAlertas);
         tv_perfil_modContrasena.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +77,15 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
                     new actualizarPerfil().execute("http://37.187.198.145/llamas/App/ActualizarPerfilApp.php?correoV="
                             +emailViejo+"&nombre="+nombre+"&telefono="+telefono+"&correoN="+email+"&apellido="+apellido);
                 }
+            }
+        });
+        btn_perfil_cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Inicio_Activity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         });
 

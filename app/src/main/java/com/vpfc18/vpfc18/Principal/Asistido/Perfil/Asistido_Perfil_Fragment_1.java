@@ -161,8 +161,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
 
 
     public void cargarDatosPerfil() {
-
-
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
             public void onSuccess(JSONArray response) {
@@ -181,22 +179,16 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                     Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Exception e) {
                 Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
         auxinetAPI.cargarPerfil(correoUser);
-
-
     }
 
 
     public void actualizarDatosPerfil() {
-
-
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
             public void onSuccess(JSONArray response) {
@@ -221,7 +213,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
         auxinetAPI.actualizarPerfil(emailViejo, nombre, telefono, email, apellido);
     }
 

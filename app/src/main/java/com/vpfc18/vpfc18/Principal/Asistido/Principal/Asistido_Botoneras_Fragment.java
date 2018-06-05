@@ -6,13 +6,20 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
+import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.Principal.Asistido.Principal.Dialog_Tipos_Ayudas.Asistido_Dialog_Tipo_Ayudas;
 import com.vpfc18.vpfc18.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 
 /**
@@ -70,9 +77,62 @@ public class Asistido_Botoneras_Fragment extends Fragment {
             }
         });
 
+        cargarContacto1();
+        cargarContacto2();
         return vista;
 
 
+    }
+
+    public void cargarContacto1() {
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    Log.v("Datos1", respuesta.toString());
+                    String contactonombre1 = respuesta.getString(0);
+                    String contactotelefono1 = respuesta.getString(1);
+                    Log.v("Datos2", "2");
+                    //et_contactos_nombre1.setText(contactonombre1);
+                    //et_contactos_telefono1.setText(contactotelefono1);
+
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+        auxinetAPI.cargarContactos(correoUser,"contacto1");
+    }
+
+    private void cargarContacto2() {
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    Log.v("Datos1",respuesta.toString());
+                    String contactonombre2 = respuesta.getString(0);
+                    String contactotelefono2 = respuesta.getString(1);
+                    Log.v("Datos2","2");
+                    et_contactos_nombre2.setText(contactonombre2);
+                    et_contactos_telefono2.setText(contactotelefono2);
+
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "No tienes un contacto 2", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+        auxinetAPI.cargarContactos(correoUser,"contacto2");
     }
 
 

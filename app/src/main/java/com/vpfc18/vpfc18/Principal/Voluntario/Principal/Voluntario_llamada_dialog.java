@@ -93,7 +93,6 @@ public class Voluntario_llamada_dialog extends DialogFragment {
             } else {
                 llamadaTelefonica(telefono);
                 Log.i("PERMISOS2", "Se tiene permiso para realizar llamadas!");
-
             }
         }
         return;

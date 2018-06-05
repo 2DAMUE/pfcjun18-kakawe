@@ -84,7 +84,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         }
     }
 
-
     public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
         Reader reader = null;
         reader = new InputStreamReader(stream, "UTF-8");
@@ -93,13 +92,11 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         return new String(buffer);
     }
 
-
     public void nuevaAlerta(String usuario, String tipoAlerta, String latitud, String longitud) {
         String metodo = "GenerarAlertasApp.php?";
         String parametros = "correo=" + usuario + "&nombreAlerta=" + tipoAlerta + "&latitud=" + latitud + "&longitud=" + longitud;
         this.execute(APIUrl + metodo + parametros);
     }
-
 
     public void cargarPerfil(String usuario) {
         String metodo = "DatosPerfilApp.php?";
@@ -107,11 +104,21 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         this.execute(APIUrl + metodo + parametros);
     }
 
-
     public void actualizarPerfil(String emailViejo, String nombre, String telefono, String email, String apellido) {
         String metodo = "ActualizarPerfilApp.php?";
         String parametros = "correoV=" + emailViejo + "&nombre=" + nombre + "&telefono=" + telefono + "&correoN=" + email + "&apellido=" + apellido;
         this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void cargarContactos(String usuario,String contacto){
+        String parametros = "correo=" + usuario;
+        if (contacto.equals("contacto1")){
+            String metodo = "CargarContacto1App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }else{
+            String metodo = "CargarContacto2App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }
     }
 
 
