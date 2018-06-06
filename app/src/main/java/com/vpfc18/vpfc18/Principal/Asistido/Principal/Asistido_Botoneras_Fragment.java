@@ -118,8 +118,8 @@ public class Asistido_Botoneras_Fragment extends Fragment {
                     String contactonombre2 = respuesta.getString(0);
                     String contactotelefono2 = respuesta.getString(1);
                     Log.v("Datos2","2");
-                    et_contactos_nombre2.setText(contactonombre2);
-                    et_contactos_telefono2.setText(contactotelefono2);
+                    //et_contactos_nombre2.setText(contactonombre2);
+                    //et_contactos_telefono2.setText(contactotelefono2);
 
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "No tienes un contacto 2", Toast.LENGTH_SHORT).show();
