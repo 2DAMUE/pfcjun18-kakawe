@@ -3,6 +3,7 @@ package com.vpfc18.vpfc18.Base_de_datos;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +42,7 @@ public class MapsAPI extends AsyncTask<String, Void, String> {
             if (exception == null) {
                 try {
                     JSONArray response = new JSONArray(result);
+                    Log.v("MAPSAPII",result);
                     callBack.onSuccess(response);
                 } catch (JSONException e) {
                     callBack.onFailure(e);
@@ -74,7 +76,7 @@ public class MapsAPI extends AsyncTask<String, Void, String> {
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ", "%20");
         InputStream is = null;
-        int len = 500;
+        int len = 10000;
 
         try {
             URL url = new URL(myurl);
@@ -105,9 +107,8 @@ public class MapsAPI extends AsyncTask<String, Void, String> {
         return new String(buffer);
     }
 
-    public void cargarPerfil(String usuario) {
-        String metodo = "DatosPerfilApp.php?";
-        String parametros = "correo=" + usuario;
-        generadorHilo(APIUrl + metodo + parametros);
+    public void cargarAlertas() {
+        String metodo = "CargarAlertasApp.php";
+        generadorHilo(APIUrl + metodo);
     }
 }

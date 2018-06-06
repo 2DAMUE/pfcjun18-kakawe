@@ -9,6 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,32 +23,29 @@
         <activity
             android:name=".Inicio.Inicio_Activity"
             android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".Principal.Voluntario.Principal.Voluntario_Principal_Activity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Principal.Asistido.Principal.Asistido_Principal_Activity"
+            android:screenOrientation="portrait"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAxMnx40xmRy26QBYjRQoDwCoM9A2EC0Wk" />
+
+        <activity
+            android:name=".Principal.PruebaActivity"
+            android:label="@string/title_activity_prueba"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Principal.Voluntario.Principal.Voluntario_Principal_Activity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
-            android:name=".Principal.Asistido.Principal.Asistido_Principal_Activity"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAxMnx40xmRy26QBYjRQoDwCoM9A2EC0Wk" />
-
     </application>
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true"
-        />
 
 </manifest>
