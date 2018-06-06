@@ -6,31 +6,26 @@
 
     <Button
         android:id="@+id/btn_ayuda1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_ayudas"
         android:text="Aseo" />
 
     <Button
         android:id="@+id/btn_ayuda2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_ayudas"
         android:text="Compra" />
 
     <Button
         android:id="@+id/btn_ayuda3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_ayudas"
         android:text="Desplazamiento" />
 
     <Button
         android:id="@+id/btn_ayuda4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_ayudas"
         android:text="Hogar" />
 
     <Button
         android:id="@+id/btn_ayuda5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_ayudas"
         android:text="Compañia" />
 </LinearLayout>
