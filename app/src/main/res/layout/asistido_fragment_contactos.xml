@@ -9,11 +9,7 @@
 
     <ToggleButton
         android:id="@+id/btn_contactos_modificar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/green"
-        android:textOff="EDITAR"
-        android:textOn="GUARDAR" />
+        style="@style/btn_editar" />
 
 
     <ScrollView
