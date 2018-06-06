@@ -15,4 +15,7 @@
     <color name="red">#ff4435</color>
     <color name="rojo">#ff0000</color>
     <color name="black">#000000</color>
+    <color name="azulAuxinet">#155889</color>
+    <color name="verdeAuxinet">#00CB79</color>
+
 </resources>

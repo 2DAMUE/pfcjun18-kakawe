@@ -9,11 +9,7 @@
 
     <ToggleButton
         android:id="@+id/btn_perfil_modificar_datos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/green"
-        android:textOff="EDITAR"
-        android:textOn="GUARDAR" />
+        style="@style/btn_editar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,17 +20,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/iv_perfilUs_fotoUs"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_width="0dp"
-                app:civ_shadow="true"
-                app:civ_shadow_color="#8BC34A"
-                app:civ_shadow_radius="10" />
 
+            <ImageView
+                android:id="@+id/iv_perfilUs_fotoUs"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@android:drawable/btn_star" />
 
             <View style="@style/low_divider" />
 
