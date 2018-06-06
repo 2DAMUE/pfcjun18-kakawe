@@ -71,13 +71,13 @@
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
 
-        app:button_background="@drawable/shape_rounded"
+        app:button_background="@drawable/shape_swiper"
         app:button_bottom_padding="0dp"
         app:button_image_disabled="@drawable/ic_arrows"
 
         app:button_image_enabled="@drawable/ic_arrows"
         app:button_image_height="120dp"
-        app:button_image_width="100dp"
+        app:button_image_width="120dp"
 
         app:button_left_padding="0dp"
         app:button_right_padding="0dp"
