@@ -52,15 +52,11 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         et_perfil_apellido = (EditText) vista.findViewById(R.id.et_perfil_apellido);
         et_perfil_sexo = (EditText) vista.findViewById(R.id.et_perfil_sexo);
         et_perfil_fnacimiento = (EditText) vista.findViewById(R.id.et_perfil_fnacimiento);
-
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         tv_perfil_datosMedicos = (TextView) vista.findViewById(R.id.tv_perfil_datosMedicos);
         tv_perfil_contactos = (TextView) vista.findViewById(R.id.tv_perfil_contactos);
-
         btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_modificar_datos);
-
         btn_perfil_cerrarSesion = (Button) vista.findViewById(R.id.btn_perfil_cerrarSesion);
-
         correoUser = getArguments().getString("correoUser");
 
         btn_perfil_modificar_datos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -97,7 +93,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
 
     }
 
-
     private void habilitarCampos(Boolean habilitado) {
         et_perfil_nombre.setEnabled(habilitado);
         et_perfil_apellido.setEnabled(habilitado);
@@ -107,7 +102,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         et_perfil_email.setEnabled(habilitado);
 
     }
-
 
     private boolean comprobarCampos() {
         email = et_perfil_email.getText().toString().trim();
@@ -150,7 +144,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         return correoUser;
     }
 
-
     public void cargarDatosPerfil() {
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
@@ -178,7 +171,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         auxinetAPI.cargarPerfil(correoUser);
     }
 
-
     public void actualizarDatosPerfil() {
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
@@ -198,7 +190,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                     Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Exception e) {
                 Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -206,7 +197,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         });
         auxinetAPI.actualizarPerfil(emailViejo, nombre, telefono, email, apellido);
     }
-
 
     private void vistaDatosMedicos() {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_2_datosMedicos();
@@ -219,7 +209,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         fragmentoSeleccionado.setArguments(datos);
     }
 
-
     private void modificarContrasena() {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_3_contrasena();
         FragmentTransaction t = getFragmentManager().beginTransaction();
@@ -230,7 +219,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }
-
 
     private void vistaModificarContactos() {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_4_contactos();
