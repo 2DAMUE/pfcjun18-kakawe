@@ -70,13 +70,10 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                     habilitarCampos(true);
                 } else if (comprobarCampos()) {
                     habilitarCampos(false);
-                    //actualizarDatos();
                     actualizarDatosPerfil();
                 }
             }
         });
-
-
         tv_perfil_modContrasena.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,12 +92,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 vistaModificarContactos();
             }
         });
-
-
-        //Carga el perfil de la base de datos
-        //new cargarPerfil().execute("http://37.187.198.145/llamas/App/DatosPerfilApp.php?correo=" + correoUser);
-
-
         cargarDatosPerfil();
         return vista;
 

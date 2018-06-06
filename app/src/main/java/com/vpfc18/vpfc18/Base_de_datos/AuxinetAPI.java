@@ -25,7 +25,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
     private OnResponseListener callBack;
     public Exception exception;
 
-
     public AuxinetAPI(OnResponseListener<JSONArray> callBack) {
         this.callBack = callBack;
     }
@@ -39,7 +38,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         }
         return null;
     }
-
 
     @Override
     protected void onPostExecute(String result) {
@@ -56,7 +54,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
             }
         }
     }
-
 
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ", "%20");
@@ -121,6 +118,54 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         }
     }
 
+    public void guardarContactos(String usuario, String contacto,String nombre,String telefono){
+        String parametros = "correo=" + usuario+"&nombre="+nombre
+                +"&telefono="+telefono;
+        if (contacto.equals("contacto1")){
+            String metodo = "ActualizarContacto1App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }else{
+            String metodo = "ActualizarContacto2App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }
+    }
+
+    public void loguearUsuario(String usuario,String password){
+        String metodo = "LoginApp.php?";
+        String parametros = "correo=" + usuario + "&password=" + password;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void registrarUsuario(String usuario,String password,String nombre,String telefono,String tipoUsuario){
+        String metodo = "RegistroApp.php?";
+        String parametros = "correo="+usuario+"&password="+password+"&nombre="+nombre+"&telefono="+telefono+"&usuario="+tipoUsuario;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void cargarDatosMedicos(String usuario){
+        String metodo = "DatosMedicosDependienteApp.php?";
+        String parametros = "correo="+usuario;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void actualizarDatosMedicos(String correo,String peso,String altura,String gpSanguineo,String alergias,String medicacion,String nMedicas,String enfermedades){
+        String metodo = "ActualizarDatosMedicosApp.php?";
+        String parametros = "correo="+correo+"&peso="+peso+"&altura="+altura+"&grSanguineo="
+                +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion+"&notasMedicas="
+                +nMedicas+"&enfermedades="+enfermedades;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void cargarContrasena(String usuario){
+        String metodo = "CargarContrasenaApp.php?";
+        String parametros = "correo="+usuario;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void modificarContrasena(String usuario, String password){
+        String metodo = "ModificarContrasenaApp.php?";
+        String parametros = "correo="+usuario+"&password="+password;
+    }
 
 }
 

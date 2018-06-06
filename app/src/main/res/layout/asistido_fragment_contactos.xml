@@ -65,6 +65,14 @@
 
             </LinearLayout>
 
+            <View style="@style/divider" />
+
+            <Button
+                android:id="@+id/btn_guardarContacto1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar contacto 1" />
+
             <TextView
                 android:id="@+id/tv_contactos_contacto2"
                 style="@style/subheader"
@@ -108,7 +116,15 @@
                     android:inputType="phone" />
 
             </LinearLayout>
+            <View style="@style/divider" />
 
+            <Button
+                android:id="@+id/btn_guardarContacto2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar contacto 2" />
+
+            <View style="@style/medium_divider" />
 
             <Button
                 android:id="@+id/btn_contactos_atras"

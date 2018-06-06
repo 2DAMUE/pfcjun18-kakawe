@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
+import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
@@ -56,8 +58,7 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
             @Override
             public void onClick(View v) {
                 if (comprobarCampos()){
-                    new modificarContrasena().execute("http://37.187.198.145/llamas/App/ModificarContrasenaApp.php?correo="
-                            +correoUser+"&password="+passwordNuevo);
+                    actualizarPassword();
                 }
             }
         });
@@ -68,60 +69,57 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
             }
         });
         //cargamos los datos de la contrasena primero
-        new cargarContrasena().execute("http://37.187.198.145/llamas/App/CargarContrasenaApp.php?correo="
-                +correoUser);
+        cargarPassword();
         return vista;
     }
+    private void actualizarPassword(){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
 
-    public class cargarContrasena extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        @Override
-        protected void onPostExecute(String resultado) {
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                et_perfil_contrasenaVieja.setText(respuesta.getString(0));
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    String contra = respuesta.getString(0);
+                    if (contra.equals(passwordNuevo)){
+                        et_perfil_contrasenaVieja.setText(respuesta.getString(0));
+                        Toast.makeText(getContext(), "Contrasena actualizada con exito", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getContext(), "Fallo al actualizar la contrasena", Toast.LENGTH_SHORT).show();
+                    }
 
-        }
-    }
-    //Cargo el perfil de la base de datos
-    public class modificarContrasena extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        @Override
-        protected void onPostExecute(String resultado) {
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                String contra = respuesta.getString(0);
-                if (contra.equals(passwordNuevo)){
-                    et_perfil_contrasenaVieja.setText(respuesta.getString(0));
-                    Toast.makeText(getContext(), "Contrasena actualizada con exito", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getContext(), "Fallo al actualizar la contrasena", Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
-
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
             }
-        }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+        auxinetAPI.modificarContrasena(correoUser,passwordNuevo);
     }
+    private void cargarPassword(){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
+
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    et_perfil_contrasenaVieja.setText(respuesta.getString(0));
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+        auxinetAPI.cargarContrasena(correoUser);
+    }
+
     private boolean comprobarCampos(){
         passwordViejo = et_perfil_contrasenaVieja.getText().toString().trim();
         passwordNuevo = et_perfil_contrasenaNueva.getText().toString();
@@ -133,17 +131,17 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
             et_perfil_contrasenaVieja.requestFocus();
             return false;
         }if (passwordNuevo.isEmpty()){
-            String a= "No puedes dejar el campo contraseña actual vacio";
+            String a= "No puedes dejar el campo contraseña nueva vacio";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_contrasenaNueva.requestFocus();
             return false;
         }if (repetirPassword.isEmpty()){
-            String a= "No puedes dejar el campo contraseña actual vacio";
+            String a= "No puedes dejar el campo repetir contraseña vacio";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_repetirContrasena.requestFocus();
             return false;
         }if (!passwordNuevo.equals(repetirPassword)){
-            String a= "No puedes dejar el campo contraseña actual vacio";
+            String a= "Las contraseás deben coincidir";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_repetirContrasena.requestFocus();
             return false;
@@ -161,37 +159,4 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
         fragmentoSeleccionado.setArguments(datos);
     }
 
-    private String downloadUrl(String myurl) throws IOException {
-        myurl = myurl.replace(" ","%20");
-        InputStream is = null;
-        int len = 500;
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            conn.connect();
-            int response = conn.getResponseCode();
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
-    }
 }

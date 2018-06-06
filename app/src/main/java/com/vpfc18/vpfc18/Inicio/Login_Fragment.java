@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
+import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.Principal.Asistido.Principal.Asistido_Principal_Activity;
 import com.vpfc18.vpfc18.Principal.Voluntario.Principal.Voluntario_Principal_Activity;
 import com.vpfc18.vpfc18.R;
@@ -39,7 +41,6 @@ public class Login_Fragment extends Fragment {
     EditText et_login_correo,et_login_contrasena;
     Button btn_login_entrar;
     TextView tv_login_recordarContrasena;
-
     String correo, contrasena;
 
     public Login_Fragment() {
@@ -59,53 +60,40 @@ public class Login_Fragment extends Fragment {
         btn_login_entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //apaño para no estar comprobando campos todo el rato
-
-                //misterciclos21
-
-                correo = "jose1@mail.com";
-                contrasena = "1111";
-
-                new Loguin_Usuario().execute("http://37.187.198.145/llamas/App/LoginApp.php?correo="
-                        +correo+"&password="+contrasena);
                 if (comprobarCampos()){
-                    new Loguin_Usuario().execute("http://37.187.198.145/llamas/App/LoginApp.php?correo="
-                            +correo+"&password="+contrasena);
+                    loguearUsuario();
                 }
             }
         });
         return vista;
     }
-    public class Loguin_Usuario extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
 
-        @Override
-        protected void onPostExecute(String resultado) {
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                String correoUser = respuesta.getString(0);
-                String tipo = respuesta.getString(1);
-                if (tipo.equals("asistentes")){
-                    cargaPrincipal("asistentes",correoUser);
-                }else{
-                    cargaPrincipal("dependientes",correoUser);
+    private void loguearUsuario() {
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    String correoUser = respuesta.getString(0);
+                    String tipo = respuesta.getString(1);
+                    if (tipo.equals("asistentes")){
+                        cargaPrincipal("asistentes",correoUser);
+                    }else{
+                        cargaPrincipal("dependientes",correoUser);
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "Credenciales invalidas", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "Credenciales invalidas", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
             }
-
-        }
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        auxinetAPI.loguearUsuario(correo,contrasena);
     }
-    private void cargaPrincipal(String tipo,String correoUser){
 
+    private void cargaPrincipal(String tipo,String correoUser){
         if (tipo.equals("asistentes")){
             Intent intent = new Intent(getContext(), Voluntario_Principal_Activity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
