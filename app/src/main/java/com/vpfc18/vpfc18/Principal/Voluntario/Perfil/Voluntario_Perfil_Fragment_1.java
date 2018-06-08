@@ -179,6 +179,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_3_Contrasena();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
+        t.addToBackStack(null);
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
@@ -189,6 +190,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_2_TiposAyudas();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
+        t.addToBackStack(null);
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();

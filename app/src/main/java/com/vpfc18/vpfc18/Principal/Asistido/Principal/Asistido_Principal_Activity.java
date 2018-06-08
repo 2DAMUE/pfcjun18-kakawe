@@ -39,6 +39,8 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
         asistido_principal_toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.asistido_principal_toolbar);
         setSupportActionBar(asistido_principal_toolbar);
         asistido_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
+        getSupportActionBar().setTitle("Selector emergencias");
+        asistido_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
         if (checkPermission()){
             cargaBotones();
         }

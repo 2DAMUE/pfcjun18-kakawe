@@ -78,21 +78,6 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                 }
             }
         });
-        //gestionar la comprobacion de datos desde un único boton
-        //y mirar lo de habiliar campos
-        /*btn_contactos_modificar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-
-                    habilitarCampos(true);
-                } else if (comprobarCampos()) {
-                    habilitarCampos(false);
-                    actualizarDatos();
-                    actualizarDatosPerfil();
-                }
-            }
-        });*/
 
         btn_contactos_atras.setOnClickListener(new View.OnClickListener() {
             @Override

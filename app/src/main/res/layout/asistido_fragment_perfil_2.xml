@@ -38,7 +38,12 @@
 
                 <EditText
                     android:id="@+id/et_perfil_altura"
-                    style="@style/et_perfil"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:backgroundTint = "@android:color/transparent"
+                    android:gravity = "end"
+                    android:enabled = "false"
+                    android:paddingHorizontal = "30dp"
                     android:hint="00.0"
                     android:inputType="numberDecimal" />
 
@@ -61,7 +66,12 @@
 
                 <EditText
                     android:id="@+id/et_perfil_peso"
-                    style="@style/et_perfil"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:backgroundTint = "@android:color/transparent"
+                    android:gravity = "end"
+                    android:enabled = "false"
+                    android:paddingHorizontal = "30dp"
                     android:hint="00.0"
                     android:inputType="numberDecimal" />
             </LinearLayout>
@@ -110,7 +120,12 @@
 
                 <EditText
                     android:id="@+id/et_perfil_alergias"
-                    style="@style/et_perfil"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:backgroundTint = "@android:color/transparent"
+                    android:gravity = "end"
+                    android:enabled = "false"
+                    android:paddingHorizontal = "30dp"
                     android:hint="Alérgias"
                     android:inputType="text" />
 
@@ -155,7 +170,12 @@
 
                 <EditText
                     android:id="@+id/et_perfil_enfermedades"
-                    style="@style/et_perfil"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:backgroundTint = "@android:color/transparent"
+                    android:gravity = "end"
+                    android:enabled = "false"
+                    android:paddingHorizontal = "30dp"
                     android:hint="Enfermedades"
                     android:inputType="text" />
 
@@ -178,7 +198,12 @@
 
                 <EditText
                     android:id="@+id/et_perfil_notasMedicas"
-                    style="@style/et_perfil"
+                    android:layout_width = "match_parent"
+                    android:layout_height = "match_parent"
+                    android:backgroundTint = "@android:color/transparent"
+                    android:gravity = "end"
+                    android:enabled = "false"
+                    android:paddingHorizontal = "30dp"
                     android:hint="Notas medicas"
                     android:inputType="text" />
 

@@ -116,6 +116,7 @@
                     app:civ_shadow="false" />
 
                 <TextView
+                    android:id="@+id/tv_contacto1_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -149,12 +150,13 @@
                     app:civ_shadow="false" />
 
                 <TextView
+                    android:id="@+id/tv_contacto2_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="CONTACTO 2"
-                    android:textSize="24dp"
                     android:textColor="@color/black"
+                    android:textSize="24dp"
                     android:textStyle="bold" />
             </LinearLayout>
         </FrameLayout>

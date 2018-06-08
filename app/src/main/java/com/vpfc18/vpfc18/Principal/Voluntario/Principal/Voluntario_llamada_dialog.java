@@ -66,7 +66,7 @@ public class Voluntario_llamada_dialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 checkPermission();
-                //llamadaTelefonica(telefono);
+                llamadaTelefonica(telefono);
 
             }
         });

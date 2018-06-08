@@ -202,6 +202,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_2_datosMedicos();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.addToBackStack(null);
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
@@ -213,6 +214,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_3_contrasena();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.addToBackStack(null);
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
@@ -224,6 +226,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_4_contactos();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.addToBackStack(null);
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();

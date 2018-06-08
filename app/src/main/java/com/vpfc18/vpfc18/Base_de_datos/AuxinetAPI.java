@@ -13,10 +13,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by eloy on 2/6/18.
- */
-
 
 public class AuxinetAPI extends AsyncTask<String, Void, String> {
 

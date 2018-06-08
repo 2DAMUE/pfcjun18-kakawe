@@ -23,8 +23,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.Principal.Asistido.Principal.Dialog_Tipos_Ayudas.Asistido_Dialog_Tipo_Ayudas;
@@ -44,7 +46,8 @@ import java.util.Locale;
 public class Asistido_Botoneras_Fragment extends Fragment{
 
     LocationManager mlocManager;
-    Button btn_ayuda, btn_compania,btn_contacto1,btn_contacto2;
+    CircularImageView btn_ayuda, btn_compania,btn_contacto1,btn_contacto2;
+    TextView tv_contacto1_nombre,tv_contacto2_nombre;
     String correoUser,telefono1,telefono2,latitud,longitud;
     public Asistido_Botoneras_Fragment() {
         // Required empty public constructor
@@ -56,12 +59,12 @@ public class Asistido_Botoneras_Fragment extends Fragment{
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_asistido__botoneras_, container, false);
 
-
-
-        btn_ayuda = (Button) vista.findViewById(R.id.btn_ayuda);
-        btn_compania = (Button) vista.findViewById(R.id.btn_compania);
-        btn_contacto1 = (Button) vista.findViewById(R.id.btn_contacto1);
-        btn_contacto2 = (Button) vista.findViewById(R.id.btn_contacto2);
+        tv_contacto1_nombre = (TextView)vista.findViewById(R.id.tv_contacto1_nombre);
+        tv_contacto2_nombre = (TextView)vista.findViewById(R.id.tv_contacto2_nombre);
+        btn_ayuda = (CircularImageView) vista.findViewById(R.id.btn_ayuda);
+        btn_compania = (CircularImageView) vista.findViewById(R.id.btn_compania);
+        btn_contacto1 = (CircularImageView) vista.findViewById(R.id.btn_contacto1);
+        btn_contacto2 = (CircularImageView) vista.findViewById(R.id.btn_contacto2);
         correoUser = getArguments().getString("correoUser");
 
         btn_compania.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +123,7 @@ public class Asistido_Botoneras_Fragment extends Fragment{
                 try {
                     String contactonombre1 = respuesta.getString(0);
                     String contactotelefono1 = respuesta.getString(1);
-                    btn_contacto1.setText(contactonombre1);
+                    tv_contacto1_nombre.setText(contactonombre1);
                     telefono1= contactotelefono1;
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
@@ -142,7 +145,7 @@ public class Asistido_Botoneras_Fragment extends Fragment{
                 try {
                     String contactonombre2 = respuesta.getString(0);
                     String contactotelefono2 = respuesta.getString(1);
-                    btn_contacto2.setText(contactonombre2);
+                    tv_contacto2_nombre.setText(contactonombre2);
                     telefono2= contactotelefono2;
 
                 } catch (JSONException e) {

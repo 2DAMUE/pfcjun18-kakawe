@@ -34,7 +34,7 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
 
     EditText et_perfil_contrasenaVieja,et_perfil_contrasenaNueva,et_perfil_repetirContrasena;
     Button btn_perfil_actualizarDatos,btn_perfil_atras;
-    String correoUser,passwordViejo,passwordNuevo,repetirPassword;
+    String correoUser,passwordNuevo,repetirPassword;
 
 
     public Voluntario_Perfil_Fragment_3_Contrasena() {
@@ -48,7 +48,6 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
         View vista = inflater.inflate(R.layout.voluntario_perfil_fragment_3_contrasena, container, false);
         correoUser = getArguments().getString("correoUser");
 
-        et_perfil_contrasenaVieja = (EditText)vista.findViewById(R.id.et_perfil_contrasenaVieja);
         et_perfil_contrasenaNueva = (EditText)vista.findViewById(R.id.et_perfil_contrasenaNueva);
         et_perfil_repetirContrasena = (EditText)vista.findViewById(R.id.et_perfil_repetirContrasena);
 
@@ -82,6 +81,7 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
                     if (contra.equals(passwordNuevo)){
                         et_perfil_contrasenaVieja.setText(respuesta.getString(0));
                         Toast.makeText(getContext(), "Contrasena actualizada con exito", Toast.LENGTH_SHORT).show();
+                        volverAPerfil();
                     }else{
                         Toast.makeText(getContext(), "Fallo al actualizar la contrasena", Toast.LENGTH_SHORT).show();
                     }
@@ -104,12 +104,6 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
 
             @Override
             public void onSuccess(JSONArray respuesta) {
-                try {
-                    et_perfil_contrasenaVieja.setText(respuesta.getString(0));
-                } catch (JSONException e) {
-                    Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
             }
 
             @Override
@@ -121,16 +115,10 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
     }
 
     private boolean comprobarCampos(){
-        passwordViejo = et_perfil_contrasenaVieja.getText().toString().trim();
         passwordNuevo = et_perfil_contrasenaNueva.getText().toString();
         repetirPassword = et_perfil_repetirContrasena.getText().toString();
 
-        if (passwordViejo.isEmpty()){
-            String a= "No puedes dejar el campo contraseña actual vacio";
-            Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
-            et_perfil_contrasenaVieja.requestFocus();
-            return false;
-        }if (passwordNuevo.isEmpty()){
+        if (passwordNuevo.isEmpty()){
             String a= "No puedes dejar el campo contraseña nueva vacio";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_contrasenaNueva.requestFocus();
