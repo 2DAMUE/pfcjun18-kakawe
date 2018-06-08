@@ -2,16 +2,23 @@ package com.vpfc18.vpfc18.Principal;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.vpfc18.vpfc18.R;
 
 public class PruebaActivity extends AppCompatActivity {
@@ -51,7 +58,6 @@ public class PruebaActivity extends AppCompatActivity {
 
             }
         });
-
 
     }
 
