@@ -97,7 +97,7 @@ public class LVAdapterAlertas implements ListAdapter {
         TextView tv_vista_alertas_nombreAsistido = (TextView) view.findViewById(R.id.tv_vista_alertas_nombreAsistido);
         TextView tv_vista_alertas_tipoAlerta = (TextView) view.findViewById(R.id.tv_vista_alertas_tipoAlerta);
         TextView tv_vista_alertas_distancia = (TextView) view.findViewById(R.id.tv_vista_alertas_distancia);
-        Button btn_vista_alertas_llamar = (Button) view.findViewById(R.id.btn_vista_alertas_llamar);
+        //Button btn_vista_alertas_llamar = (Button) view.findViewById(R.id.btn_vista_alertas_llamar);
 
         tv_vista_alertas_nombreAsistido.setText(listaAlertas.get(position).getNombreAsistido());
         tv_vista_alertas_tipoAlerta.setText(listaAlertas.get(position).getNombreAlerta());
@@ -106,14 +106,14 @@ public class LVAdapterAlertas implements ListAdapter {
 
 
         Log.v("distancia", String.valueOf(x));
-
+/*
         btn_vista_alertas_llamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cargarDialogLlamada(listaAlertas.get(position).getNombreAsistido(), listaAlertas.get(position).getTelefono(), listaAlertas.get(position).getId_alerta());
             }
         });
-
+*/
         return view;
 
     }

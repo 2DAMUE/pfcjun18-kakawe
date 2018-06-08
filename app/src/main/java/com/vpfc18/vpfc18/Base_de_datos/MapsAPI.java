@@ -76,7 +76,7 @@ public class MapsAPI extends AsyncTask<String, Void, String> {
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ", "%20");
         InputStream is = null;
-        int len = 10000;
+        int len = 15000;
 
         try {
             URL url = new URL(myurl);
