@@ -55,7 +55,6 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         et_contactos_telefono1 = (EditText)view.findViewById(R.id.et_contactos_telefono1);
         et_contactos_nombre2 = (EditText)view.findViewById(R.id.et_contactos_nombre2);
         et_contactos_telefono2 = (EditText)view.findViewById(R.id.et_contactos_telefono2);
-        btn_contactos_modificar = (ToggleButton)view.findViewById(R.id.btn_contactos_modificar);
 
         btn_contactos_atras = (Button)view.findViewById(R.id.btn_contactos_atras);
         btn_guardarContacto1 = (Button)view.findViewById(R.id.btn_guardarContacto1);

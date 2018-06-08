@@ -161,6 +161,13 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
     public void modificarContrasena(String usuario, String password){
         String metodo = "ModificarContrasenaApp.php?";
         String parametros = "correo="+usuario+"&password="+password;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void agregarAsistente(String usuario,int id_alerta){
+        String metodo = "ModificarAlertasApp.php?";
+        String parametros = "correo="+usuario+"&idAlerta="+id_alerta;
+        this.execute(APIUrl + metodo + parametros);
     }
 
 }

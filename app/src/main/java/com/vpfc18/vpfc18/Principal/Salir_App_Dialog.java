@@ -72,5 +72,4 @@ public class Salir_App_Dialog extends DialogFragment {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-
 }
