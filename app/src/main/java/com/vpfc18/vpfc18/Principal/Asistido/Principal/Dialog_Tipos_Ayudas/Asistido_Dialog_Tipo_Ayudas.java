@@ -20,8 +20,8 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
 
     Button btn_ayuda1, btn_ayuda2, btn_ayuda3, btn_ayuda4, btn_ayuda5;
 
-    String[] tiposAlerta = {"Aseo", "Ayuda en la compra", "Desplazamiento", "Labores del hogar", "Compania"};
-    String usuario;
+    String[] tiposAlerta = {"aseo", "compra", "desplazamiento", "hogar"};
+    String correoUser,latitud,longitud;
 
 
     @Override
@@ -31,12 +31,15 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View vista = inflater.inflate(R.layout.asistido_dialog_tipos_ayudas, null);
 
+        Bundle datos=this.getArguments();
+        latitud = datos.getString("latitud");
+        longitud = datos.getString("longitud");
+        correoUser = datos.getString("correoUser");
 
         btn_ayuda1 = (Button) vista.findViewById(R.id.btn_ayuda1);
         btn_ayuda2 = (Button) vista.findViewById(R.id.btn_ayuda2);
         btn_ayuda3 = (Button) vista.findViewById(R.id.btn_ayuda3);
         btn_ayuda4 = (Button) vista.findViewById(R.id.btn_ayuda4);
-        btn_ayuda5 = (Button) vista.findViewById(R.id.btn_ayuda5);
 
         //usuario = getArguments().getString("correoUser");
 
@@ -57,14 +60,12 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
     public void nuevaAlerta(int alerta) {
 
         String tipoAlerta = tiposAlerta[alerta];
-        String latitud = null;
-        String longitud = null;
-
-
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
             public void onSuccess(JSONArray response) {
                 Log.v("AlertaCreada", response.toString());
+                dismiss();
+                Toast.makeText(getActivity(), "Alerta generada con éxito", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -73,7 +74,7 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
             }
         });
 
-        auxinetAPI.nuevaAlerta(usuario, tipoAlerta, latitud, longitud);
+        auxinetAPI.nuevaAlerta(correoUser, tipoAlerta, latitud, longitud);
 
 
     }

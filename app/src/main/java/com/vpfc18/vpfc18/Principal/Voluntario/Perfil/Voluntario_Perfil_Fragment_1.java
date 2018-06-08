@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
+import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.Inicio.Inicio_Activity;
 import com.vpfc18.vpfc18.R;
 
@@ -59,7 +61,6 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         et_perfil_fnacimiento = (EditText)vista.findViewById(R.id.et_perfil_fnacimiento);
 
         btn_perfil_actualizarDatos = (Button) vista.findViewById(R.id.btn_perfil_actualizarDatos);
-        btn_perfil_cerrarSesion = (Button) vista.findViewById(R.id.btn_perfil_cerrarSesion);
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         //tv_perfil_modificarAlertas = (TextView) vista.findViewById(R.id.tv_perfil_modificarAlertas);
         tv_perfil_modContrasena.setOnClickListener(new View.OnClickListener() {
@@ -74,90 +75,66 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
             public void onClick(View v) {
                 if (comprobarCampos()){
                     //para actualizar el perfil de la bae de datos
-                    new actualizarPerfil().execute("http://37.187.198.145/llamas/App/ActualizarPerfilApp.php?correoV="
-                            +emailViejo+"&nombre="+nombre+"&telefono="+telefono+"&correoN="+email+"&apellido="+apellido);
-                }
+                    actualizarDatosPerfil();
+                  }
             }
         });
-        btn_perfil_cerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Inicio_Activity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
-
         //Carga el perfil de la base de datos
-        new cargarPerfil().execute("http://37.187.198.145/llamas/App/DatosPerfilApp.php?correo="
-                +correoUser);
+        cargarDatosPerfil();
         return vista;
     }
-    //Para actualizar el perfil de la base de datos
-    public class actualizarPerfil extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                Log.d("CargandoAlertasPERFIL",strings+"");
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        @Override
-        protected void onPostExecute(String resultado) {
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                String apellido = respuesta.getString(3);
-                if (apellido.equals("null")){
-                    et_perfil_apellido.setText("");
-                }else{
-                    et_perfil_apellido.setText(respuesta.getString(3));
+    public void cargarDatosPerfil() {
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray response) {
+                try {
+                    String apellido = response.getString(3);
+                    if (apellido.equals("null")) {
+                        et_perfil_apellido.setText("");
+                    } else {
+                        et_perfil_apellido.setText(response.getString(3));
+                    }
+                    emailViejo = response.getString(0);
+                    et_perfil_email.setText(response.getString(0));
+                    et_perfil_telefono.setText(response.getString(1));
+                    et_perfil_nombre.setText(response.getString(2));
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-                emailViejo = respuesta.getString(0);
-                et_perfil_email.setText(respuesta.getString(0));
-                et_perfil_telefono.setText(respuesta.getString(1));
-                et_perfil_nombre.setText(respuesta.getString(2));
-                Toast.makeText(getContext(), "Perfil actualizado con exito", Toast.LENGTH_LONG).show();
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
             }
-
-        }
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        auxinetAPI.cargarPerfil(correoUser);
     }
-    //Cargo el perfil de la base de datos
-    public class cargarPerfil extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                Log.d("CargandoAlertasPERFIL2",strings+"");
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        @Override
-        protected void onPostExecute(String resultado) {
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                String apellido = respuesta.getString(3);
-                if (apellido.equals("null")){
-                    et_perfil_apellido.setText("");
-                }else{
-                    et_perfil_apellido.setText(respuesta.getString(3));
+    public void actualizarDatosPerfil() {
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray response) {
+                try {
+                    String apellido = response.getString(3);
+                    if (apellido.equals("null")) {
+                        et_perfil_apellido.setText("");
+                    } else {
+                        et_perfil_apellido.setText(response.getString(3));
+                    }
+                    emailViejo = response.getString(0);
+                    et_perfil_email.setText(response.getString(0));
+                    et_perfil_telefono.setText(response.getString(1));
+                    et_perfil_nombre.setText(response.getString(2));
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-                emailViejo = respuesta.getString(0);
-                et_perfil_email.setText(respuesta.getString(0));
-                et_perfil_telefono.setText(respuesta.getString(1));
-                et_perfil_nombre.setText(respuesta.getString(2));
-
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
             }
-        }
+
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        auxinetAPI.actualizarPerfil(emailViejo, nombre, telefono, email, apellido);
     }
     private boolean comprobarCampos(){
         email = et_perfil_email.getText().toString().trim();
@@ -202,6 +179,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_3_Contrasena();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
+        t.addToBackStack(null);
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
@@ -212,46 +190,12 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_2_TiposAyudas();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
+        t.addToBackStack(null);
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
-    }
-
-
-    private String downloadUrl(String myurl) throws IOException {
-        myurl = myurl.replace(" ","%20");
-        InputStream is = null;
-        int len = 500;
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            conn.connect();
-            int response = conn.getResponseCode();
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
     }
 }
 

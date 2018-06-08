@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.vpfc18.vpfc18.Entidades.Datos_Alertas;
+import com.vpfc18.vpfc18.Principal.Salir_App_Dialog;
 import com.vpfc18.vpfc18.Principal.Voluntario.Perfil.Voluntario_Perfil_Fragment;
 import com.vpfc18.vpfc18.R;
 
@@ -120,16 +121,26 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
                     contador=1;
                     item.setIcon(R.drawable.ic_map);
                     cargaLista();
+                    break;
                 }else{
                     contador=0;
                     item.setIcon(R.drawable.ic_notificacion);
                     cargaMapa();
+                    break;
                 }
-                return true;
+            case R.id.cerrarSesion:
+                mensajeSalir();
             default:
-                return super.onOptionsItemSelected(item);
+
         }
+        return super.onOptionsItemSelected(item);
     }
+
+    private void mensajeSalir() {
+        Salir_App_Dialog vld = new Salir_App_Dialog();
+        vld.show(getFragmentManager(), "Salir");
+    }
+
 
     private void cargaMapa(){
         perfil=0;

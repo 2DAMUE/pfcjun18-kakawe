@@ -4,93 +4,195 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/blanco"
+    android:orientation="vertical"
     tools:context=".Principal.Asistido.Principal.Asistido_Botoneras_Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_ayuda"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_rounded"
-            android:backgroundTint="@color/verdeAuxinet"
-            android:text="Ayuda" />
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/btn_compania"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/btn_ayuda"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_heart"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="0dp"
+                    app:civ_shadow="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="AYUDA"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_rounded"
-            android:backgroundTint="@color/verdeAuxinet"
-            android:text="Compañia" />
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/btn_compania"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_coffee"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="0dp"
+                    app:civ_shadow="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="COMPAÑIA"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_contacto1"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_rounded"
-            android:backgroundTint="@color/verdeAuxinet"
-            android:text="Contacto 1" />
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/btn_contacto2"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/btn_contacto1"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_contact"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="0dp"
+                    app:civ_shadow="false" />
+
+                <TextView
+                    android:id="@+id/tv_contacto1_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="CONTACTO 1"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_rounded"
-            android:backgroundTint="@color/verdeAuxinet"
-            android:text="Contacto 2" />
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/btn_contacto2"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_contact"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="0dp"
+                    app:civ_shadow="false" />
+
+                <TextView
+                    android:id="@+id/tv_contacto2_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="CONTACTO 2"
+                    android:textColor="@color/black"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
-
 
     <com.ebanx.swipebtn.SwipeButton
         android:id="@+id/btn_sos"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
 
         app:button_background="@drawable/shape_swiper"
-        app:button_bottom_padding="0dp"
+
         app:button_image_disabled="@drawable/ic_arrows"
-
-        app:button_image_enabled="@drawable/ic_arrows"
-        app:button_image_height="120dp"
+        app:button_image_enabled="@drawable/ic_emergencia"
         app:button_image_width="120dp"
+        app:button_image_height="120dp"
 
-        app:button_left_padding="0dp"
-        app:button_right_padding="0dp"
-        app:button_top_padding="0dp"
+        app:button_left_padding="15dp"
+        app:button_right_padding="15dp"
+        app:button_top_padding="15dp"
+        app:button_bottom_padding="15dp"
+
         app:has_activate_state="true"
-
         app:initial_state="disabled"
-        app:inner_text="EMERGENCIA"
+
+        app:inner_text="DESLICE EN CASO\nDE EMERGENCIA"
+        app:inner_text_size="22sp"
         app:inner_text_background="@drawable/shape_circle"
-        app:inner_text_bottom_padding="50dp"
         app:inner_text_color="@color/blanco"
 
-        app:inner_text_size="20sp"
-        app:inner_text_top_padding="50dp" />
+        app:inner_text_left_padding="90dp"
+        app:inner_text_right_padding="10dp"
+        app:inner_text_top_padding="33dp"
+        app:inner_text_bottom_padding="33dp" />
 
 </LinearLayout>

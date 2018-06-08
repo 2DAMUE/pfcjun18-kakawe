@@ -167,7 +167,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         //cargarAlertas();
         mMapView = (MapView) mView.findViewById(R.id.map);
         mMapView.setVisibility(View.INVISIBLE);
@@ -182,7 +181,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 ll_mapa_detalle.setVisibility(View.INVISIBLE);
             }
         });
-
     }
 
     @Override

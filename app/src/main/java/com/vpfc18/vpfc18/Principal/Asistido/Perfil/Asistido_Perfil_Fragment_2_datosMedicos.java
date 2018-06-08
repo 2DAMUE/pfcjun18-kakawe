@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
+import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.Principal.Asistido.Principal.Asistido_Principal_Activity;
 import com.vpfc18.vpfc18.R;
 
@@ -67,7 +69,6 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 gpSanguineo = parent.getItemAtPosition(position).toString();
-                Log.v("Datos",gpSanguineo);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -78,9 +79,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
             @Override
             public void onClick(View v) {
                 if (comprobarCampos()){
-                    new actualizarDatosMedicos().execute("http://37.187.198.145/llamas/App/ActualizarDatosMedicosApp.php?correo="
-                            +correoUser+"&peso="+peso+"&altura="+altura+"&grSanguineo="
-                            +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion+"&notasMedicas="+nMedicas+"&enfermedades="+enfermedades);
+                    actualizarDM();
                 }
             }
         });
@@ -91,101 +90,89 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
             }
         });
         //cargamos los datos medicos
-        new cargarDatosMedicos().execute("http://37.187.198.145/llamas/App/DatosMedicosDependienteApp.php?correo="
-                +correoUser);
-
+        cargarDM();
         return vista;
     }
-    public class actualizarDatosMedicos extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        @Override
-        protected void onPostExecute(String resultado) {
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1carga",respuesta.toString());
 
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
+    private void cargarDM() {
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    String peso = respuesta.getString(0);
+                    String altura = respuesta.getString(1);
+                    String grSanguineo = respuesta.getString(2);
+                    String alergias = respuesta.getString(3);
+                    String medicacion = respuesta.getString(4);
+                    String enfermedades = respuesta.getString(5);
+                    String notasMedicas = respuesta.getString(6);
+
+                    Resources res = getActivity().getResources();
+                    String sangre[] = res.getStringArray(R.array.gr_sanguineo);
+                    ArrayAdapter myAdap = (ArrayAdapter) spn_perfil_grSanguineo.getAdapter();
+                    if (peso.equals("null")){
+                        et_perfil_peso.setText("");
+                    }else{
+                        et_perfil_peso.setText(peso);
+                    }if (altura.equals("null")){
+                        et_perfil_altura.setText("");
+                    }else{
+                        et_perfil_altura.setText(altura);
+                    }
+                    if (grSanguineo.equals("null")){
+
+                    }else{
+                        for (String s: sangre)
+                            if (grSanguineo.equals(s)){
+                                int spinnerPosition = myAdap.getPosition(s);
+                                spn_perfil_grSanguineo.setSelection(spinnerPosition);
+                                Log.v("Datos",s);
+                            }
+                    }if (alergias.equals("null")){
+                        et_perfil_alergias.setText("");
+                    }else{
+                        et_perfil_alergias.setText(alergias);
+                    }if (medicacion.equals("null")){
+                        et_perfil_medicacion.setText("");
+                    }else{
+                        et_perfil_medicacion.setText(medicacion);
+                    }if (enfermedades.equals("null")){
+                        et_perfil_enfermedades.setText("");
+                    }else{
+                        et_perfil_enfermedades.setText(enfermedades);
+                    }if (notasMedicas.equals("null")){
+                        et_perfil_notasMedicas.setText("");
+                    }else{
+                        et_perfil_notasMedicas.setText(notasMedicas);
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
-        }
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+        auxinetAPI.cargarDatosMedicos(correoUser);
+    }
+    private void actualizarDM(){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
+
+            @Override
+            public void onSuccess(JSONArray response) {
+                Toast.makeText(getContext(), "Datos médicos actualizados con exito", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getContext(), "Fallo al actualizar", Toast.LENGTH_SHORT).show();
+            }
+        });
+        auxinetAPI.actualizarDatosMedicos(correoUser,peso,altura,gpSanguineo,alergias,medicacion,nMedicas,enfermedades);
     }
 
-    public class cargarDatosMedicos extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        @Override
-        protected void onPostExecute(String resultado) {
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1carga",respuesta.toString());
-                String peso = respuesta.getString(0);
-                String altura = respuesta.getString(1);
-                String grSanguineo = respuesta.getString(2);
-                String alergias = respuesta.getString(3);
-                String medicacion = respuesta.getString(4);
-                String enfermedades = respuesta.getString(5);
-                String notasMedicas = respuesta.getString(6);
-
-                Resources res = getActivity().getResources();
-                String sangre[] = res.getStringArray(R.array.gr_sanguineo);
-                ArrayAdapter myAdap = (ArrayAdapter) spn_perfil_grSanguineo.getAdapter();
-
-                if (peso.equals("null")){
-                    et_perfil_peso.setText("");
-                }else{
-                    et_perfil_peso.setText(peso);
-                }if (altura.equals("null")){
-                    et_perfil_altura.setText("");
-                }else{
-                    et_perfil_altura.setText(altura);
-                }
-                if (grSanguineo.equals("null")){
-
-                }else{
-                    for (String s: sangre)
-                        if (grSanguineo.equals(s)){
-                            int spinnerPosition = myAdap.getPosition(s);
-                            spn_perfil_grSanguineo.setSelection(spinnerPosition);
-                            Log.v("Datos",s);
-                        }
-                }if (alergias.equals("null")){
-                    et_perfil_alergias.setText("");
-                }else{
-                    et_perfil_alergias.setText(alergias);
-                }if (medicacion.equals("null")){
-                    et_perfil_medicacion.setText("");
-                }else{
-                    et_perfil_medicacion.setText(medicacion);
-                }if (enfermedades.equals("null")){
-                    et_perfil_enfermedades.setText("");
-                }else{
-                    et_perfil_enfermedades.setText(enfermedades);
-                }if (notasMedicas.equals("null")){
-                    et_perfil_notasMedicas.setText("");
-                }else{
-                    et_perfil_notasMedicas.setText(notasMedicas);
-                }
-
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        }
-    }
     private boolean comprobarCampos(){
         altura = et_perfil_altura.getText().toString().trim();
         peso = et_perfil_peso.getText().toString();
@@ -220,38 +207,5 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
-    }
-    private String downloadUrl(String myurl) throws IOException {
-        myurl = myurl.replace(" ","%20");
-        InputStream is = null;
-        int len = 500;
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            conn.connect();
-            int response = conn.getResponseCode();
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
     }
 }

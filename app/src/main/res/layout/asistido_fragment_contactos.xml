@@ -7,11 +7,6 @@
     tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_4_contactos">
 
 
-    <ToggleButton
-        android:id="@+id/btn_contactos_modificar"
-        style="@style/btn_editar" />
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -20,6 +15,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <View style="@style/low_divider" />
 
             <TextView
                 android:id="@+id/tv_contactos_contacto1"
@@ -65,6 +62,17 @@
 
             </LinearLayout>
 
+            <View style="@style/divider" />
+
+            <Button
+                android:id="@+id/btn_guardarContacto1"
+                style="@style/btn_editar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar contacto 1" />
+
+
+
             <TextView
                 android:id="@+id/tv_contactos_contacto2"
                 style="@style/subheader"
@@ -108,10 +116,20 @@
                     android:inputType="phone" />
 
             </LinearLayout>
+            <View style="@style/divider" />
 
+            <Button
+                android:id="@+id/btn_guardarContacto2"
+                style="@style/btn_editar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar contacto 2" />
+
+            <View style="@style/medium_divider" />
 
             <Button
                 android:id="@+id/btn_contactos_atras"
+                style="@style/btn_editar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Atras" />

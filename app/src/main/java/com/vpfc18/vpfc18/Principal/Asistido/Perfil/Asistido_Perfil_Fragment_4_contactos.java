@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
+import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
@@ -34,7 +36,7 @@ import java.net.URL;
  */
 public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
 
-    Button btn_contactos_atras;
+    Button btn_contactos_atras,btn_guardarContacto1,btn_guardarContacto2;
     ToggleButton btn_contactos_modificar;
     EditText et_contactos_nombre1,et_contactos_nombre2,et_contactos_telefono1,et_contactos_telefono2;
 
@@ -53,22 +55,26 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         et_contactos_telefono1 = (EditText)view.findViewById(R.id.et_contactos_telefono1);
         et_contactos_nombre2 = (EditText)view.findViewById(R.id.et_contactos_nombre2);
         et_contactos_telefono2 = (EditText)view.findViewById(R.id.et_contactos_telefono2);
-        btn_contactos_modificar = (ToggleButton)view.findViewById(R.id.btn_contactos_modificar);
 
         btn_contactos_atras = (Button)view.findViewById(R.id.btn_contactos_atras);
-
+        btn_guardarContacto1 = (Button)view.findViewById(R.id.btn_guardarContacto1);
+        btn_guardarContacto2 = (Button)view.findViewById(R.id.btn_guardarContacto2);
         correoUser = getArguments().getString("correoUser");
 
-        btn_contactos_modificar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        btn_guardarContacto1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                //if (isChecked) {
-                    //habilitarCampos(true);
-                //} else if (comprobarCampos()) {
-                    //habilitarCampos(false);
-                    //actualizarDatos();
-                    //actualizarDatosPerfil();
-                //}
+            public void onClick(View v) {
+                if (comprobarCampos("1")){
+                    actualizarDatos("contacto1",nombre1,telefono1);
+                }
+            }
+        });
+        btn_guardarContacto2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (comprobarCampos("2")){
+                    actualizarDatos("contacto2",nombre2,telefono2);
+                }
             }
         });
 
@@ -78,27 +84,49 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                 volverAPerfil();
             }
         });
-
-
-        cargarContactos();
+        cargarContacto1();
+        cargarContacto2();
         return view;
     }
 
 
 
 
-    private void guardarContactos(String numero){
-        if (numero.equals("1")){
-            new guardarContacto1().execute("http://37.187.198.145/llamas/App/ActualizarContacto1App.php?correo="
-                    +correoUser+"&nombre="+nombre1+"&telefono="+telefono1);
-            //http://37.187.198.145/llamas/App/ActualizarContacto1App.php?correo=borja1@mail.com&nombre=ramoncete&telefono=4545
-        }else{
-            new guardarContacto1().execute("http://37.187.198.145/llamas/App/ActualizarContacto2App.php?correo="
-                    +correoUser+"&nombre="+nombre2+"&telefono="+telefono2);
-        }
+    private void actualizarDatos(final String contacto, String nombre, String telefono){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
+
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    if (contacto.equals("1")){
+                        String contactonombre1 = respuesta.getString(1);
+                        Toast.makeText(getContext(), "Contacto "+contactonombre1+ " guardado con exito", Toast.LENGTH_LONG).show();
+
+                    }else{
+                        String contactonombre2 = respuesta.getString(1);
+                        Toast.makeText(getContext(), "Contacto "+contactonombre2+ " guardado con exito", Toast.LENGTH_LONG).show();
+                    }
+                    } catch (JSONException e) {
+                    if (contacto.equals("1")){
+                        Toast.makeText(getContext(), "Fallo al guardar el contacto", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }else{
+                        Toast.makeText(getContext(), "Fallo al guardar el contacto", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                e.printStackTrace();
+            }
+        });
+        auxinetAPI.guardarContactos(correoUser,contacto,nombre,telefono);
+
     }
-    private boolean comprobarCampos(String numero){
-        if (numero.equals("1")){
+    private boolean comprobarCampos(String contacto){
+        if (contacto.equals("1")){
             nombre1 = et_contactos_nombre1.getText().toString().trim();
             telefono1 = et_contactos_telefono1.getText().toString().trim();
             if (nombre1.isEmpty()){
@@ -112,7 +140,6 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                 et_contactos_telefono1.requestFocus();
                 return false;
             }
-            guardarContactos(numero);
         }else{
             nombre2 = et_contactos_nombre2.getText().toString().trim();
             telefono2 = et_contactos_telefono2.getText().toString().trim();
@@ -121,127 +148,62 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                 Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
                 et_contactos_nombre2.requestFocus();
                 return false;
-            }if (telefono2.isEmpty()){
-                String a= "Escribe un telefono de tu contacto 2";
+            }if (telefono2.isEmpty()) {
+                String a = "Escribe un telefono de tu contacto 2";
                 Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
                 et_contactos_telefono2.requestFocus();
                 return false;
             }
-            guardarContactos(numero);
         }
         return true;
     }
-    private void cargarContactos() {
-        new cargarContacto1().execute("http://37.187.198.145/llamas/App/CargarContacto1App.php?correo="
-                +correoUser);
-        new cargarContacto2().execute("http://37.187.198.145/llamas/App/CargarContacto2App.php?correo="
-                +correoUser);
+    public void cargarContacto1(){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
+
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    String contactonombre1 = respuesta.getString(0);
+                    String contactotelefono1 = respuesta.getString(1);
+                    et_contactos_nombre1.setText(contactonombre1);
+                    et_contactos_telefono1.setText(contactotelefono1);
+
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+        auxinetAPI.cargarContactos(correoUser,"contacto1");
     }
+    public void cargarContacto2(){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
 
-    public class cargarContacto1 extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    String contactonombre2 = respuesta.getString(0);
+                    String contactotelefono2 = respuesta.getString(1);
+                    et_contactos_nombre2.setText(contactonombre2);
+                    et_contactos_telefono2.setText(contactotelefono2);
 
-        @Override
-        protected void onPostExecute(String resultado) {
-            Log.v("Datos",resultado);
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1",respuesta.toString());
-                String contactonombre1 = respuesta.getString(0);
-                String contactotelefono1 = respuesta.getString(1);
-                Log.v("Datos2","2");
-                et_contactos_nombre1.setText(contactonombre1);
-                et_contactos_telefono1.setText(contactotelefono1);
-
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        }
-    }
-    public class cargarContacto2 extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String resultado) {
-            Log.v("Datos",resultado);
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1",respuesta.toString());
-                String contactonombre2 = respuesta.getString(0);
-                String contactotelefono2 = respuesta.getString(1);
-                Log.v("Datos2","2");
-                et_contactos_nombre2.setText(contactonombre2);
-                et_contactos_telefono2.setText(contactotelefono2);
-
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "No tienes un contacto 2", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "No tienes un contacto 2", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
 
-        }
-    }
-    public class guardarContacto1 extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
+            @Override
+            public void onFailure(Exception e) {
+
             }
-        }
-
-        @Override
-        protected void onPostExecute(String resultado) {
-            Log.v("Datos",resultado);
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-                Log.v("Datos1",respuesta.toString());
-                String contactonombre1 = respuesta.getString(1);
-                Toast.makeText(getContext(), "Contacto "+contactonombre1+ " guardado con exito", Toast.LENGTH_LONG).show();
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "Fallo al guardar", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
-        }
-    }
-    public class guardarContactos extends AsyncTask<String,Void,String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try{
-                return downloadUrl(strings[0]);
-            }catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String resultado) {
-            Log.v("Datos",resultado);
-            try {
-                JSONArray respuesta= new JSONArray(resultado);
-
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "Fallo al guardar", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
-        }
+        });
+        auxinetAPI.cargarContactos(correoUser,"contacto2");
     }
 
     private void volverAPerfil() {
@@ -252,38 +214,5 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
-    }
-    private String downloadUrl(String myurl) throws IOException {
-        myurl = myurl.replace(" ","%20");
-        InputStream is = null;
-        int len = 500;
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            conn.connect();
-            int response = conn.getResponseCode();
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
     }
 }
