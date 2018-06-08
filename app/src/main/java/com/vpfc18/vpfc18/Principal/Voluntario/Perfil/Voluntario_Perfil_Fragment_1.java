@@ -61,7 +61,6 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         et_perfil_fnacimiento = (EditText)vista.findViewById(R.id.et_perfil_fnacimiento);
 
         btn_perfil_actualizarDatos = (Button) vista.findViewById(R.id.btn_perfil_actualizarDatos);
-        btn_perfil_cerrarSesion = (Button) vista.findViewById(R.id.btn_perfil_cerrarSesion);
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         //tv_perfil_modificarAlertas = (TextView) vista.findViewById(R.id.tv_perfil_modificarAlertas);
         tv_perfil_modContrasena.setOnClickListener(new View.OnClickListener() {
@@ -80,16 +79,6 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
                   }
             }
         });
-        btn_perfil_cerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Inicio_Activity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
-
         //Carga el perfil de la base de datos
         cargarDatosPerfil();
         return vista;
