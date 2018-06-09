@@ -15,6 +15,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -26,6 +28,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
@@ -43,9 +50,18 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Asistido_Botoneras_Fragment extends Fragment{
+public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyCallback {
 
-    LocationManager mlocManager;
+    View mView;
+    private double longitudAsistido;
+    private double latitudAsistido;
+    private Boolean salir = false;
+
+    private GoogleMap mGoogleMaps;
+    private MapView mMapView;
+    private LatLng actual;
+
+
     CircularImageView btn_ayuda, btn_compania,btn_contacto1,btn_contacto2;
     TextView tv_contacto1_nombre,tv_contacto2_nombre;
     String correoUser,telefono1,telefono2,latitud,longitud;
@@ -57,20 +73,20 @@ public class Asistido_Botoneras_Fragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.fragment_asistido__botoneras_, container, false);
+        mView = inflater.inflate(R.layout.fragment_asistido__botoneras_, container, false);
 
-        tv_contacto1_nombre = (TextView)vista.findViewById(R.id.tv_contacto1_nombre);
-        tv_contacto2_nombre = (TextView)vista.findViewById(R.id.tv_contacto2_nombre);
-        btn_ayuda = (CircularImageView) vista.findViewById(R.id.btn_ayuda);
-        btn_compania = (CircularImageView) vista.findViewById(R.id.btn_compania);
-        btn_contacto1 = (CircularImageView) vista.findViewById(R.id.btn_contacto1);
-        btn_contacto2 = (CircularImageView) vista.findViewById(R.id.btn_contacto2);
+        tv_contacto1_nombre = (TextView)mView.findViewById(R.id.tv_contacto1_nombre);
+        tv_contacto2_nombre = (TextView)mView.findViewById(R.id.tv_contacto2_nombre);
+        btn_ayuda = (CircularImageView) mView.findViewById(R.id.btn_ayuda);
+        btn_compania = (CircularImageView) mView.findViewById(R.id.btn_compania);
+        btn_contacto1 = (CircularImageView) mView.findViewById(R.id.btn_contacto1);
+        btn_contacto2 = (CircularImageView) mView.findViewById(R.id.btn_contacto2);
         correoUser = getArguments().getString("correoUser");
 
         btn_compania.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mandarAviso("compania");
+                mandarAviso("compania");
             }
         });
         btn_ayuda.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +112,61 @@ public class Asistido_Botoneras_Fragment extends Fragment{
         cargarContacto1();
         cargarContacto2();
 
-        return vista;
+        return mView;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        MapsInitializer.initialize(getContext());
+
+        mGoogleMaps = googleMap;
+        mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mGoogleMaps.clear();
+        mGoogleMaps.getUiSettings().setMyLocationButtonEnabled(true);
+        mGoogleMaps.getUiSettings().setMapToolbarEnabled(false);
+        mGoogleMaps.getUiSettings().setZoomControlsEnabled(true);
+
+        mMapView.setVisibility(View.INVISIBLE);
+
+        setMyLocationEnabled();
+
+    }
+
+    private void setMyLocationEnabled() {
+        mGoogleMaps.getUiSettings().setMyLocationButtonEnabled(true);
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mMapView.setVisibility(View.INVISIBLE);
+        mGoogleMaps.setMyLocationEnabled(true);
+        mGoogleMaps.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(Location location) {
+                if (salir == false) {
+                    //------------posicion de mi marcador--------------//
+                    latitudAsistido = location.getLatitude();
+                    longitudAsistido = location.getLongitude();
+                    actual = new LatLng(latitudAsistido, longitudAsistido);
+
+                    latitud = String.valueOf(latitudAsistido);
+                    longitud = String.valueOf(longitudAsistido);
+                    salir = true;
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mMapView = (MapView) mView.findViewById(R.id.map);
+        mMapView.setVisibility(View.INVISIBLE);
+        if (mMapView != null) {
+            mMapView.onCreate(null);
+            mMapView.onResume();
+            mMapView.getMapAsync(this);
+        }
+
     }
 
     private void mandarAviso(String tipoAviso) {
@@ -111,10 +181,10 @@ public class Asistido_Botoneras_Fragment extends Fragment{
 
             }
         });
-        Log.v("DIRECCION",latitud + " " +longitud);
+        latitud = String.valueOf(latitudAsistido);
+        longitud = String.valueOf(longitudAsistido);
         auxinetAPI.nuevaAlerta(correoUser,tipoAviso,latitud,longitud);
     }
-
 
     public void cargarContacto1() {
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
@@ -199,5 +269,6 @@ public class Asistido_Botoneras_Fragment extends Fragment{
         }
         return;
     }
+
 
 }

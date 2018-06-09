@@ -97,23 +97,24 @@ public class LVAdapterAlertas implements ListAdapter {
         TextView tv_vista_alertas_nombreAsistido = (TextView) view.findViewById(R.id.tv_vista_alertas_nombreAsistido);
         TextView tv_vista_alertas_tipoAlerta = (TextView) view.findViewById(R.id.tv_vista_alertas_tipoAlerta);
         TextView tv_vista_alertas_distancia = (TextView) view.findViewById(R.id.tv_vista_alertas_distancia);
-        //Button btn_vista_alertas_llamar = (Button) view.findViewById(R.id.btn_vista_alertas_llamar);
+        String tipoAlertaDetalle = listaAlertas.get(position).getNombreAlerta();
+        if (tipoAlertaDetalle.equals("aseo")){
+            tipoAlertaDetalle = "Ayuda con aseo";
+        }if (tipoAlertaDetalle.equals("compra")){
+            tipoAlertaDetalle = "Ayuda en la compra";
+        }if (tipoAlertaDetalle.equals("compania")){
+            tipoAlertaDetalle = "Necesito compañia";
+        }if (tipoAlertaDetalle.equals("desplazamiento")){
+            tipoAlertaDetalle = "Desplazamiento";
+        }if (tipoAlertaDetalle.equals("hogar")){
+            tipoAlertaDetalle = "Ayuda con labores del hogar";
+        }
 
         tv_vista_alertas_nombreAsistido.setText(listaAlertas.get(position).getNombreAsistido());
-        tv_vista_alertas_tipoAlerta.setText(listaAlertas.get(position).getNombreAlerta());
+        tv_vista_alertas_tipoAlerta.setText(tipoAlertaDetalle);
         tv_vista_alertas_distancia.setText(String.valueOf(listaAlertas.get(position).getDistancia()));
         double x = listaAlertas.get(position).getDistancia();
 
-
-        Log.v("distancia", String.valueOf(x));
-/*
-        btn_vista_alertas_llamar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cargarDialogLlamada(listaAlertas.get(position).getNombreAsistido(), listaAlertas.get(position).getTelefono(), listaAlertas.get(position).getId_alerta());
-            }
-        });
-*/
         return view;
 
     }

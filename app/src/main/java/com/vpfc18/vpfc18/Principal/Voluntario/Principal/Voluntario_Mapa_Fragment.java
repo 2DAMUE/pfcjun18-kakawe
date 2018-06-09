@@ -36,6 +36,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.vpfc18.vpfc18.Base_de_datos.MapsAPI;
+import com.vpfc18.vpfc18.Base_de_datos.respuestaMapa;
 import com.vpfc18.vpfc18.Controlador.Comunicador;
 import com.vpfc18.vpfc18.Entidades.Datos_Alertas;
 import com.vpfc18.vpfc18.R;
@@ -63,8 +65,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
     //--------------------------------//
 
-    private double longitudAsistente;
-    private double latitudAsistente;
+    private double longitudAsistente,latitudAsistente;
     private double latitudAsistido;
     private double longitudAsistido;
     private double distancia;
@@ -81,7 +82,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     ArrayList<Datos_Alertas> datos_alertas;
     String correoUser;
     Datos_Alertas eAlertas = new Datos_Alertas();
-    final Cargar_Alertas Carga_Alertas = new Cargar_Alertas();
     private LatLng actual;
     Integer c;
 
@@ -126,41 +126,9 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 intent.addCategory(Intent.CATEGORY_LAUNCHER);
                 intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                 startActivity(intent);
-
-
-                Log.v("idMa", idMarker + "");
-                Log.v("lat", "idMarker" + idMarker + " ;Latitud " + datos_alertas.get(idMarker).getLatitud() + " ;Longitud" + datos_alertas.get(c).getLongitud() + "");
-
             }
         });
-
-
-        gohome();
-
         return mView;
-    }
-
-
-    private void cargarAlertas() {
-        Log.v("CargandoAlertas3", "asdfsadfsadf");
-        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
-    }
-
-    public void gohome() {
-        Thread t = new Thread() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void run() {
-                try {
-                    sleep(700);
-                } catch (Exception e) {
-
-                } finally {
-                    cargarAlertas();
-                }
-            }
-        };
-        t.start();
     }
 
 
@@ -224,9 +192,50 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     mGoogleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 15));
                     //mGoogleMaps.addMarker(new MarkerOptions().position(actual).title("YO"));
                 }
-
+                cargarAlertasMapa();
             }
         });
+    }
+    public void cargarAlertasMapa() {
+        MapsAPI mapsAPI = new MapsAPI(new respuestaMapa<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray response) {
+                datos_alertas = null;
+
+                datos_alertas = new ArrayList<>();
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+
+                        JSONObject object = response.getJSONObject(i);
+                        int id_alerta = object.getInt("id_alerta");
+                        String nombreAsistidoDetalle = object.getString("nombre");
+                        double latitudAsistido = object.getDouble("latitud");
+                        double longitudAsistido = object.getDouble("longitud");
+                        String telefono = object.getString("telefono");
+                        String tipoAlerta = object.getString("nombreAlerta");
+
+                        // int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
+                        int distancia = 0;
+                        eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
+                        datos_alertas.add(eAlertas);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } finally {
+                        posicionAsistidos();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        mapsAPI.cargarAlertas();
     }
 
     public void cargarDialogLlamada(String nombre1, String telefono1, int id_alerta1) {
@@ -240,57 +249,96 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         vld.show(getActivity().getFragmentManager(), "dialog");
     }
 
-    public class Cargar_Alertas extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
-                return downloadUrl(strings[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
+    private void posicionAsistidos() {
+
+        Datos_Alertas eAlertas;
+
+        for (int i = 0; i < datos_alertas.size(); i++) {
+            eAlertas = datos_alertas.get(i);
+            Log.v("Datos", datos_alertas.toString());
+            double latitudAsistido1 = eAlertas.getLatitud();
+            double longitudAsistido1 = eAlertas.getLongitud();
+            String tipoAlerta = eAlertas.getNombreAlerta();
+
+            if (tipoAlerta.equals("aseo")) {
+
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.botiquin_de_primeros_auxilios))).setTag(0);
             }
-        }
 
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
+            if (tipoAlerta.equals("compra")) {
 
-        @Override
-        protected void onPostExecute(String resultado) {
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.sirena))).setTag(i);
 
-            datos_alertas = new ArrayList<>();
-            try {
-                JSONArray listadoAlertas = new JSONArray(resultado);
-                for (int i = 0; i < listadoAlertas.length(); i++) {
-                    JSONObject object = listadoAlertas.getJSONObject(i);
-                    int id_alerta = object.getInt("id_alerta");
-                    String nombreAsistidoDetalle = object.getString("nombre");
-                    latitudAsistido = object.getDouble("latitud");
-                    longitudAsistido = object.getDouble("longitud");
-                    String telefono = object.getString("telefono");
-                    String tipoAlerta = object.getString("nombreAlerta");
+            }
 
-                    int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
-                    eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
-                    datos_alertas.add(eAlertas);
+            if (tipoAlerta.equals("compania")) {
 
-                    comunicador.setObjeto(eAlertas);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulancia))).setTag(i);
+            }
 
+            if (tipoAlerta.equals("desplazamiento")) {
+
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.hidrante))).setTag(i);
+
+            }
+
+            if (tipoAlerta.equals("hogar")) {
+
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_phone))).setTag(i);
+            }
+
+            mGoogleMaps.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+
+                    c = (Integer) marker.getTag();
+
+                    Datos_Alertas eAlertas = datos_alertas.get(c);
+
+                    final int id_alerta = eAlertas.getId_alerta();
+                    final String telefono = eAlertas.getTelefono();
+                    final String nombreAsistidoDetalle = eAlertas.getNombreAsistido();
+                    String tipoAlertaDetalle = eAlertas.getNombreAlerta();
+
+                    double latitudAsistido = eAlertas.getLatitud();
+                    double longitudAsistido = eAlertas.getLongitud();
+                    //double distanciaEntreAsistidoAsistente = eAlertas.getDistancia();
+
+                    double distancia = calcularDistancia(latitudAsistido, longitudAsistido);
+
+                    tv_voluntarioMapa_nombreAsistido.setText(nombreAsistidoDetalle);
+                    if (tipoAlertaDetalle.equals("aseo")){
+                        tipoAlertaDetalle = "Ayuda con aseo";
+                    }if (tipoAlertaDetalle.equals("compra")){
+                        tipoAlertaDetalle = "Ayuda en la compra";
+                    }if (tipoAlertaDetalle.equals("compania")){
+                        tipoAlertaDetalle = "Necesito compañia";
+                    }if (tipoAlertaDetalle.equals("desplazamiento")){
+                        tipoAlertaDetalle = "Desplazamiento";
+                    }if (tipoAlertaDetalle.equals("hogar")){
+                        tipoAlertaDetalle = "Ayuda con labores del hogar";
+                    }
+                    tv_voluntarioMapa_tipoAlerta.setText(tipoAlertaDetalle);
+                    tv_voluntarioMapa_distancia.setText(String.valueOf(distancia).substring(0, 5));
+
+                    btn_voluntarioMapa_Llamar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            cargarDialogLlamada(nombreAsistidoDetalle, telefono, id_alerta);
+                        }
+                    });
+
+                    ll_mapa_detalle.setVisibility(View.VISIBLE);
+
+                    return false;
                 }
-
-                posicionAsistidos();
-
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "No hay datos de alertas", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
+            });
 
         }
-
 
     }
 
-    private double calcularDistancia(double latitudAsistido, double longitudAsistido) {
+    private double calcularDistancia(double pLatitudAsistido, double pLongitudAsistido) {
 
         distancia = 0;
 
@@ -299,126 +347,17 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
         asistente.setLatitude(latitudAsistente);
         asistente.setLongitude(longitudAsistente);
-        asistido.setLatitude(latitudAsistido);
-        asistido.setLongitude(longitudAsistido);
+
+        asistido.setLatitude(pLatitudAsistido);
+        asistido.setLongitude(pLongitudAsistido);
+
         distancia = asistente.distanceTo(asistido);
+
+        if (distancia > 1000) {
+            distancia = distancia / 1000;
+        }
 
         return distancia;
     }
 
-    private void posicionAsistidos() {
-        Datos_Alertas eAlertas;
-        for (int i = 0; i < datos_alertas.size(); i++) {
-
-            eAlertas = datos_alertas.get(i);
-            double latitudAsistido1 = eAlertas.getLatitud();
-            double longitudAsistido1 = eAlertas.getLongitud();
-            String tipoAlerta = eAlertas.getNombreAlerta();
-            LatLng posicionAsistido = new LatLng(latitudAsistido1, longitudAsistido1);
-            int id_alert = eAlertas.getId_alerta();
-
-            //mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_phone))).setTag(i);
-
-            //mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido)).setTag(i);
-
-            if (tipoAlerta.equals("Aseo")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.botiquin_de_primeros_auxilios))).setTag(i);
-            }
-
-            if (tipoAlerta.equals("Ayuda en la compra")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.sirena))).setTag(i);
-                Log.v("i", i + "");
-
-            }
-
-            if (tipoAlerta.equals("Compañia")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulancia))).setTag(i);
-            }
-
-            if (tipoAlerta.equals("Desplazamiento")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.hidrante))).setTag(i);
-
-            }
-
-            if (tipoAlerta.equals("Labores del hogar")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(posicionAsistido).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_phone))).setTag(i);
-            }
-
-            mGoogleMaps.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-                    //metodo para cargar las ventanas de información de cada marcador
-                    c = (Integer) marker.getTag();
-                    // String idMarkerString = marker.getId().substring(1, 2);
-                    // idMarker = Integer.parseInt(idMarkerString);
-                    Datos_Alertas eAlertas = datos_alertas.get(c);
-                    final int id_alerta = eAlertas.getId_alerta();
-                    final String nombreAsistidoDetalle = eAlertas.getNombreAsistido();
-                    String tipoAlertaDetalle = eAlertas.getNombreAlerta();
-                    final String telefono = eAlertas.getTelefono();
-                    double distanciaEntreAsistidoAsistente = eAlertas.getDistancia();
-
-                    tv_voluntarioMapa_nombreAsistido.setText(nombreAsistidoDetalle);
-
-                    btn_voluntarioMapa_Llamar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            cargarDialogLlamada(nombreAsistidoDetalle, telefono, id_alerta);
-                        }
-                    });
-                    tv_voluntarioMapa_tipoAlerta.setText(tipoAlertaDetalle);
-                    tv_voluntarioMapa_distancia.setText(String.valueOf(distanciaEntreAsistidoAsistente));
-
-                    Toast.makeText(getActivity().getApplicationContext(), "has pulsado en el marcador y su posición " + idMarker, Toast.LENGTH_LONG).show();
-
-                    ll_mapa_detalle.setVisibility(View.VISIBLE);
-
-                    return false;
-                }
-            });
-
-
-        }
-
-    }
-
-
-    private String downloadUrl(String myurl) throws IOException {
-        myurl = myurl.replace(" ", "%20");
-        InputStream is = null;
-        int len = 100000;
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            conn.connect();
-            int response = conn.getResponseCode();
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
-    }
 }

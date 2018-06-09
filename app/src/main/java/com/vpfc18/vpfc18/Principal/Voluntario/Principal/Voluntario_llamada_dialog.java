@@ -68,7 +68,6 @@ public class Voluntario_llamada_dialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 checkPermission();
-                llamadaTelefonica(telefono);
 
             }
         });
@@ -105,13 +104,8 @@ public class Voluntario_llamada_dialog extends DialogFragment {
         switch (requestCode){
             case REQUEST_CODE_ASK_PERMISSIONS:
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    // El usuario acepto los permisos.
-                    //Toast.makeText(getActivity(), "Necesitamos que aceptes los permisos para llamar a las personas que necesitan ayuda!", Toast.LENGTH_LONG).show();
-                    llamadaTelefonica(telefono);
                     Log.i("PERMISOS3", "No se tiene permiso para realizar llamadas telefónicas.");
                   }else{
-                    // Permiso denegado.
-                    //Toast.makeText(getActivity(), "Necesitamos que aceptes los permisos para llamar a las personas que necesitan ayuda!", Toast.LENGTH_LONG).show();
                     Log.i("PERMISOS4", "No se tiene permiso para realizar llamadas telefónicas.");
                     checkPermission();
                 }

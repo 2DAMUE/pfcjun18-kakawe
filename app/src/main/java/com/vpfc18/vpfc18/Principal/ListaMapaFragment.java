@@ -63,8 +63,6 @@ public class ListaMapaFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mGoogleMaps;
     private MapView mMapView;
     private LatLng actual;
-    private double distancia;
-    Integer c;
 
     ArrayList<Datos_Alertas> lista_alertas;
     LVAdapterAlertas adaptador;

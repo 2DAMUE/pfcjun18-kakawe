@@ -47,7 +47,6 @@ import java.util.ArrayList;
  */
 public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
-    Comunicador comunicador = new Comunicador();
     private String correoUser;
 
     //----------Elementos del Vista--------------//
@@ -103,8 +102,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
                 intent.addCategory(Intent.CATEGORY_LAUNCHER);
                 intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                 startActivity(intent);
-
-
             }
         });
 
@@ -201,8 +198,6 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
                         int distancia = 0;
                         eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
                         datos_alertas.add(eAlertas);
-
-                        comunicador.setObjeto(eAlertas);
 
 
                     } catch (JSONException e) {

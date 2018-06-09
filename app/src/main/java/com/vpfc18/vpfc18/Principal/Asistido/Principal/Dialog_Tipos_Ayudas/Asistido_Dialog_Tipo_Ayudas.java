@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
@@ -18,7 +20,7 @@ import org.json.JSONArray;
 
 public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
 
-    Button btn_ayuda1, btn_ayuda2, btn_ayuda3, btn_ayuda4, btn_ayuda5;
+    LinearLayout btn_ayuda1, btn_ayuda2, btn_ayuda3, btn_ayuda4, btn_ayuda5;
 
     String[] tiposAlerta = {"aseo", "compra", "desplazamiento", "hogar"};
     String correoUser,latitud,longitud;
@@ -36,10 +38,10 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
         longitud = datos.getString("longitud");
         correoUser = datos.getString("correoUser");
 
-        btn_ayuda1 = (Button) vista.findViewById(R.id.btn_ayuda1);
-        btn_ayuda2 = (Button) vista.findViewById(R.id.btn_ayuda2);
-        btn_ayuda3 = (Button) vista.findViewById(R.id.btn_ayuda3);
-        btn_ayuda4 = (Button) vista.findViewById(R.id.btn_ayuda4);
+        btn_ayuda1 = (LinearLayout) vista.findViewById(R.id.btn_ayuda1);
+        btn_ayuda2 = (LinearLayout) vista.findViewById(R.id.btn_ayuda2);
+        btn_ayuda3 = (LinearLayout) vista.findViewById(R.id.btn_ayuda3);
+        btn_ayuda4 = (LinearLayout) vista.findViewById(R.id.btn_ayuda4);
 
         //usuario = getArguments().getString("correoUser");
 
