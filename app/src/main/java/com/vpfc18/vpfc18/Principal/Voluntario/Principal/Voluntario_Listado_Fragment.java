@@ -176,7 +176,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
                         //posicionAsistidos();
                     }
                 }
-                adaptador = new LVAdapterAlertas(datos_alertas, getContext(), getActivity().getFragmentManager(), correoUser);
+                adaptador = new LVAdapterAlertas(datos_alertas, getContext(), getActivity().getFragmentManager(), correoUser,latitudAsistente,longitudAsistente);
                 lv_lista_voluntario_listado.setAdapter(adaptador);
 
             }

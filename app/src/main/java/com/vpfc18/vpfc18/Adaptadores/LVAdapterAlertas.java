@@ -29,16 +29,22 @@ import java.util.ArrayList;
 
 public class LVAdapterAlertas implements ListAdapter {
 
+    private double distancia;
     private ArrayList<Datos_Alertas> listaAlertas;
     Context context;
     FragmentManager fm;
     String correoUser;
+    private double longitudAsistente,latitudAsistente;
 
-    public LVAdapterAlertas(ArrayList<Datos_Alertas> listaAlertas, Context context, FragmentManager fm, String correoUser) {
+
+
+    public LVAdapterAlertas(ArrayList<Datos_Alertas> listaAlertas, Context context, FragmentManager fm, String correoUser,Double latitudAsistente,Double longitudAsistente) {
         this.listaAlertas = listaAlertas;
         this.context = context;
         this.fm = fm;
         this.correoUser = correoUser;
+        this.latitudAsistente = latitudAsistente;
+        this.longitudAsistente = longitudAsistente;
     }
 
     public ArrayList<Datos_Alertas> getListaAlertas() {
@@ -112,7 +118,8 @@ public class LVAdapterAlertas implements ListAdapter {
 
         tv_vista_alertas_nombreAsistido.setText(listaAlertas.get(position).getNombreAsistido());
         tv_vista_alertas_tipoAlerta.setText(tipoAlertaDetalle);
-        tv_vista_alertas_distancia.setText(String.valueOf(listaAlertas.get(position).getDistancia()));
+        distancia = calcularDistancia(listaAlertas.get(position).getLatitud(),listaAlertas.get(position).getLongitud());
+        tv_vista_alertas_distancia.setText(String.valueOf(distancia).substring(0, 5));
         double x = listaAlertas.get(position).getDistancia();
 
         return view;
@@ -146,5 +153,26 @@ public class LVAdapterAlertas implements ListAdapter {
         return listaAlertas.isEmpty();
     }
 
+    private double calcularDistancia(double pLatitudAsistido, double pLongitudAsistido) {
+
+        distancia = 0;
+
+        Location asistente = new Location("puntoA");
+        Location asistido = new Location("puntoB");
+
+        asistente.setLatitude(latitudAsistente);
+        asistente.setLongitude(longitudAsistente);
+
+        asistido.setLatitude(pLatitudAsistido);
+        asistido.setLongitude(pLongitudAsistido);
+
+        distancia = asistente.distanceTo(asistido);
+
+        if (distancia > 1000) {
+            distancia = distancia / 1000;
+        }
+
+        return distancia;
+    }
 
 }

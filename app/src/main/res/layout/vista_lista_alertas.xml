@@ -15,6 +15,9 @@
         android:background="@color/blanco"
         android:orientation="vertical">
 
+        <View
+            style="@style/low_divider"
+            android:layout_width="match_parent" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -104,9 +107,7 @@
 
         </LinearLayout>
 
-        <View
-            style="@style/low_divider"
-            android:layout_width="match_parent" />
+
     </LinearLayout>
 
 </LinearLayout>
