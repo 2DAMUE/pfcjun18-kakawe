@@ -206,8 +206,8 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
                 for (int i = 0; i < response.length(); i++) {
                     try {
-
                         JSONObject object = response.getJSONObject(i);
+                        String id_dependiente = object.getString("id_dependiente");
                         int id_alerta = object.getInt("id_alerta");
                         String nombreAsistidoDetalle = object.getString("nombre");
                         double latitudAsistido = object.getDouble("latitud");
@@ -217,7 +217,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
                         // int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
                         int distancia = 0;
-                        eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
+                        eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia,id_dependiente);
                         datos_alertas.add(eAlertas);
 
 

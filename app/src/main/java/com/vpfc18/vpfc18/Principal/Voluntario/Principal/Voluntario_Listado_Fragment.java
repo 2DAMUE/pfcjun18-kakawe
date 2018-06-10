@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,11 +87,24 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
         lv_lista_voluntario_listado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.v("position", position + "");
-                Toast.makeText(getContext(), "holaaaaaaaaaaaaaaaaaaa" + position, Toast.LENGTH_SHORT).show();
+                verAsistido(position);
             }
         });
         return mView;
+    }
+    public void verAsistido(int num){
+        String nombreAsistido = datos_alertas.get(num).getNombreAsistido();
+        String idCorreoAsistido = datos_alertas.get(num).getId_asistente();
+        String telefonoAsistido = datos_alertas.get(num).getTelefono();
+        Voluntario_detalle_Dialog vld = new Voluntario_detalle_Dialog();
+        Bundle datos = new Bundle();
+        Log.v("idCorreoAsistido",idCorreoAsistido);
+        datos.putString("nombreAsistido", nombreAsistido);
+        datos.putString("correoUser", correoUser);
+        datos.putString("idCorreoAsistido",idCorreoAsistido);
+        datos.putString("telefonoAsistido",telefonoAsistido);
+        vld.setArguments(datos);
+        vld.show(getActivity().getFragmentManager(), "dialog");
     }
 
     @Override
@@ -157,6 +171,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
                     try {
 
                         JSONObject object = response.getJSONObject(i);
+                        String id_dependiente = object.getString("id_dependiente");
                         int id_alerta = object.getInt("id_alerta");
                         String nombreAsistidoDetalle = object.getString("nombre");
                         double latitudAsistido = object.getDouble("latitud");
@@ -166,7 +181,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
 
                         // int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
                         int distancia = 0;
-                        eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia);
+                        eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia,id_dependiente);
                         datos_alertas.add(eAlertas);
 
 
