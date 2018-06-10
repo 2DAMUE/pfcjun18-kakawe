@@ -29,16 +29,22 @@ import java.util.ArrayList;
 
 public class LVAdapterAlertas implements ListAdapter {
 
+    private double distancia;
     private ArrayList<Datos_Alertas> listaAlertas;
     Context context;
     FragmentManager fm;
     String correoUser;
+    private double longitudAsistente,latitudAsistente;
 
-    public LVAdapterAlertas(ArrayList<Datos_Alertas> listaAlertas, Context context, FragmentManager fm, String correoUser) {
+
+
+    public LVAdapterAlertas(ArrayList<Datos_Alertas> listaAlertas, Context context, FragmentManager fm, String correoUser,Double latitudAsistente,Double longitudAsistente) {
         this.listaAlertas = listaAlertas;
         this.context = context;
         this.fm = fm;
         this.correoUser = correoUser;
+        this.latitudAsistente = latitudAsistente;
+        this.longitudAsistente = longitudAsistente;
     }
 
     public ArrayList<Datos_Alertas> getListaAlertas() {
@@ -97,23 +103,25 @@ public class LVAdapterAlertas implements ListAdapter {
         TextView tv_vista_alertas_nombreAsistido = (TextView) view.findViewById(R.id.tv_vista_alertas_nombreAsistido);
         TextView tv_vista_alertas_tipoAlerta = (TextView) view.findViewById(R.id.tv_vista_alertas_tipoAlerta);
         TextView tv_vista_alertas_distancia = (TextView) view.findViewById(R.id.tv_vista_alertas_distancia);
-        //Button btn_vista_alertas_llamar = (Button) view.findViewById(R.id.btn_vista_alertas_llamar);
+        String tipoAlertaDetalle = listaAlertas.get(position).getNombreAlerta();
+        if (tipoAlertaDetalle.equals("aseo")){
+            tipoAlertaDetalle = "Ayuda con aseo";
+        }if (tipoAlertaDetalle.equals("compra")){
+            tipoAlertaDetalle = "Ayuda en la compra";
+        }if (tipoAlertaDetalle.equals("compania")){
+            tipoAlertaDetalle = "Necesito compañia";
+        }if (tipoAlertaDetalle.equals("desplazamiento")){
+            tipoAlertaDetalle = "Desplazamiento";
+        }if (tipoAlertaDetalle.equals("hogar")){
+            tipoAlertaDetalle = "Ayuda con labores del hogar";
+        }
 
         tv_vista_alertas_nombreAsistido.setText(listaAlertas.get(position).getNombreAsistido());
-        tv_vista_alertas_tipoAlerta.setText(listaAlertas.get(position).getNombreAlerta());
-        tv_vista_alertas_distancia.setText(String.valueOf(listaAlertas.get(position).getDistancia()));
+        tv_vista_alertas_tipoAlerta.setText(tipoAlertaDetalle);
+        distancia = calcularDistancia(listaAlertas.get(position).getLatitud(),listaAlertas.get(position).getLongitud());
+        tv_vista_alertas_distancia.setText(String.valueOf(distancia).substring(0, 5));
         double x = listaAlertas.get(position).getDistancia();
 
-
-        Log.v("distancia", String.valueOf(x));
-/*
-        btn_vista_alertas_llamar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cargarDialogLlamada(listaAlertas.get(position).getNombreAsistido(), listaAlertas.get(position).getTelefono(), listaAlertas.get(position).getId_alerta());
-            }
-        });
-*/
         return view;
 
     }
@@ -145,5 +153,26 @@ public class LVAdapterAlertas implements ListAdapter {
         return listaAlertas.isEmpty();
     }
 
+    private double calcularDistancia(double pLatitudAsistido, double pLongitudAsistido) {
+
+        distancia = 0;
+
+        Location asistente = new Location("puntoA");
+        Location asistido = new Location("puntoB");
+
+        asistente.setLatitude(latitudAsistente);
+        asistente.setLongitude(longitudAsistente);
+
+        asistido.setLatitude(pLatitudAsistido);
+        asistido.setLongitude(pLongitudAsistido);
+
+        distancia = asistente.distanceTo(asistido);
+
+        if (distancia > 1000) {
+            distancia = distancia / 1000;
+        }
+
+        return distancia;
+    }
 
 }

@@ -87,7 +87,7 @@ public class Login_Fragment extends Fragment {
             }
             @Override
             public void onFailure(Exception e) {
-                Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Credenciales invalidas", Toast.LENGTH_LONG).show();
             }
         });
         auxinetAPI.loguearUsuario(correo,contrasena);

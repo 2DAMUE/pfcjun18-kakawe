@@ -170,6 +170,12 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         this.execute(APIUrl + metodo + parametros);
     }
 
+    public void cargarDM(String id_correoAsistido){
+        String metodo = "CargarDmApp.php?";
+        String parametros = "id_usuario="+id_correoAsistido;
+        this.execute(APIUrl +  metodo + parametros);
+    }
+
 }
 
 

@@ -233,15 +233,16 @@
 
                     <EditText
                         android:id="@+id/et_perfil_notasMedicas"
-                        android:layout_width = "match_parent"
-                        android:layout_height = "match_parent"
-                        android:backgroundTint = "@android:color/transparent"
-                        android:gravity = "end"
-                        android:enabled = "false"
-                        android:paddingHorizontal = "30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@android:color/transparent"
                         android:clickable="false"
-                        android:hint="Notas medicas"
-                        android:inputType="text" />
+                        android:enabled="false"
+                        android:gravity="end"
+                        android:hint="Notas"
+                        android:inputType="text"
+                        android:paddingHorizontal="30dp"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
