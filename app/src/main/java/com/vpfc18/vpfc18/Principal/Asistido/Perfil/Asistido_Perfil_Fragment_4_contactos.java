@@ -15,10 +15,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
@@ -44,11 +49,13 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
     private StorageReference storageReference;
     Intent intent;
     Uri uri;
+    int accion;
     private static final int GALERY_INTENT = 1;
 
-    Button btn_contactos_atras,btn_guardarContacto1,btn_guardarContacto2,btn_foto_contacto1,btn_foto_contacto2;
+    Button btn_contactos_atras,btn_guardarContacto1,btn_guardarContacto2;
     ToggleButton btn_contactos_modificar;
     EditText et_contactos_nombre1,et_contactos_nombre2,et_contactos_telefono1,et_contactos_telefono2;
+    ImageView iv_foto_contacto1,iv_foto_contacto2;
 
 
     String correoUser,nombre1,nombre2,telefono1,telefono2;
@@ -60,13 +67,29 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        storageReference = FirebaseStorage.getInstance().getReference();
+
         View view = inflater.inflate(R.layout.asistido_fragment_contactos, container, false);
         et_contactos_nombre1 = (EditText)view.findViewById(R.id.et_contactos_nombre1);
         et_contactos_telefono1 = (EditText)view.findViewById(R.id.et_contactos_telefono1);
         et_contactos_nombre2 = (EditText)view.findViewById(R.id.et_contactos_nombre2);
         et_contactos_telefono2 = (EditText)view.findViewById(R.id.et_contactos_telefono2);
 
-        btn_foto_contacto1.setOnClickListener(new View.OnClickListener() {
+        iv_foto_contacto1 = (ImageView) view.findViewById(R.id.iv_foto_contacto1);
+        iv_foto_contacto2 = (ImageView) view.findViewById(R.id.iv_foto_contacto2);
+
+        iv_foto_contacto1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accion = 0;
+                intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, GALERY_INTENT);
+
+            }
+        });
+
+        iv_foto_contacto2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(Intent.ACTION_PICK);
@@ -75,17 +98,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
 
             }
         });
-
-        btn_foto_contacto2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, GALERY_INTENT);
-
-            }
-        });
-
+/*
         btn_guardarContacto1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +124,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         });
         cargarContacto1();
         cargarContacto2();
+        */
         return view;
     }
 
@@ -121,11 +135,61 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         if (requestCode == GALERY_INTENT && resultCode == RESULT_OK) {
             //Aquí sólo se recoge la URI. No se grabará hasta que no se haya grabado el contacto
             uri = data.getData();
-            //subirFoto();
+            subirFoto();
         }
-        
+
     }
 
+    private void subirFoto() {
+
+        StorageReference rutaCarpetaImg = storageReference.child("jose1@mail.com").child("jose1_contacto1@mail.com");
+        Log.v("ruta",rutaCarpetaImg + "");
+        rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //descargar imagen de firebase
+
+                if (accion == 0){
+                    Uri descargarFoto = taskSnapshot.getDownloadUrl();
+                    Log.v("ruta2",descargarFoto + "");
+
+                    Glide.with(getActivity())
+                            .load(descargarFoto)
+                            .into(iv_foto_contacto1);
+
+                    Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
+                }else{
+                    Uri descargarFoto = taskSnapshot.getDownloadUrl();
+                    Log.v("ruta2",descargarFoto + "");
+
+                    Glide.with(getActivity())
+                            .load(descargarFoto)
+                            .into(iv_foto_contacto2);
+
+                    Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        });
+
+
+        /*StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(correoUser);
+        //subimos la imagen y verificamos mediante un toast que se subio la foto
+        rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //descargar imagen de firebase
+                Uri descargarFoto = taskSnapshot.getDownloadUrl();
+                Glide.with(getActivity())
+                        .load(descargarFoto)
+                        .into(btn_foto_perfil);
+
+                Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
+            }
+        });
+        */
+    }
 
     private void actualizarDatos(final String contacto, String nombre, String telefono){
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){

@@ -25,7 +25,7 @@
                 android:text="Contacto 1" />
 
             <ImageView
-                android:id="@+id/btn_foto_contacto1"
+                android:id="@+id/iv_foto_contacto1"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:scaleType="centerCrop"
@@ -77,7 +77,7 @@
                 android:text="Contacto 2" />
 
             <ImageView
-                android:id="@+id/btn_foto_contacto2"
+                android:id="@+id/iv_foto_contacto2"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
                 android:scaleType="centerCrop"
