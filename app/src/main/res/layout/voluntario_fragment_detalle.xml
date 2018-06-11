@@ -283,6 +283,20 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
+            <View style="@style/divider" />
+
+            <Button
+                android:id="@+id/btn_detalle_cerrar"
+                style="@style/btn"
+
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:text="Atras" />
+
 
         </LinearLayout>
     </ScrollView>
