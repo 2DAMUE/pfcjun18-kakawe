@@ -19,13 +19,17 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import com.google.firebase.storage.UploadTask;
+
+import com.google.firebase.internal.api.FirebaseNoSignedInUserException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
@@ -41,9 +45,9 @@ import static android.app.Activity.RESULT_OK;
  */
 public class Asistido_Perfil_Fragment_1 extends Fragment {
 
+    private StorageReference storageReference;
     Intent intent;
     Uri uri;
-    private StorageReference storageReference;
     private static final int GALERY_INTENT = 1;
 
     CircularImageView btn_foto_perfil;
@@ -64,6 +68,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                              Bundle savedInstanceState) {
 
         View vista = inflater.inflate(R.layout.asistido_fragment_perfil_1, container, false);
+
         storageReference = FirebaseStorage.getInstance().getReference();
 
         et_perfil_email = (EditText) vista.findViewById(R.id.et_perfil_email);
@@ -123,9 +128,12 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
 
     }
 
+
+
     private void cargarFotoPerfil() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference refGuardar = storage.getReferenceFromUrl("gs://auxinet-app.appspot.com").child(correoUser).child(correoUser);
+        StorageReference refGuardar = storage.getReferenceFromUrl("gs://auxi-net.appspot.com").child(correoUser).child(correoUser);
+
         Log.v("refGuardar", refGuardar.toString());
         if (refGuardar.getName().isEmpty()) {
         } else {
@@ -136,6 +144,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                     .skipMemoryCache(true)
                     .into(btn_foto_perfil);
         }
+
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, final Intent data) {
@@ -149,7 +158,25 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
     private void subirFoto() {
+        //
         StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(correoUser);
+        Log.v("ruta",rutaCarpetaImg + "");
+        rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //descargar imagen de firebase
+                Uri descargarFoto = taskSnapshot.getDownloadUrl();
+                Log.v("ruta2",descargarFoto + "");
+                Glide.with(getActivity())
+                        .load(descargarFoto)
+                        .into(btn_foto_perfil);
+
+                Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        /*StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(correoUser);
         //subimos la imagen y verificamos mediante un toast que se subio la foto
         rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -163,6 +190,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
             }
         });
+        */
     }
 
     private void habilitarCampos(Boolean habilitado) {

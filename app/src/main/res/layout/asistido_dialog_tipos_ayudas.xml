@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+    android:layout_width="320dp"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
     android:gravity="center"
+
     android:orientation="vertical">
 
 
     <LinearLayout
         android:id="@+id/btn_ayuda1"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:background="@drawable/shape_circle"
         android:backgroundTint="@color/azulAuxinet"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-s
+
         <com.mikhaellopez.circularimageview.CircularImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -40,7 +43,7 @@ s
 
     <LinearLayout
         android:id="@+id/btn_ayuda2"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:background="@drawable/shape_circle"
@@ -72,7 +75,7 @@ s
 
     <LinearLayout
         android:id="@+id/btn_ayuda3"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:background="@drawable/shape_circle"
@@ -102,7 +105,7 @@ s
 
     <LinearLayout
         android:id="@+id/btn_ayuda4"
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:background="@drawable/shape_circle"

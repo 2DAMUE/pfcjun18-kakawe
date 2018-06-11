@@ -1,7 +1,6 @@
 package com.vpfc18.vpfc18.Principal.Voluntario.Perfil;
 
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -18,14 +17,6 @@ import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,7 +36,7 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.voluntario_perfil_fragment_3_contrasena, container, false);
+        View vista = inflater.inflate(R.layout.voluntario_fragment_perfil_3, container, false);
         correoUser = getArguments().getString("correoUser");
 
         et_perfil_contrasenaNueva = (EditText)vista.findViewById(R.id.et_perfil_contrasenaNueva);

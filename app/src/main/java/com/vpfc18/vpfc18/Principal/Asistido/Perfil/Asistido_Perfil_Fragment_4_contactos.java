@@ -1,6 +1,8 @@
 package com.vpfc18.vpfc18.Principal.Asistido.Perfil;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.firebase.storage.StorageReference;
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
@@ -31,12 +34,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
 
-    Button btn_contactos_atras,btn_guardarContacto1,btn_guardarContacto2;
+    private StorageReference storageReference;
+    Intent intent;
+    Uri uri;
+    private static final int GALERY_INTENT = 1;
+
+    Button btn_contactos_atras,btn_guardarContacto1,btn_guardarContacto2,btn_foto_contacto1,btn_foto_contacto2;
     ToggleButton btn_contactos_modificar;
     EditText et_contactos_nombre1,et_contactos_nombre2,et_contactos_telefono1,et_contactos_telefono2;
 
@@ -56,10 +66,25 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         et_contactos_nombre2 = (EditText)view.findViewById(R.id.et_contactos_nombre2);
         et_contactos_telefono2 = (EditText)view.findViewById(R.id.et_contactos_telefono2);
 
-        btn_contactos_atras = (Button)view.findViewById(R.id.btn_contactos_atras);
-        btn_guardarContacto1 = (Button)view.findViewById(R.id.btn_guardarContacto1);
-        btn_guardarContacto2 = (Button)view.findViewById(R.id.btn_guardarContacto2);
-        correoUser = getArguments().getString("correoUser");
+        btn_foto_contacto1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, GALERY_INTENT);
+
+            }
+        });
+
+        btn_foto_contacto2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, GALERY_INTENT);
+
+            }
+        });
 
         btn_guardarContacto1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +114,17 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         return view;
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //verificamos si obtenemos la imagen de la galeria
+        if (requestCode == GALERY_INTENT && resultCode == RESULT_OK) {
+            //Aquí sólo se recoge la URI. No se grabará hasta que no se haya grabado el contacto
+            uri = data.getData();
+            //subirFoto();
+        }
+        
+    }
 
 
     private void actualizarDatos(final String contacto, String nombre, String telefono){

@@ -2,19 +2,12 @@ package com.vpfc18.vpfc18.Principal.Asistido.Principal;
 
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -24,7 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,10 +33,6 @@ import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 
 /**
@@ -73,7 +61,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_asistido__botoneras_, container, false);
+        mView = inflater.inflate(R.layout.asistido_fragment_botoneras, container, false);
 
         tv_contacto1_nombre = (TextView)mView.findViewById(R.id.tv_contacto1_nombre);
         tv_contacto2_nombre = (TextView)mView.findViewById(R.id.tv_contacto2_nombre);

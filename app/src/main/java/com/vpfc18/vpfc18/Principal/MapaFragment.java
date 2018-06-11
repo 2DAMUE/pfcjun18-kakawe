@@ -4,13 +4,18 @@ package com.vpfc18.vpfc18.Principal;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.VectorDrawable;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +30,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -232,30 +238,32 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
             if (tipoAlerta.equals("aseo")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.botiquin_de_primeros_auxilios))).setTag(0);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.marker_shower))).setTag(0);
             }
 
             if (tipoAlerta.equals("compra")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.sirena))).setTag(i);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.marker_shopping))).setTag(i);
 
             }
 
             if (tipoAlerta.equals("compania")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulancia))).setTag(i);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.ambulancia))).setTag(i);
             }
 
             if (tipoAlerta.equals("desplazamiento")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.hidrante))).setTag(i);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.marker_car))).setTag(i);
 
             }
 
             if (tipoAlerta.equals("hogar")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_phone))).setTag(i);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.marker_home))).setTag(i);
             }
+
+
 
             mGoogleMaps.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
@@ -295,6 +303,22 @@ public class MapaFragment extends Fragment implements OnMapReadyCallback {
 
         }
 
+    }
+
+    //metodo para poder introduccir imagenes vectoriales en los marcadores
+    private BitmapDescriptor getBitmapDescriptor(int id) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            VectorDrawable vectorDrawable = (VectorDrawable) getContext().getDrawable(id);
+            int h = vectorDrawable.getIntrinsicHeight();
+            int w = vectorDrawable.getIntrinsicWidth();
+            vectorDrawable.setBounds(0, 0, w, h);
+            Bitmap bm = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bm);
+            vectorDrawable.draw(canvas);
+            return BitmapDescriptorFactory.fromBitmap(bm);
+        } else {
+            return BitmapDescriptorFactory.fromResource(id);
+        }
     }
 
     private double calcularDistancia(double pLatitudAsistido, double pLongitudAsistido) {
