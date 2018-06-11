@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -96,15 +97,18 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
         String nombreAsistido = datos_alertas.get(num).getNombreAsistido();
         String idCorreoAsistido = datos_alertas.get(num).getId_asistente();
         String telefonoAsistido = datos_alertas.get(num).getTelefono();
-        Voluntario_detalle_Dialog vld = new Voluntario_detalle_Dialog();
+
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
+        t.addToBackStack(null);
+        t.commit();
         Bundle datos = new Bundle();
-        Log.v("idCorreoAsistido",idCorreoAsistido);
         datos.putString("nombreAsistido", nombreAsistido);
         datos.putString("correoUser", correoUser);
         datos.putString("idCorreoAsistido",idCorreoAsistido);
         datos.putString("telefonoAsistido",telefonoAsistido);
-        vld.setArguments(datos);
-        vld.show(getActivity().getFragmentManager(), "dialog");
+        fragmentoSeleccionado.setArguments(datos);
     }
 
     @Override

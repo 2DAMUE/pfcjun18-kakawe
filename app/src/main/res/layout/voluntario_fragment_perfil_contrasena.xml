@@ -42,7 +42,7 @@
             android:id="@+id/et_perfil_contrasenaNueva"
             style="@style/et_perfil"
             android:inputType="textPassword"
-            android:text="123456" />
+            android:hint="Nueva contraseña" />
     </LinearLayout>
 
     <View style="@style/divider" />
@@ -64,7 +64,7 @@
             android:id="@+id/et_perfil_repetirContrasena"
             style="@style/et_perfil"
             android:inputType="textPassword"
-            android:text="123456" />
+            android:hint="Repetir contraseña" />
     </LinearLayout>
 
     <View style="@style/medium_divider" />
