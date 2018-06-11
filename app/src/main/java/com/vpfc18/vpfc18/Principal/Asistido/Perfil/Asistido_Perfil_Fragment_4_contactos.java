@@ -123,6 +123,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
             uri = data.getData();
             //subirFoto();
         }
+        
     }
 
 
