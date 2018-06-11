@@ -133,15 +133,12 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
 
     private void cargarFotoPerfil() {
         Log.v("dentro1","ERRORAZO");
-            final StorageReference stor = FirebaseStorage.getInstance().getReference().child("662959149").child("662959149");
+            final StorageReference stor = FirebaseStorage.getInstance().getReference().child(telefono).child(telefono);
         Log.v("dentro2",stor.toString());
-            final long ONE_MEGABYTE = 1024 * 1024;
             stor.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    Log.v("dentro3",task + "");
                     Uri fotobajada = task.getResult();
-                    Log.v("dentro4",fotobajada + "");
                     Glide.with(getActivity())
                             .load(fotobajada)
                             .into(iv_foto_perfil);
@@ -335,6 +332,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
+        datos.putString("telefonoUser", telefono);
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }
