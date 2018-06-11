@@ -89,6 +89,8 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private LatLng actual;
     Integer c;
 
+    BitmapDescriptor marker_shower,marker_car,marker_shopping,marker_coffee,marker_home;
+
 
     //----------Elementos del Vista--------------//
     private TextView tv_voluntarioMapa_nombreAsistido, tv_voluntarioMapa_tipoAlerta, tv_voluntarioMapa_distancia;
@@ -113,6 +115,8 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         btn_voluntarioMapa_navegar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_navegar);
         btn_voluntarioMapa_Llamar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_Llamar);
 
+
+
         correoUser = getArguments().getString("correoUser");
         ll_mapa_detalle = (LinearLayout) mView.findViewById(R.id.ll_mapa_detalle);
         btn_voluntarioMapa_cerrar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_cerrar);
@@ -122,7 +126,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         btn_voluntarioMapa_navegar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(android.content.Intent
                         .ACTION_VIEW,
                         Uri.parse("http://maps.google.com/maps?saddr=" + latitudAsistente + "," + longitudAsistente + "&daddr=" + datos_alertas.get(c).getLatitud() + "," + datos_alertas.get(c).getLongitud()));
@@ -158,6 +161,12 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
+
+        marker_shower = getBitmapDescriptor(R.drawable.marker_shower);
+        marker_car = getBitmapDescriptor(R.drawable.marker_car);
+        marker_shopping = getBitmapDescriptor(R.drawable.marker_shopping);
+        marker_coffee = getBitmapDescriptor(R.drawable.marker_coffee);
+        marker_home = getBitmapDescriptor(R.drawable.marker_home);
 
         mGoogleMaps = googleMap;
         mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -266,29 +275,29 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
             if (tipoAlerta.equals("aseo")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.marker_shower))).setTag(0);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_shower)).setTag(0);
             }
 
             if (tipoAlerta.equals("compra")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.marker_shopping))).setTag(i);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_shopping)).setTag(i);
 
             }
 
             if (tipoAlerta.equals("compania")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.marker_coffee))).setTag(i);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_coffee)).setTag(i);
             }
 
             if (tipoAlerta.equals("desplazamiento")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.marker_car))).setTag(i);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_car)).setTag(i);
 
             }
 
             if (tipoAlerta.equals("hogar")) {
 
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(getBitmapDescriptor(R.drawable.marker_home))).setTag(i);
+                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_home)).setTag(i);
             }
 
             mGoogleMaps.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
