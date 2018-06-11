@@ -43,19 +43,15 @@
         <Button
             android:id="@+id/btn_llamar_dialogLlamada"
             style="@style/btn"
-            android:layout_width="match_parent"
+            android:layout_width="135dp"
             android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:paddingHorizontal="20dp"
             android:text="Llamar" />
 
         <Button
             android:id="@+id/btn_cancelar_dialogLlamada"
             style="@style/btn"
-            android:layout_width="match_parent"
+            android:layout_width="135dp"
             android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:paddingHorizontal="20dp"
             android:text="Cancelar" />
     </LinearLayout>
 

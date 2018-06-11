@@ -111,16 +111,35 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/btn_contacto1"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_contact"
-                    app:civ_border_color="#EEEEEE"
-                    app:civ_border_width="0dp"
-                    app:civ_shadow="false" />
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/btn_contacto1"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/ic_contact"
+                        app:civ_border_color="#EEEEEE"
+                        app:civ_border_width="0dp"
+                        app:civ_shadow="false" />
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/iv_phone_contacto1"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="9dp"
+                        android:src="@drawable/ic_phone_contact"
+                        android:visibility="invisible"
+                        app:civ_border_color="#FFFFFF"
+                        app:civ_border_width="3dp"
+                        app:civ_shadow="false" />
+
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/tv_contacto1_nombre"
@@ -146,16 +165,34 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/btn_contacto2"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_contact"
-                    app:civ_border_color="#EEEEEE"
-                    app:civ_border_width="0dp"
-                    app:civ_shadow="false" />
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/btn_contacto2"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/ic_contact"
+                        app:civ_border_color="#EEEEEE"
+                        app:civ_border_width="0dp"
+                        app:civ_shadow="false" />
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/iv_phone_contacto2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="9dp"
+                        android:src="@drawable/ic_phone_contact"
+                        android:visibility="invisible"
+                        app:civ_border_color="#FFFFFF"
+                        app:civ_border_width="3dp"
+                        app:civ_shadow="false" />
+
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/tv_contacto2_nombre"

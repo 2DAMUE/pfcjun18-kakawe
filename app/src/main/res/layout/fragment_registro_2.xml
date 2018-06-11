@@ -55,7 +55,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="20dp"
-        android:drawableLeft="@drawable/ic_phone"
+        android:drawableLeft="@drawable/ic_phone_contact"
         android:ems="10"
         android:hint="Teléfono"
         android:inputType="phone"
