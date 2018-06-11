@@ -33,6 +33,9 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View vista = inflater.inflate(R.layout.asistido_dialog_tipos_ayudas, null);
 
+
+
+
         Bundle datos=this.getArguments();
         latitud = datos.getString("latitud");
         longitud = datos.getString("longitud");
