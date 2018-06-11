@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.vpfc18.vpfc18.Entidades.Datos_Alertas;
 
-import com.vpfc18.vpfc18.Principal.Voluntario.Principal.Voluntario_llamada_dialog;
 import com.vpfc18.vpfc18.R;
 
 
