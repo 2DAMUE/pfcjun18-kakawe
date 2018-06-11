@@ -42,7 +42,6 @@ public class PruebaActivity extends AppCompatActivity {
                 FragmentTransaction t2 = fm2.beginTransaction();
                 t2.replace(R.id.contenedor, fragmentoSeleccionado2);
                 t2.commit();
-
             }
         });
 
