@@ -337,9 +337,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     return false;
                 }
             });
-
         }
-
     }
 
     //metodo para poder introduccir imagenes vectoriales en los marcadores
