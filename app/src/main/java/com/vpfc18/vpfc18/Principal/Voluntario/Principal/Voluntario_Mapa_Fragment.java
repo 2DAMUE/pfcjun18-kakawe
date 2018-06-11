@@ -69,7 +69,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
     //--------------------------------//
 
-    private double longitudAsistente,latitudAsistente;
+    private double longitudAsistente, latitudAsistente;
     private double latitudAsistido;
     private double longitudAsistido;
     private double distancia;
@@ -89,7 +89,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private LatLng actual;
     Integer c;
 
-    BitmapDescriptor marker_shower,marker_car,marker_shopping,marker_coffee,marker_home;
+    BitmapDescriptor marker_shower, marker_car, marker_shopping, marker_coffee, marker_home;
 
 
     //----------Elementos del Vista--------------//
@@ -114,7 +114,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         btn_voluntarioMapa_cerrar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_cerrar);
         btn_voluntarioMapa_navegar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_navegar);
         btn_voluntarioMapa_Llamar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_Llamar);
-
 
 
         correoUser = getArguments().getString("correoUser");
@@ -209,6 +208,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             }
         });
     }
+
     public void cargarAlertasMapa() {
         MapsAPI mapsAPI = new MapsAPI(new respuestaMapa<JSONArray>() {
             @Override
@@ -230,7 +230,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
                         // int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
                         int distancia = 0;
-                        eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia,id_dependiente);
+                        eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia, id_dependiente);
                         datos_alertas.add(eAlertas);
 
 
@@ -272,33 +272,21 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
             double latitudAsistido1 = eAlertas.getLatitud();
             double longitudAsistido1 = eAlertas.getLongitud();
             String tipoAlerta = eAlertas.getNombreAlerta();
+            BitmapDescriptor icono = BitmapDescriptorFactory.fromResource(R.drawable.ic_location);
 
             if (tipoAlerta.equals("aseo")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_shower)).setTag(0);
+                icono = marker_shower;
+            } else if (tipoAlerta.equals("compra")) {
+                icono = marker_shopping;
+            } else if (tipoAlerta.equals("compania")) {
+                icono = marker_coffee;
+            } else if (tipoAlerta.equals("desplazamiento")) {
+                icono = marker_car;
+            } else if (tipoAlerta.equals("hogar")) {
+                icono = marker_home;
             }
 
-            if (tipoAlerta.equals("compra")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_shopping)).setTag(i);
-
-            }
-
-            if (tipoAlerta.equals("compania")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_coffee)).setTag(i);
-            }
-
-            if (tipoAlerta.equals("desplazamiento")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_car)).setTag(i);
-
-            }
-
-            if (tipoAlerta.equals("hogar")) {
-
-                mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(marker_home)).setTag(i);
-            }
+            mGoogleMaps.addMarker(new MarkerOptions().position(new LatLng(latitudAsistido1, longitudAsistido1)).icon(icono)).setTag(i);
 
             mGoogleMaps.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
@@ -320,15 +308,19 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     double distancia = calcularDistancia(latitudAsistido, longitudAsistido);
 
                     tv_voluntarioMapa_nombreAsistido.setText(nombreAsistidoDetalle);
-                    if (tipoAlertaDetalle.equals("aseo")){
+                    if (tipoAlertaDetalle.equals("aseo")) {
                         tipoAlertaDetalle = "Ayuda con aseo";
-                    }if (tipoAlertaDetalle.equals("compra")){
+                    }
+                    if (tipoAlertaDetalle.equals("compra")) {
                         tipoAlertaDetalle = "Ayuda en la compra";
-                    }if (tipoAlertaDetalle.equals("compania")){
+                    }
+                    if (tipoAlertaDetalle.equals("compania")) {
                         tipoAlertaDetalle = "Necesito compañia";
-                    }if (tipoAlertaDetalle.equals("desplazamiento")){
+                    }
+                    if (tipoAlertaDetalle.equals("desplazamiento")) {
                         tipoAlertaDetalle = "Desplazamiento";
-                    }if (tipoAlertaDetalle.equals("hogar")){
+                    }
+                    if (tipoAlertaDetalle.equals("hogar")) {
                         tipoAlertaDetalle = "Ayuda con labores del hogar";
                     }
                     tv_voluntarioMapa_tipoAlerta.setText(tipoAlertaDetalle);

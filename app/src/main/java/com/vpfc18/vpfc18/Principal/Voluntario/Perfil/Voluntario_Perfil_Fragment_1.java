@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
@@ -26,11 +28,13 @@ import org.json.JSONException;
  */
 public class Voluntario_Perfil_Fragment_1 extends Fragment {
 
-    EditText et_perfil_email,et_perfil_telefono,et_perfil_nombre,et_perfil_apellido,et_perfil_sexo,et_perfil_fnacimiento;
-    TextView tv_perfil_modContrasena,tv_perfil_modificarAlertas;
-    Button btn_perfil_actualizarDatos,btn_perfil_cerrarSesion;
+    EditText et_perfil_email, et_perfil_telefono, et_perfil_nombre, et_perfil_apellido, et_perfil_sexo, et_perfil_fnacimiento;
+    TextView tv_perfil_modContrasena;
+    Button btn_perfil_actualizarDatos;
+    ToggleButton btn_perfil_modificar_datos;
 
-    String correoUser,email,emailViejo,nombre,apellido,telefono,sexo,fNacimiento;
+    String correoUser, email, emailViejo, nombre, apellido, telefono, sexo, fNacimiento;
+
     public Voluntario_Perfil_Fragment_1() {
         // Required empty public constructor
     }
@@ -41,16 +45,31 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         View vista = inflater.inflate(R.layout.voluntario_fragment_perfil_principal, container, false);
         correoUser = getArguments().getString("correoUser");
 
-        et_perfil_email = (EditText)vista.findViewById(R.id.et_perfil_email);
-        et_perfil_telefono = (EditText)vista.findViewById(R.id.et_perfil_telefono);
-        et_perfil_nombre = (EditText)vista.findViewById(R.id.et_perfil_nombre);
-        et_perfil_apellido = (EditText)vista.findViewById(R.id.et_perfil_apellido);
-        et_perfil_sexo = (EditText)vista.findViewById(R.id.et_perfil_sexo);
-        et_perfil_fnacimiento = (EditText)vista.findViewById(R.id.et_perfil_fnacimiento);
+        et_perfil_email = (EditText) vista.findViewById(R.id.et_perfil_email);
+        et_perfil_telefono = (EditText) vista.findViewById(R.id.et_perfil_telefono);
+        et_perfil_nombre = (EditText) vista.findViewById(R.id.et_perfil_nombre);
+        et_perfil_apellido = (EditText) vista.findViewById(R.id.et_perfil_apellido);
+        et_perfil_sexo = (EditText) vista.findViewById(R.id.et_perfil_sexo);
+        et_perfil_fnacimiento = (EditText) vista.findViewById(R.id.et_perfil_fnacimiento);
 
         btn_perfil_actualizarDatos = (Button) vista.findViewById(R.id.btn_perfil_actualizarDatos);
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         //tv_perfil_modificarAlertas = (TextView) vista.findViewById(R.id.tv_perfil_modificarAlertas);
+
+
+        btn_perfil_modificar_datos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    habilitarCampos(true);
+                } else if (comprobarCampos()) {
+                    habilitarCampos(false);
+                    actualizarDatosPerfil();
+                }
+            }
+        });
+
+
         tv_perfil_modContrasena.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,16 +80,17 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         btn_perfil_actualizarDatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (comprobarCampos()){
+                if (comprobarCampos()) {
                     //para actualizar el perfil de la bae de datos
                     actualizarDatosPerfil();
-                  }
+                }
             }
         });
         //Carga el perfil de la base de datos
         cargarDatosPerfil();
         return vista;
     }
+
     public void cargarDatosPerfil() {
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
@@ -90,6 +110,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
                     Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Exception e) {
                 Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -97,6 +118,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         });
         auxinetAPI.cargarPerfil(correoUser);
     }
+
     public void actualizarDatosPerfil() {
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
@@ -123,8 +145,20 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
             }
         });
         auxinetAPI.actualizarPerfil(emailViejo, nombre, telefono, email, apellido);
+
     }
-    private boolean comprobarCampos(){
+
+    private void habilitarCampos(Boolean habilitado) {
+        et_perfil_nombre.setEnabled(habilitado);
+        et_perfil_apellido.setEnabled(habilitado);
+        et_perfil_fnacimiento.setEnabled(habilitado);
+        et_perfil_sexo.setEnabled(habilitado);
+        et_perfil_telefono.setEnabled(habilitado);
+        et_perfil_email.setEnabled(habilitado);
+
+    }
+
+    private boolean comprobarCampos() {
         email = et_perfil_email.getText().toString().trim();
         telefono = et_perfil_telefono.getText().toString();
         nombre = et_perfil_nombre.getText().toString();
@@ -132,32 +166,34 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         sexo = et_perfil_sexo.getText().toString();
         fNacimiento = et_perfil_fnacimiento.getText().toString();
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            String a= "Escribe un correo válido";
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            String a = "Escribe un correo válido";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_email.requestFocus();
             return false;
         }
-        if (telefono.isEmpty()){
-            String a= "No puedes dejar el campo teléfono vacio";
+        if (telefono.isEmpty()) {
+            String a = "No puedes dejar el campo teléfono vacio";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_telefono.requestFocus();
             return false;
         }
-        if (apellido.isEmpty()){
+        if (apellido.isEmpty()) {
             apellido = "null";
-        }if (sexo.isEmpty()){
+        }
+        if (sexo.isEmpty()) {
             sexo = "null";
-        }if (fNacimiento.isEmpty()){
+        }
+        if (fNacimiento.isEmpty()) {
             fNacimiento = "null";
         }
         return true;
     }
 
-    private String devolverCorreo(){
-        if (emailViejo.equals(email)){
+    private String devolverCorreo() {
+        if (emailViejo.equals(email)) {
             correoUser = email;
-        }else{
+        } else {
             correoUser = emailViejo;
         }
         return correoUser;
@@ -174,6 +210,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }
+
     private void modificarTiposAyudas() {
         Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_2_TiposAyudas();
         FragmentTransaction t = getFragmentManager().beginTransaction();

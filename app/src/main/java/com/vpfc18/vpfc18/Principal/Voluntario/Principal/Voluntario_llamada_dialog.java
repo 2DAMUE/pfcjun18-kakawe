@@ -7,11 +7,9 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -26,30 +24,23 @@ import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class Voluntario_llamada_dialog extends DialogFragment {
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     TextView tv_nombre_dialogLlamada;
-    Button btn_llamar_dialogLlamada,btn_cancelar_dialogLlamada;
+    Button btn_llamar_dialogLlamada, btn_cancelar_dialogLlamada;
     View vista;
-    String nombre,telefono,correoUser;
+    String nombre, telefono, correoUser;
     int id_alerta;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 
-        Bundle datos=this.getArguments();
+        Bundle datos = this.getArguments();
         nombre = datos.getString("nombre");
         telefono = datos.getString("telefono");
         id_alerta = datos.getInt("id_alerta");
@@ -58,8 +49,8 @@ public class Voluntario_llamada_dialog extends DialogFragment {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        vista = inflater.inflate(R.layout.voluntario_dialog_llamada,null);
-        tv_nombre_dialogLlamada = (TextView)vista.findViewById(R.id.tv_nombre_dialogLlamada);
+        vista = inflater.inflate(R.layout.voluntario_dialog_llamada, null);
+        tv_nombre_dialogLlamada = (TextView) vista.findViewById(R.id.tv_nombre_dialogLlamada);
         btn_llamar_dialogLlamada = (Button) vista.findViewById(R.id.btn_llamar_dialogLlamada);
         btn_cancelar_dialogLlamada = (Button) vista.findViewById(R.id.btn_cancelar_dialogLlamada);
 
@@ -101,11 +92,11 @@ public class Voluntario_llamada_dialog extends DialogFragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
+        switch (requestCode) {
             case REQUEST_CODE_ASK_PERMISSIONS:
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.i("PERMISOS3", "No se tiene permiso para realizar llamadas telefónicas.");
-                  }else{
+                } else {
                     Log.i("PERMISOS4", "No se tiene permiso para realizar llamadas telefónicas.");
                     checkPermission();
                 }
@@ -124,7 +115,7 @@ public class Voluntario_llamada_dialog extends DialogFragment {
     }
 
     public void agregarAsistente() {
-        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
 
             @Override
             public void onSuccess(JSONArray response) {
@@ -136,6 +127,7 @@ public class Voluntario_llamada_dialog extends DialogFragment {
 
             }
         });
-        auxinetAPI.agregarAsistente(correoUser,id_alerta);
+        auxinetAPI.agregarAsistente(correoUser, id_alerta);
     }
+
 }

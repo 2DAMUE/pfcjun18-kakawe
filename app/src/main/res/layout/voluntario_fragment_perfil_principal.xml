@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Principal.Voluntario.Perfil.Voluntario_Perfil_Fragment_1">
+
+
+    <ToggleButton
+        android:id="@+id/btn_perfil_modificar_datos"
+        style="@style/btn_editar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,6 +20,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
+            <ImageView
+                android:id="@+id/iv_foto_perfil"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
+
+
             <View style="@style/low_divider" />
 
             <LinearLayout
@@ -25,21 +38,21 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_nombre"
-                    android:layout_height="match_parent"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="40dp"
                     android:text="Nombre" />
 
                 <EditText
                     android:id="@+id/et_perfil_nombre"
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:gravity="end"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
-                    android:paddingHorizontal="30dp"
+                    android:gravity="end"
+                    android:hint="Nombre"
                     android:inputType="text"
-                    android:hint="Nombre" />
+                    android:paddingHorizontal="30dp" />
 
             </LinearLayout>
 
@@ -52,21 +65,21 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_apellido"
-                    android:layout_height="match_parent"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="40dp"
                     android:text="Apellidos" />
 
                 <EditText
                     android:id="@+id/et_perfil_apellido"
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:gravity="end"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
-                    android:paddingHorizontal="30dp"
+                    android:gravity="end"
+                    android:hint="apellidos"
                     android:inputType="textPersonName"
-                    android:hint="apellidos" />
+                    android:paddingHorizontal="30dp" />
             </LinearLayout>
 
             <View style="@style/divider" />
@@ -78,25 +91,24 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_fnacimiento"
-                    android:layout_height="match_parent"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="40dp"
                     android:text="Fecha de nacimiento" />
 
                 <EditText
                     android:id="@+id/et_perfil_fnacimiento"
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:gravity="end"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
-                    android:paddingHorizontal="30dp"
+                    android:gravity="end"
+                    android:hint="01/01/2001"
                     android:inputType="date"
-                    android:hint="01/01/2001" />
+                    android:paddingHorizontal="30dp" />
             </LinearLayout>
 
             <View style="@style/divider" />
-
 
 
             <LinearLayout
@@ -115,15 +127,17 @@
                 <EditText
                     android:id="@+id/et_perfil_sexo"
                     style="@style/et_perfil"
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:gravity="end"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
-                    android:paddingHorizontal="30dp"
+                    android:gravity="end"
+                    android:hint="sexo"
                     android:inputType="text"
-                    android:hint="sexo"/>
+                    android:paddingHorizontal="30dp" />
             </LinearLayout>
+
             <View style="@style/divider" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -131,21 +145,21 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_telefono"
-                    android:layout_height="match_parent"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="40dp"
                     android:text="Telefono" />
 
                 <EditText
                     android:id="@+id/et_perfil_telefono"
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:gravity="end"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
-                    android:paddingHorizontal="30dp"
+                    android:gravity="end"
+                    android:hint="000 000 000"
                     android:inputType="phone"
-                    android:hint="000 000 000" />
+                    android:paddingHorizontal="30dp" />
 
             </LinearLayout>
 
@@ -158,21 +172,21 @@
 
                 <TextView
                     android:id="@+id/tv_perfil_email"
-                    android:layout_height="match_parent"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="40dp"
                     android:text="Email" />
 
                 <EditText
                     android:id="@+id/et_perfil_email"
-                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:gravity="end"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
-                    android:paddingHorizontal="30dp"
+                    android:gravity="end"
+                    android:hint="nombre@correo.com"
                     android:inputType="textEmailAddress"
-                    android:hint="nombre@correo.com" />
+                    android:paddingHorizontal="30dp" />
             </LinearLayout>
 
             <View style="@style/divider" />
@@ -181,21 +195,10 @@
                 android:id="@+id/tv_perfil_modContrasena"
                 style="@style/submenu_perfil"
                 android:text="Contraseña" />
-            <View style="@style/low_divider" />
-            <Button
-                android:id="@+id/btn_perfil_actualizarDatos"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="guardar" />
 
-            <View style="@style/low_divider" />
+            <View style="@style/divider" />
 
-            <Button
-                android:id="@+id/btn_perfil_cerrarSesion"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Cerrar sesión" />
-            <View style="@style/low_divider" />
+
         </LinearLayout>
     </ScrollView>
 

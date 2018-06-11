@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,23 +19,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/iv_foto_perfil"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/iv_foto_perfil"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher" />
-
-
-            </LinearLayout>
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher" />
 
             <View style="@style/low_divider" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -224,7 +214,7 @@
                 style="@style/submenu_perfil"
                 android:text="Contraseña" />
 
-            <View style="@style/medium_divider" />
+            <View style="@style/divider" />
 
         </LinearLayout>
     </ScrollView>
