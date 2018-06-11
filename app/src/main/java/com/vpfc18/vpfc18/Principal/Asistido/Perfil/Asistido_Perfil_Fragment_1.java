@@ -27,9 +27,6 @@ import com.google.firebase.storage.StorageReference;
 
 import com.google.firebase.storage.UploadTask;
 
-import com.google.firebase.internal.api.FirebaseNoSignedInUserException;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
@@ -67,7 +64,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View vista = inflater.inflate(R.layout.asistido_fragment_perfil_1, container, false);
+        View vista = inflater.inflate(R.layout.asistido_fragment_perfil_principal, container, false);
 
         storageReference = FirebaseStorage.getInstance().getReference();
 

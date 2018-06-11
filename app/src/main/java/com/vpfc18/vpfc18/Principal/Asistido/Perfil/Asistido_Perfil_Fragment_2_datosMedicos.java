@@ -2,12 +2,10 @@ package com.vpfc18.vpfc18.Principal.Asistido.Perfil;
 
 
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,20 +18,10 @@ import android.widget.Toast;
 
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
-import com.vpfc18.vpfc18.Principal.Asistido.Principal.Asistido_Principal_Activity;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,7 +41,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.asistido_fragment_perfil_2, container, false);
+        View vista = inflater.inflate(R.layout.asistido_fragment_perfil_medicos, container, false);
         et_perfil_peso = (EditText)vista.findViewById(R.id.et_perfil_peso);
         et_perfil_alergias = (EditText)vista.findViewById(R.id.et_perfil_alergias);
         et_perfil_altura = (EditText)vista.findViewById(R.id.et_perfil_altura);

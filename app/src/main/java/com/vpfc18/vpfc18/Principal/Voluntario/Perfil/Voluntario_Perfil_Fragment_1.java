@@ -1,12 +1,9 @@
 package com.vpfc18.vpfc18.Principal.Voluntario.Perfil;
 
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,19 +15,10 @@ import android.widget.Toast;
 
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
-import com.vpfc18.vpfc18.Inicio.Inicio_Activity;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 
 /**
@@ -50,7 +38,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.voluntario_fragment_perfil_1, container, false);
+        View vista = inflater.inflate(R.layout.voluntario_fragment_perfil_principal, container, false);
         correoUser = getArguments().getString("correoUser");
 
         et_perfil_email = (EditText)vista.findViewById(R.id.et_perfil_email);

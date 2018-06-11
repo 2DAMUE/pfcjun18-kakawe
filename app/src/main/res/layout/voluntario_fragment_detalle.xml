@@ -1,46 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <View style="@style/low_divider" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/tv_detalle_nombre"
-                android:layout_width = "wrap_content"
-                android:layout_height = "match_parent"
-                android:gravity = "center_vertical"
-                android:paddingHorizontal = "40dp"
-                android:text="Nombre" />
-
-            <EditText
-                android:id="@+id/et_detalle_nombre"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:backgroundTint="@android:color/transparent"
-                android:clickable="false"
-                android:enabled="false"
-                android:gravity="end"
-                android:hint="Nombre"
-                android:inputType="text"
-                android:paddingHorizontal="30dp" />
+                android:layout_height="50dp"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_detalle_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
+                    android:text="Nombre" />
 
-        <View style="@style/divider" />
+                <EditText
+                    android:id="@+id/et_detalle_nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:gravity="end"
+                    android:hint="Nombre"
+                    android:inputType="text"
+                    android:paddingHorizontal="30dp" />
+
+            </LinearLayout>
+
+            <View style="@style/divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,15 +64,15 @@
 
                     <EditText
                         android:id="@+id/et_detalle_altura"
-                        android:layout_width = "match_parent"
-                        android:layout_height = "match_parent"
-                        android:backgroundTint = "@android:color/transparent"
-                        android:gravity = "end"
-                        android:enabled = "false"
-                        android:paddingHorizontal = "30dp"
-                        android:hint="00.0"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@android:color/transparent"
                         android:clickable="false"
-                        android:inputType="numberDecimal" />
+                        android:enabled="false"
+                        android:gravity="end"
+                        android:hint="00.0"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="30dp" />
 
                 </LinearLayout>
 
@@ -91,15 +93,15 @@
 
                     <EditText
                         android:id="@+id/et_detalle_peso"
-                        android:layout_width = "match_parent"
-                        android:layout_height = "match_parent"
-                        android:backgroundTint = "@android:color/transparent"
-                        android:gravity = "end"
-                        android:enabled = "false"
-                        android:paddingHorizontal = "30dp"
-                        android:hint="00.0"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@android:color/transparent"
                         android:clickable="false"
-                        android:inputType="numberDecimal" />
+                        android:enabled="false"
+                        android:gravity="end"
+                        android:hint="00.0"
+                        android:inputType="numberDecimal"
+                        android:paddingHorizontal="30dp" />
                 </LinearLayout>
 
                 <View style="@style/divider" />
@@ -116,17 +118,18 @@
                         android:gravity="center_vertical"
                         android:paddingHorizontal="40dp"
                         android:text="Grupo sanguíneo" />
+
                     <EditText
                         android:id="@+id/et_detalle_gpSanguineo"
-                        android:layout_width = "match_parent"
-                        android:layout_height = "match_parent"
-                        android:backgroundTint = "@android:color/transparent"
-                        android:gravity = "end"
-                        android:enabled = "false"
-                        android:paddingHorizontal = "30dp"
-                        android:hint="Grupo sanguineo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@android:color/transparent"
                         android:clickable="false"
-                        android:inputType="text" />
+                        android:enabled="false"
+                        android:gravity="end"
+                        android:hint="Grupo sanguineo"
+                        android:inputType="text"
+                        android:paddingHorizontal="30dp" />
 
                 </LinearLayout>
 
@@ -147,15 +150,15 @@
 
                     <EditText
                         android:id="@+id/et_detalle_alergias"
-                        android:layout_width = "match_parent"
-                        android:layout_height = "match_parent"
-                        android:backgroundTint = "@android:color/transparent"
-                        android:gravity = "end"
-                        android:enabled = "false"
-                        android:paddingHorizontal = "30dp"
-                        android:hint="Alérgias"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@android:color/transparent"
                         android:clickable="false"
-                        android:inputType="text" />
+                        android:enabled="false"
+                        android:gravity="end"
+                        android:hint="Alérgias"
+                        android:inputType="text"
+                        android:paddingHorizontal="30dp" />
 
                 </LinearLayout>
 
@@ -176,15 +179,15 @@
 
                     <EditText
                         android:id="@+id/et_detalle_medicacion"
-                        android:layout_width = "match_parent"
-                        android:layout_height = "match_parent"
-                        android:backgroundTint = "@android:color/transparent"
-                        android:gravity = "end"
-                        android:enabled = "false"
-                        android:paddingHorizontal = "30dp"
-                        android:hint="Medicación"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@android:color/transparent"
                         android:clickable="false"
-                        android:inputType="text" />
+                        android:enabled="false"
+                        android:gravity="end"
+                        android:hint="Medicación"
+                        android:inputType="text"
+                        android:paddingHorizontal="30dp" />
                 </LinearLayout>
 
                 <View style="@style/divider" />
@@ -204,15 +207,15 @@
 
                     <EditText
                         android:id="@+id/et_detalle_enfermedades"
-                        android:layout_width = "match_parent"
-                        android:layout_height = "match_parent"
-                        android:backgroundTint = "@android:color/transparent"
-                        android:gravity = "end"
-                        android:enabled = "false"
-                        android:paddingHorizontal = "30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@android:color/transparent"
                         android:clickable="false"
+                        android:enabled="false"
+                        android:gravity="end"
                         android:hint="Enfermedades"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:paddingHorizontal="30dp" />
 
                 </LinearLayout>
 
@@ -246,47 +249,42 @@
 
                 </LinearLayout>
 
+                <View style="@style/divider" />
 
             </LinearLayout>
 
 
-        <View style="@style/low_divider" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-
-
-            <Button
-                android:id="@+id/btn_detalle_navegar"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="NAVEGAR" />
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_detalle_llamar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="LLAMAR" />
+                <Button
+                    android:id="@+id/btn_detalle_navegar"
+                    style="@style/btn"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_location"
+                    android:padding="10dp"
+                    android:text="NAVEGAR"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btn_detalle_llamar"
+                    style="@style/btn"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_call"
+                    android:padding="10dp"
+                    android:text="LLAMAR"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+
         </LinearLayout>
-        <View style="@style/divider" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-
-
-            <Button
-                android:id="@+id/btn_detalle_cerrar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="CERRAR DETALLE" />
-        </LinearLayout>
-    </LinearLayout>
-
+    </ScrollView>
 
 </LinearLayout>

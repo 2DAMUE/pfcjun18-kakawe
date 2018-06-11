@@ -4,9 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Principal.Voluntario.Perfil.Voluntario_Perfil_Fragment_3_Contrasena">
+    tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_3_contrasena">
 
-    <View style="@style/low_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_perfil_contrasenaVieja"
+            style="@style/tv_perfil"
+            android:text="Contraseña actual" />
+
+        <EditText
+            android:id="@+id/et_perfil_contrasenaVieja"
+            style="@style/et_perfil"
+            android:inputType="textPassword"
+            android:text="123456" />
+    </LinearLayout>
 
     <View style="@style/low_divider" />
 
@@ -17,19 +33,15 @@
 
         <TextView
             android:id="@+id/tv_perfil_contrasenaNueva"
-            android:layout_height="match_parent"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingHorizontal="40dp"
             android:text="Nueva contraseña" />
 
         <EditText
             android:id="@+id/et_perfil_contrasenaNueva"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="end"
-            android:backgroundTint="@android:color/transparent"
-            android:paddingHorizontal="30dp"
+            style="@style/et_perfil"
             android:inputType="textPassword"
             android:text="123456" />
     </LinearLayout>
@@ -43,40 +55,27 @@
 
         <TextView
             android:id="@+id/tv_perfil_repetirContrasena"
-            android:layout_height="match_parent"
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingHorizontal="40dp"
             android:text="Repetir contraseña" />
 
         <EditText
             android:id="@+id/et_perfil_repetirContrasena"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="end"
-            android:backgroundTint="@android:color/transparent"
-            android:paddingHorizontal="30dp"
+            style="@style/et_perfil"
             android:inputType="textPassword"
             android:text="123456" />
     </LinearLayout>
 
-    <View style="@style/low_divider" />
-
-
-    <Button
-        android:id="@+id/btn_perfil_actualizarDatos"
-        style="@style/btn_editar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Actualizar datos" />
-
     <View style="@style/medium_divider" />
 
+
     <Button
-        android:id="@+id/btn_perfil_atras"
-        style="@style/btn_editar"
+        android:id="@+id/btn_perfil_guardar"
+        style="@style/btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Atras" />
+        android:text="Guardar" />
 
 </LinearLayout>

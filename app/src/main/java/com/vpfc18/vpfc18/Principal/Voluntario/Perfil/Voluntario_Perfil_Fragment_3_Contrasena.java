@@ -36,7 +36,7 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.voluntario_fragment_perfil_3, container, false);
+        View vista = inflater.inflate(R.layout.voluntario_fragment_perfil_contrasena, container, false);
         correoUser = getArguments().getString("correoUser");
 
         et_perfil_contrasenaNueva = (EditText)vista.findViewById(R.id.et_perfil_contrasenaNueva);

@@ -35,7 +35,7 @@ public class Asistido_Perfil_Fragment_3_contrasena extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.asistido_fragment_perfil_3, container, false);
+        View vista = inflater.inflate(R.layout.asistido_fragment_perfil_contrasena, container, false);
         et_perfil_contrasenaVieja = (EditText)vista.findViewById(R.id.et_perfil_contrasenaVieja);
         et_perfil_contrasenaNueva = (EditText)vista.findViewById(R.id.et_perfil_contrasenaNueva);
         et_perfil_repetirContrasena = (EditText)vista.findViewById(R.id.et_perfil_repetirContrasena);

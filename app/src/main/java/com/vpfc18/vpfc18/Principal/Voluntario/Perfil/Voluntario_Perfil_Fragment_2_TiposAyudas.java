@@ -30,7 +30,7 @@ public class Voluntario_Perfil_Fragment_2_TiposAyudas extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.voluntario_fragment_perfil_2, container, false);
+        View vista = inflater.inflate(R.layout.voluntario_fragment_perfil_preferencia, container, false);
         correoUser = getArguments().getString("correoUser");
 
         cbx_tipoayuda_ayuda1 = (CheckBox)vista.findViewById(R.id.cbx_tipoayuda_ayuda1);

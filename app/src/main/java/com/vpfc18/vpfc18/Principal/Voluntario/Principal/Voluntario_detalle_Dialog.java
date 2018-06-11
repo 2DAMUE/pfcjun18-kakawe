@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,10 +15,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
@@ -52,7 +49,7 @@ public class Voluntario_detalle_Dialog extends DialogFragment {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        vista = inflater.inflate(R.layout.voluntario_dialog_detalle,null);
+        vista = inflater.inflate(R.layout.voluntario_fragment_detalle,null);
 
         btn_detalle_cerrar = (Button)vista.findViewById(R.id.btn_detalle_cerrar);
         btn_detalle_llamar = (Button)vista.findViewById(R.id.btn_detalle_llamar);
