@@ -30,7 +30,6 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
 
     EditText et_perfil_email, et_perfil_telefono, et_perfil_nombre, et_perfil_apellido, et_perfil_sexo, et_perfil_fnacimiento;
     TextView tv_perfil_modContrasena;
-    Button btn_perfil_actualizarDatos;
     ToggleButton btn_perfil_modificar_datos;
 
     String correoUser, email, emailViejo, nombre, apellido, telefono, sexo, fNacimiento;
@@ -51,10 +50,8 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         et_perfil_apellido = (EditText) vista.findViewById(R.id.et_perfil_apellido);
         et_perfil_sexo = (EditText) vista.findViewById(R.id.et_perfil_sexo);
         et_perfil_fnacimiento = (EditText) vista.findViewById(R.id.et_perfil_fnacimiento);
-
-        btn_perfil_actualizarDatos = (Button) vista.findViewById(R.id.btn_perfil_actualizarDatos);
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
-        //tv_perfil_modificarAlertas = (TextView) vista.findViewById(R.id.tv_perfil_modificarAlertas);
+        btn_perfil_modificar_datos = (ToggleButton)vista.findViewById(R.id.btn_perfil_modificar_datos) ;
 
 
         btn_perfil_modificar_datos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -74,16 +71,6 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
             @Override
             public void onClick(View v) {
                 modificarContrasena();
-            }
-        });
-
-        btn_perfil_actualizarDatos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (comprobarCampos()) {
-                    //para actualizar el perfil de la bae de datos
-                    actualizarDatosPerfil();
-                }
             }
         });
         //Carga el perfil de la base de datos

@@ -26,7 +26,7 @@ import com.vpfc18.vpfc18.R;
 import org.json.JSONArray;
 
 
-public class Voluntario_llamada_dialog extends DialogFragment {
+public class Voluntario_Llamada_Dialog extends DialogFragment {
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
@@ -43,7 +43,7 @@ public class Voluntario_llamada_dialog extends DialogFragment {
         Bundle datos = this.getArguments();
         nombre = datos.getString("nombre");
         telefono = datos.getString("telefono");
-        id_alerta = datos.getInt("id_alerta");
+        id_alerta = datos.getInt("idAlerta");
         correoUser = datos.getString("correoUser");
 
 
@@ -81,10 +81,9 @@ public class Voluntario_llamada_dialog extends DialogFragment {
                 Toast.makeText(getContext(), "Necesitamos que aceptes los permisos para llamar a las personas que necesitan ayuda!", Toast.LENGTH_LONG).show();
                 Log.i("PERMISOS1", "No se tiene permiso para realizar llamadas telefónicas.");
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, 225);
-
             } else {
-                llamadaTelefonica(telefono);
                 Log.i("PERMISOS2", "Se tiene permiso para realizar llamadas!");
+                llamadaTelefonica(telefono);
             }
         }
         return;
@@ -106,9 +105,10 @@ public class Voluntario_llamada_dialog extends DialogFragment {
     }
 
     public void llamadaTelefonica(String contacto) {
-        agregarAsistente();
+
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + contacto));
+        agregarAsistente();
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
@@ -119,12 +119,12 @@ public class Voluntario_llamada_dialog extends DialogFragment {
 
             @Override
             public void onSuccess(JSONArray response) {
-
+                Log.v("ENTRANDO","ASE");
             }
 
             @Override
             public void onFailure(Exception e) {
-
+                Log.v("ENTRANDO",e.toString());
             }
         });
         auxinetAPI.agregarAsistente(correoUser, id_alerta);

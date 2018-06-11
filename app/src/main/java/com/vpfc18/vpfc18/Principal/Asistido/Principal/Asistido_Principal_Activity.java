@@ -115,6 +115,7 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
                 cargaBotones();
             } else {
                 Log.i("PERMISOS2", "Se tiene permiso para acceder a tu ubicación!");
+                cargaBotones();
             }
         }
         return true;

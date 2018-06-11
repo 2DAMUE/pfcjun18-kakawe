@@ -97,11 +97,13 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
         String nombreAsistido = datos_alertas.get(num).getNombreAsistido();
         String idCorreoAsistido = datos_alertas.get(num).getId_asistente();
         String telefonoAsistido = datos_alertas.get(num).getTelefono();
+        int idAlerta = datos_alertas.get(num).getId_alerta();
         Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
         t.commit();
         Bundle datos = new Bundle();
+        datos.putInt("idAlerta", idAlerta);
         datos.putString("nombreAsistido", nombreAsistido);
         datos.putString("correoUser", correoUser);
         datos.putString("idCorreoAsistido",idCorreoAsistido);

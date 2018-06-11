@@ -25,7 +25,7 @@ import org.json.JSONException;
 public class Asistido_Perfil_Fragment_3_contrasena extends Fragment {
 
     EditText et_perfil_contrasenaVieja,et_perfil_contrasenaNueva,et_perfil_repetirContrasena;
-    Button btn_perfil_actualizar,btn_perfil_atras;
+    Button btn_perfil_actualizar;
     String correoUser,passwordViejo,passwordNuevo,repetirPassword,passwordActual;
 
     public Asistido_Perfil_Fragment_3_contrasena() {
@@ -41,7 +41,6 @@ public class Asistido_Perfil_Fragment_3_contrasena extends Fragment {
         et_perfil_contrasenaNueva = (EditText)vista.findViewById(R.id.et_perfil_contrasenaNueva);
         et_perfil_repetirContrasena = (EditText)vista.findViewById(R.id.et_perfil_repetirContrasena);
         btn_perfil_actualizar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
-        btn_perfil_atras = (Button) vista.findViewById(R.id.btn_perfil_atras);
 
         correoUser = getArguments().getString("correoUser");
         btn_perfil_actualizar.setOnClickListener(new View.OnClickListener() {
@@ -51,12 +50,6 @@ public class Asistido_Perfil_Fragment_3_contrasena extends Fragment {
                     actualizarPassword();
                 }
 
-            }
-        });
-        btn_perfil_atras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                volverAPerfil();
             }
         });
         cargarPassword();

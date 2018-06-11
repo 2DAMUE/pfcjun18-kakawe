@@ -24,7 +24,7 @@ import org.json.JSONException;
 public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
 
     EditText et_perfil_contrasenaVieja,et_perfil_contrasenaNueva,et_perfil_repetirContrasena;
-    Button btn_perfil_actualizarDatos,btn_perfil_atras;
+    Button btn_perfil_actualizarDatos;
     String correoUser,passwordViejo,passwordNuevo,repetirPassword,passwordActual;
 
 
@@ -43,7 +43,6 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
         et_perfil_contrasenaNueva = (EditText)vista.findViewById(R.id.et_perfil_contrasenaNueva);
         et_perfil_repetirContrasena = (EditText)vista.findViewById(R.id.et_perfil_repetirContrasena);
 
-        btn_perfil_atras = (Button) vista.findViewById(R.id.btn_perfil_atras);
         btn_perfil_actualizarDatos = (Button) vista.findViewById(R.id.btn_perfil_actualizarDatos);
         btn_perfil_actualizarDatos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,12 +50,6 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
                 if (comprobarCampos()){
                     actualizarPassword();
                 }
-            }
-        });
-        btn_perfil_atras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                volverAPerfil();
             }
         });
         //cargamos los datos de la contrasena primero

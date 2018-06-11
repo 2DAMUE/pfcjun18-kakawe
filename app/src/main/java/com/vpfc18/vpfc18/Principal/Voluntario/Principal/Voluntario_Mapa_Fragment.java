@@ -9,17 +9,12 @@ import android.graphics.Canvas;
 import android.graphics.drawable.VectorDrawable;
 import android.location.Location;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.text.Layout;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -50,13 +44,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -250,7 +237,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     }
 
     public void cargarDialogLlamada(String nombre1, String telefono1, int id_alerta1) {
-        Voluntario_llamada_dialog vld = new Voluntario_llamada_dialog();
+        Voluntario_Llamada_Dialog vld = new Voluntario_Llamada_Dialog();
         Bundle datos = new Bundle();
         datos.putString("nombre", nombre1);
         datos.putString("telefono", telefono1);

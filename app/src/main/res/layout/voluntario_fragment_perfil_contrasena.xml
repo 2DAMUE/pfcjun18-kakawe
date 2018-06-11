@@ -13,12 +13,20 @@
 
         <TextView
             android:id="@+id/tv_perfil_contrasenaVieja"
-            style="@style/tv_perfil"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="40dp"
             android:text="Contraseña actual" />
 
         <EditText
             android:id="@+id/et_perfil_contrasenaVieja"
-            style="@style/et_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:enabled="false"
+            android:gravity="end"
+            android:paddingHorizontal="30dp"
             android:inputType="textPassword"
             android:text="123456" />
     </LinearLayout>
@@ -40,8 +48,13 @@
 
         <EditText
             android:id="@+id/et_perfil_contrasenaNueva"
-            style="@style/et_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:enabled="false"
+            android:gravity="end"
             android:inputType="textPassword"
+            android:paddingHorizontal="30dp"
             android:hint="Nueva contraseña" />
     </LinearLayout>
 
@@ -62,8 +75,13 @@
 
         <EditText
             android:id="@+id/et_perfil_repetirContrasena"
-            style="@style/et_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:enabled="false"
+            android:gravity="end"
             android:inputType="textPassword"
+            android:paddingHorizontal="30dp"
             android:hint="Repetir contraseña" />
     </LinearLayout>
 
@@ -71,7 +89,7 @@
 
 
     <Button
-        android:id="@+id/btn_perfil_guardar"
+        android:id="@+id/btn_perfil_actualizarDatos"
         style="@style/btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"

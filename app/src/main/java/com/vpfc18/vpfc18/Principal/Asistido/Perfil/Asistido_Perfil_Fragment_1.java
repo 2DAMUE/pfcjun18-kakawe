@@ -2,8 +2,11 @@ package com.vpfc18.vpfc18.Principal.Asistido.Perfil;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -22,7 +25,10 @@ import android.widget.ToggleButton;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -79,7 +85,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         tv_perfil_datosMedicos = (TextView) vista.findViewById(R.id.tv_perfil_datosMedicos);
         tv_perfil_contactos = (TextView) vista.findViewById(R.id.tv_perfil_contactos);
         btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_modificar_datos);
-        btn_perfil_cerrarSesion = (Button) vista.findViewById(R.id.btn_perfil_cerrarSesion);
         iv_foto_perfil = (ImageView) vista.findViewById(R.id.iv_foto_perfil);
         correoUser = getArguments().getString("correoUser");
 
@@ -127,18 +132,21 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
     private void cargarFotoPerfil() {
-        Log.v("Entrada", "1");
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference refGuardar = storage.getReferenceFromUrl("gs://auxi-net.appspot.com/662959149/662959149");
-        Log.v("refGuardar", refGuardar.toString());
-            Log.v("Entrada", "2");
-        if (refGuardar.getName().isEmpty()) {
-        } else {
-            Glide.with(getContext())
-                    .load(refGuardar)
-                    .into(iv_foto_perfil);
-            Log.v("refGuardar2", refGuardar.toString());
-        }
+        Log.v("dentro1","ERRORAZO");
+            final StorageReference stor = FirebaseStorage.getInstance().getReference().child("662959149").child("662959149");
+        Log.v("dentro2",stor.toString());
+            final long ONE_MEGABYTE = 1024 * 1024;
+            stor.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Log.v("dentro3",task + "");
+                    Uri fotobajada = task.getResult();
+                    Log.v("dentro4",fotobajada + "");
+                    Glide.with(getActivity())
+                            .load(fotobajada)
+                            .into(iv_foto_perfil);
+                }
+            });
     }
 
     @Override
@@ -154,9 +162,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
     private void subirFoto() {
-        Log.v("telefono2" , telefono);
         StorageReference rutaCarpetaImg = storageReference.child(telefono).child(telefono);
-        Log.v("ruta",rutaCarpetaImg + "");
         rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

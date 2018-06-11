@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.vpfc18.vpfc18.Entidades.Datos_Alertas;
 
+import com.vpfc18.vpfc18.Principal.Voluntario.Principal.Voluntario_Llamada_Dialog;
 import com.vpfc18.vpfc18.R;
 
 
@@ -119,7 +120,7 @@ public class LVAdapterAlertas implements ListAdapter {
     }
 
     public void cargarDialogLlamada(String nombre, String telefono, int id_alerta) {
-        Voluntario_llamada_dialog vld = new Voluntario_llamada_dialog();
+        Voluntario_Llamada_Dialog vld = new Voluntario_Llamada_Dialog();
         Bundle datos = new Bundle();
         datos.putString("nombre", nombre);
         datos.putString("telefono", telefono);
