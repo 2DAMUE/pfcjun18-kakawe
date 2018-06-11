@@ -133,9 +133,9 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     private void cargarFotoPerfil() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference refGuardar = storage.getReferenceFromUrl("gs://auxi-net.appspot.com").child(correoUser).child(correoUser);
+
         Log.v("refGuardar", refGuardar.toString());
         if (refGuardar.getName().isEmpty()) {
-
         } else {
             Log.v("Entrada", "2");
             Glide.with(this).using(new FirebaseImageLoader())
@@ -160,11 +160,13 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     private void subirFoto() {
         //
         StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(correoUser);
+        Log.v("ruta",rutaCarpetaImg + "");
         rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 //descargar imagen de firebase
                 Uri descargarFoto = taskSnapshot.getDownloadUrl();
+                Log.v("ruta2",descargarFoto + "");
                 Glide.with(getActivity())
                         .load(descargarFoto)
                         .into(btn_foto_perfil);
