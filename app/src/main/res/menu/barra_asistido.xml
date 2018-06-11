@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/cerrarSesion"
-        android:icon="@drawable/ic_notificacion"
+        android:icon="@drawable/ic_cerrarsesion"
         android:title="Cerrar sesion"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>
