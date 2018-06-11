@@ -128,7 +128,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         });
         cargarDatosPerfil();
         return vista;
-
     }
 
     private void cargarFotoPerfil() {
@@ -139,9 +138,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
             stor.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    Log.v("dentro3",task + "");
                     Uri fotobajada = task.getResult();
-                    Log.v("dentro4",fotobajada + "");
                     Glide.with(getActivity())
                             .load(fotobajada)
                             .into(iv_foto_perfil);
@@ -175,23 +172,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
             }
         });
-
-
-        /*StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(correoUser);
-        //subimos la imagen y verificamos mediante un toast que se subio la foto
-        rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //descargar imagen de firebase
-                Uri descargarFoto = taskSnapshot.getDownloadUrl();
-                Glide.with(getActivity())
-                        .load(descargarFoto)
-                        .into(iv_foto_perfil);
-
-                Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
-            }
-        });
-        */
     }
 
     private void habilitarCampos(Boolean habilitado) {
