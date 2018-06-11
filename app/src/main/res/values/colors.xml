@@ -17,5 +17,6 @@
     <color name="black">#000000</color>
     <color name="azulAuxinet">#155889</color>
     <color name="verdeAuxinet">#00CB79</color>
+    <color name="negro_trans">#40000000 </color>
 
 </resources>

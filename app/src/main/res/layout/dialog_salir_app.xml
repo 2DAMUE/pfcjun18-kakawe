@@ -18,14 +18,14 @@
         <Button
             android:id="@+id/btn_dialog_salir"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/btn"
             android:layout_weight="1"
             android:text="Salir" />
 
         <Button
             android:id="@+id/btn_dialog_cancelar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/btn"
             android:layout_weight="1"
             android:text="Cancelar" />
     </LinearLayout>

@@ -2,20 +2,13 @@ package com.vpfc18.vpfc18.Adaptadores;
 
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.database.DataSetObserver;
 import android.location.Location;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -98,7 +91,7 @@ public class LVAdapterAlertas implements ListAdapter {
 
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View view = inflater.inflate(R.layout.vista_lista_alertas, parent, false);
+        View view = inflater.inflate(R.layout.voluntario_vista_alerta, parent, false);
 
         TextView tv_vista_alertas_nombreAsistido = (TextView) view.findViewById(R.id.tv_vista_alertas_nombreAsistido);
         TextView tv_vista_alertas_tipoAlerta = (TextView) view.findViewById(R.id.tv_vista_alertas_tipoAlerta);

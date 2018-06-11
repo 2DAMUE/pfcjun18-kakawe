@@ -110,17 +110,6 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/btn_contacto1"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_contact"
-                    app:civ_border_color="#EEEEEE"
-                    app:civ_border_width="0dp"
-                    app:civ_shadow="false" />
-
                 <TextView
                     android:id="@+id/tv_contacto1_nombre"
                     android:layout_width="wrap_content"
@@ -165,6 +154,17 @@
                     android:textSize="24dp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/btn_contacto1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_contact"
+                app:civ_border_color="#EEEEEE"
+                app:civ_border_width="0dp"
+                app:civ_shadow="false" />
         </FrameLayout>
     </LinearLayout>
 

@@ -8,7 +8,6 @@
 
     <ToggleButton
         android:id="@+id/btn_perfil_modificar_datos"
-
         style="@style/btn_editar" />
 
     <ScrollView

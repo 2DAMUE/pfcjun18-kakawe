@@ -19,7 +19,7 @@
         android:backgroundTint="@color/azulAuxinet"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-s
+
         <com.mikhaellopez.circularimageview.CircularImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
