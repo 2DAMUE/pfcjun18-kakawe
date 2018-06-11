@@ -6,7 +6,7 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".Principal.Voluntario.Principal.Voluntario_llamada_dialog">
+    tools:context=".Principal.Voluntario.Principal.Voluntario_Llamada_Dialog">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,19 +43,15 @@
         <Button
             android:id="@+id/btn_llamar_dialogLlamada"
             style="@style/btn"
-            android:layout_width="match_parent"
+            android:layout_width="135dp"
             android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:paddingHorizontal="20dp"
             android:text="Llamar" />
 
         <Button
             android:id="@+id/btn_cancelar_dialogLlamada"
             style="@style/btn"
-            android:layout_width="match_parent"
+            android:layout_width="135dp"
             android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:paddingHorizontal="20dp"
             android:text="Cancelar" />
     </LinearLayout>
 

@@ -19,8 +19,7 @@
         <EditText
             android:id="@+id/et_perfil_contrasenaVieja"
             style="@style/et_perfil"
-            android:inputType="textPassword"
-            android:text="123456" />
+            android:inputType="textPassword" />
     </LinearLayout>
 
     <View style="@style/low_divider" />
@@ -41,8 +40,7 @@
         <EditText
             android:id="@+id/et_perfil_contrasenaNueva"
             style="@style/et_perfil"
-            android:inputType="textPassword"
-            android:hint="Nueva contraseña" />
+            android:inputType="textPassword" />
     </LinearLayout>
 
     <View style="@style/divider" />
@@ -63,15 +61,14 @@
         <EditText
             android:id="@+id/et_perfil_repetirContrasena"
             style="@style/et_perfil"
-            android:inputType="textPassword"
-            android:hint="Repetir contraseña" />
+            android:inputType="textPassword" />
     </LinearLayout>
 
     <View style="@style/medium_divider" />
 
 
     <Button
-        android:id="@+id/btn_perfil_guardar"
+        android:id="@+id/btn_perfil_actualizarDatos"
         style="@style/btn"
         android:layout_width="match_parent"
         android:layout_height="50dp"

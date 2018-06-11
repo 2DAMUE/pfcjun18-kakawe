@@ -1,4 +1,4 @@
-package com.vpfc18.vpfc18.Principal.Asistido.Principal.Dialog_Tipos_Ayudas;
+package com.vpfc18.vpfc18.Principal.Asistido.Principal;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,18 +7,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.mikhaellopez.circularimageview.CircularImageView;
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
 
-public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
+public class Asistido_Dialog_Tipos_Ayuda extends DialogFragment {
 
     LinearLayout btn_ayuda1, btn_ayuda2, btn_ayuda3, btn_ayuda4, btn_ayuda5;
 
@@ -31,7 +29,7 @@ public class Asistido_Dialog_Tipo_Ayudas extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View vista = inflater.inflate(R.layout.asistido_dialog_tipos_ayudas, null);
+        View vista = inflater.inflate(R.layout.asistido_dialog_tipos_ayuda, null);
 
 
 

@@ -26,7 +26,7 @@ import com.vpfc18.vpfc18.R;
 import org.json.JSONArray;
 
 
-public class Voluntario_llamada_dialog extends DialogFragment {
+public class Voluntario_Llamada_Dialog extends DialogFragment {
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 

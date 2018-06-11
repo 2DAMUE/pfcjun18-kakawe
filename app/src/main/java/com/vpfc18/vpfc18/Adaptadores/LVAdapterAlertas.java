@@ -118,6 +118,7 @@ public class LVAdapterAlertas implements ListAdapter {
 
     }
 
+    
     public void cargarDialogLlamada(String nombre, String telefono, int id_alerta) {
         Voluntario_llamada_dialog vld = new Voluntario_llamada_dialog();
         Bundle datos = new Bundle();

@@ -3,32 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".Principal.Salir_App_Dialog">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿Realmente quieres salir de la aplicacion?" />
+        android:gravity="center"
+        android:text="¿Seguro que deseas cerrar sesión?"
+        android:textSize="18sp" />
+
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_dialog_salir"
             style="@style/btn"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
+            android:layout_width="135dp"
+            android:layout_marginRight="5dp"
             android:text="Salir" />
 
         <Button
             android:id="@+id/btn_dialog_cancelar"
             style="@style/btn"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
+            android:layout_width="135dp"
+            android:layout_marginLeft="5dp"
             android:text="Cancelar" />
     </LinearLayout>
 
