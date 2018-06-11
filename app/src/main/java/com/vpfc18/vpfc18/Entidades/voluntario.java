@@ -10,6 +10,8 @@ public class voluntario {
     public voluntario() {
     }
 
+
+
     public voluntario(String nombre, String correo, String contrasena, int telefono) {
         this.nombre = nombre;
         this.correo = correo;

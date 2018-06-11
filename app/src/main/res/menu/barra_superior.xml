@@ -6,4 +6,9 @@
         android:icon="@drawable/ic_notificacion"
         android:title="busqueda"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/cerrarSesion"
+        android:icon="@drawable/ic_notificacion"
+        android:title="Cerrar sesion"
+        app:showAsAction="never" />
 </menu>

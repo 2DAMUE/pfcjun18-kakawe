@@ -13,10 +13,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by eloy on 2/6/18.
- */
-
 
 public class AuxinetAPI extends AsyncTask<String, Void, String> {
 
@@ -24,7 +20,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
 
     private OnResponseListener callBack;
     public Exception exception;
-
 
     public AuxinetAPI(OnResponseListener<JSONArray> callBack) {
         this.callBack = callBack;
@@ -39,7 +34,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         }
         return null;
     }
-
 
     @Override
     protected void onPostExecute(String result) {
@@ -56,7 +50,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
             }
         }
     }
-
 
     private String downloadUrl(String myurl) throws IOException {
         myurl = myurl.replace(" ", "%20");
@@ -84,7 +77,6 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         }
     }
 
-
     public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
         Reader reader = null;
         reader = new InputStreamReader(stream, "UTF-8");
@@ -93,13 +85,11 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         return new String(buffer);
     }
 
-
     public void nuevaAlerta(String usuario, String tipoAlerta, String latitud, String longitud) {
         String metodo = "GenerarAlertasApp.php?";
         String parametros = "correo=" + usuario + "&nombreAlerta=" + tipoAlerta + "&latitud=" + latitud + "&longitud=" + longitud;
         this.execute(APIUrl + metodo + parametros);
     }
-
 
     public void cargarPerfil(String usuario) {
         String metodo = "DatosPerfilApp.php?";
@@ -107,13 +97,84 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         this.execute(APIUrl + metodo + parametros);
     }
 
-
     public void actualizarPerfil(String emailViejo, String nombre, String telefono, String email, String apellido) {
         String metodo = "ActualizarPerfilApp.php?";
         String parametros = "correoV=" + emailViejo + "&nombre=" + nombre + "&telefono=" + telefono + "&correoN=" + email + "&apellido=" + apellido;
         this.execute(APIUrl + metodo + parametros);
     }
 
+    public void cargarContactos(String usuario,String contacto){
+        String parametros = "correo=" + usuario;
+        if (contacto.equals("contacto1")){
+            String metodo = "CargarContacto1App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }else{
+            String metodo = "CargarContacto2App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }
+    }
+
+    public void guardarContactos(String usuario, String contacto,String nombre,String telefono){
+        String parametros = "correo=" + usuario+"&nombre="+nombre
+                +"&telefono="+telefono;
+        if (contacto.equals("contacto1")){
+            String metodo = "ActualizarContacto1App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }else{
+            String metodo = "ActualizarContacto2App.php?";
+            this.execute(APIUrl + metodo + parametros);
+        }
+    }
+
+    public void loguearUsuario(String usuario,String password){
+        String metodo = "LoginApp.php?";
+        String parametros = "correo=" + usuario + "&password=" + password;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void registrarUsuario(String usuario,String password,String nombre,String telefono,String tipoUsuario){
+        String metodo = "RegistroApp.php?";
+        String parametros = "correo="+usuario+"&password="+password+"&nombre="+nombre+"&telefono="+telefono+"&usuario="+tipoUsuario;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void cargarDatosMedicos(String usuario){
+        String metodo = "DatosMedicosDependienteApp.php?";
+        String parametros = "correo="+usuario;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void actualizarDatosMedicos(String correo,String peso,String altura,String gpSanguineo,String alergias,String medicacion,String nMedicas,String enfermedades){
+        String metodo = "ActualizarDatosMedicosApp.php?";
+        String parametros = "correo="+correo+"&peso="+peso+"&altura="+altura+"&grSanguineo="
+                +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion+"&notasMedicas="
+                +nMedicas+"&enfermedades="+enfermedades;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void cargarContrasena(String usuario){
+        String metodo = "CargarContrasenaApp.php?";
+        String parametros = "correo="+usuario;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void modificarContrasena(String usuario, String password){
+        String metodo = "ModificarContrasenaApp.php?";
+        String parametros = "correo="+usuario+"&password="+password;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void agregarAsistente(String usuario,int id_alerta){
+        String metodo = "ModificarAlertasApp.php?";
+        String parametros = "correo="+usuario+"&idAlerta="+id_alerta;
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void cargarDM(String id_correoAsistido){
+        String metodo = "CargarDmApp.php?";
+        String parametros = "id_usuario="+id_correoAsistido;
+        this.execute(APIUrl +  metodo + parametros);
+    }
 
 }
 

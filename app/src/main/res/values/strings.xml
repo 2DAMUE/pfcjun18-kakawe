@@ -21,6 +21,8 @@
         <item>Femenino</item>
 
     </string-array>
+    <string name="title_activity_prueba">PruebaActivity</string>
+    <string name="resume">resume</string>
 
 
 </resources>

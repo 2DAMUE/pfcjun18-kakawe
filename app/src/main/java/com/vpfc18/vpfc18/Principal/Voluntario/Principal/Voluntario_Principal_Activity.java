@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.vpfc18.vpfc18.Entidades.Datos_Alertas;
+import com.vpfc18.vpfc18.Principal.Salir_App_Dialog;
 import com.vpfc18.vpfc18.Principal.Voluntario.Perfil.Voluntario_Perfil_Fragment;
 import com.vpfc18.vpfc18.R;
 
@@ -47,6 +49,7 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
     int contador=0;
     int perfil = 0;
     int STORAGE_PERMISSION_CODE=2;
+    private static final int REQUEST_FINE_LOCATION = 11;
     String correoUser;
     ArrayList<Datos_Alertas> datos_alertas;
     @SuppressLint("NewApi")
@@ -59,7 +62,10 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         voluntario_principal_toolbar =(android.support.v7.widget.Toolbar) findViewById(R.id.voluntario_principal_toolbar);
         setSupportActionBar(voluntario_principal_toolbar);
         voluntario_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
-        cargaMapa();
+        if (checkPermissions()){
+            cargaMapa();
+        }
+
         voluntario_principal_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +77,34 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
 
             }
         });
+    }
+    private boolean checkPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            requestPermissions();
+            return false;
+        }
+    }
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                REQUEST_FINE_LOCATION);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_FINE_LOCATION: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    cargaMapa();
+                } else {
+                }
+            }
+        }
     }
 
     //Para poder colocar el menu en la action bar, tenemos que añadir este método e inflar el recurso
@@ -87,16 +121,26 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
                     contador=1;
                     item.setIcon(R.drawable.ic_map);
                     cargaLista();
+                    break;
                 }else{
                     contador=0;
                     item.setIcon(R.drawable.ic_notificacion);
                     cargaMapa();
+                    break;
                 }
-                return true;
+            case R.id.cerrarSesion:
+                mensajeSalir();
             default:
-                return super.onOptionsItemSelected(item);
+
         }
+        return super.onOptionsItemSelected(item);
     }
+
+    private void mensajeSalir() {
+        Salir_App_Dialog vld = new Salir_App_Dialog();
+        vld.show(getFragmentManager(), "Salir");
+    }
+
 
     private void cargaMapa(){
         perfil=0;
@@ -114,11 +158,6 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         perfil=0;
         voluntario_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
         getSupportActionBar().setTitle("Listado eventos");
-
-        //Voluntario_Mapa_Fragment vmf = new Voluntario_Mapa_Fragment();
-        //double latitudAsistente = vmf.getLatitudAsistente();
-       // double longitudAsistente = vmf.getLongitudAsistente();
-
         Fragment fragmentoSeleccionado = new Voluntario_Listado_Fragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction t = fm.beginTransaction();
@@ -126,8 +165,6 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         t.commit();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
-        //datos.putDouble("latitudAsistente",latitudAsistente);
-        //datos.putDouble("longitudAsistente",longitudAsistente);
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargaPerfil(){
@@ -163,7 +200,7 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         }
         return;
     }
-    @Override
+    /*@Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == STORAGE_PERMISSION_CODE)  {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -172,7 +209,7 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
 
             }
         }
-    }
+    }*/
     public void gohome(){
         Thread t = new Thread(){
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

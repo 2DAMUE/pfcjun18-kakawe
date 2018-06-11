@@ -7,13 +7,17 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +30,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.vpfc18.vpfc18.Adaptadores.LVAdapterAlertas;
+import com.vpfc18.vpfc18.Base_de_datos.MapsAPI;
+import com.vpfc18.vpfc18.Base_de_datos.respuestaMapa;
+import com.vpfc18.vpfc18.Controlador.Comunicador;
 import com.vpfc18.vpfc18.Entidades.Datos_Alertas;
 import com.vpfc18.vpfc18.R;
 
@@ -45,17 +52,25 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyCallback{
 
+    Comunicador comunicador = new Comunicador();
+    LVAdapterAlertas adaptador;
+    private String correoUser;
+    ListView lv_lista_voluntario_listado;
+    private double longitudAsistente;
+    private double latitudAsistente;
+    private LatLng actual;
+
+    ArrayList<Datos_Alertas> datos_alertas;
+    Datos_Alertas eAlertas = new Datos_Alertas();
+
+    View mView;
     private GoogleMap mGoogleMaps;
     private MapView mMapView;
+    private Boolean salir = false;
 
-    private String correoUser;
-    private ArrayList<Datos_Alertas> lista_alertas = new ArrayList<>();
-    ListView lv_lista_voluntario_listado;
-    Cargar_Alertas Carga_Alertas = new Cargar_Alertas();
-    double latitudAsistente;
-    double longitudAsistente;
     public Voluntario_Listado_Fragment() {
         // Required empty public constructor
     }
@@ -64,43 +79,62 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.voluntario_fragment_listado_, container, false);
+        mView = inflater.inflate(R.layout.voluntario_fragment_listado_, container, false);
 
         correoUser = getArguments().getString("correoUser");
-        lv_lista_voluntario_listado = (ListView)vista.findViewById(R.id.lv_lista_voluntario_listado);
-        cargar();
-
-        return vista;
-    }
-    public void cargar() {
-        Thread t = new Thread() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+        lv_lista_voluntario_listado = (ListView) mView.findViewById(R.id.lv_lista_voluntario_listado);
+        lv_lista_voluntario_listado.setClickable(true);
+        lv_lista_voluntario_listado.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void run() {
-                try {
-                    sleep(700);
-                } catch (Exception e) {
-
-                } finally {
-                    cargarAlertas();
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                verAsistido(position);
             }
-        };
-        t.start();
+        });
+        return mView;
+    }
+    public void verAsistido(int num){
+        String nombreAsistido = datos_alertas.get(num).getNombreAsistido();
+        String idCorreoAsistido = datos_alertas.get(num).getId_asistente();
+        String telefonoAsistido = datos_alertas.get(num).getTelefono();
+        Voluntario_detalle_Dialog vld = new Voluntario_detalle_Dialog();
+        Bundle datos = new Bundle();
+        Log.v("idCorreoAsistido",idCorreoAsistido);
+        datos.putString("nombreAsistido", nombreAsistido);
+        datos.putString("correoUser", correoUser);
+        datos.putString("idCorreoAsistido",idCorreoAsistido);
+        datos.putString("telefonoAsistido",telefonoAsistido);
+        vld.setArguments(datos);
+        vld.show(getActivity().getFragmentManager(), "dialog");
     }
 
-    private void cargarAlertas() {
-        Carga_Alertas.execute("http://37.187.198.145/llamas/App/CargarAlertasApp.php");
-    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mMapView = (MapView) mView.findViewById(R.id.map);
+        mMapView.setVisibility(View.INVISIBLE);
+        if (mMapView != null) {
+            mMapView.onCreate(null);
+            mMapView.onResume();
+            mMapView.getMapAsync(this);
+        }
 
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
 
         mGoogleMaps = googleMap;
+        mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mGoogleMaps.clear();
+        mGoogleMaps.getUiSettings().setMyLocationButtonEnabled(true);
+        mGoogleMaps.getUiSettings().setMapToolbarEnabled(false);
+        mGoogleMaps.getUiSettings().setZoomControlsEnabled(true);
+
+        mMapView.setVisibility(View.INVISIBLE);
 
         setMyLocationEnabled();
+
     }
 
     private void setMyLocationEnabled() {
@@ -108,113 +142,65 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mMapView.setVisibility(View.VISIBLE);
+        mMapView.setVisibility(View.INVISIBLE);
         mGoogleMaps.setMyLocationEnabled(true);
-
         mGoogleMaps.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
             public void onMyLocationChange(Location location) {
-
-                latitudAsistente = location.getLatitude();
-                longitudAsistente = location.getLongitude();
-
+                if (salir == false) {
+                    //------------posicion de mi marcador--------------//
+                    latitudAsistente = location.getLatitude();
+                    longitudAsistente = location.getLongitude();
+                    actual = new LatLng(latitudAsistente, longitudAsistente);
+                    salir = true;
+                    cargarAlertasMapa();
+                }
             }
         });
     }
 
+    public void cargarAlertasMapa() {
+        MapsAPI mapsAPI = new MapsAPI(new respuestaMapa<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray response) {
+                datos_alertas = null;
+
+                datos_alertas = new ArrayList<>();
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+
+                        JSONObject object = response.getJSONObject(i);
+                        String id_dependiente = object.getString("id_dependiente");
+                        int id_alerta = object.getInt("id_alerta");
+                        String nombreAsistidoDetalle = object.getString("nombre");
+                        double latitudAsistido = object.getDouble("latitud");
+                        double longitudAsistido = object.getDouble("longitud");
+                        String telefono = object.getString("telefono");
+                        String tipoAlerta = object.getString("nombreAlerta");
+
+                        // int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
+                        int distancia = 0;
+                        eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia,id_dependiente);
+                        datos_alertas.add(eAlertas);
 
 
-    public class Cargar_Alertas extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
-                return downloadUrl(strings[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-        }
-
-        @Override
-        protected void onPostExecute(String resultado) {
-            lista_alertas = new ArrayList<>();
-            try {
-                JSONArray listadoAlertas = new JSONArray(resultado);
-                for (int i = 0; i < listadoAlertas.length(); i++) {
-                    JSONObject object = listadoAlertas.getJSONObject(i);
-                    int id_alerta = object.getInt("id_alerta");
-                    String nombreDependiente = object.getString("nombre");
-                    String tipoAlerta = object.getString("nombreAlerta");
-                    double latitudAsistido = object.getDouble("latitud");
-                    double longitudAsistido = object.getDouble("longitud");
-                    String telefono = object.getString("telefono");
-
-                    //metodo para calcular la distancia entre posicion actual y la ubicacion de la alerta
-                    double distancia = calcularDistancia(latitudAsistido,longitudAsistido);
-                    Datos_Alertas eAlertas = new Datos_Alertas(id_alerta,nombreDependiente, latitudAsistido, longitudAsistido,telefono,tipoAlerta,distancia);
-                    lista_alertas.add(eAlertas);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } finally {
+                        //posicionAsistidos();
+                    }
                 }
-                LVAdapterAlertas adaptador = new LVAdapterAlertas(lista_alertas,getContext(),getActivity().getFragmentManager(),correoUser);
+                adaptador = new LVAdapterAlertas(datos_alertas, getContext(), getActivity().getFragmentManager(), correoUser,latitudAsistente,longitudAsistente);
                 lv_lista_voluntario_listado.setAdapter(adaptador);
-            } catch (JSONException e) {
-                Toast.makeText(getContext(), "No hay datos de alertas", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
+
             }
-        }
-    }
 
-    private double calcularDistancia(double latitudAsistido, double longitudAsistido) {
-        double distancia = 0;
-
-        Location asistente = new Location("puntoA");
-        Location asistido = new Location("puntoA");
-
-        asistente.setLatitude(latitudAsistente);
-        asistente.setLongitude(longitudAsistente);
-        asistido.setLatitude(latitudAsistido);
-        asistido.setLongitude(longitudAsistido);
-
-        distancia = asistente.distanceTo(asistido);
-
-        return distancia;
-    }
-
-    private String downloadUrl(String myurl) throws IOException {
-        myurl = myurl.replace(" ", "%20");
-        InputStream is = null;
-        int len = 100000;
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(10000 /* milliseconds */);
-            conn.setConnectTimeout(15000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            conn.connect();
-            int response = conn.getResponseCode();
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-        } finally {
-            if (is != null) {
-                is.close();
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }
+        });
+        mapsAPI.cargarAlertas();
     }
-
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
-    }
-
 }

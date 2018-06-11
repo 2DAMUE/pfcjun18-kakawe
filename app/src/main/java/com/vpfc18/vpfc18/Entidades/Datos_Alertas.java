@@ -9,11 +9,12 @@ public class Datos_Alertas {
     private String telefono;
     private String nombreAlerta;
     private double distancia;
+    private String id_asistente;
 
     public Datos_Alertas() {
     }
 
-    public Datos_Alertas(int id_alerta, String nombreAsistido, double latitud, double longitud, String telefono, String nombreAlerta, double distancia) {
+    public Datos_Alertas(int id_alerta, String nombreAsistido, double latitud, double longitud, String telefono, String nombreAlerta, double distancia, String id_asistente) {
         this.id_alerta = id_alerta;
         this.nombreAsistido = nombreAsistido;
         this.latitud = latitud;
@@ -21,6 +22,7 @@ public class Datos_Alertas {
         this.telefono = telefono;
         this.nombreAlerta = nombreAlerta;
         this.distancia = distancia;
+        this.id_asistente = id_asistente;
     }
 
     public int getId_alerta() {
@@ -79,16 +81,25 @@ public class Datos_Alertas {
         this.distancia = distancia;
     }
 
+    public String getId_asistente() {
+        return id_asistente;
+    }
+
+    public void setId_asistente(String id_asistente) {
+        this.id_asistente = id_asistente;
+    }
+
     @Override
     public String toString() {
         return "Datos_Alertas{" +
                 "id_alerta=" + id_alerta +
                 ", nombreAsistido='" + nombreAsistido + '\'' +
                 ", latitud=" + latitud +
-                ", logitud=" + longitud +
+                ", longitud=" + longitud +
                 ", telefono='" + telefono + '\'' +
                 ", nombreAlerta='" + nombreAlerta + '\'' +
                 ", distancia=" + distancia +
+                ", id_asistente='" + id_asistente + '\'' +
                 '}';
     }
 }

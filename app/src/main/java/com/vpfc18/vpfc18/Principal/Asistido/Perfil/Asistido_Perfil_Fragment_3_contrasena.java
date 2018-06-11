@@ -9,8 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
+import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 
 /**
@@ -20,8 +26,8 @@ public class Asistido_Perfil_Fragment_3_contrasena extends Fragment {
 
     EditText et_perfil_contrasenaVieja,et_perfil_contrasenaNueva,et_perfil_repetirContrasena;
     Button btn_perfil_actualizar,btn_perfil_atras;
+    String correoUser,passwordViejo,passwordNuevo,repetirPassword;
 
-    String correoUser;
     public Asistido_Perfil_Fragment_3_contrasena() {
         // Required empty public constructor
     }
@@ -40,7 +46,10 @@ public class Asistido_Perfil_Fragment_3_contrasena extends Fragment {
         btn_perfil_actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actualizarDatos();
+                if (comprobarCampos()){
+                    actualizarPassword();
+                }
+
             }
         });
         btn_perfil_atras.setOnClickListener(new View.OnClickListener() {
@@ -49,12 +58,85 @@ public class Asistido_Perfil_Fragment_3_contrasena extends Fragment {
                 volverAPerfil();
             }
         });
+        cargarPassword();
         return vista;
     }
-    private void actualizarDatos(){
+    private void actualizarPassword(){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
 
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    String contra = respuesta.getString(0);
+                    if (contra.equals(passwordNuevo)){
+                        et_perfil_contrasenaVieja.setText(respuesta.getString(0));
+                        Toast.makeText(getContext(), "Contrasena actualizada con exito", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getContext(), "Fallo al actualizar la contrasena", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+        auxinetAPI.modificarContrasena(correoUser,passwordNuevo);
+    }
+    private void cargarPassword(){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
+
+            @Override
+            public void onSuccess(JSONArray respuesta) {
+                try {
+                    et_perfil_contrasenaVieja.setText(respuesta.getString(0));
+                } catch (JSONException e) {
+                    Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+        auxinetAPI.cargarContrasena(correoUser);
     }
 
+    private boolean comprobarCampos(){
+        passwordViejo = et_perfil_contrasenaVieja.getText().toString().trim();
+        passwordNuevo = et_perfil_contrasenaNueva.getText().toString();
+        repetirPassword = et_perfil_repetirContrasena.getText().toString();
+
+        if (passwordViejo.isEmpty()){
+            String a= "No puedes dejar el campo contraseña actual vacio";
+            Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+            et_perfil_contrasenaVieja.requestFocus();
+            return false;
+        }if (passwordNuevo.isEmpty()){
+            String a= "No puedes dejar el campo contraseña nueva vacio";
+            Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+            et_perfil_contrasenaNueva.requestFocus();
+            return false;
+        }if (repetirPassword.isEmpty()){
+            String a= "No puedes dejar el campo repetir contraseña vacio";
+            Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+            et_perfil_repetirContrasena.requestFocus();
+            return false;
+        }if (!passwordNuevo.equals(repetirPassword)){
+            String a= "Las contraseás deben coincidir";
+            Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+            et_perfil_repetirContrasena.requestFocus();
+            return false;
+        }
+        return true;
+    }
     private void volverAPerfil() {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_1();
         FragmentTransaction t = getFragmentManager().beginTransaction();
