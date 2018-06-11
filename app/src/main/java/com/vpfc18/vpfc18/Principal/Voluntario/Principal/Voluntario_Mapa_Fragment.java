@@ -345,7 +345,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     //metodo para poder introduccir imagenes vectoriales en los marcadores
     private BitmapDescriptor getBitmapDescriptor(int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            VectorDrawable vectorDrawable = (VectorDrawable) getContext().getDrawable(id);
+            VectorDrawable vectorDrawable = (VectorDrawable) getActivity().getDrawable(id);
             int h = vectorDrawable.getIntrinsicHeight();
             int w = vectorDrawable.getIntrinsicWidth();
             vectorDrawable.setBounds(0, 0, w, h);
