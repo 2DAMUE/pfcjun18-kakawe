@@ -40,12 +40,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAxMnx40xmRy26QBYjRQoDwCoM9A2EC0Wk" />
 
-        <activity
-            android:name=".Principal.PruebaActivity"
-            android:label="@string/title_activity_prueba"
-            android:theme="@style/AppTheme">
-
-        </activity>
     </application>
 
 </manifest>
