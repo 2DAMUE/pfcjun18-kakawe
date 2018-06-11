@@ -31,7 +31,7 @@
             android:backgroundTint="@android:color/transparent"
             android:paddingHorizontal="30dp"
             android:inputType="textPassword"
-            android:text="123456" />
+            android:hint="Nueva contraseña" />
     </LinearLayout>
 
     <View style="@style/divider" />
@@ -57,7 +57,7 @@
             android:backgroundTint="@android:color/transparent"
             android:paddingHorizontal="30dp"
             android:inputType="textPassword"
-            android:text="123456" />
+            android:hint="Repetir contraseña" />
     </LinearLayout>
 
     <View style="@style/low_divider" />
