@@ -130,14 +130,15 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         Log.v("Entrada", "1");
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference refGuardar = storage.getReferenceFromUrl("gs://auxi-net.appspot.com/662959149/662959149");
-
         Log.v("refGuardar", refGuardar.toString());
-
             Log.v("Entrada", "2");
-            Glide.with(getContext()).using(new FirebaseImageLoader())
+        if (refGuardar.getName().isEmpty()) {
+        } else {
+            Glide.with(getContext())
                     .load(refGuardar)
                     .into(iv_foto_perfil);
-        Log.v("refGuardar2", refGuardar.toString());
+            Log.v("refGuardar2", refGuardar.toString());
+        }
     }
 
     @Override
@@ -154,7 +155,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
 
     private void subirFoto() {
         Log.v("telefono2" , telefono);
-
         StorageReference rutaCarpetaImg = storageReference.child(telefono).child(telefono);
         Log.v("ruta",rutaCarpetaImg + "");
         rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -162,8 +162,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 //descargar imagen de firebase
                 Uri descargarFoto = taskSnapshot.getDownloadUrl();
-
-                Log.v("ruta2",descargarFoto + "");
                 Glide.with(getActivity())
                         .load(descargarFoto)
                         .into(iv_foto_perfil);
