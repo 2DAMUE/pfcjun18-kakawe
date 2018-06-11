@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_2_datosMedicos">
 
-    
+
     <ToggleButton
         android:id="@+id/btn_perfil_modificar_datos"
         style="@style/btn_editar" />
