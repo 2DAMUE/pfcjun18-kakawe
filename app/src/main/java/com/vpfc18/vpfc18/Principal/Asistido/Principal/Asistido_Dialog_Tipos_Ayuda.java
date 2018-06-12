@@ -3,10 +3,14 @@ package com.vpfc18.vpfc18.Principal.Asistido.Principal;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -21,20 +25,18 @@ public class Asistido_Dialog_Tipos_Ayuda extends DialogFragment {
     LinearLayout btn_ayuda1, btn_ayuda2, btn_ayuda3, btn_ayuda4, btn_ayuda5;
 
     String[] tiposAlerta = {"aseo", "compra", "desplazamiento", "hogar"};
-    String correoUser,latitud,longitud;
+    String correoUser, latitud, longitud;
 
 
     @Override
     public Dialog onCreateDialog(Bundle saveIntanceState) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View vista = inflater.inflate(R.layout.asistido_dialog_tipos_ayuda, null);
 
-
-
-
-        Bundle datos=this.getArguments();
+        Bundle datos = this.getArguments();
         latitud = datos.getString("latitud");
         longitud = datos.getString("longitud");
         correoUser = datos.getString("correoUser");
@@ -53,9 +55,13 @@ public class Asistido_Dialog_Tipos_Ayuda extends DialogFragment {
             }
         });
 
-
         builder.setView(vista);
-        return builder.create();
+
+        Dialog dialog = builder.create();
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00FFFFFF")));
+
+        return dialog;
 
 
     }
