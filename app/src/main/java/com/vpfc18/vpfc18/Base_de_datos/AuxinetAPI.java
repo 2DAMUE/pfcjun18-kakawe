@@ -155,11 +155,10 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         this.execute(APIUrl + metodo + parametros);
     }
 
-    public void actualizarDatosMedicos(String correo,String peso,String altura,String gpSanguineo,String alergias,String medicacion,String nMedicas,String enfermedades){
+    public void actualizarDatosMedicos(String correo,String peso,String altura,String gpSanguineo,String alergias,String medicacion){
         String metodo = "ActualizarDatosMedicosApp.php?";
         String parametros = "correo="+correo+"&peso="+peso+"&altura="+altura+"&grSanguineo="
-                +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion+"&notasMedicas="
-                +nMedicas+"&enfermedades="+enfermedades;
+                +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion;
         Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }

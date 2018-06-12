@@ -44,7 +44,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
     public Voluntario_Detalle_Fragment() {
         // Required empty public constructor
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
