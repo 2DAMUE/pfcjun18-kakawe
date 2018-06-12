@@ -57,7 +57,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
 
     ImageView iv_foto_perfil,iv_editarFoto_perfil;
     EditText et_perfil_email, et_perfil_telefono, et_perfil_nombre, et_perfil_apellido, et_perfil_fnacimiento, et_perfil_sexo;
-    TextView tv_perfil_modContrasena, tv_perfil_datosMedicos, tv_perfil_contactos;
+    TextView tv_perfil_modContrasena, tv_perfil_datosMedicos, tv_perfil_contactos1,tv_perfil_contactos2;
     ToggleButton btn_perfil_modificar_datos;
 
     String email, emailViejo, nombre, apellido, telefono, correoUser, sexo, fNacimiento;
@@ -83,7 +83,8 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         et_perfil_fnacimiento = (EditText) vista.findViewById(R.id.et_perfil_fnacimiento);
         tv_perfil_modContrasena = (TextView) vista.findViewById(R.id.tv_perfil_modContrasena);
         tv_perfil_datosMedicos = (TextView) vista.findViewById(R.id.tv_perfil_datosMedicos);
-        tv_perfil_contactos = (TextView) vista.findViewById(R.id.tv_perfil_contactos);
+        tv_perfil_contactos1 = (TextView) vista.findViewById(R.id.tv_perfil_contactos1);
+        tv_perfil_contactos2 = (TextView) vista.findViewById(R.id.tv_perfil_contactos2);
         btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_modificar_datos);
         iv_foto_perfil = (ImageView) vista.findViewById(R.id.iv_foto_perfil);
         iv_editarFoto_perfil = (ImageView) vista.findViewById(R.id.iv_editarFoto_perfil);
@@ -121,7 +122,13 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 vistaDatosMedicos();
             }
         });
-        tv_perfil_contactos.setOnClickListener(new View.OnClickListener() {
+        tv_perfil_contactos1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vistaModificarContactos();
+            }
+        });
+        tv_perfil_contactos2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 vistaModificarContactos();
