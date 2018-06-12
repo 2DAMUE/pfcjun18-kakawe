@@ -32,9 +32,9 @@ import org.json.JSONException;
 public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
 
     EditText et_perfil_peso,et_perfil_alergias,et_perfil_altura,et_perfil_medicacion;
-    TextView tv_perfil_enfermedades,tv_perfil_notasMedicas;
+    TextView tv_perfil_enfermedades,tv_perfil_notasMedicas,tv_perfil_alergias,tv_perfil_medicacion;
     Spinner spn_perfil_grSanguineo;
-    String correoUser,altura,peso,gpSanguineo,alergias,medicacion;
+    String correoUser,altura,peso,gpSanguineo;
     ToggleButton btn_perfil_modificar_datos;
 
     public Asistido_Perfil_Fragment_2_datosMedicos() {
@@ -47,9 +47,9 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.asistido_fragment_perfil_medicos, container, false);
         et_perfil_peso = (EditText)vista.findViewById(R.id.et_perfil_peso);
-        et_perfil_alergias = (EditText)vista.findViewById(R.id.et_perfil_alergias);
+        tv_perfil_alergias = (TextView)vista.findViewById(R.id.tv_perfil_alergias);
         et_perfil_altura = (EditText)vista.findViewById(R.id.et_perfil_altura);
-        et_perfil_medicacion = (EditText)vista.findViewById(R.id.et_perfil_medicacion);
+        tv_perfil_medicacion = (TextView)vista.findViewById(R.id.tv_perfil_medicacion);
         spn_perfil_grSanguineo = (Spinner) vista.findViewById(R.id.spn_perfil_grSanguineo);
         btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_modificar_datos);
         tv_perfil_enfermedades = (TextView)vista.findViewById(R.id.tv_perfil_enfermedades);
@@ -89,8 +89,40 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
                 cargarNotasM();
             }
         });
+        tv_perfil_alergias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarAlergias();
+            }
+        });
+        tv_perfil_medicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarMedicacion();
+            }
+        });
         cargarDM();
         return vista;
+    }
+    private void cargarAlergias() {
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_7_Alergias();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.addToBackStack(null);
+        t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
+    }
+    private void cargarMedicacion() {
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_8_Medicacion();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.addToBackStack(null);
+        t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
 
     private void cargarEnfermedades() {
@@ -132,8 +164,6 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
                     String grSanguineo = respuesta.getString(2);
                     String alergias = respuesta.getString(3);
                     String medicacion = respuesta.getString(4);
-                    String enfermedades = respuesta.getString(5);
-                    String notasMedicas = respuesta.getString(6);
 
                     Resources res = getActivity().getResources();
                     String sangre[] = res.getStringArray(R.array.gr_sanguineo);
@@ -164,7 +194,6 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
                         et_perfil_medicacion.setText("");
                     }else{
                         et_perfil_medicacion.setText(medicacion);
-                    }if (enfermedades.equals("null")){
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();

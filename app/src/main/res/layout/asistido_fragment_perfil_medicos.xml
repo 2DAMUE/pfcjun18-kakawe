@@ -100,60 +100,19 @@
 
             </LinearLayout>
 
-            <View style="@style/divider" />
+            <View style="@style/low_divider" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_perfil_alergias"
+                style="@style/submenu_perfil"
+                android:text="Alergias" />
 
-                <TextView
-                    android:id="@+id/tv_perfil_alergias"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="40dp"
-                    android:text="Alérgias" />
+            <View style="@style/low_divider" />
 
-                <EditText
-                    android:id="@+id/et_perfil_alergias"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:enabled="false"
-                    android:gravity="end"
-                    android:hint="Alérgias"
-                    android:inputType="text"
-                    android:paddingHorizontal="30dp" />
-
-            </LinearLayout>
-
-            <View style="@style/divider" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_perfil_medicacion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="40dp"
-                    android:text="Medicación" />
-
-                <EditText
-                    android:id="@+id/et_perfil_medicacion"
-                    style="@style/et_perfil"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:enabled="false"
-                    android:gravity="end"
-                    android:hint="Alérgias"
-                    android:inputType="text" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_perfil_medicacion"
+                style="@style/submenu_perfil"
+                android:text="Medicación" />
 
             <View style="@style/low_divider" />
 

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
@@ -35,7 +36,8 @@ public class Voluntario_Detalle_Fragment extends Fragment {
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
     Button btn_detalle_cerrar,btn_detalle_llamar,btn_detalle_navegar;
-    EditText et_detalle_nombre,et_detalle_altura,et_detalle_peso,et_detalle_gpSanguineo,et_detalle_alergias,et_detalle_medicacion,et_detalle_enfermedades,et_perfil_notasMedicas;
+    EditText et_detalle_nombre,et_detalle_altura,et_detalle_peso,et_detalle_gpSanguineo;
+    TextView tv_detalle_enfermedades,tv_detalle_notasMedicas,tv_detalle_alergias,tv_detalle_medicacion;
 
     String correoUser,id_correoAsistido,telefono,nombreAsistido;
     int id_alerta;
@@ -64,10 +66,11 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         et_detalle_altura =(EditText)vista.findViewById(R.id.et_detalle_altura);
         et_detalle_peso =(EditText)vista.findViewById(R.id.et_detalle_peso);
         et_detalle_gpSanguineo =(EditText)vista.findViewById(R.id.et_detalle_gpSanguineo);
-        et_detalle_alergias =(EditText)vista.findViewById(R.id.et_detalle_alergias);
-        et_detalle_enfermedades =(EditText)vista.findViewById(R.id.et_detalle_enfermedades);
-        et_detalle_medicacion =(EditText)vista.findViewById(R.id.et_detalle_medicacion);
-        et_perfil_notasMedicas =(EditText)vista.findViewById(R.id.et_perfil_notasMedicas);
+        tv_detalle_alergias =(TextView)vista.findViewById(R.id.tv_detalle_alergias);
+        tv_detalle_medicacion =(TextView)vista.findViewById(R.id.tv_detalle_medicacion);
+        tv_detalle_enfermedades =(TextView) vista.findViewById(R.id.tv_detalle_enfermedades);
+        tv_detalle_notasMedicas =(TextView)vista.findViewById(R.id.tv_detalle_notasMedicas);
+
         cargarDm();
         btn_detalle_llamar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,8 +85,75 @@ public class Voluntario_Detalle_Fragment extends Fragment {
                 volverAlistado();
             }
         });
+        tv_detalle_enfermedades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarEnfermedades();
+            }
+        });
+        tv_detalle_notasMedicas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarNotasM();
+            }
+        });
+        tv_detalle_medicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarMedicacion();
+            }
+        });
+        tv_detalle_alergias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarAlergias();
+            }
+        });
+
         return vista;
     }
+    private void cargarMedicacion() {
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Medicacion();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.addToBackStack(null);
+        t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
+    }
+    private void cargarAlergias() {
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Alergias();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.addToBackStack(null);
+        t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
+    }
+
+    private void cargarEnfermedades() {
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Enfermedades();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.addToBackStack(null);
+        t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
+    }
+    private void cargarNotasM() {
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_NotasM();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
+        t.addToBackStack(null);
+        t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
+    }
+
     public void cargarDialogLlamada() {
         Voluntario_Llamada_Dialog vld = new Voluntario_Llamada_Dialog();
         Bundle datos = new Bundle();
@@ -115,11 +185,6 @@ public class Voluntario_Detalle_Fragment extends Fragment {
                     String peso = respuesta.getString(0);
                     String altura = respuesta.getString(1);
                     String grSanguineo = respuesta.getString(2);
-                    String alergias = respuesta.getString(3);
-                    String medicacion = respuesta.getString(4);
-                    String enfermedades = respuesta.getString(5);
-                    String notasMedicas = respuesta.getString(6);
-                    Log.v("DATOSMEDICOS",peso+altura+grSanguineo+alergias+medicacion+enfermedades+notasMedicas);
 
                     et_detalle_nombre.setText(nombreAsistido);
                     if (peso.equals("null")){
@@ -135,22 +200,6 @@ public class Voluntario_Detalle_Fragment extends Fragment {
                         et_detalle_gpSanguineo.setText("");
                     }else{
                         et_detalle_gpSanguineo.setText(grSanguineo);
-                    }if (alergias.equals("null")){
-                        et_detalle_alergias.setText("");
-                    }else{
-                        et_detalle_alergias.setText(alergias);
-                    }if (medicacion.equals("null")){
-                        et_detalle_medicacion.setText("");
-                    }else{
-                        et_detalle_medicacion.setText(medicacion);
-                    }if (enfermedades.equals("null")){
-                        et_detalle_enfermedades.setText("");
-                    }else{
-                        et_detalle_enfermedades.setText(enfermedades);
-                    }if (notasMedicas.equals("null")){
-                        et_perfil_notasMedicas.setText("");
-                    }else{
-                        et_perfil_notasMedicas.setText(notasMedicas);
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
