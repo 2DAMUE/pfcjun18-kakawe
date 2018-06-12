@@ -12,7 +12,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_perfil_contrasenaVieja"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -26,9 +25,9 @@
             android:backgroundTint="@android:color/transparent"
             android:enabled="false"
             android:gravity="end"
-            android:paddingHorizontal="30dp"
+            android:hint="·········"
             android:inputType="textPassword"
-            android:text="123456" />
+            android:paddingHorizontal="30dp" />
     </LinearLayout>
 
     <View style="@style/low_divider" />
@@ -39,7 +38,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_perfil_contrasenaNueva"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -53,9 +51,9 @@
             android:backgroundTint="@android:color/transparent"
             android:enabled="false"
             android:gravity="end"
+            android:hint="·········"
             android:inputType="textPassword"
-            android:paddingHorizontal="30dp"
-            android:hint="Nueva contraseña" />
+            android:paddingHorizontal="30dp" />
     </LinearLayout>
 
     <View style="@style/divider" />
@@ -66,7 +64,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_perfil_repetirContrasena"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -80,12 +77,12 @@
             android:backgroundTint="@android:color/transparent"
             android:enabled="false"
             android:gravity="end"
+            android:hint="·········"
             android:inputType="textPassword"
-            android:paddingHorizontal="30dp"
-            android:hint="Repetir contraseña" />
+            android:paddingHorizontal="30dp" />
     </LinearLayout>
 
-    <View style="@style/medium_divider" />
+    <View style="@style/low_divider" />
 
 
     <Button
