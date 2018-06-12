@@ -50,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="AYUDA"
-                    android:textColor="@color/black"
+                    android:textColor="@color/azulAuxinet"
                     android:textSize="24dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="COMPAÑIA"
-                    android:textColor="@color/black"
+                    android:textColor="@color/azulAuxinet"
                     android:textSize="24dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="CONTACTO 1"
-                    android:textColor="@color/black"
+                    android:textColor="@color/azulAuxinet"
                     android:textSize="24dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -200,7 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="CONTACTO 2"
-                    android:textColor="@color/black"
+                    android:textColor="@color/azulAuxinet"
                     android:textSize="24dp"
                     android:textStyle="bold" />
             </LinearLayout>

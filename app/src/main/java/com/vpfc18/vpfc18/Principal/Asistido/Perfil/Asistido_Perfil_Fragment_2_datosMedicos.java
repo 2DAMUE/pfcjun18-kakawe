@@ -29,7 +29,7 @@ import org.json.JSONException;
 public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
 
     EditText et_perfil_peso,et_perfil_alergias,et_perfil_altura,et_perfil_medicacion,et_perfil_enfermedades,et_perfil_notasMedicas;
-    Button btn_perfil_guardar,btn_perfil_atras;
+    Button btn_perfil_guardar;
     Spinner spn_perfil_grSanguineo;
     String correoUser,altura,peso,gpSanguineo,alergias,medicacion,enfermedades,nMedicas;
 
@@ -50,7 +50,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
         spn_perfil_grSanguineo = (Spinner) vista.findViewById(R.id.spn_perfil_grSanguineo);
         et_perfil_notasMedicas = (EditText)vista.findViewById(R.id.et_perfil_notasMedicas);
         btn_perfil_guardar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
-        btn_perfil_atras = (Button) vista.findViewById(R.id.btn_perfil_atras);
+
 
         correoUser = getArguments().getString("correoUser");
         spn_perfil_grSanguineo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -71,12 +71,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
                 }
             }
         });
-        btn_perfil_atras.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                volverAPerfil();
-            }
-        });
+
         //cargamos los datos medicos
         cargarDM();
         return vista;

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -47,11 +48,10 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     Uri uri;
     private static final int GALERY_INTENT = 1;
 
-    CircularImageView btn_foto_perfil;
     EditText et_perfil_email, et_perfil_telefono, et_perfil_nombre, et_perfil_apellido, et_perfil_sexo, et_perfil_fnacimiento;
-    Button btn_perfil_cerrarSesion;
     TextView tv_perfil_modContrasena, tv_perfil_datosMedicos, tv_perfil_contactos;
     ToggleButton btn_perfil_modificar_datos;
+    ImageView iv_foto_perfil;
 
     String email, emailViejo, nombre, apellido, telefono, correoUser, sexo, fNacimiento;
 
@@ -78,8 +78,8 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         tv_perfil_datosMedicos = (TextView) vista.findViewById(R.id.tv_perfil_datosMedicos);
         tv_perfil_contactos = (TextView) vista.findViewById(R.id.tv_perfil_contactos);
         btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_modificar_datos);
-        btn_perfil_cerrarSesion = (Button) vista.findViewById(R.id.btn_perfil_cerrarSesion);
-        btn_foto_perfil = (CircularImageView) vista.findViewById(R.id.btn_foto_perfil);
+
+        iv_foto_perfil = (ImageView) vista.findViewById(R.id.iv_foto_perfil);
         correoUser = getArguments().getString("correoUser");
 
         btn_perfil_modificar_datos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -93,7 +93,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 }
             }
         });
-        btn_foto_perfil.setOnClickListener(new View.OnClickListener() {
+        iv_foto_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(Intent.ACTION_PICK);
@@ -138,7 +138,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                     .load(refGuardar)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
-                    .into(btn_foto_perfil);
+                    .into(iv_foto_perfil);
         }
 
     }
@@ -166,7 +166,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 Log.v("ruta2", descargarFoto + "");
                 Glide.with(getActivity())
                         .load(descargarFoto)
-                        .into(btn_foto_perfil);
+                        .into(iv_foto_perfil);
 
                 Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
             }
