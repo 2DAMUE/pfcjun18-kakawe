@@ -36,7 +36,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.vpfc18.vpfc18.Base_de_datos.MapsAPI;
 import com.vpfc18.vpfc18.Base_de_datos.respuestaMapa;
-import com.vpfc18.vpfc18.Controlador.Comunicador;
+
 import com.vpfc18.vpfc18.Entidades.Datos_Alertas;
 import com.vpfc18.vpfc18.R;
 
@@ -51,10 +51,6 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCallback {
-
-    Comunicador comunicador = new Comunicador();
-
-    //--------------------------------//
 
     private double longitudAsistente, latitudAsistente;
     private double latitudAsistido;

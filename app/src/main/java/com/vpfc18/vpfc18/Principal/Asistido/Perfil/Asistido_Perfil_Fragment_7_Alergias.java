@@ -9,14 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
+import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
 import com.vpfc18.vpfc18.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class Asistido_Perfil_Fragment_7_Alergias extends Fragment {
 
-    String correoUser;
+    String correoUser, alergias;
     View vista;
     Button bt_perfil_asistido_alergia_guardar;
 
@@ -31,10 +36,12 @@ public class Asistido_Perfil_Fragment_7_Alergias extends Fragment {
         // Inflate the layout for this fragment
         vista = inflater.inflate(R.layout.asistido_fragment_perfil_alergias, container, false);
 
-        bt_perfil_asistido_alergia_guardar = (Button)vista.findViewById(R.id.bt_perfil_asistido_alergia_guardar);
+        cargarAlergias();
+        bt_perfil_asistido_alergia_guardar = (Button) vista.findViewById(R.id.bt_perfil_asistido_alergia_guardar);
         bt_perfil_asistido_alergia_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_1();
                 FragmentTransaction t = getFragmentManager().beginTransaction();
                 t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
@@ -46,6 +53,29 @@ public class Asistido_Perfil_Fragment_7_Alergias extends Fragment {
         });
 
         return vista;
+    }
+
+    private void cargarAlergias() {
+
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
+
+            @Override
+            public void onSuccess(JSONArray response) {
+                try {
+                    alergias = response.getString(3);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+
+            }
+        });
+        auxinetAPI.cargarDatosMedicos(correoUser);
     }
 
 }
