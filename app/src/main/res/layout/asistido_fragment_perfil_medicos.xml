@@ -40,7 +40,6 @@
                     android:backgroundTint="@android:color/transparent"
                     android:enabled="false"
                     android:gravity="end"
-                    android:hint="00.0"
                     android:inputType="numberDecimal"
                     android:paddingHorizontal="30dp" />
 
@@ -68,7 +67,6 @@
                     android:backgroundTint="@android:color/transparent"
                     android:enabled="false"
                     android:gravity="end"
-                    android:hint="00.0"
                     android:inputType="numberDecimal"
                     android:paddingHorizontal="30dp" />
             </LinearLayout>

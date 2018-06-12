@@ -48,7 +48,6 @@
                     android:clickable="false"
                     android:enabled="false"
                     android:gravity="end"
-                    android:hint="Nombre"
                     android:inputType="text"
                     android:paddingHorizontal="30dp" />
 
@@ -82,7 +81,6 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="00.0"
                         android:inputType="numberDecimal"
                         android:paddingHorizontal="30dp" />
 
@@ -111,7 +109,6 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="00.0"
                         android:inputType="numberDecimal"
                         android:paddingHorizontal="30dp" />
                 </LinearLayout>
@@ -139,7 +136,6 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="Grupo sanguineo"
                         android:inputType="text"
                         android:paddingHorizontal="30dp" />
 

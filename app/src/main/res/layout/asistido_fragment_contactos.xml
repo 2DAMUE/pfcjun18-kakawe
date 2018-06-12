@@ -58,12 +58,19 @@
 
                 <TextView
                     android:id="@+id/tv_contactos_nombre1"
-                    style="@style/tv_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Nombre" />
 
                 <EditText
                     android:id="@+id/et_contactos_nombre1"
-                    style="@style/et_perfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
                     android:inputType="text" />
 
             </LinearLayout>
@@ -77,12 +84,19 @@
 
                 <TextView
                     android:id="@+id/tv_contactos_telefono1"
-                    style="@style/tv_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Telefono" />
 
                 <EditText
                     android:id="@+id/et_contactos_telefono1"
-                    style="@style/et_perfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
                     android:inputType="phone" />
 
             </LinearLayout>
@@ -125,12 +139,19 @@
 
                 <TextView
                     android:id="@+id/tv_contactos_nombre2"
-                    style="@style/tv_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Nombre" />
 
                 <EditText
                     android:id="@+id/et_contactos_nombre2"
-                    style="@style/et_perfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
                     android:inputType="text" />
 
             </LinearLayout>
@@ -144,12 +165,19 @@
 
                 <TextView
                     android:id="@+id/tv_contactos_telefono2"
-                    style="@style/tv_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
                     android:text="Telefono" />
 
                 <EditText
                     android:id="@+id/et_contactos_telefono2"
-                    style="@style/et_perfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
                     android:inputType="phone" />
 
             </LinearLayout>

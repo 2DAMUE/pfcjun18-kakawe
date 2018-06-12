@@ -25,6 +25,7 @@ import android.widget.ToggleButton;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,7 +55,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     Uri uri;
     private static final int GALERY_INTENT = 1;
 
-    ImageView iv_foto_perfil;
+    ImageView iv_foto_perfil,iv_editarFoto_perfil;
     EditText et_perfil_email, et_perfil_telefono, et_perfil_nombre, et_perfil_apellido, et_perfil_fnacimiento, et_perfil_sexo;
     Button btn_perfil_cerrarSesion;
     TextView tv_perfil_modContrasena, tv_perfil_datosMedicos, tv_perfil_contactos;
@@ -86,6 +87,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         tv_perfil_contactos = (TextView) vista.findViewById(R.id.tv_perfil_contactos);
         btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_modificar_datos);
         iv_foto_perfil = (ImageView) vista.findViewById(R.id.iv_foto_perfil);
+        iv_editarFoto_perfil = (ImageView) vista.findViewById(R.id.iv_editarFoto_perfil);
         correoUser = getArguments().getString("correoUser");
 
         btn_perfil_modificar_datos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -174,7 +176,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 Glide.with(getActivity())
                         .load(descargarFoto)
                         .into(iv_foto_perfil);
-
+                iv_foto_perfil.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
             }
         });
@@ -182,11 +184,36 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
 
     private void habilitarCampos(Boolean habilitado) {
         et_perfil_nombre.setEnabled(habilitado);
+
         et_perfil_apellido.setEnabled(habilitado);
+
         et_perfil_fnacimiento.setEnabled(habilitado);
+
         et_perfil_sexo.setEnabled(habilitado);
+
         et_perfil_telefono.setEnabled(habilitado);
+
         et_perfil_email.setEnabled(habilitado);
+
+        iv_foto_perfil.setClickable(habilitado);
+        if (habilitado){
+            et_perfil_nombre.setHint("Nombre");
+            et_perfil_apellido.setHint("Apellido");
+            et_perfil_fnacimiento.setHint("00/00/0000");
+            et_perfil_sexo.setHint("Sexo");
+            et_perfil_telefono.setHint("Telefono");
+            et_perfil_email.setHint("Email");
+            iv_editarFoto_perfil.setVisibility(View.VISIBLE);
+        }else{
+            et_perfil_nombre.setHint("");
+            et_perfil_apellido.setHint("");
+            et_perfil_fnacimiento.setHint("");
+            et_perfil_sexo.setHint("");
+            et_perfil_telefono.setHint("");
+            et_perfil_email.setHint("");
+            iv_editarFoto_perfil.setVisibility(View.INVISIBLE);
+        }
+
 
     }
 
