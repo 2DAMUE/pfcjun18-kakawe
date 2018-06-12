@@ -7,6 +7,10 @@
     tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_4_contactos">
 
 
+    <ToggleButton
+        android:id="@+id/btn_perfil_modificar_datos"
+        style="@style/btn_editar" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,19 +21,34 @@
             android:orientation="vertical">
 
 
-
-
             <TextView
                 android:id="@+id/tv_contactos_contacto1"
                 style="@style/subheader"
                 android:text="Contacto 1" />
 
-            <ImageView
-                android:id="@+id/iv_foto_contacto1"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_foto_contacto1"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:src="@drawable/ic_profile" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="15dp"
+                    android:background="@color/blanco_trans"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_edit" />
+
+            </FrameLayout>
+
+            <View style="@style/low_divider" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,7 +64,6 @@
                 <EditText
                     android:id="@+id/et_contactos_nombre1"
                     style="@style/et_perfil"
-                    android:hint="Nombre"
                     android:inputType="text" />
 
             </LinearLayout>
@@ -65,7 +83,6 @@
                 <EditText
                     android:id="@+id/et_contactos_telefono1"
                     style="@style/et_perfil"
-                    android:hint="000 000 000"
                     android:inputType="phone" />
 
             </LinearLayout>
@@ -76,12 +93,29 @@
                 style="@style/subheader"
                 android:text="Contacto 2" />
 
-            <ImageView
-                android:id="@+id/iv_foto_contacto2"
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_foto_contacto2"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:src="@drawable/ic_profile" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="15dp"
+                    android:background="@color/blanco_trans"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_edit" />
+
+            </FrameLayout>
+
+            <View style="@style/low_divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,7 +131,6 @@
                 <EditText
                     android:id="@+id/et_contactos_nombre2"
                     style="@style/et_perfil"
-                    android:hint="Nombre"
                     android:inputType="text" />
 
             </LinearLayout>
@@ -117,11 +150,13 @@
                 <EditText
                     android:id="@+id/et_contactos_telefono2"
                     style="@style/et_perfil"
-                    android:hint="000 000 000"
                     android:inputType="phone" />
 
             </LinearLayout>
-            <View style="@style/divider" />
+
+
+            <View style="@style/low_divider" />
+
 
         </LinearLayout>
     </ScrollView>

@@ -26,7 +26,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_perfil_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -39,8 +38,7 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
                     android:gravity="end"
-                    android:hint="Nombre"
-                    android:inputType="text"
+                    android:inputType="textPersonName"
                     android:paddingHorizontal="30dp" />
 
             </LinearLayout>
@@ -53,7 +51,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_perfil_apellido"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -66,7 +63,6 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
                     android:gravity="end"
-                    android:hint="apellidos"
                     android:inputType="textPersonName"
                     android:paddingHorizontal="30dp" />
             </LinearLayout>
@@ -79,7 +75,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_perfil_fnacimiento"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -92,7 +87,6 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
                     android:gravity="end"
-                    android:hint="01/01/2001"
                     android:inputType="date"
                     android:paddingHorizontal="30dp" />
             </LinearLayout>
@@ -106,7 +100,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_perfil_sexo"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -120,7 +113,6 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
                     android:gravity="end"
-                    android:hint="sexo"
                     android:inputType="text"
                     android:paddingHorizontal="30dp" />
             </LinearLayout>
@@ -133,7 +125,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_perfil_telefono"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -146,7 +137,6 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
                     android:gravity="end"
-                    android:hint="000 000 000"
                     android:inputType="phone"
                     android:paddingHorizontal="30dp" />
 
@@ -160,7 +150,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_perfil_email"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -173,7 +162,6 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
                     android:gravity="end"
-                    android:hint="nombre@correo.com"
                     android:inputType="textEmailAddress"
                     android:paddingHorizontal="30dp" />
             </LinearLayout>
@@ -185,7 +173,7 @@
                 style="@style/submenu_perfil"
                 android:text="Contraseña" />
 
-            <View style="@style/divider" />
+            <View style="@style/low_divider" />
 
 
         </LinearLayout>

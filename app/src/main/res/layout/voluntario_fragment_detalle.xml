@@ -17,13 +17,22 @@
             android:orientation="vertical">
 
 
+            <ImageView
+                android:id="@+id/iv_detalle_foto"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:src="@drawable/ic_profile" />
+
+
+            <View style="@style/low_divider" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_detalle_nombre"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -38,7 +47,6 @@
                     android:clickable="false"
                     android:enabled="false"
                     android:gravity="end"
-                    android:hint="Nombre"
                     android:inputType="text"
                     android:paddingHorizontal="30dp" />
 
@@ -57,7 +65,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_perfil_altura"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -72,7 +79,6 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="00.0"
                         android:inputType="numberDecimal"
                         android:paddingHorizontal="30dp" />
 
@@ -86,7 +92,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_perfil_peso"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -101,7 +106,6 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="00.0"
                         android:inputType="numberDecimal"
                         android:paddingHorizontal="30dp" />
                 </LinearLayout>
@@ -114,7 +118,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_detalle_grSanguineo"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -129,7 +132,6 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="Grupo sanguineo"
                         android:inputType="text"
                         android:paddingHorizontal="30dp" />
 
@@ -143,7 +145,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_perfil_alergias"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -158,7 +159,6 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="Alérgias"
                         android:inputType="text"
                         android:paddingHorizontal="30dp" />
 
@@ -172,7 +172,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_perfil_medicacion"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -187,7 +186,6 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="Medicación"
                         android:inputType="text"
                         android:paddingHorizontal="30dp" />
                 </LinearLayout>
@@ -200,7 +198,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_perfil_enfermedades"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -215,7 +212,6 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="Enfermedades"
                         android:inputType="text"
                         android:paddingHorizontal="30dp" />
 
@@ -229,7 +225,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_perfil_notasMedicas"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -244,14 +239,12 @@
                         android:clickable="false"
                         android:enabled="false"
                         android:gravity="end"
-                        android:hint="Notas"
                         android:inputType="text"
-                        android:paddingHorizontal="30dp"
-                        android:textSize="18sp" />
+                        android:paddingHorizontal="30dp" />
 
                 </LinearLayout>
 
-                <View style="@style/divider" />
+                <View style="@style/low_divider" />
 
             </LinearLayout>
 
@@ -287,13 +280,12 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <View style="@style/divider" />
 
             <Button
                 android:id="@+id/btn_detalle_cerrar"
                 style="@style/btn"
-
                 android:layout_width="match_parent"
+                android:layout_marginBottom="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
