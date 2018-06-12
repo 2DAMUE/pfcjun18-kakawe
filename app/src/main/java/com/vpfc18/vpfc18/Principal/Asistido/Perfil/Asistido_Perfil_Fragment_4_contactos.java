@@ -61,7 +61,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
     ImageView iv_foto_contacto1,iv_foto_contacto2;
 
 
-    String correoUser,nombre1,nombre2,telefono1,telefono2,telefonoUser;
+    String correoUser,nombre1,nombre2,telefono1,telefono2,telefonoUser,accionContacto;
     public Asistido_Perfil_Fragment_4_contactos() {
         // Required empty public constructor
     }
@@ -88,6 +88,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
             @Override
             public void onClick(View v) {
                 accion = 0;
+                accionContacto = "contacto1";
                 intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, GALERY_INTENT);
@@ -99,6 +100,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
             @Override
             public void onClick(View v) {
                 accion = 1;
+                accionContacto = "contacto2";
                 intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, GALERY_INTENT);
@@ -138,31 +140,41 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
     }
 
     private void cargarFotoPerfilContacto1() {
-        Log.v("dentro1","ERRORAZO");
-        final StorageReference stor = FirebaseStorage.getInstance().getReference().child(telefonoUser).child(telefonoUser + "_contacto1");
-        Log.v("dentro2",stor.toString());
+        final StorageReference stor = FirebaseStorage.getInstance().getReference().child(correoUser).child("contacto1");
         stor.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
-                Uri fotobajada = task.getResult();
-                Glide.with(getActivity())
-                        .load(fotobajada)
-                        .into(iv_foto_contacto1);
+                try {
+                    Uri fotobajada = task.getResult();
+                    Glide.with(getActivity())
+                            .load(fotobajada)
+                            .into(iv_foto_contacto1);
+                    iv_foto_contacto1.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                }catch (Exception e){
+                        Log.e("CARGA1","VACIO");
+                    }finally {
+                        Log.e("CARGA11","VACIO");
+                    }
             }
         });
     }
 
     private void cargarFotoPerfilContacto2() {
-        Log.v("dentro1","ERRORAZO");
-        final StorageReference stor = FirebaseStorage.getInstance().getReference().child(telefonoUser).child(telefonoUser + "_contacto2");
-        Log.v("dentro2",stor.toString());
+        final StorageReference stor = FirebaseStorage.getInstance().getReference().child(correoUser).child("contacto2");
         stor.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
-                Uri fotobajada = task.getResult();
-                Glide.with(getActivity())
-                        .load(fotobajada)
-                        .into(iv_foto_contacto2);
+                try {
+                    Uri fotobajada = task.getResult();
+                    Glide.with(getActivity())
+                            .load(fotobajada)
+                            .into(iv_foto_contacto2);
+                    iv_foto_contacto2.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                }catch (Exception e){
+                    Log.e("CARGA1","VACIO");
+                }finally {
+                    Log.e("CARGA11","VACIO");
+                }
             }
         });
     }
@@ -174,19 +186,18 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         if (requestCode == GALERY_INTENT && resultCode == RESULT_OK) {
             //Aquí sólo se recoge la URI. No se grabará hasta que no se haya grabado el contacto
             uri = data.getData();
-            subirFoto();
+            subirFoto(accionContacto);
         }
 
     }
 
-    private void subirFoto() {
+    private void subirFoto(String contacto) {
 
-        StorageReference rutaCarpetaImg = storageReference.child("jose1@mail.com").child("jose1_contacto1@mail.com");
+        StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(accionContacto);
         rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 //descargar imagen de firebase
-
                 if (accion == 0){
                     Uri descargarFoto = taskSnapshot.getDownloadUrl();
                     Log.v("ruta2",descargarFoto + "");
@@ -194,7 +205,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                     Glide.with(getActivity())
                             .load(descargarFoto)
                             .into(iv_foto_contacto1);
-
+                    iv_foto_contacto1.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
                 }
                 if (accion == 1){
@@ -204,7 +215,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                     Glide.with(getActivity())
                             .load(descargarFoto)
                             .into(iv_foto_contacto2);
-
+                    iv_foto_contacto2.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
 
                 }
@@ -213,7 +224,6 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         });
 
     }
-
     private void actualizarDatos(final String contacto, String nombre, String telefono){
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
 

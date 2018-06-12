@@ -1,6 +1,7 @@
 package com.vpfc18.vpfc18.Base_de_datos;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -88,18 +89,21 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
     public void nuevaAlerta(String usuario, String tipoAlerta, String latitud, String longitud) {
         String metodo = "GenerarAlertasApp.php?";
         String parametros = "correo=" + usuario + "&nombreAlerta=" + tipoAlerta + "&latitud=" + latitud + "&longitud=" + longitud;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
     public void cargarPerfil(String usuario) {
         String metodo = "DatosPerfilApp.php?";
         String parametros = "correo=" + usuario;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
     public void actualizarPerfil(String emailViejo, String nombre, String telefono, String email, String apellido) {
         String metodo = "ActualizarPerfilApp.php?";
         String parametros = "correoV=" + emailViejo + "&nombre=" + nombre + "&telefono=" + telefono + "&correoN=" + email + "&apellido=" + apellido;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
@@ -107,9 +111,11 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         String parametros = "correo=" + usuario;
         if (contacto.equals("contacto1")){
             String metodo = "CargarContacto1App.php?";
+            Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
             this.execute(APIUrl + metodo + parametros);
         }else{
             String metodo = "CargarContacto2App.php?";
+            Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
             this.execute(APIUrl + metodo + parametros);
         }
     }
@@ -119,9 +125,11 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
                 +"&telefono="+telefono;
         if (contacto.equals("contacto1")){
             String metodo = "ActualizarContacto1App.php?";
+            Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
             this.execute(APIUrl + metodo + parametros);
         }else{
             String metodo = "ActualizarContacto2App.php?";
+            Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
             this.execute(APIUrl + metodo + parametros);
         }
     }
@@ -129,18 +137,21 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
     public void loguearUsuario(String usuario,String password){
         String metodo = "LoginApp.php?";
         String parametros = "correo=" + usuario + "&password=" + password;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
     public void registrarUsuario(String usuario,String password,String nombre,String telefono,String tipoUsuario){
         String metodo = "RegistroApp.php?";
         String parametros = "correo="+usuario+"&password="+password+"&nombre="+nombre+"&telefono="+telefono+"&usuario="+tipoUsuario;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
     public void cargarDatosMedicos(String usuario){
         String metodo = "DatosMedicosDependienteApp.php?";
         String parametros = "correo="+usuario;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
@@ -149,30 +160,35 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         String parametros = "correo="+correo+"&peso="+peso+"&altura="+altura+"&grSanguineo="
                 +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion+"&notasMedicas="
                 +nMedicas+"&enfermedades="+enfermedades;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
     public void cargarContrasena(String usuario){
         String metodo = "CargarContrasenaApp.php?";
         String parametros = "correo="+usuario;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
     public void modificarContrasena(String usuario, String password){
         String metodo = "ModificarContrasenaApp.php?";
         String parametros = "correo="+usuario+"&password="+password;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
     public void agregarAsistente(String usuario,int id_alerta){
         String metodo = "ModificarAlertasApp.php?";
         String parametros = "correo="+usuario+"&idAlerta="+id_alerta;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
 
     public void cargarDM(String id_correoAsistido){
         String metodo = "CargarDmApp.php?";
         String parametros = "id_usuario="+id_correoAsistido;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl +  metodo + parametros);
     }
 
