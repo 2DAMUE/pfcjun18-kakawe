@@ -186,9 +186,16 @@
             <View style="@style/low_divider" />
 
             <TextView
-                android:id="@+id/tv_perfil_contactos"
+                android:id="@+id/tv_perfil_contactos1"
                 style="@style/submenu_perfil"
-                android:text="Contactos de emergencia" />
+                android:text="Contacto de emergencia 1" />
+
+            <View style="@style/divider" />
+
+            <TextView
+                android:id="@+id/tv_perfil_contactos2"
+                style="@style/submenu_perfil"
+                android:text="Contacto de emergencia 2" />
 
             <View style="@style/low_divider" />
 

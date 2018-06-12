@@ -57,7 +57,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
 
     ImageView iv_foto_perfil,iv_editarFoto_perfil;
     EditText et_perfil_email, et_perfil_telefono, et_perfil_nombre, et_perfil_apellido, et_perfil_fnacimiento, et_perfil_sexo;
-    Button btn_perfil_cerrarSesion;
     TextView tv_perfil_modContrasena, tv_perfil_datosMedicos, tv_perfil_contactos;
     ToggleButton btn_perfil_modificar_datos;
 
@@ -184,17 +183,11 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
 
     private void habilitarCampos(Boolean habilitado) {
         et_perfil_nombre.setEnabled(habilitado);
-
         et_perfil_apellido.setEnabled(habilitado);
-
         et_perfil_fnacimiento.setEnabled(habilitado);
-
         et_perfil_sexo.setEnabled(habilitado);
-
         et_perfil_telefono.setEnabled(habilitado);
-
         et_perfil_email.setEnabled(habilitado);
-
         iv_foto_perfil.setClickable(habilitado);
         if (habilitado){
             et_perfil_nombre.setHint("Nombre");
@@ -213,8 +206,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
             et_perfil_email.setHint("");
             iv_editarFoto_perfil.setVisibility(View.INVISIBLE);
         }
-
-
     }
 
     private boolean comprobarCampos() {
@@ -259,8 +250,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
     public void cargarDatosPerfil() {
-        Log.v("Entrada", "3");
-
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
             public void onSuccess(JSONArray response) {

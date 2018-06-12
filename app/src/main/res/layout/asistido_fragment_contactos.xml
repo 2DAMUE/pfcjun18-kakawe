@@ -8,7 +8,7 @@
 
 
     <ToggleButton
-        android:id="@+id/btn_perfil_modificar_datos"
+        android:id="@+id/btn_contactos_modificar"
         style="@style/btn_editar" />
 
     <ScrollView
@@ -37,12 +37,15 @@
                     android:src="@drawable/ic_profile" />
 
                 <ImageView
+                    android:id="@+id/iv_editarFoto_contacto1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
                     android:layout_margin="15dp"
                     android:background="@color/blanco_trans"
                     android:padding="5dp"
+                    android:visibility="invisible"
+
                     android:src="@drawable/ic_edit" />
 
             </FrameLayout>
@@ -119,12 +122,14 @@
                     android:src="@drawable/ic_profile" />
 
                 <ImageView
+                    android:id="@+id/iv_editarFoto_contacto2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
                     android:layout_margin="15dp"
                     android:background="@color/blanco_trans"
                     android:padding="5dp"
+                    android:visibility="invisible"
                     android:src="@drawable/ic_edit" />
 
             </FrameLayout>

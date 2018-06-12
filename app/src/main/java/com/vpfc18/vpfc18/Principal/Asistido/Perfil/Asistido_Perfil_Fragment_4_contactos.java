@@ -55,13 +55,12 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
     int accion;
     private static final int GALERY_INTENT = 1;
 
-    Button btn_contactos_atras,btn_guardarContacto1,btn_guardarContacto2;
     ToggleButton btn_contactos_modificar;
     EditText et_contactos_nombre1,et_contactos_nombre2,et_contactos_telefono1,et_contactos_telefono2;
-    ImageView iv_foto_contacto1,iv_foto_contacto2;
+    ImageView iv_foto_contacto1,iv_foto_contacto2,iv_editarFoto_contacto1,iv_editarFoto_contacto2;
 
 
-    String correoUser,nombre1,nombre2,telefono1,telefono2,telefonoUser,accionContacto;
+    String correoUser,nombre1,nombre2,telefono1,telefono2,telefonoUser,accionContacto,contacto;
     public Asistido_Perfil_Fragment_4_contactos() {
         // Required empty public constructor
     }
@@ -71,6 +70,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         storageReference = FirebaseStorage.getInstance().getReference();
+
 
 
         correoUser = getArguments().getString("correoUser");
@@ -83,7 +83,21 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
 
         iv_foto_contacto1 = (ImageView) view.findViewById(R.id.iv_foto_contacto1);
         iv_foto_contacto2 = (ImageView) view.findViewById(R.id.iv_foto_contacto2);
+        iv_editarFoto_contacto1 = (ImageView) view.findViewById(R.id.iv_editarFoto_contacto1);
+        iv_editarFoto_contacto2 = (ImageView) view.findViewById(R.id.iv_editarFoto_contacto2);
+        btn_contactos_modificar = (ToggleButton) view.findViewById(R.id.btn_contactos_modificar);
 
+        btn_contactos_modificar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    habilitarCampos(true);
+                } else if (comprobarCampos()) {
+                    habilitarCampos(false);
+                    actualizarDatos(contacto);
+                }
+            }
+        });
         iv_foto_contacto1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,9 +145,10 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                 volverAPerfil();
             }
         });
+        */
         cargarContacto1();
         cargarContacto2();
-        */
+
        cargarFotoPerfilContacto1();
        cargarFotoPerfilContacto2();
         return view;
@@ -186,12 +201,12 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         if (requestCode == GALERY_INTENT && resultCode == RESULT_OK) {
             //Aquí sólo se recoge la URI. No se grabará hasta que no se haya grabado el contacto
             uri = data.getData();
-            subirFoto(accionContacto);
+            subirFoto();
         }
 
     }
 
-    private void subirFoto(String contacto) {
+    private void subirFoto() {
 
         StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(accionContacto);
         rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -224,7 +239,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         });
 
     }
-    private void actualizarDatos(final String contacto, String nombre, String telefono){
+    private void actualizarDatos(final String contacto){
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
 
             @Override
@@ -254,39 +269,70 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                 e.printStackTrace();
             }
         });
-        auxinetAPI.guardarContactos(correoUser,contacto,nombre,telefono);
+        auxinetAPI.guardarContactos(correoUser,contacto,nombre1,telefono1);
 
     }
-    private boolean comprobarCampos(String contacto){
-        if (contacto.equals("1")){
-            nombre1 = et_contactos_nombre1.getText().toString().trim();
-            telefono1 = et_contactos_telefono1.getText().toString().trim();
-            if (nombre1.isEmpty()){
-                String a= "Escribe un nombre de tu contacto 1";
-                Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
-                et_contactos_nombre1.requestFocus();
-                return false;
-            }if (telefono1.isEmpty()){
+
+    private void habilitarCampos(Boolean habilitado) {
+        et_contactos_nombre1.setEnabled(habilitado);
+        et_contactos_nombre2.setEnabled(habilitado);
+        et_contactos_telefono1.setEnabled(habilitado);
+        et_contactos_telefono2.setEnabled(habilitado);
+        if (habilitado){
+            et_contactos_nombre1.setHint("Nombre");
+            et_contactos_nombre2.setHint("Nombre");
+            et_contactos_telefono1.setHint("000 000 000");
+            et_contactos_telefono2.setHint("000 000 000");
+            iv_editarFoto_contacto1.setVisibility(View.VISIBLE);
+            iv_editarFoto_contacto2.setVisibility(View.VISIBLE);
+        }else{
+            et_contactos_nombre1.setHint("");
+            et_contactos_nombre2.setHint("");
+            et_contactos_telefono1.setHint("");
+            et_contactos_telefono2.setHint("");
+            iv_editarFoto_contacto1.setVisibility(View.INVISIBLE);
+            iv_editarFoto_contacto2.setVisibility(View.INVISIBLE);
+        }
+    }
+    private boolean comprobarCampos(){
+        nombre1 = et_contactos_nombre1.getText().toString().trim();
+        telefono1 = et_contactos_telefono1.getText().toString().trim();
+        nombre2 = et_contactos_nombre2.getText().toString().trim();
+        telefono2 = et_contactos_telefono2.getText().toString().trim();
+
+            if (!nombre1.isEmpty() && telefono1.isEmpty()){
                 String a= "Escribe un telefono de tu contacto 1";
                 Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
                 et_contactos_telefono1.requestFocus();
                 return false;
+            }if (!telefono1.isEmpty() && nombre1.isEmpty()){
+                String a= "Escribe un nombre de tu contacto 1";
+                Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
+                et_contactos_nombre1.requestFocus();
+                return false;
             }
-        }else{
-            nombre2 = et_contactos_nombre2.getText().toString().trim();
-            telefono2 = et_contactos_telefono2.getText().toString().trim();
-            if (nombre2.isEmpty()){
+            if (nombre2.isEmpty() && !telefono2.isEmpty()){
                 String a= "Escribe un nombre de tu contacto 2";
                 Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
                 et_contactos_nombre2.requestFocus();
                 return false;
-            }if (telefono2.isEmpty()) {
+            }if (telefono2.isEmpty() && !nombre2.isEmpty()) {
                 String a = "Escribe un telefono de tu contacto 2";
                 Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
                 et_contactos_telefono2.requestFocus();
                 return false;
             }
-        }
+            if (!nombre1.isEmpty() && !nombre2.isEmpty() && !telefono1.isEmpty() && !telefono2.isEmpty()){
+                contacto = "3";
+                return true;
+            }if (!nombre1.isEmpty() && !telefono1.isEmpty()){
+                contacto = "1";
+                return true;
+            }if (!nombre2.isEmpty() && !telefono2.isEmpty())  {
+                contacto = "2";
+                return true;
+            }
+
         return true;
     }
     public void cargarContacto1(){
