@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.vpfc18.vpfc18.R;
 
@@ -17,7 +18,7 @@ import com.vpfc18.vpfc18.R;
  */
 public class Registro_Fragment_1 extends Fragment {
 
-    ImageButton ibtn_registro_ayudar,ibtn_registro_serAyudado;
+    ImageView ibtn_registro_ayudar,ibtn_registro_serAyudado;
 
     public Registro_Fragment_1() {
         // Required empty public constructor
@@ -28,8 +29,8 @@ public class Registro_Fragment_1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_registro_1, container, false);
-        ibtn_registro_ayudar = (ImageButton)vista.findViewById(R.id.ibtn_registro_ayudar);
-        ibtn_registro_serAyudado = (ImageButton)vista.findViewById(R.id.ibtn_registro_serAyudado);
+        ibtn_registro_ayudar = (ImageView)vista.findViewById(R.id.ibtn_registro_ayudar);
+        ibtn_registro_serAyudado = (ImageView)vista.findViewById(R.id.ibtn_registro_serAyudado);
 
         ibtn_registro_ayudar.setOnClickListener(new View.OnClickListener() {
             @Override

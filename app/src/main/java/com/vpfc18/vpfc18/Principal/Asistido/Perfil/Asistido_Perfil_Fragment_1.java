@@ -2,11 +2,8 @@ package com.vpfc18.vpfc18.Principal.Asistido.Perfil;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -25,10 +22,7 @@ import android.widget.ToggleButton;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -54,11 +48,10 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     Uri uri;
     private static final int GALERY_INTENT = 1;
 
-    ImageView iv_foto_perfil;
-    EditText et_perfil_email, et_perfil_telefono, et_perfil_nombre, et_perfil_apellido, et_perfil_fnacimiento, et_perfil_sexo;
-    Button btn_perfil_cerrarSesion;
+    EditText et_perfil_email, et_perfil_telefono, et_perfil_nombre, et_perfil_apellido, et_perfil_sexo, et_perfil_fnacimiento;
     TextView tv_perfil_modContrasena, tv_perfil_datosMedicos, tv_perfil_contactos;
     ToggleButton btn_perfil_modificar_datos;
+    ImageView iv_foto_perfil;
 
     String email, emailViejo, nombre, apellido, telefono, correoUser, sexo, fNacimiento;
 
@@ -85,6 +78,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         tv_perfil_datosMedicos = (TextView) vista.findViewById(R.id.tv_perfil_datosMedicos);
         tv_perfil_contactos = (TextView) vista.findViewById(R.id.tv_perfil_contactos);
         btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_modificar_datos);
+
         iv_foto_perfil = (ImageView) vista.findViewById(R.id.iv_foto_perfil);
         correoUser = getArguments().getString("correoUser");
 
@@ -128,28 +122,30 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         });
         cargarDatosPerfil();
         return vista;
+
     }
 
+
     private void cargarFotoPerfil() {
-        Log.v("dentro1","ERRORAZO");
-            final StorageReference stor = FirebaseStorage.getInstance().getReference().child("662959149").child("662959149");
-        Log.v("dentro2",stor.toString());
-            final long ONE_MEGABYTE = 1024 * 1024;
-            stor.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    Uri fotobajada = task.getResult();
-                    Glide.with(getActivity())
-                            .load(fotobajada)
-                            .into(iv_foto_perfil);
-                }
-            });
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference refGuardar = storage.getReferenceFromUrl("gs://auxi-net.appspot.com").child(correoUser).child(correoUser);
+
+        Log.v("refGuardar", refGuardar.toString());
+        if (refGuardar.getName().isEmpty()) {
+        } else {
+            Log.v("Entrada", "2");
+            Glide.with(this).using(new FirebaseImageLoader())
+                    .load(refGuardar)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(iv_foto_perfil);
+        }
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.v("ruta",telefono + "");
         //verificamos si obtenemos la imagen de la galeria
         if (requestCode == GALERY_INTENT && resultCode == RESULT_OK) {
             //Aquí sólo se recoge la URI. No se grabará hasta que no se haya grabado el contacto
@@ -159,12 +155,15 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
     private void subirFoto() {
-        StorageReference rutaCarpetaImg = storageReference.child(telefono).child(telefono);
+        //
+        StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(correoUser);
+        Log.v("ruta", rutaCarpetaImg + "");
         rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 //descargar imagen de firebase
                 Uri descargarFoto = taskSnapshot.getDownloadUrl();
+                Log.v("ruta2", descargarFoto + "");
                 Glide.with(getActivity())
                         .load(descargarFoto)
                         .into(iv_foto_perfil);
@@ -172,6 +171,23 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                 Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
             }
         });
+
+
+        /*StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(correoUser);
+        //subimos la imagen y verificamos mediante un toast que se subio la foto
+        rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                //descargar imagen de firebase
+                Uri descargarFoto = taskSnapshot.getDownloadUrl();
+                Glide.with(getActivity())
+                        .load(descargarFoto)
+                        .into(btn_foto_perfil);
+
+                Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
+            }
+        });
+        */
     }
 
     private void habilitarCampos(Boolean habilitado) {
@@ -181,7 +197,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         et_perfil_sexo.setEnabled(habilitado);
         et_perfil_telefono.setEnabled(habilitado);
         et_perfil_email.setEnabled(habilitado);
-
     }
 
     private boolean comprobarCampos() {
@@ -226,8 +241,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
     public void cargarDatosPerfil() {
-        Log.v("Entrada", "3");
-
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
             public void onSuccess(JSONArray response) {
@@ -241,13 +254,13 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                     emailViejo = response.getString(0);
                     et_perfil_email.setText(response.getString(0));
                     et_perfil_telefono.setText(response.getString(1));
-                    telefono= response.getString(1);
                     et_perfil_nombre.setText(response.getString(2));
                     cargarFotoPerfil();
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Exception e) {
                 Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -275,6 +288,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                     Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onFailure(Exception e) {
                 Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();

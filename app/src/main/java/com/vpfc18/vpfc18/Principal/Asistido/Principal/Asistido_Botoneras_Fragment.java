@@ -3,6 +3,7 @@ package com.vpfc18.vpfc18.Principal.Asistido.Principal;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -244,7 +246,10 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
         datos.putString("longitud", longitud);
         datos.putString("correoUser", correoUser);
         pu.setArguments(datos);
+
         pu.show(getActivity().getFragmentManager(), "¿Que tipo de ayuda necesitas?");
+
+        //pu.getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
     }
 
     private void checkPermission(String telefono) {
