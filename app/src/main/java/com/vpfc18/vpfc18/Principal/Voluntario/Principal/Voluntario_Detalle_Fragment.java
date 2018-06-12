@@ -113,7 +113,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         return vista;
     }
     private void cargarMedicacion() {
-        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Medicacion();
+        Fragment fragmentoSeleccionado = new Voluntario_Principal_Detalle_Fragment_Medicacion();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -124,7 +124,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargarAlergias() {
-        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Alergias();
+        Fragment fragmentoSeleccionado = new Voluntario_Principal_Detalle_Fragment_Alergias();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -136,7 +136,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
     }
 
     private void cargarEnfermedades() {
-        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Enfermedades();
+        Fragment fragmentoSeleccionado = new Voluntario_Principal_Detalle_Fragment_Enfermedades();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -147,7 +147,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargarNotasM() {
-        Fragment fragmentoSeleccionado = new Voluntario_Detalle_NotasM();
+        Fragment fragmentoSeleccionado = new Voluntario_Principal_Detalle_Fragment_NotasM();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
