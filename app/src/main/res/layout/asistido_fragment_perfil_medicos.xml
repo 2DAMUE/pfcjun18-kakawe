@@ -92,7 +92,7 @@
                     android:id="@+id/spn_perfil_grSanguineo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:clickable="false"
+                    android:enabled="false"
                     android:drawSelectorOnTop="true"
                     android:entries="@array/gr_sanguineo"
                     android:gravity="right"
@@ -146,7 +146,12 @@
                 <EditText
                     android:id="@+id/et_perfil_medicacion"
                     style="@style/et_perfil"
-                    android:hint="Medicación"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
+                    android:hint="Alérgias"
                     android:inputType="text" />
             </LinearLayout>
 

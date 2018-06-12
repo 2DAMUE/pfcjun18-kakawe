@@ -76,8 +76,13 @@
 
         <EditText
             android:id="@+id/et_perfil_repetirContrasena"
-            style="@style/et_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:enabled="false"
+            android:gravity="end"
             android:inputType="textPassword"
+            android:paddingHorizontal="30dp"
             android:text="123456" />
     </LinearLayout>
 

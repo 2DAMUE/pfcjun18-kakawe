@@ -88,7 +88,7 @@ public class Registro_Fragment_2 extends Fragment {
             }
             @Override
             public void onFailure(Exception e) {
-
+                Toast.makeText(getContext(), "El usuario ya existe", Toast.LENGTH_LONG).show();
             }
         });
         auxinetAPI.registrarUsuario(correo,contrasena,nombre,telefono,tipoUsuario);

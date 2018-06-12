@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
@@ -29,9 +31,9 @@ import org.json.JSONException;
 public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
 
     EditText et_perfil_peso,et_perfil_alergias,et_perfil_altura,et_perfil_medicacion,et_perfil_enfermedades,et_perfil_notasMedicas;
-    Button btn_perfil_guardar;
     Spinner spn_perfil_grSanguineo;
     String correoUser,altura,peso,gpSanguineo,alergias,medicacion,enfermedades,nMedicas;
+    ToggleButton btn_perfil_modificar_datos;
 
     public Asistido_Perfil_Fragment_2_datosMedicos() {
         // Required empty public constructor
@@ -49,7 +51,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
         et_perfil_enfermedades = (EditText)vista.findViewById(R.id.et_perfil_enfermedades);
         spn_perfil_grSanguineo = (Spinner) vista.findViewById(R.id.spn_perfil_grSanguineo);
         et_perfil_notasMedicas = (EditText)vista.findViewById(R.id.et_perfil_notasMedicas);
-        btn_perfil_guardar = (Button) vista.findViewById(R.id.btn_perfil_guardar);
+        btn_perfil_modificar_datos = (ToggleButton) vista.findViewById(R.id.btn_perfil_modificar_datos);
 
 
         correoUser = getArguments().getString("correoUser");
@@ -63,18 +65,28 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
 
             }
         });
-        btn_perfil_guardar.setOnClickListener(new View.OnClickListener() {
+        btn_perfil_modificar_datos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (comprobarCampos()){
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    habilitarCampos(true);
+                } else if (comprobarCampos()) {
+                    habilitarCampos(false);
                     actualizarDM();
                 }
             }
         });
-
-        //cargamos los datos medicos
         cargarDM();
         return vista;
+    }
+    private void habilitarCampos(Boolean habilitado) {
+        et_perfil_peso.setEnabled(habilitado);
+        et_perfil_alergias.setEnabled(habilitado);
+        et_perfil_altura.setEnabled(habilitado);
+        et_perfil_medicacion.setEnabled(habilitado);
+        et_perfil_enfermedades.setEnabled(habilitado);
+        spn_perfil_grSanguineo.setEnabled(habilitado);
+        et_perfil_notasMedicas.setEnabled(habilitado);
     }
 
     private void cargarDM() {
