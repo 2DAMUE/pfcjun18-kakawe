@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Principal.Voluntario.Principal.Voluntario_Principal_Detalle_Fragment_Medicacion">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_perfil_voluntario_medicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Alergias"
+        android:textAlignment="center"
+        android:textSize="28sp" />
+
+    <EditText
+        android:id="@+id/mtv_perfil_voluntario_medicacion"
+        android:layout_width="match_parent"
+        android:layout_height="321dp"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/bt_perfil_voluntario_medicacion_guardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="guardar" />
+</LinearLayout>
