@@ -206,11 +206,9 @@
             </LinearLayout>
 
 
-
             <Button
                 android:id="@+id/btn_detalle_cerrar"
                 style="@style/btn"
-
                 android:layout_width="match_parent"
                 android:layout_marginBottom="40dp"
                 android:layout_marginLeft="10dp"

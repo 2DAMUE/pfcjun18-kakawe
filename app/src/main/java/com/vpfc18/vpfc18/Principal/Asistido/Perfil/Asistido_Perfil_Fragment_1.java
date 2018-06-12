@@ -130,7 +130,6 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         });
         cargarDatosPerfil();
         return vista;
-
     }
 
     private void cargarFotoPerfil() {
