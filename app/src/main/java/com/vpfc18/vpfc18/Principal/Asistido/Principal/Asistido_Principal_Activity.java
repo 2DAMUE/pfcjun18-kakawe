@@ -41,9 +41,8 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
         asistido_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
         getSupportActionBar().setTitle("Selector emergencias");
         asistido_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
-        if (checkPermission()){
-            cargaBotones();
-        }
+        checkPermission();
+
         asistido_principal_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +115,7 @@ public class Asistido_Principal_Activity extends AppCompatActivity {
                 cargaBotones();
             } else {
                 Log.i("PERMISOS2", "Se tiene permiso para acceder a tu ubicación!");
+                cargaBotones();
             }
         }
         return true;

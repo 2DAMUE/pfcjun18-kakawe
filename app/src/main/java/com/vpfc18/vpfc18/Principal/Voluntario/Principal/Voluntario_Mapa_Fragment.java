@@ -128,7 +128,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //cargarAlertas();
         mMapView = (MapView) mView.findViewById(R.id.map);
         mMapView.setVisibility(View.INVISIBLE);
         if (mMapView != null) {
@@ -215,7 +214,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         String telefono = object.getString("telefono");
                         String tipoAlerta = object.getString("nombreAlerta");
 
-                        // int distancia = (int) calcularDistancia(latitudAsistido, longitudAsistido);
                         int distancia = 0;
                         eAlertas = new Datos_Alertas(id_alerta, nombreAsistidoDetalle, latitudAsistido, longitudAsistido, telefono, tipoAlerta, distancia, id_dependiente);
                         datos_alertas.add(eAlertas);
@@ -331,7 +329,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     //metodo para poder introduccir imagenes vectoriales en los marcadores
     private BitmapDescriptor getBitmapDescriptor(int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            VectorDrawable vectorDrawable = (VectorDrawable) getContext().getDrawable(id);
+            VectorDrawable vectorDrawable = (VectorDrawable) getActivity().getDrawable(id);
             int h = vectorDrawable.getIntrinsicHeight();
             int w = vectorDrawable.getIntrinsicWidth();
             vectorDrawable.setBounds(0, 0, w, h);

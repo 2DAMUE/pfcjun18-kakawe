@@ -53,7 +53,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         vista = inflater.inflate(R.layout.voluntario_fragment_detalle, container, false);
 
         Bundle datos=this.getArguments();
-        datos.getInt("id_asistido");
+        id_alerta = datos.getInt("idAlerta");
         correoUser = datos.getString("correoUser");
         id_correoAsistido = datos.getString("idCorreoAsistido");
         nombreAsistido = datos.getString("nombreAsistido");
@@ -74,8 +74,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         btn_detalle_llamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkPermission();
-                llamadaTelefonica(telefono);
+                cargarDialogLlamada();
 
             }
         });
@@ -86,6 +85,16 @@ public class Voluntario_Detalle_Fragment extends Fragment {
             }
         });
         return vista;
+    }
+    public void cargarDialogLlamada() {
+        Voluntario_Llamada_Dialog vld = new Voluntario_Llamada_Dialog();
+        Bundle datos = new Bundle();
+        datos.putString("nombre", nombreAsistido);
+        datos.putString("telefono", telefono);
+        datos.putInt("id_alerta", id_alerta);
+        datos.putString("correoUser", correoUser);
+        vld.setArguments(datos);
+        vld.show(getActivity().getFragmentManager(), "dialog");
     }
 
     private void volverAlistado() {
@@ -156,67 +165,5 @@ public class Voluntario_Detalle_Fragment extends Fragment {
             }
         });
         auxinetAPI.cargarDM(id_correoAsistido);
-    }
-
-    private void checkPermission() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-        } else {
-            int permissionCheck = ContextCompat.checkSelfPermission(
-                    getContext(), Manifest.permission.CALL_PHONE);
-            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getContext(), "Necesitamos que aceptes los permisos para llamar a las personas que necesitan ayuda!", Toast.LENGTH_LONG).show();
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, 225);
-
-            } else {
-                llamadaTelefonica(telefono);
-                Log.i("PERMISOS2", "Se tiene permiso para realizar llamadas!");
-            }
-        }
-        return;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case REQUEST_CODE_ASK_PERMISSIONS:
-                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    // El usuario acepto los permisos.
-                    //Toast.makeText(getActivity(), "Necesitamos que aceptes los permisos para llamar a las personas que necesitan ayuda!", Toast.LENGTH_LONG).show();
-                    llamadaTelefonica(telefono);
-                    Log.i("PERMISOS3", "No se tiene permiso para realizar llamadas telefónicas.");
-                }else{
-                    // Permiso denegado.
-                    //Toast.makeText(getActivity(), "Necesitamos que aceptes los permisos para llamar a las personas que necesitan ayuda!", Toast.LENGTH_LONG).show();
-                    Log.i("PERMISOS4", "No se tiene permiso para realizar llamadas telefónicas.");
-                    checkPermission();
-                }
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
-
-    public void llamadaTelefonica(String contacto) {
-        agregarAsistente();
-        Intent intent = new Intent(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + contacto));
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(intent);
-        }
-    }
-
-    public void agregarAsistente() {
-        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
-
-            @Override
-            public void onSuccess(JSONArray response) {
-
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-
-            }
-        });
-        auxinetAPI.agregarAsistente(correoUser,id_alerta);
     }
 }
