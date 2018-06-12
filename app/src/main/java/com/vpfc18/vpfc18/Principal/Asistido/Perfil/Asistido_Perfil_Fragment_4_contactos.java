@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -20,7 +21,9 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -58,7 +61,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
     ImageView iv_foto_contacto1,iv_foto_contacto2;
 
 
-    String correoUser,nombre1,nombre2,telefono1,telefono2;
+    String correoUser,nombre1,nombre2,telefono1,telefono2,telefonoUser,accionContacto;
     public Asistido_Perfil_Fragment_4_contactos() {
         // Required empty public constructor
     }
@@ -69,6 +72,9 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                              Bundle savedInstanceState) {
         storageReference = FirebaseStorage.getInstance().getReference();
 
+
+        correoUser = getArguments().getString("correoUser");
+        telefonoUser = getArguments().getString("telefonoUser");
         View view = inflater.inflate(R.layout.asistido_fragment_contactos, container, false);
         et_contactos_nombre1 = (EditText)view.findViewById(R.id.et_contactos_nombre1);
         et_contactos_telefono1 = (EditText)view.findViewById(R.id.et_contactos_telefono1);
@@ -82,6 +88,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
             @Override
             public void onClick(View v) {
                 accion = 0;
+                accionContacto = "contacto1";
                 intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, GALERY_INTENT);
@@ -92,6 +99,8 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         iv_foto_contacto2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                accion = 1;
+                accionContacto = "contacto2";
                 intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, GALERY_INTENT);
@@ -125,7 +134,49 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         cargarContacto1();
         cargarContacto2();
         */
+       cargarFotoPerfilContacto1();
+       cargarFotoPerfilContacto2();
         return view;
+    }
+
+    private void cargarFotoPerfilContacto1() {
+        final StorageReference stor = FirebaseStorage.getInstance().getReference().child(correoUser).child("contacto1");
+        stor.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                try {
+                    Uri fotobajada = task.getResult();
+                    Glide.with(getActivity())
+                            .load(fotobajada)
+                            .into(iv_foto_contacto1);
+                    iv_foto_contacto1.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                }catch (Exception e){
+                        Log.e("CARGA1","VACIO");
+                    }finally {
+                        Log.e("CARGA11","VACIO");
+                    }
+            }
+        });
+    }
+
+    private void cargarFotoPerfilContacto2() {
+        final StorageReference stor = FirebaseStorage.getInstance().getReference().child(correoUser).child("contacto2");
+        stor.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                try {
+                    Uri fotobajada = task.getResult();
+                    Glide.with(getActivity())
+                            .load(fotobajada)
+                            .into(iv_foto_contacto2);
+                    iv_foto_contacto2.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                }catch (Exception e){
+                    Log.e("CARGA1","VACIO");
+                }finally {
+                    Log.e("CARGA11","VACIO");
+                }
+            }
+        });
     }
 
     @Override
@@ -135,20 +186,18 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
         if (requestCode == GALERY_INTENT && resultCode == RESULT_OK) {
             //Aquí sólo se recoge la URI. No se grabará hasta que no se haya grabado el contacto
             uri = data.getData();
-            subirFoto();
+            subirFoto(accionContacto);
         }
 
     }
 
-    private void subirFoto() {
+    private void subirFoto(String contacto) {
 
-        StorageReference rutaCarpetaImg = storageReference.child("jose1@mail.com").child("jose1_contacto1@mail.com");
-        Log.v("ruta",rutaCarpetaImg + "");
+        StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(accionContacto);
         rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 //descargar imagen de firebase
-
                 if (accion == 0){
                     Uri descargarFoto = taskSnapshot.getDownloadUrl();
                     Log.v("ruta2",descargarFoto + "");
@@ -156,16 +205,17 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                     Glide.with(getActivity())
                             .load(descargarFoto)
                             .into(iv_foto_contacto1);
-
+                    iv_foto_contacto1.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
-                }else{
+                }
+                if (accion == 1){
                     Uri descargarFoto = taskSnapshot.getDownloadUrl();
                     Log.v("ruta2",descargarFoto + "");
 
                     Glide.with(getActivity())
                             .load(descargarFoto)
                             .into(iv_foto_contacto2);
-
+                    iv_foto_contacto2.setScaleType(ImageView.ScaleType.CENTER_CROP);
                     Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
 
                 }
@@ -173,24 +223,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
             }
         });
 
-
-        /*StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(correoUser);
-        //subimos la imagen y verificamos mediante un toast que se subio la foto
-        rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //descargar imagen de firebase
-                Uri descargarFoto = taskSnapshot.getDownloadUrl();
-                Glide.with(getActivity())
-                        .load(descargarFoto)
-                        .into(btn_foto_perfil);
-
-                Toast.makeText(getActivity(), "Foto actualizada", Toast.LENGTH_LONG).show();
-            }
-        });
-        */
     }
-
     private void actualizarDatos(final String contacto, String nombre, String telefono){
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
 

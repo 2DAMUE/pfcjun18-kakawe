@@ -128,20 +128,26 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         });
         cargarDatosPerfil();
         return vista;
+
     }
 
     private void cargarFotoPerfil() {
-        Log.v("dentro1","ERRORAZO");
-            final StorageReference stor = FirebaseStorage.getInstance().getReference().child("662959149").child("662959149");
-        Log.v("dentro2",stor.toString());
-            final long ONE_MEGABYTE = 1024 * 1024;
-            stor.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            final StorageReference ruta = FirebaseStorage.getInstance().getReference().child(correoUser).child(correoUser);
+        Log.v("dentro2",ruta.toString());
+        ruta.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-                    Uri fotobajada = task.getResult();
-                    Glide.with(getActivity())
-                            .load(fotobajada)
-                            .into(iv_foto_perfil);
+                    try{
+                        Uri fotobajada = task.getResult();
+                        Glide.with(getActivity())
+                                .load(fotobajada)
+                                .into(iv_foto_perfil);
+                        iv_foto_perfil.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    }catch (Exception e){
+                        Log.e("CARGA1","VACIO");
+                    }finally {
+                        Log.e("CARGA11","VACIO");
+                    }
                 }
             });
     }
@@ -159,7 +165,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
     }
 
     private void subirFoto() {
-        StorageReference rutaCarpetaImg = storageReference.child(telefono).child(telefono);
+        StorageReference rutaCarpetaImg = storageReference.child(correoUser).child(correoUser);
         rutaCarpetaImg.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -315,6 +321,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         t.commit();
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
+        datos.putString("telefonoUser", telefono);
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }

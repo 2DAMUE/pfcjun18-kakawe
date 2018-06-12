@@ -24,7 +24,7 @@ public class Asistido_Dialog_Tipos_Ayuda extends DialogFragment {
 
     LinearLayout btn_ayuda1, btn_ayuda2, btn_ayuda3, btn_ayuda4, btn_ayuda5;
 
-    String[] tiposAlerta = {"aseo", "compra", "desplazamiento", "hogar"};
+    String[] tiposAlerta = {"aseo", "compra", "hogar", "desplazamiento"};
     String correoUser, latitud, longitud;
 
 
@@ -51,23 +51,37 @@ public class Asistido_Dialog_Tipos_Ayuda extends DialogFragment {
         btn_ayuda1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                nuevaAlerta(0);
+            }
+        });
+        btn_ayuda2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 nuevaAlerta(1);
+            }
+        });
+        btn_ayuda3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nuevaAlerta(2);
+            }
+        });
+        btn_ayuda4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nuevaAlerta(3);
             }
         });
 
         builder.setView(vista);
-
         Dialog dialog = builder.create();
-
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00FFFFFF")));
-
         return dialog;
 
 
     }
 
     public void nuevaAlerta(int alerta) {
-
         String tipoAlerta = tiposAlerta[alerta];
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override

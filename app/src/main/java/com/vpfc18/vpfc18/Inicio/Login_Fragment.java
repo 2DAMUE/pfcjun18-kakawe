@@ -55,9 +55,7 @@ public class Login_Fragment extends Fragment {
         et_login_correo= (EditText) vista.findViewById(R.id.et_login_correo);
         et_login_contrasena= (EditText) vista.findViewById(R.id.et_login_contrasena);
         btn_login_entrar= (Button) vista.findViewById(R.id.btn_login_entrar);
-        tv_login_recordarContrasena= (TextView) vista.findViewById(R.id.tv_login_recordarContrasena);
 
-        
         btn_login_entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

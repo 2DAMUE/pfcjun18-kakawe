@@ -43,7 +43,7 @@ public class Voluntario_Llamada_Dialog extends DialogFragment {
         Bundle datos = this.getArguments();
         nombre = datos.getString("nombre");
         telefono = datos.getString("telefono");
-        id_alerta = datos.getInt("idAlerta");
+        id_alerta = datos.getInt("id_alerta");
         correoUser = datos.getString("correoUser");
 
 
@@ -105,26 +105,26 @@ public class Voluntario_Llamada_Dialog extends DialogFragment {
     }
 
     public void llamadaTelefonica(String contacto) {
-
+        agregarAsistente();
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + contacto));
-        agregarAsistente();
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
     }
 
     public void agregarAsistente() {
+        Log.v("CONSULTA1","DENTRO");
         AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
 
             @Override
             public void onSuccess(JSONArray response) {
-                Log.v("ENTRANDO","ASE");
+                Log.v("CONSULTA2","ASE");
             }
 
             @Override
             public void onFailure(Exception e) {
-                Log.v("ENTRANDO",e.toString());
+                Log.v("CONSULTA3",e.toString());
             }
         });
         auxinetAPI.agregarAsistente(correoUser, id_alerta);
