@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,7 @@ import java.util.ArrayList;
  */
 
 public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyCallback{
+    private SwipeRefreshLayout sr_voultario_listado;
 
     Comunicador comunicador = new Comunicador();
     LVAdapterAlertas adaptador;
