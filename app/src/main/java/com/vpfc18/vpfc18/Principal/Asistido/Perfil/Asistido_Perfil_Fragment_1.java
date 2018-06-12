@@ -325,6 +325,4 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }
-
-
 }
