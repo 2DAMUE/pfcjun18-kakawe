@@ -20,8 +20,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <View style="@style/low_divider" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -37,14 +35,14 @@
 
                 <EditText
                     android:id="@+id/et_perfil_altura"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:backgroundTint = "@android:color/transparent"
-                    android:gravity = "end"
-                    android:enabled = "false"
-                    android:paddingHorizontal = "30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
                     android:hint="00.0"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:paddingHorizontal="30dp" />
 
             </LinearLayout>
 
@@ -65,14 +63,14 @@
 
                 <EditText
                     android:id="@+id/et_perfil_peso"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:backgroundTint = "@android:color/transparent"
-                    android:gravity = "end"
-                    android:enabled = "false"
-                    android:paddingHorizontal = "30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
                     android:hint="00.0"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:paddingHorizontal="30dp" />
             </LinearLayout>
 
             <View style="@style/divider" />
@@ -119,14 +117,14 @@
 
                 <EditText
                     android:id="@+id/et_perfil_alergias"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:backgroundTint = "@android:color/transparent"
-                    android:gravity = "end"
-                    android:enabled = "false"
-                    android:paddingHorizontal = "30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
                     android:hint="Alérgias"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:paddingHorizontal="30dp" />
 
             </LinearLayout>
 
@@ -169,14 +167,14 @@
 
                 <EditText
                     android:id="@+id/et_perfil_enfermedades"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:backgroundTint = "@android:color/transparent"
-                    android:gravity = "end"
-                    android:enabled = "false"
-                    android:paddingHorizontal = "30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
                     android:hint="Enfermedades"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:paddingHorizontal="30dp" />
 
             </LinearLayout>
 
@@ -197,25 +195,21 @@
 
                 <EditText
                     android:id="@+id/et_perfil_notasMedicas"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:backgroundTint = "@android:color/transparent"
-                    android:gravity = "end"
-                    android:enabled = "false"
-                    android:paddingHorizontal = "30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
                     android:hint="Notas medicas"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:paddingHorizontal="30dp" />
 
             </LinearLayout>
+
+            <View style="@style/divider" />
 
 
         </LinearLayout>
     </ScrollView>
-    <View style="@style/medium_divider" />
 
-    <Button
-        android:id="@+id/btn_perfil_atras"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="atras" />
 </LinearLayout>

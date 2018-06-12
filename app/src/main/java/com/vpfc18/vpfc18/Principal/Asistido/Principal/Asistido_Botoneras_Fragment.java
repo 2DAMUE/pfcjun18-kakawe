@@ -2,8 +2,11 @@ package com.vpfc18.vpfc18.Principal.Asistido.Principal;
 
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
@@ -28,7 +31,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.vpfc18.vpfc18.Base_de_datos.AuxinetAPI;
 import com.vpfc18.vpfc18.Base_de_datos.OnResponseListener;
-import com.vpfc18.vpfc18.Principal.Asistido.Principal.Dialog_Tipos_Ayudas.Asistido_Dialog_Tipo_Ayudas;
 import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
@@ -50,9 +52,10 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
     private LatLng actual;
 
 
-    CircularImageView btn_ayuda, btn_compania,btn_contacto1,btn_contacto2;
-    TextView tv_contacto1_nombre,tv_contacto2_nombre;
-    String correoUser,telefono1,telefono2,latitud,longitud;
+    CircularImageView btn_ayuda, btn_compania, btn_contacto1, btn_contacto2;
+    TextView tv_contacto1_nombre, tv_contacto2_nombre;
+    String correoUser, telefono1, telefono2, latitud, longitud;
+
     public Asistido_Botoneras_Fragment() {
         // Required empty public constructor
     }
@@ -63,8 +66,8 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.asistido_fragment_botoneras, container, false);
 
-        tv_contacto1_nombre = (TextView)mView.findViewById(R.id.tv_contacto1_nombre);
-        tv_contacto2_nombre = (TextView)mView.findViewById(R.id.tv_contacto2_nombre);
+        tv_contacto1_nombre = (TextView) mView.findViewById(R.id.tv_contacto1_nombre);
+        tv_contacto2_nombre = (TextView) mView.findViewById(R.id.tv_contacto2_nombre);
         btn_ayuda = (CircularImageView) mView.findViewById(R.id.btn_ayuda);
         btn_compania = (CircularImageView) mView.findViewById(R.id.btn_compania);
         btn_contacto1 = (CircularImageView) mView.findViewById(R.id.btn_contacto1);
@@ -158,7 +161,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
     }
 
     private void mandarAviso(String tipoAviso) {
-        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>(){
+        AuxinetAPI auxinetAPI = new AuxinetAPI(new OnResponseListener<JSONArray>() {
             @Override
             public void onSuccess(JSONArray response) {
                 Toast.makeText(getActivity(), "Alerta generada con éxito", Toast.LENGTH_SHORT).show();
@@ -171,7 +174,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
         });
         latitud = String.valueOf(latitudAsistido);
         longitud = String.valueOf(longitudAsistido);
-        auxinetAPI.nuevaAlerta(correoUser,tipoAviso,latitud,longitud);
+        auxinetAPI.nuevaAlerta(correoUser, tipoAviso, latitud, longitud);
     }
 
     public void cargarContacto1() {
@@ -182,18 +185,19 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
                     String contactonombre1 = respuesta.getString(0);
                     String contactotelefono1 = respuesta.getString(1);
                     tv_contacto1_nombre.setText(contactonombre1);
-                    telefono1= contactotelefono1;
+                    telefono1 = contactotelefono1;
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "No tienes un contacto 1", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Exception e) {
 
             }
         });
-        auxinetAPI.cargarContactos(correoUser,"contacto1");
+        auxinetAPI.cargarContactos(correoUser, "contacto1");
     }
 
     private void cargarContacto2() {
@@ -204,7 +208,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
                     String contactonombre2 = respuesta.getString(0);
                     String contactotelefono2 = respuesta.getString(1);
                     tv_contacto2_nombre.setText(contactonombre2);
-                    telefono2= contactotelefono2;
+                    telefono2 = contactotelefono2;
 
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "No tienes un contacto 2", Toast.LENGTH_SHORT).show();
@@ -217,14 +221,14 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
 
             }
         });
-        auxinetAPI.cargarContactos(correoUser,"contacto2");
+        auxinetAPI.cargarContactos(correoUser, "contacto2");
     }
 
 
     public void llamadaTelefonica(String telefono) {
-        if (telefono.isEmpty()){
+        if (telefono.isEmpty()) {
             Toast.makeText(getContext(), "Configura tus contactos en tu perfil", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Intent intent = new Intent(Intent.ACTION_CALL);
             intent.setData(Uri.parse("tel:" + telefono));
             if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -232,8 +236,9 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
             }
         }
     }
+
     private void tiposDeAyudas() {
-        Asistido_Dialog_Tipo_Ayudas pu = new Asistido_Dialog_Tipo_Ayudas();
+        Asistido_Dialog_Tipos_Ayuda pu = new Asistido_Dialog_Tipos_Ayuda();
         Bundle datos = new Bundle();
         datos.putString("latitud", latitud);
         datos.putString("longitud", longitud);

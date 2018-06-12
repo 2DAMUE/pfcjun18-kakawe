@@ -265,6 +265,7 @@
                 <Button
                     android:id="@+id/btn_detalle_navegar"
                     style="@style/btn"
+                    android:layout_width="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
@@ -276,6 +277,7 @@
                 <Button
                     android:id="@+id/btn_detalle_llamar"
                     style="@style/btn"
+                    android:layout_width="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
