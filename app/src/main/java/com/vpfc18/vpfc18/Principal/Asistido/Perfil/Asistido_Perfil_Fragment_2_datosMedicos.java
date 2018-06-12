@@ -220,23 +220,17 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
                 Toast.makeText(getContext(), "Fallo al actualizar", Toast.LENGTH_SHORT).show();
             }
         });
-        auxinetAPI.actualizarDatosMedicos(correoUser,peso,altura,gpSanguineo,alergias,medicacion);
+        auxinetAPI.actualizarDatosMedicos(correoUser,peso,altura,gpSanguineo);
     }
 
     private boolean comprobarCampos(){
         altura = et_perfil_altura.getText().toString().trim();
         peso = et_perfil_peso.getText().toString();
-        alergias = et_perfil_alergias.getText().toString();
-        medicacion = et_perfil_medicacion.getText().toString();
 
         if (altura.isEmpty()){
             altura = "null";
         }if (peso.isEmpty()){
             peso = "null";
-        }if (alergias.isEmpty()){
-            alergias = "null";
-        }if (medicacion.isEmpty()){
-            medicacion = "null";
         }if (gpSanguineo.equals("grupo")){
             gpSanguineo = "null";
         }

@@ -155,10 +155,10 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         this.execute(APIUrl + metodo + parametros);
     }
 
-    public void actualizarDatosMedicos(String correo,String peso,String altura,String gpSanguineo,String alergias,String medicacion){
+    public void actualizarDatosMedicos(String correo,String peso,String altura,String gpSanguineo){
         String metodo = "ActualizarDatosMedicosApp.php?";
         String parametros = "correo="+correo+"&peso="+peso+"&altura="+altura+"&grSanguineo="
-                +gpSanguineo+"&alergias="+alergias+"&medicacion="+medicacion;
+                +gpSanguineo;
         Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
@@ -190,15 +190,31 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl +  metodo + parametros);
     }
+
     public void guardarEnfermedades(String correoUser,String notasMedicas){
         String metodo = "ActualizarEnfermedadesApp.php?";
         String parametros = "correo="+correoUser+"&notasMedicas="+notasMedicas;
         Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
+
     public void guardarNotasM(String correoUser,String enfermedades){
         String metodo = "ActualizarNotasMedicasApp.php?";
         String parametros = "correo="+correoUser+"&enfermedades="+enfermedades;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void guardarAlergias(String correoUser,String alergias){
+        String metodo = "ActualizarNotasMedicasApp.php?";
+        String parametros = "correo="+correoUser+"&alergias="+alergias;
+        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
+        this.execute(APIUrl + metodo + parametros);
+    }
+
+    public void guardarMedicacion(String correoUser,String medicacion){
+        String metodo = "ActualizarNotasMedicasApp.php?";
+        String parametros = "correo="+correoUser+"&medicacion="+medicacion;
         Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }

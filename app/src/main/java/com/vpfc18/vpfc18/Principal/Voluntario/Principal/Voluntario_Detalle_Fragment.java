@@ -120,6 +120,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         t.commit();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
+        datos.putString("id_correoAsistido", id_correoAsistido);
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargarAlergias() {
@@ -130,6 +131,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         t.commit();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
+        datos.putString("id_correoAsistido", id_correoAsistido);
         fragmentoSeleccionado.setArguments(datos);
     }
 
@@ -141,6 +143,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         t.commit();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
+        datos.putString("id_correoAsistido", id_correoAsistido);
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargarNotasM() {
@@ -151,6 +154,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         t.commit();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
+        datos.putString("id_correoAsistido", id_correoAsistido);
         fragmentoSeleccionado.setArguments(datos);
     }
 
