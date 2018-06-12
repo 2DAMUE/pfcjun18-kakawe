@@ -48,8 +48,11 @@ public class Voluntario_Principal_Detalle_Fragment_Alergias extends Fragment {
                 t.addToBackStack(null);
                 t.commit();
                 Bundle datos = new Bundle();
+                datos.putInt("idAlerta", id_alerta);
                 datos.putString("correoUser", correoUser);
                 datos.putString("id_correoAsistido", id_correoAsistido);
+                datos.putString("nombreAsistido", nombreAsistido);
+                datos.putString("telefonoAsistido", telefono);
                 fragmentoSeleccionado.setArguments(datos);
             }
         });
