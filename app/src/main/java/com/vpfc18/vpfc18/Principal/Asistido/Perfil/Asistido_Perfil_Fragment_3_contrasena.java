@@ -67,7 +67,6 @@ public class Asistido_Perfil_Fragment_3_contrasena extends Fragment {
                     }else{
                         Toast.makeText(getContext(), "Fallo al actualizar la contrasena", Toast.LENGTH_SHORT).show();
                     }
-
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "Fallo al actualizar la contrasena", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();

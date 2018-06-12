@@ -35,6 +35,7 @@
 
                 <EditText
                     android:id="@+id/et_perfil_nombre"
+                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
@@ -62,6 +63,7 @@
 
                 <EditText
                     android:id="@+id/et_perfil_apellido"
+                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
@@ -88,6 +90,7 @@
 
                 <EditText
                     android:id="@+id/et_perfil_fnacimiento"
+                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
@@ -115,7 +118,7 @@
 
                 <EditText
                     android:id="@+id/et_perfil_sexo"
-                    style="@style/et_perfil"
+                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
@@ -142,6 +145,7 @@
 
                 <EditText
                     android:id="@+id/et_perfil_telefono"
+                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
@@ -169,6 +173,7 @@
 
                 <EditText
                     android:id="@+id/et_perfil_email"
+                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@android:color/transparent"
@@ -186,7 +191,6 @@
                 android:text="Contraseña" />
 
             <View style="@style/divider" />
-
 
         </LinearLayout>
     </ScrollView>
