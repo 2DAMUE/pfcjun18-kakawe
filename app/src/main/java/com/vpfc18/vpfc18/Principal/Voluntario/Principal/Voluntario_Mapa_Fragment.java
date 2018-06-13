@@ -82,9 +82,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private LatLng actual;
     Integer c;
 
-
     BitmapDescriptor marker_shower, marker_car, marker_shopping, marker_coffee, marker_home;
-
 
     //----------Elementos del Vista--------------//
     private TextView tv_voluntarioMapa_nombreAsistido, tv_voluntarioMapa_tipoAlerta, tv_voluntarioMapa_distancia;

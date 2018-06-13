@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.ebanx.swipebtn.SwipeButton;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
@@ -63,6 +64,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
     CircularImageView btn_ayuda, btn_compania, btn_contacto1, btn_contacto2,iv_phone_contacto1,iv_phone_contacto2;
     TextView tv_contacto1_nombre, tv_contacto2_nombre;
     String correoUser, telefono1, telefono2, latitud, longitud;
+    SwipeButton btn_sos;
 
     public Asistido_Botoneras_Fragment() {
         // Required empty public constructor
@@ -83,6 +85,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
         btn_contacto2 = (CircularImageView) mView.findViewById(R.id.btn_contacto2);
         iv_phone_contacto1 = (CircularImageView) mView.findViewById(R.id.iv_phone_contacto1);
         iv_phone_contacto2 = (CircularImageView) mView.findViewById(R.id.iv_phone_contacto2);
+        btn_sos = (SwipeButton) mView.findViewById(R.id.btn_sos);
 
         correoUser = getArguments().getString("correoUser");
 
@@ -110,6 +113,14 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 checkPermission(telefono2);
+            }
+        });
+
+        btn_sos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + 112));
             }
         });
         cargarContacto1();
