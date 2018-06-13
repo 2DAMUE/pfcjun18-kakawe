@@ -142,7 +142,7 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
     private void cargaLista(){
         perfil=0;
         voluntario_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
-        getSupportActionBar().setTitle("Listado eventos");
+        getSupportActionBar().setTitle("Listado");
         Fragment fragmentoSeleccionado = new Voluntario_Listado_Fragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction t = fm.beginTransaction();
@@ -155,7 +155,7 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
     private void cargaPerfil(){
         perfil=1;
         voluntario_principal_toolbar.setNavigationIcon(R.drawable.ic_vacio);
-        getSupportActionBar().setTitle("Perfil Usuario");
+        getSupportActionBar().setTitle("Perfil");
         Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction t = fm.beginTransaction();
@@ -165,13 +165,13 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }
-
+    
     public void requestStoragePermission() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 voluntario_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
-                getSupportActionBar().setTitle("Mapa eventos");
+                getSupportActionBar().setTitle("Mapa");
             }
         });
 

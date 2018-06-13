@@ -133,6 +133,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         return mView;
     }
     private void cargarFotoPerfil(String correoAsistido) {
+        iv_mapa_foto_asistente.setImageResource(R.drawable.ic_profile);
         final StorageReference ruta = FirebaseStorage.getInstance().getReference().child(correoAsistido).child(correoAsistido);
         Log.v("dentro2",ruta.toString());
         ruta.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -199,11 +200,11 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(getContext());
 
-        marker_shower = getBitmapDescriptor(R.drawable.marker_shower);
-        marker_car = getBitmapDescriptor(R.drawable.marker_car);
-        marker_shopping = getBitmapDescriptor(R.drawable.marker_shopping);
-        marker_coffee = getBitmapDescriptor(R.drawable.marker_coffee);
-        marker_home = getBitmapDescriptor(R.drawable.marker_home);
+        marker_shower = BitmapDescriptorFactory.fromResource(R.drawable.marker_shower);
+        marker_car = BitmapDescriptorFactory.fromResource(R.drawable.marker_car);
+        marker_shopping = BitmapDescriptorFactory.fromResource(R.drawable.marker_shopping);
+        marker_coffee = BitmapDescriptorFactory.fromResource(R.drawable.marker_coffee);
+        marker_home = BitmapDescriptorFactory.fromResource(R.drawable.marker_home);
 
         mGoogleMaps = googleMap;
         mGoogleMaps.setMapType(GoogleMap.MAP_TYPE_NORMAL);
