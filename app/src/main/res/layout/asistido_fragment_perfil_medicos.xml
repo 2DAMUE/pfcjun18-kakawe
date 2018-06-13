@@ -127,8 +127,7 @@
                 android:text="Notas médicas" />
 
             <View style="@style/low_divider" />
-
-
+            
         </LinearLayout>
     </ScrollView>
 

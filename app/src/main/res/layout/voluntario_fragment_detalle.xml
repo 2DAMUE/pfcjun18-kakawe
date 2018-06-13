@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Principal.Voluntario.Principal.Voluntario_Detalle_Fragment">
+    tools:context=".Principal.Voluntario.Principal.Voluntario_Detalle_Fragment_1">
 
 
     <ScrollView
@@ -206,11 +206,9 @@
             </LinearLayout>
 
 
-
             <Button
                 android:id="@+id/btn_detalle_cerrar"
                 style="@style/btn"
-
                 android:layout_width="match_parent"
                 android:layout_marginBottom="40dp"
                 android:layout_marginLeft="10dp"

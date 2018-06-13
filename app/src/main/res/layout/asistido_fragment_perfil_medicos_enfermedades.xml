@@ -4,11 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Principal.Voluntario.Principal.Voluntario_Principal_Detalle_Fragment_NotasM">
+    tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_5_enfermedades">
 
-    <View style="@style/low_divider" />
+    <!-- TODO: Update blank fragment layout -->
+
+    <ToggleButton
+        android:id="@+id/btn_perfil_asistido_datosMedicos"
+        style="@style/btn_editar" />
+
     <TextView
-        android:id="@+id/tv_detalle_asistido_nDatosMedicos"
+        android:id="@+id/tv_perfil_asistido_nDatosMedicos"
         style="@style/subheader"
         android:text="" />
 
@@ -19,10 +24,10 @@
         android:paddingTop="10dp">
 
         <EditText
-            android:id="@+id/mtv_detalle_asistido_datos"
+            android:id="@+id/mtv_perfil_asistido_datos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="false"
+            android:enabled="false"
             android:ems="10"
             android:inputType="textMultiLine" />
 
@@ -33,14 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:orientation="vertical">
-    </LinearLayout>
-    <View style="@style/low_divider" />
 
-    <Button
-        android:id="@+id/btn_detalle_nMedicas_atras"
-        style="@style/btn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="40dp"
-        android:text="Atras" />
+    </LinearLayout>
+
 </LinearLayout>

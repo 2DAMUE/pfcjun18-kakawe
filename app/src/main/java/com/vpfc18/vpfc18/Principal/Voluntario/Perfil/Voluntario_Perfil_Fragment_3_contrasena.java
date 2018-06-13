@@ -21,14 +21,14 @@ import org.json.JSONException;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
+public class Voluntario_Perfil_Fragment_3_contrasena extends Fragment {
 
     EditText et_perfil_contrasenaVieja,et_perfil_contrasenaNueva,et_perfil_repetirContrasena;
     Button btn_perfil_actualizarDatos;
     String correoUser,passwordViejo,passwordNuevo,repetirPassword,passwordActual;
 
 
-    public Voluntario_Perfil_Fragment_3_Contrasena() {
+    public Voluntario_Perfil_Fragment_3_contrasena() {
         // Required empty public constructor
     }
 

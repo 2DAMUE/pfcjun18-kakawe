@@ -20,7 +20,7 @@ import com.vpfc18.vpfc18.R;
 
 import org.json.JSONArray;
 
-public class Asistido_Dialog_Tipos_Ayuda extends DialogFragment {
+public class Asistido_Dialog_tiposAyuda extends DialogFragment {
 
     LinearLayout btn_ayuda1, btn_ayuda2, btn_ayuda3, btn_ayuda4, btn_ayuda5;
 

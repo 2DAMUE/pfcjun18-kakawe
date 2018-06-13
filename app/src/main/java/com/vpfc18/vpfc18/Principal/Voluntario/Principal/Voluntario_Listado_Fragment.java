@@ -4,18 +4,13 @@ package com.vpfc18.vpfc18.Principal.Voluntario.Principal;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +18,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.vpfc18.vpfc18.Adaptadores.LVAdapterAlertas;
 import com.vpfc18.vpfc18.Base_de_datos.MapsAPI;
 import com.vpfc18.vpfc18.Base_de_datos.respuestaMapa;
@@ -41,13 +33,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -97,7 +82,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
         String idCorreoAsistido = datos_alertas.get(num).getId_asistente();
         String telefonoAsistido = datos_alertas.get(num).getTelefono();
         int idAlerta = datos_alertas.get(num).getId_alerta();
-        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment();
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment_1();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
         t.commit();

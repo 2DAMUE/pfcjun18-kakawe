@@ -15,14 +15,14 @@ import com.vpfc18.vpfc18.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Perfil_Fragment_2_TiposAyudas extends Fragment {
+public class Voluntario_Perfil_Fragment_2_tiposAyudas extends Fragment {
 
     CheckBox cbx_tipoayuda_ayuda1,cbx_tipoayuda_ayuda2,cbx_tipoayuda_ayuda3,cbx_tipoayuda_ayuda4,cbx_tipoayuda_ayuda5;
     Button btn_tipoayuda_guardar;
 
     String correoUser;
     String ayuda1,ayuda2,ayuda3,ayuda4,ayuda5;
-    public Voluntario_Perfil_Fragment_2_TiposAyudas() {
+    public Voluntario_Perfil_Fragment_2_tiposAyudas() {
         // Required empty public constructor
     }
 
