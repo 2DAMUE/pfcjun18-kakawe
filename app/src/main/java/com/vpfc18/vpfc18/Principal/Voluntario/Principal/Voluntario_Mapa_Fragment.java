@@ -234,8 +234,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 latitudAsistente = location.getLatitude();
                 longitudAsistente = location.getLongitude();
                 actual = new LatLng(latitudAsistente, longitudAsistente);
-
-
+                
                 //-------------------------------------------------//
 
                 if (salir == false) {
