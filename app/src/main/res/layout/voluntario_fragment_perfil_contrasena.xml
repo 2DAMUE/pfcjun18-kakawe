@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Principal.Voluntario.Perfil.Voluntario_Perfil_Fragment_3_contrasena">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="40dp"
+            android:text="Contraseña actual" />
+
+        <EditText
+            android:id="@+id/et_perfil_contrasenaVieja"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:gravity="end"
+            android:hint="·········"
+            android:inputType="textPassword"
+            android:paddingHorizontal="30dp" />
+    </LinearLayout>
+
+    <View style="@style/low_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="40dp"
+            android:text="Nueva contraseña" />
+
+        <EditText
+            android:id="@+id/et_perfil_contrasenaNueva"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:gravity="end"
+            android:hint="·········"
+            android:inputType="textPassword"
+            android:paddingHorizontal="30dp" />
+    </LinearLayout>
+
+    <View style="@style/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="40dp"
+            android:text="Repetir contraseña" />
+
+        <EditText
+            android:id="@+id/et_perfil_repetirContrasena"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@android:color/transparent"
+            android:gravity="end"
+            android:hint="·········"
+            android:inputType="textPassword"
+            android:paddingHorizontal="30dp" />
+    </LinearLayout>
+
+    <View style="@style/low_divider" />
+
+
+    <Button
+        android:id="@+id/btn_perfil_actualizarDatos"
+        style="@style/btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:text="Guardar" />
+
+</LinearLayout>
+
+
+
+
+
+
+

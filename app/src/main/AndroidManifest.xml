@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vpfc18.vpfc18">
+    package="com.vpfc18.vpfc18"
+    android:versionCode="1"
+    android:versionName="1.0">
+
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +25,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Inicio.Inicio_Activity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,13 +34,14 @@
         </activity>
         <activity
             android:name=".Principal.Voluntario.Principal.Voluntario_Principal_Activity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Principal.Asistido.Principal.Asistido_Principal_Activity"
+            android:screenOrientation="portrait"></activity>
 
-        </activity>
-        <activity android:name=".Principal.Asistido.Principal.Asistido_Principal_Activity"
-            android:screenOrientation="portrait">
-
-        </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAxMnx40xmRy26QBYjRQoDwCoM9A2EC0Wk" />
     </application>
 
 </manifest>

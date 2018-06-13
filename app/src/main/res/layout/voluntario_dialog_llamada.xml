@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".Principal.Voluntario.Principal.Voluntario_Llamada_Dialog">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Llamar a "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_nombre_dialogLlamada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" ?"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_llamar_dialogLlamada"
+            style="@style/btn"
+            android:layout_width="135dp"
+            android:layout_marginRight="5dp"
+            android:text="Llamar" />
+
+        <Button
+            android:id="@+id/btn_cancelar_dialogLlamada"
+            style="@style/btn"
+            android:layout_width="135dp"
+            android:layout_marginLeft="5dp"
+            android:text="Cancelar" />
+    </LinearLayout>
+
+</LinearLayout>

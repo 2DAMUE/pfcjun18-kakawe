@@ -4,13 +4,13 @@ package com.vpfc18.vpfc18.Inicio;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
-import com.vpfc18.vpfc18.Principal.Voluntario.Perfil.Voluntario_Perfil_Fragment_2;
 import com.vpfc18.vpfc18.R;
 
 
@@ -19,7 +19,7 @@ import com.vpfc18.vpfc18.R;
  */
 public class Registro_Fragment_1 extends Fragment {
 
-    ImageButton ibtn_registro_ayudar,ibtn_registro_serAyudado;
+    Button ibtn_registro_ayudar,ibtn_registro_serAyudado;
 
     public Registro_Fragment_1() {
         // Required empty public constructor
@@ -30,19 +30,19 @@ public class Registro_Fragment_1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_registro_1, container, false);
-        ibtn_registro_ayudar = (ImageButton)vista.findViewById(R.id.ibtn_registro_ayudar);
-        ibtn_registro_serAyudado = (ImageButton)vista.findViewById(R.id.ibtn_registro_serAyudado);
+        ibtn_registro_ayudar = (Button) vista.findViewById(R.id.ibtn_registro_ayudar);
+        ibtn_registro_serAyudado = (Button) vista.findViewById(R.id.ibtn_registro_serAyudado);
 
         ibtn_registro_ayudar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registro2("ayudar");
+                registro2("asistentes");
             }
         });
         ibtn_registro_serAyudado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registro2("serAyudado");
+                registro2("dependientes");
             }
         });
         return vista;
@@ -53,7 +53,9 @@ public class Registro_Fragment_1 extends Fragment {
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_Inicio, fragmentoSeleccionado);
         t.commit();
-        Log.v("Datos",tipo);
+        Bundle datos = new Bundle();
+        datos.putString("tipoUsuario", tipo);
+        fragmentoSeleccionado.setArguments(datos);
     }
 
 }

@@ -16,8 +16,7 @@ import com.vpfc18.vpfc18.R;
  */
 public class Voluntario_Perfil_Fragment extends Fragment {
 
-    TabLayout tab_selector_perfil_voluntario;
-
+    String correoUser;
     public Voluntario_Perfil_Fragment() {
         // Required empty public constructor
     }
@@ -27,25 +26,8 @@ public class Voluntario_Perfil_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.voluntario_fragment_perfil, container, false);
-        tab_selector_perfil_voluntario = (TabLayout)vista.findViewById(R.id.tab_selector_perfil_voluntario);
+        correoUser = getArguments().getString("correoUser");
         vistaPerfil();
-
-        tab_selector_perfil_voluntario.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition()== 0){
-                    vistaPerfil();
-                }else{
-                    vistaAyudas();
-                }
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
         return vista;
     }
 
@@ -54,12 +36,8 @@ public class Voluntario_Perfil_Fragment extends Fragment {
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
         t.commit();
+        Bundle datos = new Bundle();
+        datos.putString("correoUser", correoUser);
+        fragmentoSeleccionado.setArguments(datos);
     }
-    private void vistaAyudas(){
-        Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_2();
-        FragmentTransaction t = getFragmentManager().beginTransaction();
-        t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
-        t.commit();
-    }
-
 }

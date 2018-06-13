@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_1">
+
+    <ToggleButton
+        android:id="@+id/btn_perfil_modificar_datos"
+        style="@style/btn_editar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_foto_perfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:clickable="false"
+                    android:src="@drawable/ic_profile" />
+
+                <ImageView
+                    android:id="@+id/iv_editarFoto_perfil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="15dp"
+                    android:visibility="invisible"
+                    android:padding="5dp"
+                    android:background="@color/blanco_trans"
+                    android:src="@drawable/ic_edit"/>
+
+            </FrameLayout>
+
+            <View style="@style/low_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
+                    android:text="Nombre" />
+
+                <EditText
+                    android:id="@+id/et_perfil_nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
+                    android:inputType="text"
+                    android:paddingHorizontal="30dp" />
+
+            </LinearLayout>
+
+            <View style="@style/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
+                    android:text="Apellido" />
+
+                <EditText
+                    android:id="@+id/et_perfil_apellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
+
+                    android:inputType="textPersonName"
+                    android:paddingHorizontal="30dp" />
+            </LinearLayout>
+
+            <View style="@style/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
+                    android:text="Fecha de nacimiento" />
+
+                <EditText
+                    android:id="@+id/et_perfil_fnacimiento"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
+
+                    android:inputType="date"
+                    android:paddingHorizontal="30dp" />
+            </LinearLayout>
+
+            <View style="@style/divider" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
+                    android:text="Sexo" />
+
+                <EditText
+                    android:id="@+id/et_perfil_sexo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
+
+                    android:inputType="text"
+                    android:paddingHorizontal="30dp" />
+            </LinearLayout>
+
+            <View style="@style/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
+                    android:text="Telefono" />
+
+                <EditText
+                    android:id="@+id/et_perfil_telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
+                    android:inputType="phone"
+                    android:paddingHorizontal="30dp" />
+
+            </LinearLayout>
+
+
+            <View style="@style/low_divider" />
+
+            <TextView
+                android:id="@+id/tv_perfil_datosMedicos"
+                style="@style/submenu_perfil"
+                android:text="Datos médicos" />
+
+            <View style="@style/low_divider" />
+
+            <TextView
+                android:id="@+id/tv_perfil_contactos1"
+                style="@style/submenu_perfil"
+                android:text="Contacto de emergencia 1" />
+
+            <View style="@style/divider" />
+
+            <TextView
+                android:id="@+id/tv_perfil_contactos2"
+                style="@style/submenu_perfil"
+                android:text="Contacto de emergencia 2" />
+
+            <View style="@style/low_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="40dp"
+                    android:text="Email" />
+
+                <EditText
+                    android:id="@+id/et_perfil_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@android:color/transparent"
+                    android:enabled="false"
+                    android:gravity="end"
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="30dp" />
+            </LinearLayout>
+
+            <View style="@style/divider" />
+
+            <TextView
+                android:id="@+id/tv_perfil_modContrasena"
+                style="@style/submenu_perfil"
+                android:text="Contraseña" />
+
+            <View style="@style/low_divider" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

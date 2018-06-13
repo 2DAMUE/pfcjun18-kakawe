@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Principal.Voluntario.Principal.Voluntario_Principal_Activity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Principal.Voluntario.Principal.Voluntario_Principal_Activity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/voluntario_principal_toolbar"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@color/colorNaranja"
+        android:background="@color/azulAuxinet"
         android:elevation="4dp"
         app:navigationIcon="@drawable/ic_perfil"
         app:titleTextColor="#FFFFFF" />
@@ -20,6 +20,6 @@
         android:id="@+id/voluntario_contenedor_principal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical" />
 
 </LinearLayout>

@@ -4,12 +4,115 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="actionBarStyle">@style/ActionBarStyle</item>
     </style>
+
     <style name="ActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="titleTextStyle">@style/ActionBarTitleTextStyle</item>
         <item name="background">@color/colorNaranja</item>
     </style>
+
     <style name="ActionBarTitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">3dp</item>
+        <item name="android:background">@color/grisOscuro</item>
+    </style>
+
+    <style name="low_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:background">@drawable/shape_divider</item>
+    </style>
+
+    <style name="medium_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@drawable/shape_divider</item>
+    </style>
+
+
+    <style name="high_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:background">@drawable/shape_divider</item>
+    </style>
+
+    <style name="et_perfil">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:gravity">end</item>
+        <item name="android:enabled">false</item>
+        <item name="android:paddingHorizontal">30dp</item>
+    </style>
+
+    <style name="tv_perfil">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingHorizontal">40dp</item>
+    </style>
+
+    <style name="submenu_perfil">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:drawableRight">@drawable/ic_flecha_mayor</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">40dp</item>
+        <item name="android:paddingRight">15dp</item>
+    </style>
+
+    <style name="subheader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@color/grisClarito</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="btn_ayudas">
+        <item name="android:layout_width">280dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:background">@drawable/shape_rounded</item>
+        <item name="android:backgroundTint">@color/azulAuxinet</item>
+        <item name="android:textColor">@color/blanco</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+
+    <style name="btn_editar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/verdeAuxinet</item>
+        <item name="android:textColor">@color/azulAuxinet</item>
+        <item name="android:textOff">EDITAR</item>
+        <item name="android:textOn">GUARDAR</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/verdeAuxinet</item>
+        <item name="android:textColor">@color/azulAuxinet</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="MyCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 
