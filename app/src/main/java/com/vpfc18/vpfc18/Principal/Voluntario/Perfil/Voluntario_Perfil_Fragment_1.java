@@ -142,6 +142,21 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
         et_perfil_sexo.setEnabled(habilitado);
         et_perfil_telefono.setEnabled(habilitado);
         et_perfil_email.setEnabled(habilitado);
+        if (habilitado){
+            et_perfil_nombre.setHint("Nombre");
+            et_perfil_apellido.setHint("Apellido");
+            et_perfil_fnacimiento.setHint("00/00/0000");
+            et_perfil_sexo.setHint("Sexo");
+            et_perfil_telefono.setHint("Telefono");
+            et_perfil_email.setHint("Email");
+        }else{
+            et_perfil_nombre.setHint("");
+            et_perfil_apellido.setHint("");
+            et_perfil_fnacimiento.setHint("");
+            et_perfil_sexo.setHint("");
+            et_perfil_telefono.setHint("");
+            et_perfil_email.setHint("");
+        }
 
     }
 

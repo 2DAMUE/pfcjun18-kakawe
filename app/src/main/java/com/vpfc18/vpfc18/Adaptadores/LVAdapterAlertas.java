@@ -96,7 +96,7 @@ public class LVAdapterAlertas implements ListAdapter {
         TextView tv_vista_alertas_nombreAsistido = (TextView) view.findViewById(R.id.tv_vista_alertas_nombreAsistido);
         TextView tv_vista_alertas_tipoAlerta = (TextView) view.findViewById(R.id.tv_vista_alertas_tipoAlerta);
         TextView tv_vista_alertas_distancia = (TextView) view.findViewById(R.id.tv_vista_alertas_distancia);
-        
+
         String tipoAlertaDetalle = listaAlertas.get(position).getNombreAlerta();
         if (tipoAlertaDetalle.equals("aseo")){
             tipoAlertaDetalle = "Ayuda con aseo";

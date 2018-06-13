@@ -63,13 +63,9 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
             public void onSuccess(JSONArray respuesta) {
                 try {
                     String contra = respuesta.getString(0);
-                    if (contra.equals(passwordActual)){
                         Toast.makeText(getContext(), "Contrasena actualizada con exito", Toast.LENGTH_SHORT).show();
                         volverAPerfil();
-                    }else{
                         Toast.makeText(getContext(), "Fallo al actualizar la contrasena", Toast.LENGTH_SHORT).show();
-                    }
-
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "Fallo al actualizar la contrasena", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
@@ -124,13 +120,13 @@ public class Voluntario_Perfil_Fragment_3_Contrasena extends Fragment {
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_repetirContrasena.requestFocus();
             return false;
-        }if (!passwordNuevo.equals(repetirPassword)){
-            String a= "Las contraseás deben coincidir";
+        }if (!passwordViejo.equals(passwordActual)){
+            String a= "La contraseña actual no coincide";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_repetirContrasena.requestFocus();
             return false;
-        }if (!passwordViejo.equals(passwordActual)){
-            String a= "Las contraseás deben coincidir";
+        }if (!passwordNuevo.equals(repetirPassword)){
+            String a= "Las nuevas contraseñas deben coincidir";
             Toast.makeText(getContext(), a, Toast.LENGTH_LONG).show();
             et_perfil_repetirContrasena.requestFocus();
             return false;
