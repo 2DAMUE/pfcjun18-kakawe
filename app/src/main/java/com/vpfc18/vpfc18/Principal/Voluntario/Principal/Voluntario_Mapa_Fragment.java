@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,8 +58,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     //--------------------------------//
 
     private double longitudAsistente, latitudAsistente;
-    private double latitudAsistido;
-    private double longitudAsistido;
     private double distancia;
 
     //----------Elementos del mapa--------------//
@@ -71,7 +70,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private LinearLayout ll_mapa_detalle;
     private Button btn_voluntarioMapa_x;
     ArrayList<Datos_Alertas> datos_alertas;
-    String correoUser;
+    String correoUser,letra;
     Datos_Alertas eAlertas = new Datos_Alertas();
     private LatLng actual;
     Integer c;
@@ -109,6 +108,12 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         btn_voluntarioMapa_navegar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_navegar);
         btn_voluntarioMapa_Llamar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_Llamar);
 
+        ll_mapa_detalle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verAsistido(c);
+            }
+        });
         btn_voluntarioMapa_navegar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +129,30 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         return mView;
     }
 
+    public void verAsistido(int num){
+        String nombreAsistido = datos_alertas.get(num).getNombreAsistido();
+        String idCorreoAsistido = datos_alertas.get(num).getId_asistente();
+        String telefonoAsistido = datos_alertas.get(num).getTelefono();
+        int idAlerta = datos_alertas.get(num).getId_alerta();
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment();
+        FragmentTransaction t = getFragmentManager().beginTransaction();
+        t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
+        t.commit();
+        Bundle datos = new Bundle();
+        datos.putInt("idAlerta", idAlerta);
+        datos.putString("nombreAsistido", nombreAsistido);
+        datos.putString("correoUser", correoUser);
+        datos.putString("idCorreoAsistido",idCorreoAsistido);
+        datos.putString("telefonoAsistido",telefonoAsistido);
+        datos.putString("viajando","mapa");
+        datos.putDouble("latitudAsistente",latitudAsistente);
+        datos.putDouble("longitudAsistente",longitudAsistente);
+        Double latitudAsistido = datos_alertas.get(num).getLatitud();
+        Double longitudAsistido = datos_alertas.get(num).getLongitud();
+        datos.putDouble("latitudAsistido",latitudAsistido);
+        datos.putDouble("longitudAsistido",longitudAsistido);
+        fragmentoSeleccionado.setArguments(datos);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -288,7 +317,6 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
                     double latitudAsistido = eAlertas.getLatitud();
                     double longitudAsistido = eAlertas.getLongitud();
-                    //double distanciaEntreAsistidoAsistente = eAlertas.getDistancia();
 
                     double distancia = calcularDistancia(latitudAsistido, longitudAsistido);
 
@@ -309,7 +337,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                         tipoAlertaDetalle = "Ayuda con labores del hogar";
                     }
                     tv_voluntarioMapa_tipoAlerta.setText(tipoAlertaDetalle);
-                    tv_voluntarioMapa_distancia.setText(String.valueOf(distancia).substring(0, 5));
+                    tv_voluntarioMapa_distancia.setText("A "+String.valueOf(distancia).substring(0, 5)+" "+letra+" de tu ubicacion");
 
                     btn_voluntarioMapa_Llamar.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -359,7 +387,11 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
 
         if (distancia > 1000) {
             distancia = distancia / 1000;
+            letra = "Km";
+        }else{
+            letra = "m";
         }
+
 
         return distancia;
     }

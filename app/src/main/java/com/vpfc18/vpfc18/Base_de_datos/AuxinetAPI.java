@@ -109,7 +109,7 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
 
     public void cargarContactos(String usuario,String contacto){
         String parametros = "correo=" + usuario;
-        if (contacto.equals("contacto1")){
+        if (contacto.equals("1")){
             String metodo = "CargarContacto1App.php?";
             Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
             this.execute(APIUrl + metodo + parametros);
@@ -123,7 +123,7 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
     public void guardarContactos(String usuario, String contacto,String nombre,String telefono){
         String parametros = "correo=" + usuario+"&nombre="+nombre
                 +"&telefono="+telefono;
-        if (contacto.equals("contacto1")){
+        if (contacto.equals("1")){
             String metodo = "ActualizarContacto1App.php?";
             Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
             this.execute(APIUrl + metodo + parametros);
@@ -190,35 +190,25 @@ public class AuxinetAPI extends AsyncTask<String, Void, String> {
         Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl +  metodo + parametros);
     }
-
-    public void guardarEnfermedades(String correoUser,String notasMedicas){
-        String metodo = "ActualizarEnfermedadesApp.php?";
-        String parametros = "correo="+correoUser+"&notasMedicas="+notasMedicas;
+    public void guardarDetallesMedicos(String correoUser,String informacion, String detalleMedico){
+        String metodo = "";
+        String parametros = "";
+        if (detalleMedico.equals("enfermedades")){
+            metodo = "ActualizarEnfermedadesApp.php?";
+            parametros = "correo="+correoUser+"&enfermedades="+informacion;
+        }if (detalleMedico.equals("notasMedicas")){
+            metodo = "ActualizarNotasMedicasApp.php?";
+            parametros = "correo="+correoUser+"&notasMedicas="+informacion;
+        }if (detalleMedico.equals("alergias")){
+            metodo = "ActualizarAlergiasApp.php?";
+            parametros = "correo="+correoUser+"&alergias="+informacion;
+        }if (detalleMedico.equals("medicacion")){
+            metodo = "ActualizarMedicacionApp.php?";
+            parametros = "correo="+correoUser+"&medicacion="+informacion;
+        }
         Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
         this.execute(APIUrl + metodo + parametros);
     }
-
-    public void guardarNotasM(String correoUser,String enfermedades){
-        String metodo = "ActualizarNotasMedicasApp.php?";
-        String parametros = "correo="+correoUser+"&enfermedades="+enfermedades;
-        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
-        this.execute(APIUrl + metodo + parametros);
-    }
-
-    public void guardarAlergias(String correoUser,String alergias){
-        String metodo = "ActualizarNotasMedicasApp.php?";
-        String parametros = "correo="+correoUser+"&alergias="+alergias;
-        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
-        this.execute(APIUrl + metodo + parametros);
-    }
-
-    public void guardarMedicacion(String correoUser,String medicacion){
-        String metodo = "ActualizarNotasMedicasApp.php?";
-        String parametros = "correo="+correoUser+"&medicacion="+medicacion;
-        Log.v("CONSULTA",APIUrl+" "+metodo+" "+parametros);
-        this.execute(APIUrl + metodo + parametros);
-    }
-
 }
 
 

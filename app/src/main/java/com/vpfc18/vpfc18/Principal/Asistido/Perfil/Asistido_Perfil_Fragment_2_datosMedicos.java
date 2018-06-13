@@ -31,7 +31,7 @@ import org.json.JSONException;
  */
 public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
 
-    EditText et_perfil_peso,et_perfil_alergias,et_perfil_altura,et_perfil_medicacion;
+    EditText et_perfil_peso,et_perfil_altura;
     TextView tv_perfil_enfermedades,tv_perfil_notasMedicas,tv_perfil_alergias,tv_perfil_medicacion;
     Spinner spn_perfil_grSanguineo;
     String correoUser,altura,peso,gpSanguineo;
@@ -80,52 +80,31 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
         tv_perfil_enfermedades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarEnfermedades();
+                cargarDetallesMedicos("enfermedades");
             }
         });
         tv_perfil_notasMedicas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarNotasM();
+                cargarDetallesMedicos("notasMedicas");
             }
         });
         tv_perfil_alergias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarAlergias();
+                cargarDetallesMedicos("alergias");
             }
         });
         tv_perfil_medicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cargarMedicacion();
+                cargarDetallesMedicos("medicacion");
             }
         });
         cargarDM();
         return vista;
     }
-    private void cargarAlergias() {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_7_Alergias();
-        FragmentTransaction t = getFragmentManager().beginTransaction();
-        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
-        t.addToBackStack(null);
-        t.commit();
-        Bundle datos = new Bundle();
-        datos.putString("correoUser", correoUser);
-        fragmentoSeleccionado.setArguments(datos);
-    }
-    private void cargarMedicacion() {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_8_Medicacion();
-        FragmentTransaction t = getFragmentManager().beginTransaction();
-        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
-        t.addToBackStack(null);
-        t.commit();
-        Bundle datos = new Bundle();
-        datos.putString("correoUser", correoUser);
-        fragmentoSeleccionado.setArguments(datos);
-    }
-
-    private void cargarEnfermedades() {
+    private void cargarDetallesMedicos(String detalle) {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_5_Enfermedades();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
@@ -133,24 +112,13 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
         t.commit();
         Bundle datos = new Bundle();
         datos.putString("correoUser", correoUser);
-        fragmentoSeleccionado.setArguments(datos);
-    }
-    private void cargarNotasM() {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_6_NotasM();
-        FragmentTransaction t = getFragmentManager().beginTransaction();
-        t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
-        t.addToBackStack(null);
-        t.commit();
-        Bundle datos = new Bundle();
-        datos.putString("correoUser", correoUser);
+        datos.putString("detalleMedico",detalle);
         fragmentoSeleccionado.setArguments(datos);
     }
 
     private void habilitarCampos(Boolean habilitado) {
         et_perfil_peso.setEnabled(habilitado);
-        et_perfil_alergias.setEnabled(habilitado);
         et_perfil_altura.setEnabled(habilitado);
-        et_perfil_medicacion.setEnabled(habilitado);
         spn_perfil_grSanguineo.setEnabled(habilitado);
     }
 
@@ -186,14 +154,6 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
                                 spn_perfil_grSanguineo.setSelection(spinnerPosition);
                                 Log.v("Datos",s);
                             }
-                    }if (alergias.equals("null")){
-                        et_perfil_alergias.setText("");
-                    }else{
-                        et_perfil_alergias.setText(alergias);
-                    }if (medicacion.equals("null")){
-                        et_perfil_medicacion.setText("");
-                    }else{
-                        et_perfil_medicacion.setText(medicacion);
                     }
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();

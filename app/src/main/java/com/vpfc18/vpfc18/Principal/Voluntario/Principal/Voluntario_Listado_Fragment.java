@@ -62,8 +62,7 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
     LVAdapterAlertas adaptador;
     private String correoUser;
     ListView lv_lista_voluntario_listado;
-    private double longitudAsistente;
-    private double latitudAsistente;
+    private double longitudAsistente,latitudAsistente;
     private LatLng actual;
 
     ArrayList<Datos_Alertas> datos_alertas;
@@ -110,6 +109,13 @@ public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyC
         datos.putString("correoUser", correoUser);
         datos.putString("idCorreoAsistido",idCorreoAsistido);
         datos.putString("telefonoAsistido",telefonoAsistido);
+        datos.putString("viajando","listado");
+        datos.putDouble("latitudAsistente",latitudAsistente);
+        datos.putDouble("longitudAsistente",longitudAsistente);
+        Double latitudAsistido = datos_alertas.get(num).getLatitud();
+        Double longitudAsistido = datos_alertas.get(num).getLongitud();
+        datos.putDouble("latitudAsistido",latitudAsistido);
+        datos.putDouble("longitudAsistido",longitudAsistido);
         fragmentoSeleccionado.setArguments(datos);
     }
 

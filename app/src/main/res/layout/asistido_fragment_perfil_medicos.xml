@@ -105,21 +105,21 @@
                 style="@style/submenu_perfil"
                 android:text="Alergias" />
 
-            <View style="@style/low_divider" />
+            <View style="@style/divider" />
 
             <TextView
                 android:id="@+id/tv_perfil_medicacion"
                 style="@style/submenu_perfil"
                 android:text="Medicación" />
 
-            <View style="@style/low_divider" />
+            <View style="@style/divider" />
 
             <TextView
                 android:id="@+id/tv_perfil_enfermedades"
                 style="@style/submenu_perfil"
                 android:text="Enfermedades" />
 
-            <View style="@style/low_divider" />
+            <View style="@style/divider" />
 
             <TextView
                 android:id="@+id/tv_perfil_notasMedicas"

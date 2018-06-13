@@ -8,32 +8,26 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="40dp">
+    <ToggleButton
+        android:id="@+id/btn_perfil_asistido_datosMedicos"
+        style="@style/btn_editar" />
 
-        <TextView
-            android:id="@+id/tv_perfil_asistido_enfermedades"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Enfermedades"
-            android:textAlignment="center"
-            android:textSize="28sp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_perfil_asistido_nDatosMedicos"
+        style="@style/subheader"
+        android:text="" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="40dp">
+        android:paddingTop="10dp">
 
         <EditText
-            android:id="@+id/mtv_perfil_asistido_enfermedades"
+            android:id="@+id/mtv_perfil_asistido_datos"
             android:layout_width="match_parent"
-            android:layout_height="321dp"
+            android:layout_height="wrap_content"
+            android:enabled="false"
             android:ems="10"
             android:inputType="textMultiLine" />
 
@@ -45,11 +39,6 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/bt_perfil_asistido_enfermedades_guardar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="guardar" />
     </LinearLayout>
 
 </LinearLayout>

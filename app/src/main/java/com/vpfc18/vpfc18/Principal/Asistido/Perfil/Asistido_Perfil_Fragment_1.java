@@ -125,13 +125,13 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         tv_perfil_contactos1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vistaModificarContactos();
+                vistaModificarContactos("1");
             }
         });
         tv_perfil_contactos2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vistaModificarContactos();
+                vistaModificarContactos("2");
             }
         });
         cargarDatosPerfil();
@@ -300,6 +300,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
                     et_perfil_email.setText(response.getString(0));
                     et_perfil_telefono.setText(response.getString(1));
                     et_perfil_nombre.setText(response.getString(2));
+                    Toast.makeText(getContext(), "Perfil actualizado con exito", Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     Toast.makeText(getContext(), "ERROR: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -336,7 +337,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         fragmentoSeleccionado.setArguments(datos);
     }
 
-    private void vistaModificarContactos() {
+    private void vistaModificarContactos(String nContacto) {
         Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_4_contactos();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
@@ -345,6 +346,7 @@ public class Asistido_Perfil_Fragment_1 extends Fragment {
         correoUser = devolverCorreo();
         Bundle datos = new Bundle();
         datos.putString("telefonoUser", telefono);
+        datos.putString("nContacto",nContacto);
         datos.putString("correoUser", correoUser);
         fragmentoSeleccionado.setArguments(datos);
     }

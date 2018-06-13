@@ -26,7 +26,7 @@ public class LVAdapterAlertas implements ListAdapter {
     private ArrayList<Datos_Alertas> listaAlertas;
     Context context;
     FragmentManager fm;
-    String correoUser;
+    String correoUser,letra;
     private double longitudAsistente,latitudAsistente;
 
 
@@ -96,9 +96,11 @@ public class LVAdapterAlertas implements ListAdapter {
         TextView tv_vista_alertas_nombreAsistido = (TextView) view.findViewById(R.id.tv_vista_alertas_nombreAsistido);
         TextView tv_vista_alertas_tipoAlerta = (TextView) view.findViewById(R.id.tv_vista_alertas_tipoAlerta);
         TextView tv_vista_alertas_distancia = (TextView) view.findViewById(R.id.tv_vista_alertas_distancia);
+        
         String tipoAlertaDetalle = listaAlertas.get(position).getNombreAlerta();
         if (tipoAlertaDetalle.equals("aseo")){
             tipoAlertaDetalle = "Ayuda con aseo";
+
         }if (tipoAlertaDetalle.equals("compra")){
             tipoAlertaDetalle = "Ayuda en la compra";
         }if (tipoAlertaDetalle.equals("compania")){
@@ -112,25 +114,13 @@ public class LVAdapterAlertas implements ListAdapter {
         tv_vista_alertas_nombreAsistido.setText(listaAlertas.get(position).getNombreAsistido());
         tv_vista_alertas_tipoAlerta.setText(tipoAlertaDetalle);
         distancia = calcularDistancia(listaAlertas.get(position).getLatitud(),listaAlertas.get(position).getLongitud());
-        tv_vista_alertas_distancia.setText(String.valueOf(distancia).substring(0, 5));
+        tv_vista_alertas_distancia.setText(String.valueOf(distancia).substring(0, 5)+" "+letra);
         double x = listaAlertas.get(position).getDistancia();
 
         return view;
 
     }
 
-
-    public void cargarDialogLlamada(String nombre, String telefono, int id_alerta) {
-        Voluntario_Llamada_Dialog vld = new Voluntario_Llamada_Dialog();
-        Bundle datos = new Bundle();
-        datos.putString("nombre", nombre);
-        datos.putString("telefono", telefono);
-        datos.putInt("id_alerta", id_alerta);
-        datos.putString("correoUser", correoUser);
-
-        vld.setArguments(datos);
-        vld.show(fm, "dialog");
-    }
 
     @Override
     public int getItemViewType(int position) {
@@ -164,6 +154,9 @@ public class LVAdapterAlertas implements ListAdapter {
 
         if (distancia > 1000) {
             distancia = distancia / 1000;
+            letra = "Km";
+        }else{
+            letra = "m";
         }
 
         return distancia;
