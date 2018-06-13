@@ -10,12 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/background_image" />
+        android:src="@drawable/login_background" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blanco_trans"/>
+        android:background="@color/blanco_trans" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,11 +40,14 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_selector"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/blanco_trans">
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
+                tex
                 android:layout_height="wrap_content"
                 android:text="Login" />
 
