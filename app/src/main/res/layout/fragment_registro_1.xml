@@ -25,7 +25,7 @@
                 android:textStyle="bold" />
 
 
-            <ImageView
+            <Button
                 android:id="@+id/ibtn_registro_ayudar"
                 android:layout_width="120dp"
                 android:layout_height="100dp"
@@ -42,7 +42,7 @@
                 android:textStyle="bold" />
 
 
-            <ImageView
+            <Button
                 android:id="@+id/ibtn_registro_serAyudado"
                 android:layout_width="120dp"
                 android:layout_height="100dp"
