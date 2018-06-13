@@ -3,33 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_6_NotasM">
+    tools:context=".Principal.Asistido.Perfil.Asistido_Perfil_Fragment_8_medicacion">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/tv_perfil_asistido_notas_medicas"
+        android:id="@+id/tv_perfil_asistido_medicacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Notas Medicas"
+        android:text="Medicación"
         android:textAlignment="center"
         android:textSize="28sp" />
 
     <EditText
-        android:id="@+id/mt_perfil_asistido_notas_medicas"
+        android:id="@+id/mtv_perfil_asistido_medicacion"
         android:layout_width="match_parent"
         android:layout_height="321dp"
-        android:layout_weight="1"
-        android:ems="10"
         android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/bt_perfil_asistido_notas_medicas_guardar"
+        android:id="@+id/bt_perfil_asistido_medicacion_guardar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="guardar" />
-
 </LinearLayout>

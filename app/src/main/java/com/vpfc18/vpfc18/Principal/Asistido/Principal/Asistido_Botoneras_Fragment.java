@@ -2,12 +2,8 @@ package com.vpfc18.vpfc18.Principal.Asistido.Principal;
 
 
 import android.Manifest;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
@@ -21,7 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -295,7 +290,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
     }
 
     private void tiposDeAyudas() {
-        Asistido_Dialog_Tipos_Ayuda pu = new Asistido_Dialog_Tipos_Ayuda();
+        Asistido_Dialog_tiposAyuda pu = new Asistido_Dialog_tiposAyuda();
         Bundle datos = new Bundle();
         datos.putString("latitud", latitud);
         datos.putString("longitud", longitud);

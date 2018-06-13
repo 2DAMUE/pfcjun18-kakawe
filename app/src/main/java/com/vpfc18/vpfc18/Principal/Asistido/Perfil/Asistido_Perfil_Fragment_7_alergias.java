@@ -14,14 +14,13 @@ import com.vpfc18.vpfc18.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Asistido_Perfil_Fragment_6_NotasM extends Fragment {
+public class Asistido_Perfil_Fragment_7_alergias extends Fragment {
 
     String correoUser;
     View vista;
-    Button bt_perfil_asistido_notas_medicas_guardar;
+    Button bt_perfil_asistido_alergia_guardar;
 
-
-    public Asistido_Perfil_Fragment_6_NotasM() {
+    public Asistido_Perfil_Fragment_7_alergias() {
         // Required empty public constructor
     }
 
@@ -30,10 +29,10 @@ public class Asistido_Perfil_Fragment_6_NotasM extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        vista = inflater.inflate(R.layout.asistido_fragment_perfil_notas_m, container, false);
+        vista = inflater.inflate(R.layout.asistido_fragment_perfil_medicos_alergias, container, false);
 
-        bt_perfil_asistido_notas_medicas_guardar = (Button)vista.findViewById(R.id.bt_perfil_asistido_notas_medicas_guardar);
-        bt_perfil_asistido_notas_medicas_guardar.setOnClickListener(new View.OnClickListener() {
+        bt_perfil_asistido_alergia_guardar = (Button)vista.findViewById(R.id.bt_perfil_asistido_alergia_guardar);
+        bt_perfil_asistido_alergia_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_1();

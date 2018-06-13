@@ -14,14 +14,14 @@ import com.vpfc18.vpfc18.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Principal_Detalle_Fragment_Alergias extends Fragment {
+public class Voluntario_Detalle_Fragment_2_alergias extends Fragment {
 
     String correoUser,id_correoAsistido,telefono,nombreAsistido;
     int id_alerta;
     View vista;
     Button bt_perfil_voluntario_alergia_guardar;
 
-    public Voluntario_Principal_Detalle_Fragment_Alergias() {
+    public Voluntario_Detalle_Fragment_2_alergias() {
         // Required empty public constructor
     }
 
@@ -29,7 +29,7 @@ public class Voluntario_Principal_Detalle_Fragment_Alergias extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.voluntario_principal_detalle_fragment_alergias, container, false);
+        vista = inflater.inflate(R.layout.voluntario_fragment_detalle_alergias, container, false);
 
         Bundle datos=this.getArguments();
         id_alerta = datos.getInt("idAlerta");
@@ -42,7 +42,7 @@ public class Voluntario_Principal_Detalle_Fragment_Alergias extends Fragment {
         bt_perfil_voluntario_alergia_guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment();
+                Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment_1();
                 FragmentTransaction t = getFragmentManager().beginTransaction();
                 t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
                 t.addToBackStack(null);

@@ -8,7 +8,6 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -187,7 +186,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
     }
 
     private void modificarContrasena() {
-        Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_3_Contrasena();
+        Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_3_contrasena();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -199,7 +198,7 @@ public class Voluntario_Perfil_Fragment_1 extends Fragment {
     }
 
     private void modificarTiposAyudas() {
-        Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_2_TiposAyudas();
+        Fragment fragmentoSeleccionado = new Voluntario_Perfil_Fragment_2_tiposAyudas();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_voluntario, fragmentoSeleccionado);
         t.addToBackStack(null);

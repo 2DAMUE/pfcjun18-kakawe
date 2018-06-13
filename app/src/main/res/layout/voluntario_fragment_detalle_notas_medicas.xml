@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Principal.Voluntario.Principal.Voluntario_Principal_Detalle_Fragment_Alergias">
+    tools:context=".Principal.Voluntario.Principal.Voluntario_Detalle_Fragment_5_notasMedicas">
 
 
     <TextView
-        android:id="@+id/tv_perfil_voluntario_alergia"
+        android:id="@+id/tv_perfil_voluntario_notas_m"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Alergias"
@@ -16,13 +16,13 @@
         android:textSize="28sp" />
 
     <EditText
-        android:id="@+id/mtv_perfil_voluntario_alergia"
+        android:id="@+id/mtv_perfil_voluntario_notas_m"
         android:layout_width="match_parent"
         android:layout_height="321dp"
         android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/bt_perfil_voluntario_alergia_guardar"
+        android:id="@+id/bt_perfil_voluntario_notas_m"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="guardar" />

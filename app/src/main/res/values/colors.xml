@@ -19,5 +19,6 @@
     <color name="verdeAuxinet">#00CB79</color>
     <color name="negro_trans">#40000000 </color>
     <color name="blanco_trans">#7dffffff</color>
+    <color name="transparente">#00000000</color>
 
 </resources>

@@ -1,17 +1,9 @@
 package com.vpfc18.vpfc18.Principal.Voluntario.Principal;
 
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.Manifest;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +23,7 @@ import org.json.JSONException;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Detalle_Fragment extends Fragment {
+public class Voluntario_Detalle_Fragment_1 extends Fragment {
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
@@ -43,7 +35,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
     int id_alerta;
     View vista;
 
-    public Voluntario_Detalle_Fragment() {
+    public Voluntario_Detalle_Fragment_1() {
         // Required empty public constructor
     }
 
@@ -113,7 +105,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         return vista;
     }
     private void cargarMedicacion() {
-        Fragment fragmentoSeleccionado = new Voluntario_Principal_Detalle_Fragment_Medicacion();
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment_3_medicacion();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -124,7 +116,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargarAlergias() {
-        Fragment fragmentoSeleccionado = new Voluntario_Principal_Detalle_Fragment_Alergias();
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment_2_alergias();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -136,7 +128,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
     }
 
     private void cargarEnfermedades() {
-        Fragment fragmentoSeleccionado = new Voluntario_Principal_Detalle_Fragment_Enfermedades();
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment_4_enfermedades();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -147,7 +139,7 @@ public class Voluntario_Detalle_Fragment extends Fragment {
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargarNotasM() {
-        Fragment fragmentoSeleccionado = new Voluntario_Principal_Detalle_Fragment_NotasM();
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment_5_notasMedicas();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);

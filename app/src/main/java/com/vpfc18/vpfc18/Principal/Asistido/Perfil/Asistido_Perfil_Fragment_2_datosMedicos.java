@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -105,7 +104,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
         return vista;
     }
     private void cargarAlergias() {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_7_Alergias();
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_7_alergias();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -115,7 +114,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargarMedicacion() {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_8_Medicacion();
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_8_medicacion();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -126,7 +125,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
     }
 
     private void cargarEnfermedades() {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_5_Enfermedades();
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_5_enfermedades();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);
@@ -136,7 +135,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
         fragmentoSeleccionado.setArguments(datos);
     }
     private void cargarNotasM() {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_6_NotasM();
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_6_notasMedicas();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);

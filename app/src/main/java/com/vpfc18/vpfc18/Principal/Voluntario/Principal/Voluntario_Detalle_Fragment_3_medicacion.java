@@ -12,10 +12,10 @@ import com.vpfc18.vpfc18.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Principal_Detalle_Fragment_NotasM extends Fragment {
+public class Voluntario_Detalle_Fragment_3_medicacion extends Fragment {
 
 
-    public Voluntario_Principal_Detalle_Fragment_NotasM() {
+    public Voluntario_Detalle_Fragment_3_medicacion() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class Voluntario_Principal_Detalle_Fragment_NotasM extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.voluntario_fragment_principal_detalle_notas_m, container, false);
+        return inflater.inflate(R.layout.voluntario_fragment_detalle_medicacion, container, false);
     }
 
 }
