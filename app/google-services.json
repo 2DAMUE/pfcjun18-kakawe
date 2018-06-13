@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "275004532738",
+    "firebase_url": "https://auxi-net.firebaseio.com",
+    "project_id": "auxi-net",
+    "storage_bucket": "auxi-net.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275004532738:android:0f9ffd3a1d0275d9",
+        "android_client_info": {
+          "package_name": "com.vpfc18.vpfc18"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275004532738-scae99o724bg5pibtf1u4igd1aenek0e.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "275004532738-scae99o724bg5pibtf1u4igd1aenek0e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBipTFKwJZMyJ9KbdVTykN9lFywOxfZijk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
