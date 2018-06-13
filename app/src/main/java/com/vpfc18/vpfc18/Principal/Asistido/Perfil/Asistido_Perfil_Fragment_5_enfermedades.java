@@ -23,13 +23,13 @@ import org.json.JSONException;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Asistido_Perfil_Fragment_5_Enfermedades extends Fragment {
+public class Asistido_Perfil_Fragment_5_enfermedades extends Fragment {
 
     View vista;
     String correoUser,detalle,informacion;
     TextView mtv_perfil_asistido_datos,tv_perfil_asistido_nDatosMedicos;
     ToggleButton btn_perfil_asistido_datosMedicos;
-    public Asistido_Perfil_Fragment_5_Enfermedades() {
+    public Asistido_Perfil_Fragment_5_enfermedades() {
         // Required empty public constructor
     }
 
@@ -37,7 +37,7 @@ public class Asistido_Perfil_Fragment_5_Enfermedades extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.asistido_fragment_perfil_enfermedades, container, false);
+        vista = inflater.inflate(R.layout.asistido_fragment_perfil_medicos_enfermedades, container, false);
         correoUser = getArguments().getString("correoUser");
         detalle = getArguments().getString("detalleMedico");
         mtv_perfil_asistido_datos = (TextView)vista.findViewById(R.id.mtv_perfil_asistido_datos);

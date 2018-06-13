@@ -22,7 +22,7 @@ import org.json.JSONException;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Principal_Detalle_Fragment_NotasM extends Fragment {
+public class Voluntario_Detalle_Fragment_3_medicacion extends Fragment {
 
 
     View vista;
@@ -31,7 +31,7 @@ public class Voluntario_Principal_Detalle_Fragment_NotasM extends Fragment {
     TextView mtv_detalle_asistido_datos,tv_detalle_asistido_nDatosMedicos;
     Button btn_detalle_nMedicas_atras;
 
-    public Voluntario_Principal_Detalle_Fragment_NotasM() {
+    public Voluntario_Detalle_Fragment_3_medicacion() {
         // Required empty public constructor
     }
 
@@ -39,7 +39,7 @@ public class Voluntario_Principal_Detalle_Fragment_NotasM extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.voluntario_fragment_principal_detalle_notas_m, container, false);
+        vista = inflater.inflate(R.layout.voluntario_fragment_detalle_notas_medicas, container, false);
         id_alerta = getArguments().getInt("idAlerta");
         correoUser = getArguments().getString("correoUser");
         id_correoAsistido = getArguments().getString("idCorreoAsistido");
@@ -103,7 +103,7 @@ public class Voluntario_Principal_Detalle_Fragment_NotasM extends Fragment {
     }
 
     private void cargarDetalle() {
-        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment();
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment_1();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
         t.commit();

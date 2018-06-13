@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -105,7 +104,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
         return vista;
     }
     private void cargarDetallesMedicos(String detalle) {
-        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_5_Enfermedades();
+        Fragment fragmentoSeleccionado = new Asistido_Perfil_Fragment_5_enfermedades();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.contenedor_perfil_asistido, fragmentoSeleccionado);
         t.addToBackStack(null);

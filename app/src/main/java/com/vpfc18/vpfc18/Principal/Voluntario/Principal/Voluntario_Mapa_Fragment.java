@@ -21,10 +21,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -35,6 +37,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.vpfc18.vpfc18.Base_de_datos.MapsAPI;
 import com.vpfc18.vpfc18.Base_de_datos.respuestaMapa;
 
@@ -56,6 +62,11 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private double longitudAsistente, latitudAsistente;
     private double distancia;
 
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private StorageReference storageReference;
+    Intent intent;
+    Uri uri;
+
     //----------Elementos del mapa--------------//
     private GoogleMap mGoogleMaps;
     private MapView mMapView;
@@ -71,13 +82,14 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     private LatLng actual;
     Integer c;
 
+
     BitmapDescriptor marker_shower, marker_car, marker_shopping, marker_coffee, marker_home;
 
 
     //----------Elementos del Vista--------------//
     private TextView tv_voluntarioMapa_nombreAsistido, tv_voluntarioMapa_tipoAlerta, tv_voluntarioMapa_distancia;
-    private Button btn_voluntarioMapa_cerrar, btn_voluntarioMapa_navegar, btn_voluntarioMapa_Llamar;
-
+    private Button btn_voluntarioMapa_navegar, btn_voluntarioMapa_Llamar;
+    private ImageView iv_mapa_foto_asistente,btn_voluntarioMapa_cerrar;
 
     public Voluntario_Mapa_Fragment() {
         // Required empty public constructor
@@ -87,23 +99,19 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        storageReference = FirebaseStorage.getInstance().getReference();
         mView = inflater.inflate(R.layout.voluntario_fragment_mapa, container, false);
 
         tv_voluntarioMapa_nombreAsistido = (TextView) mView.findViewById(R.id.tv_voluntarioMapa_nombreAsistido);
         tv_voluntarioMapa_tipoAlerta = (TextView) mView.findViewById(R.id.tv_voluntarioMapa_tipoAlerta);
         tv_voluntarioMapa_distancia = (TextView) mView.findViewById(R.id.tv_voluntarioMapa_distancia);
-        btn_voluntarioMapa_cerrar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_cerrar);
+        btn_voluntarioMapa_cerrar = (ImageView) mView.findViewById(R.id.btn_voluntarioMapa_cerrar);
         btn_voluntarioMapa_navegar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_navegar);
         btn_voluntarioMapa_Llamar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_Llamar);
-
+        iv_mapa_foto_asistente = (ImageView) mView.findViewById(R.id.iv_mapa_foto_asistente);
 
         correoUser = getArguments().getString("correoUser");
         ll_mapa_detalle = (LinearLayout) mView.findViewById(R.id.ll_mapa_detalle);
-        btn_voluntarioMapa_cerrar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_cerrar);
-        btn_voluntarioMapa_navegar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_navegar);
-        btn_voluntarioMapa_Llamar = (Button) mView.findViewById(R.id.btn_voluntarioMapa_Llamar);
-
         ll_mapa_detalle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,13 +132,32 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
         });
         return mView;
     }
-
+    private void cargarFotoPerfil(String correoAsistido) {
+        final StorageReference ruta = FirebaseStorage.getInstance().getReference().child(correoAsistido).child(correoAsistido);
+        Log.v("dentro2",ruta.toString());
+        ruta.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                try{
+                    Uri fotobajada = task.getResult();
+                    Glide.with(getActivity())
+                            .load(fotobajada)
+                            .into(iv_mapa_foto_asistente);
+                    iv_mapa_foto_asistente.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                }catch (Exception e){
+                    Log.e("CARGA1","VACIO");
+                }finally {
+                    Log.e("CARGA11","VACIO");
+                }
+            }
+        });
+    }
     public void verAsistido(int num){
         String nombreAsistido = datos_alertas.get(num).getNombreAsistido();
         String idCorreoAsistido = datos_alertas.get(num).getId_asistente();
         String telefonoAsistido = datos_alertas.get(num).getTelefono();
         int idAlerta = datos_alertas.get(num).getId_alerta();
-        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment();
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment_1();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
         t.commit();
@@ -310,7 +337,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                     final String telefono = eAlertas.getTelefono();
                     final String nombreAsistidoDetalle = eAlertas.getNombreAsistido();
                     String tipoAlertaDetalle = eAlertas.getNombreAlerta();
-
+                    String correoAsistido = eAlertas.getId_asistente();
                     double latitudAsistido = eAlertas.getLatitud();
                     double longitudAsistido = eAlertas.getLongitud();
 
@@ -341,7 +368,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                             cargarDialogLlamada(nombreAsistidoDetalle, telefono, id_alerta);
                         }
                     });
-
+                    cargarFotoPerfil(correoAsistido);
                     ll_mapa_detalle.setVisibility(View.VISIBLE);
                     return false;
                 }

@@ -32,7 +32,7 @@ import org.json.JSONException;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Voluntario_Detalle_Fragment extends Fragment{
+public class Voluntario_Detalle_Fragment_1 extends Fragment{
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private StorageReference storageReference;
@@ -48,7 +48,7 @@ public class Voluntario_Detalle_Fragment extends Fragment{
     int id_alerta;
     View vista;
 
-    public Voluntario_Detalle_Fragment() {
+    public Voluntario_Detalle_Fragment_1() {
         // Required empty public constructor
     }
 
@@ -162,7 +162,7 @@ public class Voluntario_Detalle_Fragment extends Fragment{
     }
 
     private void cargarDetallesMedicos(String detalle) {
-        Fragment fragmentoSeleccionado = new Voluntario_Principal_Detalle_Fragment_NotasM();
+        Fragment fragmentoSeleccionado = new Voluntario_Detalle_Fragment_3_medicacion();
         FragmentTransaction t = getFragmentManager().beginTransaction();
         t.replace(R.id.voluntario_contenedor_principal, fragmentoSeleccionado);
         t.commit();
