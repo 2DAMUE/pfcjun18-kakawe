@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.ebanx.swipebtn.OnStateChangeListener;
+import com.ebanx.swipebtn.SwipeButton;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
@@ -54,6 +56,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
     private double longitudAsistido;
     private double latitudAsistido;
     private Boolean salir = false;
+    SwipeButton btn_sos;
 
     private GoogleMap mGoogleMaps;
     private MapView mMapView;
@@ -83,6 +86,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
         btn_contacto2 = (CircularImageView) mView.findViewById(R.id.btn_contacto2);
         iv_phone_contacto1 = (CircularImageView) mView.findViewById(R.id.iv_phone_contacto1);
         iv_phone_contacto2 = (CircularImageView) mView.findViewById(R.id.iv_phone_contacto2);
+        btn_sos = (SwipeButton) mView.findViewById(R.id.btn_sos);
 
         correoUser = getArguments().getString("correoUser");
 
@@ -112,11 +116,25 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
                 checkPermission(telefono2);
             }
         });
+        btn_sos.setOnStateChangeListener(new OnStateChangeListener() {
+            @Override
+            public void onStateChange(boolean active) {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + 112));
+                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(intent);
+                }
+            }
+        });
+
         cargarContacto1();
         cargarContacto2();
 
         return mView;
     }
+
+
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

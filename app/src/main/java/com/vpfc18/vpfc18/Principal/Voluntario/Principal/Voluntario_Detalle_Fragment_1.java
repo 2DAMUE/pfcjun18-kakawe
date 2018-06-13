@@ -137,7 +137,7 @@ public class Voluntario_Detalle_Fragment_1 extends Fragment{
                 startActivity(intent);
             }
         });
-
+        Log.v("DATOSPASADOS",id_alerta+" "+id_correoAsistido+" "+viajando+" "+latitudAsistente+" "+longitudAsistente+" "+latitudAsistido+" "+longitudAsistido);
         return vista;
     }
     private void cargarFotoPerfil() {
@@ -173,6 +173,11 @@ public class Voluntario_Detalle_Fragment_1 extends Fragment{
         datos.putString("nombreAsistido",nombreAsistido);
         datos.putString("telefonoAsistido",telefono);
         datos.putString("detalleMedico",detalle);
+        datos.putString("viajando","mapa");
+        datos.putDouble("latitudAsistente",latitudAsistente);
+        datos.putDouble("longitudAsistente",longitudAsistente);
+        datos.putDouble("latitudAsistido",latitudAsistido);
+        datos.putDouble("longitudAsistido",longitudAsistido);
         fragmentoSeleccionado.setArguments(datos);
     }
 

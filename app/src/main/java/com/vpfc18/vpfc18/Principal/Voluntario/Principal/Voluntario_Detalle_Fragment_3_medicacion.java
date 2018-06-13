@@ -26,7 +26,8 @@ public class Voluntario_Detalle_Fragment_3_medicacion extends Fragment {
 
 
     View vista;
-    String correoUser,detalle,id_correoAsistido,telefono,nombreAsistido;
+    String correoUser,detalle,id_correoAsistido,telefono,nombreAsistido,viajando;
+    Double latitudAsistente,longitudAsistente,latitudAsistido,longitudAsistido;
     int id_alerta;
     TextView mtv_detalle_asistido_datos,tv_detalle_asistido_nDatosMedicos;
     Button btn_detalle_nMedicas_atras;
@@ -46,6 +47,12 @@ public class Voluntario_Detalle_Fragment_3_medicacion extends Fragment {
         nombreAsistido = getArguments().getString("nombreAsistido");
         telefono = getArguments().getString("telefonoAsistido");
         detalle = getArguments().getString("detalleMedico");
+
+        viajando = getArguments().getString("viajando");
+        latitudAsistente = getArguments().getDouble("latitudAsistente");
+        longitudAsistente = getArguments().getDouble("longitudAsistente");
+        latitudAsistido = getArguments().getDouble("latitudAsistido");
+        longitudAsistido = getArguments().getDouble("longitudAsistido");
         Log.v("DATOS",id_alerta+correoUser+id_correoAsistido+nombreAsistido+telefono+detalle);
 
         btn_detalle_nMedicas_atras = (Button)vista.findViewById(R.id.btn_detalle_nMedicas_atras);
@@ -59,6 +66,7 @@ public class Voluntario_Detalle_Fragment_3_medicacion extends Fragment {
             }
         });
         cargarDM();
+        Log.v("DATOSPASADOS1",id_alerta+" "+id_correoAsistido+" "+viajando+" "+latitudAsistente+" "+longitudAsistente+" "+latitudAsistido+" "+longitudAsistido);
         return vista;
     }
     private void cargarDM(){
@@ -113,6 +121,12 @@ public class Voluntario_Detalle_Fragment_3_medicacion extends Fragment {
         datos.putString("idCorreoAsistido",id_correoAsistido);
         datos.putString("nombreAsistido",nombreAsistido);
         datos.putString("telefonoAsistido",telefono);
+        datos.putString("viajando","mapa");
+        datos.putDouble("latitudAsistente",latitudAsistente);
+        datos.putDouble("longitudAsistente",longitudAsistente);
+        datos.putDouble("latitudAsistido",latitudAsistido);
+        datos.putDouble("longitudAsistido",longitudAsistido);
+
         fragmentoSeleccionado.setArguments(datos);
     }
 

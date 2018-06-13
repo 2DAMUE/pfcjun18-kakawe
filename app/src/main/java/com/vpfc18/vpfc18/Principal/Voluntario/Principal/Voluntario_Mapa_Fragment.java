@@ -239,6 +239,7 @@ public class Voluntario_Mapa_Fragment extends Fragment implements OnMapReadyCall
                 //-------------------------------------------------//
 
                 if (salir == false) {
+
                     salir = true;
                     mGoogleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(actual, 15));
                     //mGoogleMaps.addMarker(new MarkerOptions().position(actual).title("YO"));
