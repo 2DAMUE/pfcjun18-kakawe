@@ -34,7 +34,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.vpfc18.vpfc18.Adaptadores.LVAdapterAlertas;
 import com.vpfc18.vpfc18.Base_de_datos.MapsAPI;
 import com.vpfc18.vpfc18.Base_de_datos.respuestaMapa;
-import com.vpfc18.vpfc18.Controlador.Comunicador;
 import com.vpfc18.vpfc18.Entidades.Datos_Alertas;
 import com.vpfc18.vpfc18.R;
 
@@ -58,7 +57,6 @@ import java.util.ArrayList;
 public class Voluntario_Listado_Fragment extends Fragment implements OnMapReadyCallback{
     private SwipeRefreshLayout sr_voultario_listado;
 
-    Comunicador comunicador = new Comunicador();
     LVAdapterAlertas adaptador;
     private String correoUser;
     ListView lv_lista_voluntario_listado;
