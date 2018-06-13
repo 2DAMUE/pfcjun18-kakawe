@@ -21,7 +21,6 @@
                 android:id="@+id/ibtn_registro_serAyudado"
                 android:layout_width="250dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="40dp"
                 android:background="@color/azulAuxinet"
                 android:text="Soy Dependiente"
                 android:textColor="@color/verdeAuxinet"

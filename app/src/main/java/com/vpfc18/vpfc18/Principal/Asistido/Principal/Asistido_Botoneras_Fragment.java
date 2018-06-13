@@ -210,7 +210,7 @@ public class Asistido_Botoneras_Fragment extends Fragment implements OnMapReadyC
 
             }
         });
-        auxinetAPI.cargarContactos(correoUser, "contacto1");
+        auxinetAPI.cargarContactos(correoUser, "1");
     }
 
     private void cargarFotoPerfilContacto1() {

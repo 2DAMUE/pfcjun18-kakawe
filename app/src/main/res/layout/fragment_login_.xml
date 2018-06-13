@@ -42,6 +42,7 @@
             <Button
                 android:id="@+id/btn_login_entrar"
                 style="@style/btn"
+                android:elevation="50dp"
                 android:layout_width="250dp"
                 android:layout_marginTop="40dp"
                 android:text="Entrar" />

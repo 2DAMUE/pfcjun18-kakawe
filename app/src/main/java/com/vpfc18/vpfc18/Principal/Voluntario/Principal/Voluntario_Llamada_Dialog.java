@@ -111,6 +111,7 @@ public class Voluntario_Llamada_Dialog extends DialogFragment {
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
+        dismiss();
     }
 
     public void agregarAsistente() {

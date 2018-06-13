@@ -171,10 +171,11 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
                     if (nContacto.equals("1")){
                         String contactonombre1 = respuesta.getString(1);
                         Toast.makeText(getContext(), "Contacto 1 "+contactonombre1+ " guardado con exito", Toast.LENGTH_LONG).show();
-
+                        volverAPerfil();
                     }else{
                         String contactonombre2 = respuesta.getString(1);
                         Toast.makeText(getContext(), "Contacto 2 "+contactonombre2+ " guardado con exito", Toast.LENGTH_LONG).show();
+                        volverAPerfil();
                     }
                     } catch (JSONException e) {
                     if (nContacto.equals("1")){
@@ -202,6 +203,7 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
             et_contactos_nombre.setHint("Nombre");
             et_contactos_telefono.setHint("000 000 000");
             iv_editarFoto_contacto.setVisibility(View.VISIBLE);
+
         }else{
             et_contactos_nombre.setHint("");
             et_contactos_telefono.setHint("");

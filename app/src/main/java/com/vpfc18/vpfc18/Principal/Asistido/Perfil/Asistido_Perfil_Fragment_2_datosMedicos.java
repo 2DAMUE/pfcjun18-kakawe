@@ -129,8 +129,6 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
                     String peso = respuesta.getString(0);
                     String altura = respuesta.getString(1);
                     String grSanguineo = respuesta.getString(2);
-                    String alergias = respuesta.getString(3);
-                    String medicacion = respuesta.getString(4);
 
                     Resources res = getActivity().getResources();
                     String sangre[] = res.getStringArray(R.array.gr_sanguineo);
@@ -172,6 +170,7 @@ public class Asistido_Perfil_Fragment_2_datosMedicos extends Fragment {
             @Override
             public void onSuccess(JSONArray response) {
                 Toast.makeText(getContext(), "Datos médicos actualizados con exito", Toast.LENGTH_SHORT).show();
+                volverAPerfil();
             }
 
             @Override

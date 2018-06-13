@@ -12,8 +12,6 @@ import android.widget.ImageView;
 
 import com.vpfc18.vpfc18.R;
 
-import jp.wasabeef.blurry.Blurry;
-
 public class Inicio_Activity extends AppCompatActivity {
 
     TabLayout tab_selector;
