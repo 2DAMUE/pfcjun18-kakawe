@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +8,7 @@
     tools:context=".Inicio.Inicio_Activity">
 
     <ImageView
+        android:id="@+id/iv_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -15,7 +17,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blanco_trans" />
+        android:background="@color/blanco_trans2" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,10 +42,15 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_selector"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
-            android:background="@color/blanco_trans">
+            app:tabBackground="@color/blanco_trans"
+            app:tabSelectedTextColor="@color/azulAuxinet"
+            app:tabIndicatorColor="@color/azulAuxinet"
+            app:tabIndicatorHeight="2dp"
+            app:tabTextAppearance="@style/MyCustomTabText"
+            app:tabTextColor="@color/azulAuxinet">
 
             <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
@@ -61,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="bottom"
+            android:background="@color/blanco_trans"
             android:orientation="vertical">
 
         </LinearLayout>
