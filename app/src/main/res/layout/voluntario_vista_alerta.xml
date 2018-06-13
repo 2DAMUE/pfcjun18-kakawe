@@ -24,6 +24,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/iv_listado_detalle_marker"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_coffee" />

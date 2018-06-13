@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -92,7 +93,7 @@ public class LVAdapterAlertas implements ListAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = inflater.inflate(R.layout.voluntario_vista_alerta, parent, false);
-
+        ImageView iv_listado_detalle_marker = (ImageView) view.findViewById(R.id.iv_listado_detalle_marker);
         TextView tv_vista_alertas_nombreAsistido = (TextView) view.findViewById(R.id.tv_vista_alertas_nombreAsistido);
         TextView tv_vista_alertas_tipoAlerta = (TextView) view.findViewById(R.id.tv_vista_alertas_tipoAlerta);
         TextView tv_vista_alertas_distancia = (TextView) view.findViewById(R.id.tv_vista_alertas_distancia);
@@ -100,15 +101,19 @@ public class LVAdapterAlertas implements ListAdapter {
         String tipoAlertaDetalle = listaAlertas.get(position).getNombreAlerta();
         if (tipoAlertaDetalle.equals("aseo")){
             tipoAlertaDetalle = "Ayuda con aseo";
-
+            iv_listado_detalle_marker.setImageResource(R.drawable.ic_shower);
         }if (tipoAlertaDetalle.equals("compra")){
             tipoAlertaDetalle = "Ayuda en la compra";
+            iv_listado_detalle_marker.setImageResource(R.drawable.ic_shopping);
         }if (tipoAlertaDetalle.equals("compania")){
             tipoAlertaDetalle = "Necesito compañia";
+            iv_listado_detalle_marker.setImageResource(R.drawable.ic_coffee);
         }if (tipoAlertaDetalle.equals("desplazamiento")){
             tipoAlertaDetalle = "Desplazamiento";
+            iv_listado_detalle_marker.setImageResource(R.drawable.ic_car);
         }if (tipoAlertaDetalle.equals("hogar")){
             tipoAlertaDetalle = "Ayuda con labores del hogar";
+            iv_listado_detalle_marker.setImageResource(R.drawable.ic_home);
         }
 
         tv_vista_alertas_nombreAsistido.setText(listaAlertas.get(position).getNombreAsistido());
