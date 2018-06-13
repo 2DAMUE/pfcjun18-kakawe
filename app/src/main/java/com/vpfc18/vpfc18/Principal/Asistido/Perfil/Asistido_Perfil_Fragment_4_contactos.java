@@ -193,7 +193,6 @@ public class Asistido_Perfil_Fragment_4_contactos extends Fragment {
             }
         });
         auxinetAPI.guardarContactos(correoUser,nContacto,nombre,telefono);
-
     }
 
     private void habilitarCampos(Boolean habilitado) {
