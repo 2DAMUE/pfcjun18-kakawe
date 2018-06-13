@@ -16,37 +16,30 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¿Quieres ayudar ..."
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
 
-
-            <ImageView
-                android:id="@+id/ibtn_registro_ayudar"
-                android:layout_width="120dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_voluntario" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:text="... o ser ayudado?"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-            <ImageView
+            <Button
                 android:id="@+id/ibtn_registro_serAyudado"
-                android:layout_width="120dp"
-                android:layout_height="100dp"
-                android:src="@drawable/ic_asistido" />
+                android:layout_width="250dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="40dp"
+                android:background="@color/azulAuxinet"
+                android:text="Soy Dependiente"
+                android:textColor="@color/verdeAuxinet"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/ibtn_registro_ayudar"
+                android:layout_width="250dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="40dp"
+                android:background="@color/azulAuxinet"
+                android:text="Soy Voluntario"
+                android:textColor="@color/verdeAuxinet"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
 
         </LinearLayout>
     </ScrollView>

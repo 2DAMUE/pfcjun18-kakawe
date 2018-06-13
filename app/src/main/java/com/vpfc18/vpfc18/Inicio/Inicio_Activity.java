@@ -1,17 +1,24 @@
 package com.vpfc18.vpfc18.Inicio;
 
+import android.graphics.Color;
+import android.media.Image;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.vpfc18.vpfc18.R;
+
+import jp.wasabeef.blurry.Blurry;
 
 public class Inicio_Activity extends AppCompatActivity {
 
     TabLayout tab_selector;
+
+    ImageView iv_background;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +26,10 @@ public class Inicio_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
         //Precargamos el login de inicio
         cargaLogin();
+
+        iv_background = (ImageView) findViewById(R.id.iv_background);
+
+
 
         //Relaccionamos el Tab, para seleccionar una pestaña u otra(Login o registro)
         tab_selector = (TabLayout) findViewById(R.id.tab_selector);
