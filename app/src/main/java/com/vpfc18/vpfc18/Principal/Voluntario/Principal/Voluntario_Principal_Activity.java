@@ -142,7 +142,7 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
     private void cargaLista(){
         perfil=0;
         voluntario_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
-        getSupportActionBar().setTitle("Listado");
+        getSupportActionBar().setTitle("Listado de alertas");
         Fragment fragmentoSeleccionado = new Voluntario_Listado_Fragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction t = fm.beginTransaction();
@@ -171,7 +171,7 @@ public class Voluntario_Principal_Activity extends AppCompatActivity {
             @Override
             public void run() {
                 voluntario_principal_toolbar.setNavigationIcon(R.drawable.ic_perfil);
-                getSupportActionBar().setTitle("Mapa");
+                getSupportActionBar().setTitle("Mapa de alertas");
             }
         });
 
